@@ -17,12 +17,12 @@ const whatsappUrl =
   );
 
 const images = {
-  hero: "/domicile/exact/estate-hero.png",
-  c1: "/domicile/exact/estate-c1.png",
-  street: "/domicile/exact/estate-street.png",
-  privateResidence: "/domicile/exact/estate-c1.png",
-  residentialEstate: "/domicile/exact/estate-hero.png",
-  privateHome: "/domicile/exact/estate-street.png",
+  hero: "/casa-vento-2.png",
+  c1: "/virunga-residence-2.png",
+  street: "/casa-vento-5.png",
+  privateResidence: "/chosen/casa-lumara.webp",
+  residentialEstate: "/chosen/virunga-residence.webp",
+  privateHome: "/chosen/casa-palma.webp",
 };
 
 const explanation = [
@@ -331,7 +331,7 @@ export default function DomicileEditorial() {
     <main className={styles.page}>
       <header className={styles.header}>
         <Link href="/domicile" className={styles.brand} aria-label="DŌMICILE home">
-          <Image src="/domicile/domicile-white.webp" alt="DŌMICILE" width={1495} height={376} priority unoptimized />
+          <Image src="/domicile/domicile-black-no-tagline.svg" alt="DŌMICILE" width={900} height={220} priority unoptimized />
         </Link>
 
         <nav className={styles.nav}>
@@ -757,7 +757,7 @@ export default function DomicileEditorial() {
           <Image src={images.street} alt="Residential street cared for by DŌMICILE" fill unoptimized sizes="(max-width:900px) 100vw, 42vw" />
           <div className={styles.enquiryOverlay} />
           <div className={styles.enquiryIntro}>
-            <Image src="/domicile/domicile-white.webp" alt="DŌMICILE" width={1495} height={376} unoptimized />
+            <Image src="/domicile/domicile-white-no-tagline.svg" alt="DŌMICILE" width={900} height={220} unoptimized />
             <span className={styles.sectionTagLight}>START WITH A CONVERSATION</span>
             <h2>Tell us about your property.</h2>
             <p>
@@ -897,7 +897,7 @@ export default function DomicileEditorial() {
       <footer className={styles.footer}>
         <div className={styles.footerTop}>
           <div className={styles.footerBrand}>
-            <Image src="/domicile/domicile-white.webp" alt="DŌMICILE" width={1495} height={376} unoptimized />
+            <Image src="/domicile/domicile-white-no-tagline.svg" alt="DŌMICILE" width={900} height={220} unoptimized />
             <p>
               PROPERTY MANAGEMENT BY IMVO GROUP.
               <br />
