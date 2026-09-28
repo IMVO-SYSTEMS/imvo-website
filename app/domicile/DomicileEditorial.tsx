@@ -81,30 +81,6 @@ const services = [
   },
 ];
 
-const propertyStories = [
-  {
-    number: "01",
-    title: "Private residence",
-    status: "ROUTINE CARE ACTIVE",
-    image: images.privateResidence,
-    copy: "Scheduled checks, issue follow-through and one clear local contact for the owner.",
-  },
-  {
-    number: "02",
-    title: "Residential estate",
-    status: "INSPECTION SCHEDULED",
-    image: images.residentialEstate,
-    copy: "Property readiness, maintenance coordination and owner visibility kept in one place.",
-  },
-  {
-    number: "03",
-    title: "Private home",
-    status: "OWNER-AWAY CARE",
-    image: images.privateHome,
-    copy: "Local presence while the owner is away, with private reporting and direct escalation when needed.",
-  },
-];
-
 const faqItems = [
   [
     "Do I need to live outside Rwanda?",
@@ -152,24 +128,6 @@ const tabCopy: Record<string, { title: string; text: string }> = {
     text: "Issues, technicians, notes and completed matters remain attached to the same property record.",
   },
 };
-
-const ownerPriorities = [
-  {
-    quote: "Know what happened without chasing five different people.",
-    title: "One responsible line",
-    copy: "Inspections, technicians, repairs, access and updates are coordinated through one dependable point of contact.",
-  },
-  {
-    quote: "Keep control of decisions without managing every small step.",
-    title: "Approval stays with you",
-    copy: "Costs and works that need your authority remain visible before action, while day-to-day coordination stays off your desk.",
-  },
-  {
-    quote: "Have a usable record of what was seen, approved and completed.",
-    title: "A clear property record",
-    copy: "Photos, reports, approvals and maintenance history stay connected to the same home.",
-  },
-];
 
 type FormState = {
   name: string;
@@ -338,7 +296,6 @@ export default function DomicileEditorial() {
           <a href="#top"><Roll>Home</Roll></a>
           <a href="#care"><Roll>Care</Roll></a>
           <a href="#owner-view"><Roll>Owner view</Roll></a>
-          <a href="#properties"><Roll>Properties</Roll></a>
           <a href="#faq"><Roll>FAQ</Roll></a>
         </nav>
 
@@ -470,12 +427,10 @@ export default function DomicileEditorial() {
         <span className={styles.sectionIndex}>DŌMICILE / 01</span>
         <div className={styles.explainedCopy}>
           <h2>
-            DŌMICILE is the local operating layer between you and everything that needs
-            attention at your property.
+            One local point of contact for what your property needs.
           </h2>
           <p className={styles.explainedLead}>
-            Inspections, technicians, repairs, access, approvals and updates — coordinated
-            through one responsible point of contact.
+            Inspections, technicians, repairs, access, approvals and updates — coordinated clearly, privately and with follow-through.
           </p>
         </div>
         <div className={styles.explainedPhoto}>
@@ -547,11 +502,10 @@ export default function DomicileEditorial() {
 
       <section className={styles.servicesSection}>
         <div className={styles.servicesHeading}>
-          <span>WHAT WE OFFER?</span>
-          <h2>A FULL-SPECTRUM PROPERTY CARE SERVICE</h2>
+          <span>WHAT DŌMICILE HANDLES</span>
+          <h2>PROPERTY CARE, COORDINATED.</h2>
           <p>
-            From routine oversight to repairs and owner-away care, DŌMICILE gives the
-            property one accountable local operating point.
+            Routine oversight, maintenance, owner-away care and property works — handled through one accountable local point.
           </p>
         </div>
         <div className={styles.servicesGrid}>
@@ -564,52 +518,6 @@ export default function DomicileEditorial() {
               </div>
               <a href="#enquire">Learn more ↗</a>
             </article>
-          ))}
-        </div>
-      </section>
-
-      <section className={styles.properties} id="properties">
-        <div className={styles.propertiesHeading}>
-          <div>
-            <span className={styles.sectionTag}>SELECTED PROPERTIES</span>
-            <h2>Real homes. Quietly looked after.</h2>
-          </div>
-          <p>
-            Privacy comes first. These visual examples show the kind of residential
-            environments DŌMICILE is designed to care for.
-          </p>
-          <div className={styles.filterPills}>
-            <span className={styles.activePill}>All</span>
-            <span>Residence</span>
-            <span>Estate</span>
-            <span>Owner-away</span>
-          </div>
-        </div>
-
-        <div className={styles.propertyStories}>
-          {propertyStories.map((property) => (
-            <Reveal key={property.number} className={styles.propertyStory}>
-              <div className={styles.propertyPhoto}>
-                <Image src={property.image} alt={property.title} fill unoptimized sizes="(max-width:900px) 92vw, 31vw" />
-                <button type="button" aria-label="Save property example">♡</button>
-              </div>
-              <div className={styles.propertyCopy}>
-                <div>
-                  <small>{property.status}</small>
-                  <span>{property.number}</span>
-                </div>
-                <h3>{property.title}</h3>
-                <p>{property.copy}</p>
-                <div className={styles.propertyMeta}>
-                  <span>⌂ Kigali</span>
-                  <span>✓ Private</span>
-                  <span>↻ Managed</span>
-                </div>
-                <a href="#enquire">
-                  Discuss your property <span>↗</span>
-                </a>
-              </div>
-            </Reveal>
           ))}
         </div>
       </section>
@@ -695,37 +603,12 @@ export default function DomicileEditorial() {
         </div>
       </section>
 
-      <section className={styles.ownerPriorities}>
-        <div className={styles.ownerPriorityHeading}>
-          <span>OWNER EXPERIENCE</span>
-          <h2>Clarity, discretion and follow-through.</h2>
-          <p>
-            The value is not more messages. It is knowing that somebody responsible is
-            already handling the property.
-          </p>
-        </div>
-        <div className={styles.ownerPriorityCards}>
-          {ownerPriorities.map((item, index) => (
-            <Reveal key={item.title} className={styles.priorityCard}>
-              <span className={styles.quoteMark}>“</span>
-              <p>{item.quote}</p>
-              <div>
-                <strong>{item.title}</strong>
-                <small>0{index + 1} / DŌMICILE</small>
-              </div>
-              <em>{item.copy}</em>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
       <section className={styles.trustFaq} id="faq">
         <div className={styles.trust}>
           <span className={styles.sectionTag}>BACKED BY IMVO GROUP</span>
-          <h2>Property care with built-environment thinking behind it.</h2>
+          <h2>Backed by IMVO Group.</h2>
           <p>
-            DŌMICILE combines day-to-day property coordination with IMVO Group’s design,
-            technical and built-environment perspective.
+            Day-to-day property coordination, supported by IMVO Group’s built-environment experience.
           </p>
           <Image src="/logo.png" alt="IMVO Group" width={500} height={180} unoptimized />
           <Link href="/">
@@ -885,7 +768,7 @@ export default function DomicileEditorial() {
                 <button type="submit" disabled={!formReady || isSubmitting}>
                   {isSubmitting ? "SENDING..." : "SEND TO DŌMICILE ↗"}
                 </button>
-                <span>PRIVATE BY DEFAULT · DIRECT FOLLOW-UP</span>
+                <span>PRIVATE BY DEFAULT · <a href="/privacy-policy">PRIVACY</a></span>
               </div>
 
               {error ? <p className={styles.formError}>{error}</p> : null}
@@ -910,8 +793,7 @@ export default function DomicileEditorial() {
               <strong>PLATFORM</strong>
               <a href="#care">Care</a>
               <a href="#owner-view">Owner view</a>
-              <a href="#properties">Properties</a>
-            </div>
+                          </div>
             <div>
               <strong>COMPANY</strong>
               <Link href="/">IMVO Group</Link>
