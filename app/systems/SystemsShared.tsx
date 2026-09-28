@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./SystemsPage.module.css";\nimport PracticeSwitcher from "../components/PracticeSwitcher";
+import styles from "./SystemsPage.module.css";
+import PracticeSwitcher from "../components/PracticeSwitcher";
 
 export function SystemsHeader() {
   return (
