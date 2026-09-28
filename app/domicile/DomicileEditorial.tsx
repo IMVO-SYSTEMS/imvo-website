@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useMemo, useState, type FormEvent, type ReactNode } from "react";
 import styles from "./DomicileEditorial.module.css";
 
@@ -12,132 +12,197 @@ const WEB3FORMS_ACCESS_KEY =
 
 const whatsappUrl =
   "https://wa.me/250799409409?text=" +
-  encodeURIComponent(
-    "Hello DŌMICILE, I would like to discuss property management with your team."
-  );
+  encodeURIComponent("Hello DŌMICILE, I would like to discuss property management.");
 
 const images = {
-  hero: "/casa-vento-2.png",
-  c1: "/virunga-residence-2.png",
-  street: "/casa-vento-5.png",
-  privateResidence: "/chosen/casa-lumara.webp",
-  residentialEstate: "/chosen/virunga-residence.webp",
-  privateHome: "/chosen/casa-palma.webp",
+  hero: "/chosen/casa-vento.webp",
+  intro: "/chosen/virunga-residence.webp",
+  building: "/chosen/casa-lumara.webp",
+  building2: "/chosen/casa-palma.webp",
+  building3: "/chosen/aurelian-villa.webp",
+  building4: "/chosen/verdea-2.webp",
 };
 
-const explanation = [
-  {
-    number: "01",
-    title: "We understand the property",
-    text: "We establish the home, access arrangements, priorities, contacts and the level of authority you want DŌMICILE to hold.",
-  },
-  {
-    number: "02",
-    title: "We become the local point of contact",
-    text: "Routine checks, technicians, repairs and property matters move through one responsible desk instead of several disconnected conversations.",
-  },
-  {
-    number: "03",
-    title: "You approve what matters",
-    text: "Costs, works and decisions that require your authority stay visible and are confirmed before action, except where agreed emergency authority applies.",
-  },
-  {
-    number: "04",
-    title: "You keep the record",
-    text: "Photos, notes, reports, approvals and completed matters stay connected to the same property so you can see what happened and what comes next.",
-  },
-];
+function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y: 22 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
-const services = [
-  {
-    icon: "⌂",
-    title: "Property oversight",
-    text: "Scheduled checks, local presence and clear follow-through on the matters that affect your property.",
-  },
-  {
-    icon: "◎",
-    title: "Routine inspections",
-    text: "Structured property checks with observations, photographs and a useful record for the owner.",
-  },
-  {
-    icon: "⌁",
-    title: "Maintenance & repairs",
-    text: "Issues are scoped, technicians coordinated and completion followed through instead of being left in message threads.",
-  },
-  {
-    icon: "↗",
-    title: "Technician coordination",
-    text: "A single local point of contact coordinates access, attendance, updates and the work around your property.",
-  },
-  {
-    icon: "◌",
-    title: "Owner-away care",
-    text: "Dependable local presence when you are outside Kigali, travelling or simply want the property handled.",
-  },
-  {
-    icon: "◇",
-    title: "Property works",
-    text: "Repairs and improvements are coordinated with the owner’s approval, priorities and required level of oversight.",
-  },
-];
+function MiniChart() {
+  return (
+    <div className={styles.miniChart} aria-hidden="true">
+      <span style={{ height: "38%" }} />
+      <span style={{ height: "62%" }} />
+      <span style={{ height: "46%" }} />
+      <span style={{ height: "78%" }} />
+      <span style={{ height: "58%" }} />
+      <span style={{ height: "88%" }} />
+    </div>
+  );
+}
 
-const faqItems = [
-  [
-    "Do I need to live outside Rwanda?",
-    "No. DŌMICILE is for owners abroad, frequent travellers and Kigali-based owners who want reliable delegated property care.",
-  ],
-  [
-    "Can you manage one property only?",
-    "Yes. The service can be shaped around one home, several properties or a defined one-off need.",
-  ],
-  [
-    "How are repairs approved?",
-    "The approval process is agreed during onboarding. Work requiring owner approval does not proceed until authority is confirmed.",
-  ],
-  [
-    "What happens if something is urgent?",
-    "The matter is triaged, the owner is contacted and DŌMICILE acts within any pre-agreed emergency authority where applicable.",
-  ],
-  [
-    "Will my property appear on the website?",
-    "No, not by default. Client properties and identifying information are public only when the owner has explicitly agreed.",
-  ],
-  ["Which areas do you serve?", "DŌMICILE is currently focused on properties across Kigali, Rwanda."],
-];
+function DashboardMock({ compact = false }: { compact?: boolean }) {
+  return (
+    <div className={compact ? styles.dashboardCompact : styles.dashboardMock}>
+      <div className={styles.dashboardNav}>
+        <div className={styles.dashboardBrand}>
+          <span className={styles.logoMark}>D</span>
+          <b>DŌMICILE</b>
+        </div>
+        <div className={styles.dashboardTabs}>
+          <span className={styles.dashboardActive}>Overview</span>
+          <span>Reports</span>
+          <span>Approvals</span>
+        </div>
+        <span className={styles.avatar}>IM</span>
+      </div>
 
-const tabs = ["Overview", "Photos", "Reports", "Approvals", "Maintenance"];
-const tabCopy: Record<string, { title: string; text: string }> = {
-  Overview: {
-    title: "Everything important, in one place.",
-    text: "See what happened, what needs approval, what comes next and what has already been closed.",
-  },
-  Photos: {
-    title: "A visual record of the property.",
-    text: "Inspection, maintenance and follow-up photography stays attached to the property record.",
-  },
-  Reports: {
-    title: "Reports stay easy to find.",
-    text: "Routine checks, observations and completed actions stay organised instead of disappearing into message threads.",
-  },
-  Approvals: {
-    title: "Decisions stay visible.",
-    text: "Owner approvals and agreed authority remain clear before work proceeds.",
-  },
-  Maintenance: {
-    title: "Maintenance stays connected.",
-    text: "Issues, technicians, notes and completed matters remain attached to the same property record.",
-  },
-};
+      <div className={styles.dashboardBody}>
+        <div className={styles.metricGrid}>
+          <article>
+            <small>PROPERTY STATUS</small>
+            <strong>All good</strong>
+            <em>Last check today</em>
+          </article>
+          <article>
+            <small>OPEN ITEMS</small>
+            <strong>01</strong>
+            <em>1 approval needed</em>
+          </article>
+          <article>
+            <small>NEXT VISIT</small>
+            <strong>27 AUG</strong>
+            <em>Routine inspection</em>
+          </article>
+        </div>
+
+        <div className={styles.dashboardMainGrid}>
+          <article className={styles.chartPanel}>
+            <div className={styles.panelTitle}>
+              <span>Property activity</span>
+              <b>Last 30 days</b>
+            </div>
+            <svg viewBox="0 0 420 150" role="img" aria-label="Property activity chart">
+              <path d="M10 118 C65 85,90 100,128 78 S203 58,240 72 S316 102,410 35" fill="none" stroke="currentColor" strokeWidth="4"/>
+              <path d="M10 130 C72 120,100 128,142 111 S222 93,267 101 S337 112,410 83" fill="none" stroke="currentColor" strokeWidth="2" opacity=".35"/>
+            </svg>
+          </article>
+
+          <article className={styles.statusPanel}>
+            <span>Maintenance</span>
+            <strong>92%</strong>
+            <small>On-time resolution</small>
+            <div className={styles.progress}><i /></div>
+          </article>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PhoneMock({ variant = "overview" }: { variant?: "overview" | "analytics" | "home" }) {
+  return (
+    <div className={styles.phone}>
+      <div className={styles.phoneNotch} />
+      <div className={styles.phoneScreen}>
+        <div className={styles.phoneTop}>
+          <span>9:41</span>
+          <div><i/><i/><i/></div>
+        </div>
+        <div className={styles.phoneBrand}>
+          <span className={styles.logoMark}>D</span>
+          <b>DŌMICILE</b>
+          <span className={styles.phoneBell}>•</span>
+        </div>
+
+        {variant === "overview" && (
+          <>
+            <div className={styles.phoneMetricRow}>
+              <article><small>Status</small><strong>GOOD</strong></article>
+              <article><small>Open</small><strong>01</strong></article>
+            </div>
+            <div className={styles.phoneCard}>
+              <small>NEXT PROPERTY VISIT</small>
+              <strong>27 AUG</strong>
+              <span>Kigali · 09:30</span>
+            </div>
+            <div className={styles.phoneCard}>
+              <small>MAINTENANCE</small>
+              <div className={styles.phoneProgress}><i /></div>
+              <span>HVAC inspection · complete</span>
+            </div>
+          </>
+        )}
+
+        {variant === "analytics" && (
+          <>
+            <div className={styles.phoneCard}>
+              <small>ISSUES BY SOURCE</small>
+              <MiniChart />
+            </div>
+            <div className={styles.phoneMetricRow}>
+              <article><small>Closed</small><strong>14</strong></article>
+              <article><small>Open</small><strong>01</strong></article>
+            </div>
+            <div className={styles.phoneCard}>
+              <small>OWNER APPROVALS</small>
+              <strong>1 pending</strong>
+              <span>Maintenance quotation</span>
+            </div>
+          </>
+        )}
+
+        {variant === "home" && (
+          <>
+            <div className={styles.phonePropertyImage}>
+              <Image src={images.building2} alt="" fill sizes="260px" />
+            </div>
+            <div className={styles.phoneMetricRow}>
+              <article><small>Checks</small><strong>12</strong></article>
+              <article><small>Issues</small><strong>01</strong></article>
+            </div>
+            <div className={styles.phoneCard}>
+              <small>PROPERTY CARE</small>
+              <span>Routine inspection</span>
+              <div className={styles.phoneProgress}><i /></div>
+            </div>
+          </>
+        )}
+
+        <div className={styles.phoneNav}>
+          <span className={styles.phoneNavActive}>⌂</span>
+          <span>▥</span>
+          <span>◴</span>
+          <span>⚙</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const faq = [
+  ["Who is DŌMICILE for?", "Property owners who want one dependable local point of contact for oversight, maintenance and owner-away care."],
+  ["Do I have to live abroad?", "No. DŌMICILE is for owners abroad, frequent travellers and Kigali-based owners who prefer delegated property care."],
+  ["How do approvals work?", "You keep control of decisions that matter. Costs and works requiring approval stay visible before action."],
+  ["Where do you currently operate?", "DŌMICILE is currently focused on Kigali, Rwanda."],
+];
 
 type FormState = {
   name: string;
   phone: string;
   email: string;
   location: string;
-  propertyType: string;
-  helpWith: string;
+  need: string;
   message: string;
-  botcheck: string;
 };
 
 const initialForm: FormState = {
@@ -145,679 +210,351 @@ const initialForm: FormState = {
   phone: "",
   email: "",
   location: "",
-  propertyType: "",
-  helpWith: "",
+  need: "",
   message: "",
-  botcheck: "",
 };
-
-type QuickState = {
-  propertyType: string;
-  location: string;
-  helpWith: string;
-  ownerStatus: string;
-  contact: string;
-};
-
-const initialQuick: QuickState = {
-  propertyType: "Private residence",
-  location: "Kigali",
-  helpWith: "Ongoing property management",
-  ownerStatus: "Owner in Kigali",
-  contact: "WhatsApp",
-};
-
-function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
-  const reduceMotion = useReducedMotion();
-  return (
-    <motion.div
-      className={className}
-      initial={reduceMotion ? false : { opacity: 0, y: 20 }}
-      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-70px" }}
-      transition={{ duration: 0.66, ease: [0.16, 1, 0.3, 1] }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-function Roll({ children }: { children: string }) {
-  return (
-    <motion.span initial="rest" whileHover="hover" className={styles.roll}>
-      <span className={styles.rollTop}>
-        {children.split("").map((character, index) => (
-          <motion.span
-            key={`a-${index}`}
-            variants={{ rest: { y: 0 }, hover: { y: "-110%" } }}
-            transition={{ duration: 0.32, delay: index * 0.014, ease: [0.33, 1, 0.68, 1] }}
-          >
-            {character === " " ? "\u00A0" : character}
-          </motion.span>
-        ))}
-      </span>
-      <span className={styles.rollBottom} aria-hidden="true">
-        {children.split("").map((character, index) => (
-          <motion.span
-            key={`b-${index}`}
-            variants={{ rest: { y: "110%" }, hover: { y: 0 } }}
-            transition={{ duration: 0.32, delay: index * 0.014, ease: [0.33, 1, 0.68, 1] }}
-          >
-            {character === " " ? "\u00A0" : character}
-          </motion.span>
-        ))}
-      </span>
-    </motion.span>
-  );
-}
 
 export default function DomicileEditorial() {
-  const reduceMotion = useReducedMotion();
-  const [activeTab, setActiveTab] = useState("Overview");
+  const [form, setForm] = useState(initialForm);
+  const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [quick, setQuick] = useState<QuickState>(initialQuick);
-  const [form, setForm] = useState<FormState>(initialForm);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [error, setError] = useState("");
 
-  const formReady = useMemo(() => {
-    const email = form.email.trim();
-    const emailValid = !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    const hasContact = Boolean(form.phone.trim() || email);
+  const ready = useMemo(
+    () => Boolean(form.name.trim() && (form.phone.trim() || form.email.trim()) && form.location.trim()),
+    [form]
+  );
 
-    return Boolean(
-      form.name.trim() &&
-        hasContact &&
-        emailValid &&
-        form.location.trim() &&
-        form.propertyType &&
-        form.helpWith
-    );
-  }, [form]);
-
-  const startFromQuick = () => {
-    setForm((current) => ({
-      ...current,
-      location: quick.location,
-      propertyType: quick.propertyType,
-      helpWith: quick.helpWith,
-      message:
-        current.message ||
-        `${quick.ownerStatus}. Preferred first contact: ${quick.contact}.`,
-    }));
-    document.getElementById("enquire")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!formReady || form.botcheck) return;
-    setIsSubmitting(true);
-    setError("");
-
+    if (!ready || sending) return;
+    setSending(true);
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           access_key: WEB3FORMS_ACCESS_KEY,
-          subject: `New DŌMICILE enquiry — ${form.name} — ${form.location}`,
+          subject: `New DŌMICILE enquiry — ${form.name}`,
           from_name: "DŌMICILE by IMVO Group",
-          replyto: form.email || undefined,
           name: form.name,
-          phone_whatsapp: form.phone || "Not provided",
+          phone: form.phone || "Not provided",
           email: form.email || "Not provided",
           property_location: form.location,
-          property_type: form.propertyType,
-          help_with: form.helpWith,
-          message: form.message.trim() || "No additional message provided.",
-          botcheck: "",
+          need: form.need || "Not specified",
+          message: form.message || "No additional message.",
         }),
       });
       const result = await response.json();
-      if (!response.ok || !result?.success) throw new Error("Submission failed");
-      setIsSubmitted(true);
+      if (!response.ok || !result?.success) throw new Error("failed");
+      setSent(true);
       setForm(initialForm);
     } catch {
-      setError("We could not send the enquiry just now. Please try again or continue on WhatsApp.");
+      window.location.href = whatsappUrl;
     } finally {
-      setIsSubmitting(false);
+      setSending(false);
     }
-  };
+  }
 
   return (
     <main className={styles.page}>
       <header className={styles.header}>
-        <Link href="/domicile" className={styles.brand} aria-label="DŌMICILE home">
-          <Image src="/domicile/domicile-black-no-tagline.svg" alt="DŌMICILE" width={900} height={220} priority unoptimized />
+        <Link href="/domicile" className={styles.brand}>
+          <Image src="/domicile/domicile-black-no-tagline.svg" alt="DŌMICILE" width={900} height={220} priority />
         </Link>
-
-        <nav className={styles.nav}>
-          <a href="#top"><Roll>Home</Roll></a>
-          <a href="#care"><Roll>Care</Roll></a>
-          <a href="#owner-view"><Roll>Owner view</Roll></a>
-          <a href="#faq"><Roll>FAQ</Roll></a>
+        <nav>
+          <a href="#system">System</a>
+          <a href="#owner">Owner View</a>
+          <a href="#journey">How it works</a>
         </nav>
-
-        <a href="#enquire" className={styles.headerCta}>
-          Contact us
-        </a>
+        <a href="#contact" className={styles.headerCta}>Get started</a>
       </header>
 
-      <section className={styles.hero} id="top">
-        <div className={styles.heroSky} />
-        <motion.div
-          className={styles.heroPhoto}
-          initial={reduceMotion ? false : { scale: 1.025, y: 8 }}
-          animate={reduceMotion ? undefined : { scale: 1, y: 0 }}
-          transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <Image src={images.hero} alt="DŌMICILE managed residence in Kigali" fill priority unoptimized sizes="100vw" />
-        </motion.div>
-        <div className={styles.heroShade} />
-
-        <div className={styles.heroContent}>
-          <p className={styles.eyebrow}>PROPERTY MANAGEMENT · KIGALI</p>
-          <h1>
-            Your property,
-            <br />
-            handled.
-          </h1>
-          <p className={styles.heroLead}>
-            One dependable local point of contact for property oversight, maintenance,
-            owner-away care and follow-through.
-          </p>
-          <div className={styles.heroActions}>
-            <a href="#enquire" className={styles.primaryButton}>
-              Get in touch
-            </a>
-            <a href="#care" className={styles.ghostButton}>
-              Explore care
-            </a>
-          </div>
+      <section className={styles.hero}>
+        <div className={styles.heroImage}>
+          <Image src={images.hero} alt="Modern residence managed through DŌMICILE" fill priority sizes="100vw" />
+        </div>
+        <div className={styles.heroOverlay} />
+        <div className={styles.heroCopy}>
+          <span>PROPERTY MANAGEMENT · KIGALI</span>
+          <h1>YOUR PROPERTY.<br/>ONE CLEAR SYSTEM.</h1>
+          <p>Property oversight, maintenance, approvals and owner visibility — connected through one dependable local point of contact.</p>
+          <a href="#system">Explore DŌMICILE ↓</a>
         </div>
 
-        <div className={styles.heroFacts}>
-          <div>
-            <strong>KIGALI</strong>
-            <span>LOCAL PRESENCE</span>
+        <div className={styles.heroCard}>
+          <strong>Property care,<br/>in one place.</strong>
+          <p>One owner view. One local contact. One record of what happened and what comes next.</p>
+          <span>DŌMICILE / IMVO GROUP</span>
+        </div>
+      </section>
+
+      <section className={styles.intro} id="system">
+        <div className={styles.introMeta}>
+          <span>WHAT IS DŌMICILE?</span>
+          <small>Property Management<br/>Platform</small>
+        </div>
+        <div className={styles.introCopy}>
+          <h2>DŌMICILE is a property management platform that keeps owners connected to everything that matters.</h2>
+          <p>From routine inspections and maintenance to approvals, reports and owner-away care, DŌMICILE brings the property into one clear operating system.</p>
+          <div className={styles.introFacts}>
+            <div><span>LOCATION</span><b>Kigali, Rwanda</b></div>
+            <div><span>FOCUS</span><b>Property care + owner visibility</b></div>
+            <div><span>BY</span><b>IMVO Group</b></div>
           </div>
-          <div>
-            <strong>ONE</strong>
-            <span>RESPONSIBLE CONTACT</span>
+        </div>
+        <div className={styles.introArt}>
+          <div className={styles.arcImage}>
+            <Image src={images.intro} alt="" fill sizes="420px" />
           </div>
-          <div>
-            <strong>PRIVATE</strong>
-            <span>BY DEFAULT</span>
+        </div>
+        <div className={styles.projectStats}>
+          <div><strong>24/7</strong><span>Owner access</span></div>
+          <div><strong>01</strong><span>Responsible local contact</span></div>
+          <div><strong>100%</strong><span>Private by default</span></div>
+        </div>
+        <div className={styles.laptopScene}>
+          <DashboardMock compact />
+        </div>
+      </section>
+
+      <section className={styles.experience}>
+        <div className={styles.experienceTitle}>
+          <span>OWNER EXPERIENCE</span>
+          <h2>Designed to turn property complexity into <em>clarity</em>, <em>control</em>, and confident decisions.</h2>
+        </div>
+        <div className={styles.laptopLarge}>
+          <DashboardMock />
+        </div>
+      </section>
+
+      <section className={styles.architectureShowcase}>
+        <div className={styles.architectureImage}>
+          <Image src={images.building} alt="DŌMICILE property" fill sizes="100vw" />
+        </div>
+        <div className={styles.floatingInfo}>
+          <article>
+            <b>Property oversight</b>
+            <p>Checks, status, access and follow-through stay visible in one place.</p>
+          </article>
+          <article>
+            <b>Maintenance coordination</b>
+            <p>Issues, technicians, approvals and progress stay connected to the same property record.</p>
+          </article>
+        </div>
+        <div className={styles.floatingLogo}>D</div>
+      </section>
+
+      <section className={styles.mobileSection} id="owner">
+        <div className={styles.mobileHeading}>
+          <h2>Property Management.<br/>Right in Your <em>Pocket.</em></h2>
+          <p>Stay connected wherever you are. See status, maintenance, approvals and what comes next through one mobile experience.</p>
+        </div>
+
+        <div className={styles.mobileCanvas}>
+          <div className={styles.sideStat + " " + styles.sideStatLeft}>
+            <small>PROPERTY STATUS</small><strong>ALL GOOD</strong><span>Latest inspection complete</span>
+          </div>
+          <div className={styles.sideStat + " " + styles.sideStatRight}>
+            <small>OWNER APPROVALS</small><strong>01</strong><span>Pending decision</span>
+          </div>
+          <PhoneMock variant="overview" />
+          <div className={styles.wideChart}>
+            <svg viewBox="0 0 780 160">
+              <path d="M10 112 C100 80,145 122,220 92 S360 52,435 82 S575 118,770 46" fill="none" stroke="currentColor" strokeWidth="4"/>
+              <path d="M10 126 C90 116,160 128,240 111 S390 92,470 102 S610 119,770 92" fill="none" stroke="currentColor" strokeWidth="2" opacity=".3"/>
+            </svg>
           </div>
         </div>
       </section>
 
-      <section className={styles.quickSearch} aria-label="Start a DŌMICILE enquiry">
-        <div className={styles.quickField}>
-          <span>PROPERTY</span>
-          <select
-            value={quick.propertyType}
-            onChange={(event) => setQuick({ ...quick, propertyType: event.target.value })}
-          >
-            <option>Private residence</option>
-            <option>Apartment / condominium</option>
-            <option>Residential estate</option>
-            <option>Commercial property</option>
-            <option>Other</option>
-          </select>
+      <section className={styles.analyticsSection}>
+        <div className={styles.analyticsCopy}>
+          <h2>Property visibility.<br/>Built for <em>Better Decisions.</em></h2>
+          <p>Track what needs attention, what has been resolved and what requires your approval from one place.</p>
         </div>
-        <div className={styles.quickField}>
-          <span>LOCATION</span>
-          <select
-            value={quick.location}
-            onChange={(event) => setQuick({ ...quick, location: event.target.value })}
-          >
-            <option>Kigali</option>
-            <option>Kacyiru, Kigali</option>
-            <option>Nyarutarama, Kigali</option>
-            <option>Kimihurura, Kigali</option>
-            <option>Kibagabaga, Kigali</option>
-            <option>Other Kigali area</option>
-          </select>
-        </div>
-        <div className={styles.quickField}>
-          <span>NEED</span>
-          <select
-            value={quick.helpWith}
-            onChange={(event) => setQuick({ ...quick, helpWith: event.target.value })}
-          >
-            <option>Ongoing property management</option>
-            <option>Owner-away care</option>
-            <option>Maintenance coordination</option>
-            <option>Property inspection</option>
-            <option>One-off property support</option>
-            <option>Not sure yet</option>
-          </select>
-        </div>
-        <div className={styles.quickField}>
-          <span>OWNER STATUS</span>
-          <select
-            value={quick.ownerStatus}
-            onChange={(event) => setQuick({ ...quick, ownerStatus: event.target.value })}
-          >
-            <option>Owner in Kigali</option>
-            <option>Owner outside Rwanda</option>
-            <option>Frequent traveller</option>
-            <option>Property representative</option>
-          </select>
-        </div>
-        <div className={styles.quickField}>
-          <span>FIRST CONTACT</span>
-          <select
-            value={quick.contact}
-            onChange={(event) => setQuick({ ...quick, contact: event.target.value })}
-          >
-            <option>WhatsApp</option>
-            <option>Phone</option>
-            <option>Email</option>
-          </select>
-        </div>
-        <button type="button" className={styles.quickButton} onClick={startFromQuick}>
-          <span>⌕</span> Start enquiry
-        </button>
-      </section>
-
-      <section className={styles.explained} id="explained">
-        <span className={styles.sectionIndex}>DŌMICILE / 01</span>
-        <div className={styles.explainedCopy}>
-          <h2>
-            One local point of contact for what your property needs.
-          </h2>
-          <p className={styles.explainedLead}>
-            Inspections, technicians, repairs, access, approvals and updates — coordinated clearly, privately and with follow-through.
-          </p>
-        </div>
-        <div className={styles.explainedPhoto}>
-          <Image src={images.c1} alt="DŌMICILE residential care" fill unoptimized sizes="240px" />
-        </div>
-      </section>
-
-      <section className={styles.photoEssay} id="care">
-        <div className={styles.photoEssayIntro}>
-          <div>
-            <span className={styles.sectionTag}>CARE IN PRACTICE</span>
-            <h2>A property, properly looked after.</h2>
+        <div className={styles.analyticsStage}>
+          <div className={styles.analyticsCard + " " + styles.analyticsCardOne}>
+            <b>Open items</b><p>See exactly what still needs action.</p><strong>01</strong><span>Open matter</span>
           </div>
-          <p>
-            DŌMICILE keeps the property visible to the owner while the coordination behind
-            it stays calm, organised and local.
-          </p>
-          <div className={styles.filterPills} aria-hidden="true">
-            <span className={styles.activePill}>All</span>
-            <span>Oversight</span>
-            <span>Maintenance</span>
-            <span>Owner-away</span>
-            <span>Works</span>
+          <div className={styles.analyticsCard + " " + styles.analyticsCardTwo}>
+            <b>Maintenance</b><p>Understand what is active and what is complete.</p><strong>92%</strong><span>On-time resolution</span>
           </div>
-        </div>
-
-        <div className={styles.photoEssayGrid}>
-          <Reveal className={`${styles.essayPhoto} ${styles.essayPhotoMain}`}>
-            <Image src={images.street} alt="Property oversight" fill unoptimized sizes="(max-width:900px) 90vw, 24vw" />
-            <div className={styles.cardYear}>01</div>
-            <div className={styles.essayCaption}>
-              <strong>Property oversight</strong>
-              <p>Scheduled checks and dependable local presence.</p>
-              <a href="#enquire">Take a look ↗</a>
-            </div>
-          </Reveal>
-
-          <Reveal className={`${styles.essayPhoto} ${styles.essayPhotoTall}`}>
-            <Image src={images.hero} alt="Maintenance and repairs" fill unoptimized sizes="(max-width:900px) 90vw, 24vw" />
-            <div className={styles.cardYear}>02</div>
-            <div className={styles.essayCaption}>
-              <strong>Maintenance & repairs</strong>
-              <p>Issues scoped, coordinated and followed through.</p>
-              <a href="#enquire">Take a look ↗</a>
-            </div>
-          </Reveal>
-
-          <Reveal className={`${styles.statementCard} ${styles.careImageCard}`}>
-            <Image src={images.c1} alt="Owner-away care" fill unoptimized sizes="(max-width:900px) 90vw, 24vw" />
-            <div className={styles.cardYear}>03</div>
-            <div className={styles.essayCaption}>
-              <strong>Owner-away care</strong>
-              <p>Local presence when you are not in Kigali.</p>
-              <a href="#enquire">Take a look ↗</a>
-            </div>
-          </Reveal>
-
-          <Reveal className={`${styles.statementCardDark} ${styles.careImageCard}`}>
-            <Image src={images.street} alt="Property works" fill unoptimized sizes="(max-width:900px) 90vw, 24vw" />
-            <div className={styles.cardYear}>04</div>
-            <div className={styles.essayCaption}>
-              <strong>Property works</strong>
-              <p>Repairs and improvements with clear owner approval.</p>
-              <a href="#enquire">Take a look ↗</a>
-            </div>
-          </Reveal>
+          <PhoneMock variant="analytics" />
         </div>
       </section>
 
-      <section className={styles.servicesSection}>
-        <div className={styles.servicesHeading}>
-          <span>WHAT DŌMICILE HANDLES</span>
-          <h2>PROPERTY CARE, COORDINATED.</h2>
-          <p>
-            Routine oversight, maintenance, owner-away care and property works — handled through one accountable local point.
-          </p>
+      <section className={styles.responsiveSection}>
+        <div className={styles.responsiveImage}>
+          <Image src={images.building3} alt="" fill sizes="100vw" />
         </div>
-        <div className={styles.servicesGrid}>
-          {services.map((service) => (
-            <article key={service.title}>
-              <span className={styles.serviceIcon}>{service.icon}</span>
-              <div>
-                <h3>{service.title}</h3>
-                <p>{service.text}</p>
-              </div>
-              <a href="#enquire">Learn more ↗</a>
+        <div className={styles.responsiveCopy}>
+          <h2>Fully responsive owner interface <em>Experience.</em></h2>
+          <p>Managing a property should not require multiple conversations and scattered records. DŌMICILE brings the important parts together.</p>
+        </div>
+        <div className={styles.responsivePhone}><PhoneMock variant="home" /></div>
+        <div className={styles.responsiveStat}>
+          <small>MAINTENANCE PERFORMANCE</small>
+          <strong>92%</strong>
+          <span>On-time resolution</span>
+        </div>
+      </section>
+
+      <section className={styles.journeySection} id="journey">
+        <div className={styles.journeyHeading}>
+          <h2>Owner Journey</h2>
+          <p>One continuous property-care relationship — from onboarding to routine oversight, approvals, maintenance and reporting.</p>
+        </div>
+        <div className={styles.journeyVisual}>
+          <div className={styles.journeyCircle}>
+            <Image src={images.building4} alt="" fill sizes="580px" />
+          </div>
+          {[
+            ["01","Onboard","Property, access, owner priorities and contacts are set."],
+            ["02","Observe","Routine checks and status updates keep the property visible."],
+            ["03","Act","Maintenance and property matters move through one responsible contact."],
+            ["04","Record","Reports, approvals and completed work remain connected."],
+          ].map(([n,t,p],i)=>(
+            <article key={n} className={styles["journeyCard" + (i+1)]}>
+              <small>STAGE {n}</small>
+              <b>{t}</b>
+              <p>{p}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section className={styles.howSection}>
-        <div className={styles.howHeading}>
-          <span>HOW DOES IT WORK?</span>
-          <h2>One clear journey from first conversation to ongoing care.</h2>
+      <section className={styles.flowSection}>
+        <div className={styles.flowTitle}>
+          <span>SYSTEM FLOW</span>
+          <h2>Connecting every part of property management into <em>one seamless flow.</em></h2>
         </div>
-        <div className={styles.explanationList}>
-          {explanation.map((item) => (
-            <article key={item.number}>
-              <div className={styles.processIcon}>⌁</div>
-              <div>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </div>
-              <span>{item.number}</span>
+        <div className={styles.flowMap}>
+          <div className={styles.flowImage}>
+            <Image src={images.building2} alt="" fill sizes="700px" />
+          </div>
+          <div className={styles.flowNode + " " + styles.nodeA}>Onboarding</div>
+          <div className={styles.flowNode + " " + styles.nodeB}>Owner login</div>
+          <div className={styles.flowNode + " " + styles.nodeC}>Home</div>
+          <div className={styles.flowNode + " " + styles.nodeD}>Property</div>
+          <div className={styles.flowNode + " " + styles.nodeE}>Reports</div>
+          <div className={styles.flowNode + " " + styles.nodeF}>Approvals</div>
+          <div className={styles.flowNode + " " + styles.nodeG}>Maintenance</div>
+          <svg viewBox="0 0 1000 560" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M150 280 H355 H500 H670 H835" />
+            <path d="M500 280 V140 H670" />
+            <path d="M500 280 V420 H670" />
+            <path d="M670 140 H835" />
+            <path d="M670 420 H835" />
+          </svg>
+        </div>
+      </section>
+
+      <section className={styles.problemSection}>
+        <div className={styles.problemHeading}>
+          <h2>Turning property chaos into <em>clear control.</em></h2>
+          <p>Replacing scattered messages, maintenance chasing and uncertain follow-up with one dependable operating line.</p>
+        </div>
+        <div className={styles.problemGrid}>
+          <div className={styles.problemCards}>
+            <article><b>Scattered property information</b><p>Updates, photos and decisions disappear across different chats and people.</p><span>Problem 01</span></article>
+            <article><b>Maintenance chasing</b><p>Owners spend time following technicians and trying to understand what is actually complete.</p><span>Problem 02</span></article>
+            <article><b>No clear property record</b><p>Approvals and completed work are difficult to recover later.</p><span>Problem 03</span></article>
+          </div>
+          <div className={styles.solutionArc}>
+            <div className={styles.solutionImage}><Image src={images.hero} alt="" fill sizes="520px" /></div>
+            <div className={styles.solutionBlur} />
+            <div className={styles.solutionLabel}><span>SOLUTION</span><b>Everything in one <em>Place.</em></b></div>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.processSection}>
+        <div className={styles.processHeader}>
+          <div>
+            <span>HOW DŌMICILE WORKS</span>
+            <h2>A four-step property care process built for clarity.</h2>
+          </div>
+          <p>A clear structure keeps owners informed while DŌMICILE handles the local coordination.</p>
+        </div>
+        <div className={styles.processMap}>
+          {[
+            ["01","Understand","Property, access and priorities"],
+            ["02","Set up","Owner view and contacts"],
+            ["03","Manage","Checks, maintenance and approvals"],
+            ["04","Report","Records, follow-through and next steps"],
+          ].map(([n,t,p],i)=>(
+            <article key={n} className={styles["processCard" + (i+1)]}>
+              <span>{n}</span>
+              <b>{t}</b>
+              <p>{p}</p>
             </article>
           ))}
-        </div>
-      </section>
-
-      <section className={styles.ownerView} id="owner-view">
-        <div className={styles.ownerIntro}>
-          <span className={styles.sectionTag}>OWNER VIEW</span>
-          <div className={styles.ownerHeading}>
-            <h2>Visibility without chasing updates.</h2>
-            <p>
-              The Owner View keeps what happened, what needs approval and what comes next
-              in one calm place.
-            </p>
-          </div>
-        </div>
-
-        <div className={styles.ownerStage}>
-          <div className={styles.ownerPhoto}>
-            <Image src={images.c1} alt="DŌMICILE Owner View property" fill unoptimized sizes="100vw" />
-          </div>
-          <div className={styles.ownerShade} />
-          <div className={styles.dashboard}>
-            <div className={styles.dashboardTop}>
-              <strong>DŌMICILE / OWNER VIEW</strong>
-              <span>PROPERTY ACTIVE</span>
-            </div>
-            <div className={styles.metrics}>
-              <div>
-                <small>STATUS</small>
-                <strong>ALL GOOD</strong>
-              </div>
-              <div>
-                <small>LAST CHECK</small>
-                <strong>TODAY · 09:42</strong>
-              </div>
-              <div>
-                <small>OPEN</small>
-                <strong>01</strong>
-              </div>
-              <div>
-                <small>NEXT VISIT</small>
-                <strong>27 AUG</strong>
-              </div>
-            </div>
-            <div className={styles.tabs}>
-              {tabs.map((tab) => (
-                <button
-                  key={tab}
-                  type="button"
-                  onClick={() => setActiveTab(tab)}
-                  className={activeTab === tab ? styles.activeTab : ""}
-                >
-                  {tab}
-                </button>
-              ))}
-            </div>
-            <div className={styles.tabPanel}>
-              <span>{activeTab.toUpperCase()}</span>
-              <h3>{tabCopy[activeTab].title}</h3>
-              <p>{tabCopy[activeTab].text}</p>
-              <button type="button">VIEW LATEST REPORT →</button>
-            </div>
+          <div className={styles.processRail}>
+            <i/><i/><i/><i/>
           </div>
         </div>
       </section>
 
-      <section className={styles.trustFaq} id="faq">
-        <div className={styles.trust}>
-          <span className={styles.sectionTag}>BACKED BY IMVO GROUP</span>
-          <h2>Backed by IMVO Group.</h2>
-          <p>
-            Day-to-day property coordination, supported by IMVO Group’s built-environment experience.
-          </p>
-          <Image src="/logo.png" alt="IMVO Group" width={500} height={180} unoptimized />
-          <Link href="/">
-            VISIT IMVO GROUP <span>↗</span>
-          </Link>
-        </div>
-
-        <div className={styles.faq}>
-          <span className={styles.sectionTag}>CLARITY IN PROPERTY CARE</span>
-          <h2>Your practical questions, answered.</h2>
-          <div className={styles.faqList}>
-            {faqItems.map(([question, answer], index) => (
-              <article key={question} className={openFaq === index ? styles.faqOpen : ""}>
-                <button type="button" onClick={() => setOpenFaq(openFaq === index ? null : index)}>
-                  <strong>{question}</strong>
-                  <b>{openFaq === index ? "−" : "↘"}</b>
-                </button>
-                <div>
-                  <p>{answer}</p>
-                </div>
-              </article>
-            ))}
+      <section className={styles.contactSection} id="contact">
+        <div className={styles.contactIntro}>
+          <span>DŌMICILE / KIGALI</span>
+          <h2>Your property.<br/>Handled.</h2>
+          <p>Start with one conversation. Tell us where the property is and what you need handled.</p>
+          <div>
+            <a href="mailto:domicile@imvogroup.com">domicile@imvogroup.com</a>
+            <a href={whatsappUrl} target="_blank" rel="noreferrer">+250 799 409 409</a>
           </div>
         </div>
+
+        {sent ? (
+          <div className={styles.sentState}>
+            <span>ENQUIRY RECEIVED</span>
+            <h3>We’ll contact you directly.</h3>
+            <button onClick={() => setSent(false)}>Send another enquiry</button>
+          </div>
+        ) : (
+          <form className={styles.contactForm} onSubmit={submit}>
+            <label>Full name<input value={form.name} onChange={e=>setForm({...form,name:e.target.value})} placeholder="Your name" /></label>
+            <label>Phone / WhatsApp<input value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} placeholder="+250 ..." /></label>
+            <label>Email<input type="email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} placeholder="you@example.com" /></label>
+            <label>Property location<input value={form.location} onChange={e=>setForm({...form,location:e.target.value})} placeholder="Kigali" /></label>
+            <label className={styles.formWide}>What do you need?
+              <select value={form.need} onChange={e=>setForm({...form,need:e.target.value})}>
+                <option value="">Select</option>
+                <option>Ongoing property management</option>
+                <option>Owner-away care</option>
+                <option>Maintenance coordination</option>
+                <option>Inspection / property check</option>
+              </select>
+            </label>
+            <label className={styles.formWide}>Message<textarea value={form.message} onChange={e=>setForm({...form,message:e.target.value})} placeholder="Tell us anything useful..." /></label>
+            <button className={styles.formWide} disabled={!ready || sending}>{sending ? "Sending..." : "Send to DŌMICILE"}</button>
+          </form>
+        )}
       </section>
 
-      <section className={styles.enquiry} id="enquire">
-        <div className={styles.enquiryImage}>
-          <Image src={images.street} alt="Residential street cared for by DŌMICILE" fill unoptimized sizes="(max-width:900px) 100vw, 42vw" />
-          <div className={styles.enquiryOverlay} />
-          <div className={styles.enquiryIntro}>
-            <Image src="/domicile/domicile-white-no-tagline.svg" alt="DŌMICILE" width={900} height={220} unoptimized />
-            <span className={styles.sectionTagLight}>START WITH A CONVERSATION</span>
-            <h2>Tell us about your property.</h2>
-            <p>
-              This is an enquiry, not a registration. We’ll contact you to understand the
-              property and what you need.
-            </p>
-            <div>
-              <a href="mailto:domicile@imvogroup.com">domicile@imvogroup.com</a>
-              <a href={whatsappUrl} target="_blank" rel="noreferrer">
-                +250 799 409 409
-              </a>
-              <span>KIGALI · RWANDA</span>
-            </div>
-          </div>
+      <section className={styles.faqSection}>
+        <div>
+          <span>QUESTIONS</span>
+          <h2>Clear answers.</h2>
         </div>
-
-        <div className={styles.formSide}>
-          <div className={styles.formHeading}>
-            <span>PROPERTY ENQUIRY</span>
-            <h3>What should we know?</h3>
-            <p>A first conversation is enough to start. Phone or email is enough.</p>
-          </div>
-
-          {isSubmitted ? (
-            <div className={styles.success}>
-              <span>ENQUIRY RECEIVED</span>
-              <h3>Thank you.</h3>
-              <p>We’ll review the details and contact you directly.</p>
-              <button type="button" onClick={() => setIsSubmitted(false)}>
-                SEND ANOTHER ENQUIRY
-              </button>
-            </div>
-          ) : (
-            <form className={styles.form} onSubmit={handleSubmit}>
-              <input
-                className={styles.botcheck}
-                type="checkbox"
-                name="botcheck"
-                value={form.botcheck}
-                onChange={(event) =>
-                  setForm({ ...form, botcheck: event.target.checked ? "1" : "" })
-                }
-                tabIndex={-1}
-                autoComplete="off"
-              />
-
-              <label>
-                Full name
-                <input
-                  value={form.name}
-                  onChange={(event) => setForm({ ...form, name: event.target.value })}
-                  placeholder="Your name"
-                />
-              </label>
-
-              <label>
-                Phone / WhatsApp (or email)
-                <input
-                  value={form.phone}
-                  onChange={(event) => setForm({ ...form, phone: event.target.value })}
-                  placeholder="+250 ..."
-                />
-              </label>
-
-              <label>
-                Email (or phone)
-                <input
-                  type="email"
-                  value={form.email}
-                  onChange={(event) => setForm({ ...form, email: event.target.value })}
-                  placeholder="you@example.com"
-                />
-              </label>
-
-              <label>
-                Property location
-                <input
-                  value={form.location}
-                  onChange={(event) => setForm({ ...form, location: event.target.value })}
-                  placeholder="e.g. Kacyiru, Kigali"
-                />
-              </label>
-
-              <label>
-                Property type
-                <select
-                  value={form.propertyType}
-                  onChange={(event) => setForm({ ...form, propertyType: event.target.value })}
-                >
-                  <option value="">Select property type</option>
-                  <option>Private residence</option>
-                  <option>Apartment / condominium</option>
-                  <option>Residential estate</option>
-                  <option>Commercial property</option>
-                  <option>Other</option>
-                </select>
-              </label>
-
-              <label>
-                What do you need?
-                <select
-                  value={form.helpWith}
-                  onChange={(event) => setForm({ ...form, helpWith: event.target.value })}
-                >
-                  <option value="">Select what you need</option>
-                  <option>Ongoing property management</option>
-                  <option>Owner-away care</option>
-                  <option>Maintenance coordination</option>
-                  <option>Property inspection</option>
-                  <option>One-off property support</option>
-                  <option>Not sure yet</option>
-                </select>
-              </label>
-
-              <label className={styles.message}>
-                Message (optional)
-                <textarea
-                  value={form.message}
-                  onChange={(event) => setForm({ ...form, message: event.target.value })}
-                  placeholder="Tell us what the property needs, if there is anything else we should know..."
-                />
-              </label>
-
-              <div className={styles.formFooter}>
-                <button type="submit" disabled={!formReady || isSubmitting}>
-                  {isSubmitting ? "SENDING..." : "SEND TO DŌMICILE ↗"}
-                </button>
-                <span>PRIVATE BY DEFAULT · <a href="/privacy-policy">PRIVACY</a></span>
-              </div>
-
-              {error ? <p className={styles.formError}>{error}</p> : null}
-            </form>
-          )}
+        <div className={styles.faqList}>
+          {faq.map(([q,a],i)=>(
+            <article key={q}>
+              <button onClick={()=>setOpenFaq(openFaq===i?null:i)}><b>{q}</b><span>{openFaq===i?"−":"+"}</span></button>
+              {openFaq===i && <p>{a}</p>}
+            </article>
+          ))}
         </div>
       </section>
 
       <footer className={styles.footer}>
-        <div className={styles.footerTop}>
-          <div className={styles.footerBrand}>
-            <Image src="/domicile/domicile-white-no-tagline.svg" alt="DŌMICILE" width={900} height={220} unoptimized />
-            <p>
-              PROPERTY MANAGEMENT BY IMVO GROUP.
-              <br />
-              YOUR PROPERTY, HANDLED.
-            </p>
-          </div>
-
-          <div className={styles.footerColumns}>
-            <div>
-              <strong>PLATFORM</strong>
-              <a href="#care">Care</a>
-              <a href="#owner-view">Owner view</a>
-                          </div>
-            <div>
-              <strong>COMPANY</strong>
-              <Link href="/">IMVO Group</Link>
-              <a href="#faq">FAQ</a>
-              <a href="#enquire">Contact</a>
-            </div>
-            <div>
-              <strong>CONTACT</strong>
-              <a href="mailto:domicile@imvogroup.com">Email</a>
-              <a href={whatsappUrl} target="_blank" rel="noreferrer">
-                WhatsApp
-              </a>
-              <span>Kigali, Rwanda</span>
-            </div>
-          </div>
-        </div>
-
-        <div className={styles.footerLine}>
-          <span>© 2026 DŌMICILE · IMVO GROUP</span>
-          <span>PRIVATE BY DEFAULT</span>
-        </div>
-
-        <div className={styles.footerWord} aria-hidden="true">
-          domicile
+        <Image src="/domicile/domicile-white-no-tagline.svg" alt="DŌMICILE" width={900} height={220} />
+        <div>
+          <span>PROPERTY MANAGEMENT BY IMVO GROUP</span>
+          <span>KIGALI · RWANDA</span>
+          <Link href="/">IMVO GROUP ↗</Link>
         </div>
       </footer>
     </main>
