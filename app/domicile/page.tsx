@@ -5,7 +5,6 @@ import ImvoReturnWidget from "./ImvoReturnWidget";
 import { getDomicilePageContent, getFaqs, getSeoEntry } from "@/sanity/lib/cmsBackend";
 import { mergeCmsMetadata } from "@/app/lib/cmsMetadata";
 import type { SeoEntry } from "@/sanity/types/cmsBackend";
-import "./direct-photo-fix.css";
 
 export const revalidate = 300;
 
