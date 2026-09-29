@@ -2,178 +2,195 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useMemo, useState } from "react";
 import styles from "./SystemsPage.module.css";
 import { SystemsHeader, SystemsFooter } from "./SystemsShared";
-import { serviceGroups, industries, processSteps, caseStudies } from "./systemData";
+import { serviceGroups } from "./systemData";
+
+const serviceImages = [
+  "/about-future.jpg",
+  "/service-process.webp",
+  "/services-hero.webp",
+  "/contact-hero.webp",
+  "/about-process.jpg",
+  "/about-africa.jpg",
+  "/service-site-1.webp",
+  "/imvo-contact-team.webp",
+];
+
+const insightCards = [
+  ["MANAGEMENT", "Designing software around the operation, not around the template.", "/about-process.jpg"],
+  ["TECHNOLOGIES", "When a custom platform is better than adding another tool.", "/services-hero.webp"],
+  ["ECOMMERCE", "What a serious commerce platform needs beyond the storefront.", "/about-future.jpg"],
+  ["AI & AUTOMATION", "Where automation creates real operational leverage.", "/service-process.webp"],
+  ["SYSTEMS", "Ownership, access, backups and handover after launch.", "/contact-hero.webp"],
+  ["ENTERPRISE", "Connecting customer, finance, inventory and team workflows.", "/service-site-1.webp"],
+  ["SECURITY", "Building permissions and auditability into the product early.", "/imvo-contact-team.webp"],
+  ["PRODUCT", "How to move from an idea to a system people can actually use.", "/about-africa.jpg"],
+];
+
+const presencePoints = [
+  { label: "Kigali", className: styles.pinKigali },
+  { label: "East Africa", className: styles.pinEastAfrica },
+  { label: "Africa", className: styles.pinAfrica },
+  { label: "Global", className: styles.pinGlobal },
+];
 
 export default function SystemsPageClient() {
+  const [activeService, setActiveService] = useState(0);
+  const group = serviceGroups[activeService];
+
+  const visibleCards = useMemo(() => {
+    const padded = [...group.items];
+    while (padded.length < 4) padded.push(group.title);
+    return padded.slice(0, 4).map((item, index) => ({
+      title: item,
+      image: serviceImages[(activeService * 2 + index) % serviceImages.length],
+    }));
+  }, [activeService, group]);
+
   return (
     <main className={styles.page}>
       <SystemsHeader />
 
-      <section className={styles.hero}>
-        <Image src="/about-future.jpg" alt="IMVO Systems digital technology work" fill priority sizes="100vw" className={styles.heroImage} />
-        <div className={styles.heroWash} />
-        <div className={styles.heroGrid}>
-          <div className={styles.heroCopy}>
-            <p className={styles.kickerLight}>Digital transformation & technology services</p>
-            <h1>Technology that moves the business forward.</h1>
-            <p className={styles.heroLead}>
-              IMVO Systems designs and builds digital products, custom software, connected business platforms and dependable technology operations.
+      <section className={styles.vHero}>
+        <div className={styles.vHeroInner}>
+          <div className={styles.vHeroTitle}>
+            <p>Digital Transformation & Technology Services</p>
+            <h1>We build growth-ready digital systems for ambitious organisations<span>_</span></h1>
+          </div>
+
+          <div className={styles.vHeroBody}>
+            <h2>A Kigali-based technology and product delivery practice supporting organisations across Rwanda and beyond.</h2>
+            <p>
+              From custom software and web products to mobile experiences, enterprise integration, cloud operations, AI and automation, IMVO Systems turns real business needs into dependable digital systems.
             </p>
-            <div className={styles.heroActions}>
-              <Link className={styles.blueButton} href="/systems/contact">Talk to us <span>↗</span></Link>
-              <Link className={styles.ghostButton} href="/systems/services">Explore services <span>↓</span></Link>
+            <div className={styles.credibilityRow}>
+              <span><b>KIGALI</b><small>Rwanda HQ</small></span>
+              <span><b>PRODUCT</b><small>Design + Build</small></span>
+              <span><b>SYSTEMS</b><small>Operate + Improve</small></span>
             </div>
           </div>
-
-          <div className={styles.heroRail} aria-label="IMVO Systems capabilities">
-            {serviceGroups.map((group) => (
-              <Link key={group.id} href={"/systems/services#" + group.id}>
-                <span>{group.index}</span>
-                <strong>{group.title}</strong>
-                <b>↗</b>
-              </Link>
-            ))}
-          </div>
         </div>
       </section>
 
-      <section className={styles.introBand}>
-        <div className={styles.introBandInner}>
-          <p className={styles.kicker}>IMVO Systems</p>
-          <h2>We understand technology.<br />We also understand that delivery has to work after launch.</h2>
-          <p>
-            From customer experiences and software products to cloud operations, integrations, automation and enterprise platforms, the work is designed around a clear business outcome.
-          </p>
-        </div>
+      <section className={styles.mediaStrip} aria-label="IMVO Systems showcase">
+        <video autoPlay muted loop playsInline preload="metadata">
+          <source src="/hero-1.mp4" type="video/mp4" />
+        </video>
       </section>
 
-      <section className={styles.servicesShowcase}>
-        <div className={styles.sectionTop}>
-          <div>
-            <p className={styles.kicker}>Our services</p>
-            <h2>Capabilities for building, improving and operating digital business.</h2>
-          </div>
-          <Link href="/systems/services">View all services →</Link>
+      <section className={styles.vServices}>
+        <div className={styles.vSectionTitle}>
+          <h2>Our Services</h2>
         </div>
 
-        <div className={styles.serviceRows}>
-          {serviceGroups.map((group) => (
-            <article className={styles.serviceRow} id={group.id} key={group.id}>
-              <div className={styles.serviceNumber}>{group.index}</div>
-              <div className={styles.serviceTitle}>
-                <h3>{group.title}</h3>
-                <p>{group.summary}</p>
-              </div>
-              <div className={styles.serviceItems}>
-                {group.items.map((item) => <span key={item}>{item}</span>)}
-              </div>
-              <div className={styles.serviceImage}>
-                <Image src={group.image} alt="" fill sizes="(max-width: 900px) 100vw, 28vw" />
-              </div>
-            </article>
+        <div className={styles.serviceTabs} role="tablist" aria-label="Service groups">
+          {serviceGroups.map((item, index) => (
+            <button
+              key={item.id}
+              type="button"
+              role="tab"
+              aria-selected={activeService === index}
+              className={activeService === index ? styles.activeServiceTab : ""}
+              onClick={() => setActiveService(index)}
+            >
+              {item.title}
+            </button>
+          ))}
+        </div>
+
+        <div className={styles.vServiceCards}>
+          {visibleCards.map((card, index) => (
+            <Link href={"/systems/services#" + group.id} className={styles.vServiceCard} key={card.title + index}>
+              <Image src={card.image} alt="" fill sizes="(max-width: 760px) 82vw, 25vw" />
+              <div className={styles.cardShade} />
+              <strong>{card.title}</strong>
+            </Link>
           ))}
         </div>
       </section>
 
-      <section className={styles.presenceSection}>
-        <div className={styles.presenceCopy}>
-          <p className={styles.kickerLight}>Our presence</p>
-          <h2>Built in Kigali.<br />Designed to work anywhere.</h2>
-          <p>
-            IMVO Systems is based in Rwanda and works with businesses that need strong local understanding, clear delivery and technology that can scale beyond one market.
-          </p>
-          <div className={styles.presenceStats}>
-            <div><span>HQ</span><strong>Kigali</strong><small>Rwanda</small></div>
-            <div><span>Delivery</span><strong>East Africa</strong><small>Regional projects</small></div>
-            <div><span>Collaboration</span><strong>Global</strong><small>Remote delivery</small></div>
-          </div>
+      <section className={styles.presenceBlock}>
+        <div className={styles.vSectionTitle}>
+          <h2>Our Presence</h2>
         </div>
-        <div className={styles.presenceVisual}>
-          <Image src="/regional-map.webp" alt="IMVO Systems regional presence" fill sizes="(max-width: 900px) 100vw, 48vw" />
-        </div>
-      </section>
 
-      <section className={styles.projectsSection}>
-        <div className={styles.sectionTop}>
-          <div>
-            <p className={styles.kicker}>Selected systems</p>
-            <h2>Products shaped around the operation, not the template.</h2>
-          </div>
-          <Link href="/systems/projects">See projects →</Link>
+        <div className={styles.presenceTabs}>
+          <span><b>HQ</b> Kigali</span>
+          <span><b>Delivery</b> Rwanda & East Africa</span>
+          <span><b>Remote</b> Global collaboration</span>
         </div>
-        <div className={styles.projectGrid}>
-          {caseStudies.map((project) => (
-            <article key={project.title} className={styles.projectCard}>
-              <div className={styles.projectImage}><Image src={project.image} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" /></div>
-              <div className={styles.projectCopy}>
-                <span>{project.tag}</span>
-                <h3>{project.title}</h3>
-                <p>{project.text}</p>
-              </div>
-            </article>
+
+        <div className={styles.mapStage}>
+          <Image src="/regional-map.webp" alt="IMVO Systems regional presence" fill sizes="100vw" className={styles.mapImage} />
+          {presencePoints.map((point) => (
+            <div key={point.label} className={point.className}>
+              <i />
+              <span>{point.label}</span>
+            </div>
           ))}
         </div>
       </section>
 
-      <section className={styles.industriesSection}>
-        <div className={styles.industriesLead}>
-          <p className={styles.kickerLight}>Industries</p>
-          <h2>Technology for organisations with real operational complexity.</h2>
-          <p>We adapt the product and delivery model to how each sector actually works.</p>
-          <Link className={styles.whiteTextLink} href="/systems/industries">Explore industries →</Link>
+      <section className={styles.clientsSection} id="testimonials">
+        <div className={styles.vSectionTitle}>
+          <h2>Clients & Collaborators</h2>
         </div>
-        <div className={styles.industryList}>
-          {industries.map(([title, text], index) => (
-            <article key={title}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <div><h3>{title}</h3><p>{text}</p></div>
-              <b>↗</b>
-            </article>
+        <p className={styles.clientMarkets}>Rwanda · East Africa · Africa · International collaboration</p>
+
+        <div className={styles.logoCloud}>
+          {Array.from({ length: 9 }, (_, index) => (
+            <div key={index}><Image src={"/partners/partner-" + (index + 1) + ".png"} alt={"IMVO partner " + (index + 1)} width={150} height={74} /></div>
           ))}
         </div>
-      </section>
 
-      <section className={styles.processSection}>
-        <div className={styles.sectionTop}>
-          <div>
-            <p className={styles.kicker}>How we work</p>
-            <h2>A proven path from business problem to working system.</h2>
-          </div>
-        </div>
-        <div className={styles.processGrid}>
-          {processSteps.map(([n, title, text]) => (
-            <article key={n}>
-              <span>{n}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </article>
-          ))}
+        <div className={styles.testimonialLike}>
+          <div className={styles.stars}>★★★★★</div>
+          <p>Clear communication, dependable delivery, explicit ownership and systems that remain usable after launch.</p>
+          <strong>IMVO Systems delivery standard</strong>
+          <span>KIGALI, RWANDA</span>
         </div>
       </section>
 
-      <section className={styles.insightsSection} id="insights">
-        <div className={styles.sectionTop}>
-          <div>
-            <p className={styles.kicker}>Thinking</p>
-            <h2>Useful technology decisions start before the code.</h2>
-          </div>
-        </div>
-        <div className={styles.insightGrid}>
-          <article><span>01 / SYSTEM OWNERSHIP</span><h3>What good system ownership looks like after launch.</h3><p>Repositories, credentials, data access, backups and documentation should never be an afterthought.</p></article>
-          <article><span>02 / PRODUCT STRATEGY</span><h3>When to integrate, improve or rebuild.</h3><p>The right answer depends on business risk, current architecture, operational friction and the cost of change.</p></article>
-          <article><span>03 / DELIVERY</span><h3>Software should survive handover.</h3><p>A strong build is understandable, maintainable and recoverable by the people who own it.</p></article>
-        </div>
-      </section>
-
-      <section className={styles.finalCta}>
+      <section className={styles.edgeCta}>
         <div>
-          <p className={styles.kickerLight}>Let’s collaborate</p>
-          <h2>Give your business a stronger digital operating system.</h2>
-          <p>Start with the problem you need solved. We will help define the right route from there.</p>
+          <small>Maximise the value of your digital investment.</small>
+          <h2>Give your business an edge with customised technology.</h2>
         </div>
-        <Link className={styles.whiteButton} href="/systems/contact">Start a conversation <span>↗</span></Link>
+        <div>
+          <p>We bring product design, software engineering, integrations and operational thinking into one delivery team.</p>
+          <Link href="/systems/contact">Get your consultation <span>→</span></Link>
+        </div>
+      </section>
+
+      <section className={styles.insights} id="insights">
+        <div className={styles.vSectionTitle}>
+          <h2>Insights</h2>
+          <p>Useful thinking for organisations building, improving or operating digital systems.</p>
+        </div>
+
+        <div className={styles.insightCards}>
+          {insightCards.map(([category, title, image]) => (
+            <article key={title} className={styles.insightCard}>
+              <Image src={image} alt="" fill sizes="(max-width: 760px) 47vw, 25vw" />
+              <div className={styles.insightShade} />
+              <span>{category}</span>
+              <h3>{title}</h3>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className={styles.partnerCta}>
+        <Image src="/imvo-contact-team.webp" alt="IMVO Systems team collaboration" fill sizes="100vw" />
+        <div className={styles.partnerShade} />
+        <div className={styles.partnerCopy}>
+          <h2>Your Technology Partner is Here.</h2>
+          <p>Bring us the business problem, workflow or product. We will help define the right system and carry it through delivery.</p>
+          <Link href="/systems/contact">Talk to Us <span>→</span></Link>
+        </div>
+        <div className={styles.diagonalBlue} />
       </section>
 
       <SystemsFooter />

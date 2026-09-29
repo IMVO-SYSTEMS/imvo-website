@@ -1,6 +1,5 @@
 import Link from "next/link";
 import styles from "./SystemsPage.module.css";
-import PracticeSwitcher from "../components/PracticeSwitcher";
 import { serviceGroups, industries } from "./systemData";
 
 export function SystemsHeader() {
@@ -12,42 +11,39 @@ export function SystemsHeader() {
         </Link>
 
         <nav className={styles.primaryNav} aria-label="IMVO Systems navigation">
-          <div className={styles.megaTrigger}>
-            <Link href="/systems/services">Services</Link>
-            <div className={styles.megaMenu}>
-              <div className={styles.megaIntro}>
-                <span>Services</span>
-                <strong>Technology capabilities built around real business needs.</strong>
-                <Link href="/systems/services">View all services →</Link>
-              </div>
-              <div className={styles.megaColumns}>
-                {serviceGroups.map((group) => (
-                  <div key={group.id} className={styles.megaGroup}>
-                    <Link href={"/systems/services#" + group.id}>{group.title}</Link>
-                    {group.items.slice(0, 4).map((item) => <span key={item}>{item}</span>)}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.megaTrigger}>
-            <Link href="/systems/industries">Industries</Link>
-            <div className={styles.industryMenu}>
-              {industries.map(([title]) => (
-                <Link href="/systems/industries" key={title}>{title}</Link>
+          <div className={styles.navDrop}>
+            <Link href="/systems/services">Services <span>⌄</span></Link>
+            <div className={styles.navMenu}>
+              {serviceGroups.map((group) => (
+                <Link key={group.id} href={"/systems/services#" + group.id}>{group.title}</Link>
               ))}
             </div>
           </div>
 
+          <div className={styles.navDrop}>
+            <Link href="/systems/industries">Industries <span>⌄</span></Link>
+            <div className={styles.navMenu}>
+              {industries.map(([title]) => <Link key={title} href="/systems/industries">{title}</Link>)}
+            </div>
+          </div>
+
           <Link href="/systems/projects">Projects</Link>
-          <Link href="/systems/about">About us</Link>
+
+          <div className={styles.navDrop}>
+            <Link href="/systems/about">About us <span>⌄</span></Link>
+            <div className={styles.navMenu}>
+              <Link href="/systems/about">About IMVO Systems</Link>
+              <Link href="/systems/projects">Our Projects</Link>
+              <Link href="#testimonials">Testimonials</Link>
+            </div>
+          </div>
+
+          <Link href="#testimonials">Testimonials</Link>
+          <Link href="/careers">Careers</Link>
+          <Link href="#insights">Blog</Link>
         </nav>
 
-        <div className={styles.headerRight}>
-          <PracticeSwitcher placement="inline" variant="light" />
-          <Link className={styles.headerCta} href="/systems/contact">Contact us</Link>
-        </div>
+        <Link className={styles.headerCta} href="/systems/contact">Contact Us <span>→</span></Link>
       </div>
     </header>
   );
@@ -57,33 +53,52 @@ export function SystemsFooter() {
   return (
     <footer className={styles.footer}>
       <div className={styles.footerTop}>
-        <div className={styles.footerBrand}>
+        <div className={styles.footerIdentity}>
           <img src="/brand/imvo-systems.svg" alt="IMVO Systems" />
-          <p>Digital products, enterprise systems and technology services by IMVO Group.</p>
+          <p>IMVO Systems</p>
+          <strong>Kigali, Rwanda</strong>
+          <span>Digital products, enterprise systems, managed technology and innovation services.</span>
+          <Link href="/systems/contact">Contact IMVO Systems →</Link>
         </div>
-        <div className={styles.footerGrid}>
-          <div>
-            <strong>Services</strong>
-            {serviceGroups.map((group) => <Link key={group.id} href={"/systems/services#" + group.id}>{group.title}</Link>)}
-          </div>
-          <div>
-            <strong>Company</strong>
-            <Link href="/systems/projects">Projects</Link>
-            <Link href="/systems/industries">Industries</Link>
-            <Link href="/systems/about">About us</Link>
-            <Link href="/systems/contact">Contact</Link>
-          </div>
-          <div>
-            <strong>IMVO Group</strong>
-            <Link href="/">Studio</Link>
-            <Link href="/systems">Systems</Link>
-            <Link href="/domicile">DŌMICILE</Link>
-          </div>
+
+        <div className={styles.footerColumn}>
+          <strong>Services</strong>
+          {serviceGroups.map((group) => (
+            <Link key={group.id} href={"/systems/services#" + group.id}>{group.title}</Link>
+          ))}
+        </div>
+
+        <div className={styles.footerColumn}>
+          <strong>Industries</strong>
+          {industries.slice(0,7).map(([title]) => (
+            <Link key={title} href="/systems/industries">{title}</Link>
+          ))}
+        </div>
+
+        <div className={styles.footerColumn}>
+          <strong>About us</strong>
+          <Link href="/systems/about">About Us</Link>
+          <Link href="/systems/projects">Our Projects</Link>
+          <Link href="#testimonials">Testimonials</Link>
+          <Link href="/careers">Careers</Link>
+        </div>
+
+        <div className={styles.footerColumn}>
+          <strong>Insights</strong>
+          <Link href="#insights">Technologies</Link>
+          <Link href="#insights">Business</Link>
+          <Link href="#insights">Product</Link>
+          <Link href="#insights">Systems</Link>
         </div>
       </div>
+
       <div className={styles.footerBottom}>
-        <span>IMVO DESIGN GROUP Ltd · Kigali, Rwanda</span>
-        <span>Technology that works in the real operation.</span>
+        <span>© 2026 IMVO DESIGN GROUP Ltd. All Rights Reserved.</span>
+        <div>
+          <Link href="/">Studio</Link>
+          <Link href="/systems">Systems</Link>
+          <Link href="/domicile">DŌMICILE</Link>
+        </div>
       </div>
     </footer>
   );
