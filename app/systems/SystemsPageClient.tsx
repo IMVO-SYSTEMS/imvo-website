@@ -7,26 +7,60 @@ import styles from "./SystemsPage.module.css";
 import { SystemsHeader, SystemsFooter } from "./SystemsShared";
 import { serviceGroups } from "./systemData";
 
-const serviceImages = [
-  "/about-future.jpg",
-  "/service-process.webp",
-  "/services-hero.webp",
-  "/contact-hero.webp",
-  "/about-process.jpg",
-  "/about-africa.jpg",
-  "/service-site-1.webp",
-  "/imvo-contact-team.webp",
+const serviceImageSets = [
+  [
+    "https://images.pexels.com/photos/3862089/pexels-photo-3862089.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/3183185/pexels-photo-3183185.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/7698802/pexels-photo-7698802.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/12911248/pexels-photo-12911248.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  ],
+  [
+    "https://images.pexels.com/photos/12899153/pexels-photo-12899153.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/19805876/pexels-photo-19805876.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/32755772/pexels-photo-32755772.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/12899167/pexels-photo-12899167.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  ],
+  [
+    "https://images.pexels.com/photos/37605911/pexels-photo-37605911.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/5380664/pexels-photo-5380664.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/5473298/pexels-photo-5473298.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/32755772/pexels-photo-32755772.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  ],
+  [
+    "https://images.pexels.com/photos/7693683/pexels-photo-7693683.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/7698802/pexels-photo-7698802.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/3861957/pexels-photo-3861957.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/3183185/pexels-photo-3183185.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  ],
+  [
+    "https://images.pexels.com/photos/3861957/pexels-photo-3861957.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/5380664/pexels-photo-5380664.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/32755772/pexels-photo-32755772.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/7109291/pexels-photo-7109291.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  ],
+  [
+    "https://images.pexels.com/photos/36733315/pexels-photo-36733315.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/3862089/pexels-photo-3862089.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/7993903/pexels-photo-7993903.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/5466236/pexels-photo-5466236.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  ],
+  [
+    "https://images.pexels.com/photos/10376212/pexels-photo-10376212.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/7567557/pexels-photo-7567557.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/36733315/pexels-photo-36733315.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "https://images.pexels.com/photos/7693683/pexels-photo-7693683.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  ],
 ];
 
 const insightCards = [
-  ["MANAGEMENT", "Designing software around the operation, not around the template.", "/about-process.jpg"],
-  ["TECHNOLOGIES", "When a custom platform is better than adding another tool.", "/services-hero.webp"],
-  ["ECOMMERCE", "What a serious commerce platform needs beyond the storefront.", "/about-future.jpg"],
-  ["AI & AUTOMATION", "Where automation creates real operational leverage.", "/service-process.webp"],
-  ["SYSTEMS", "Ownership, access, backups and handover after launch.", "/contact-hero.webp"],
-  ["ENTERPRISE", "Connecting customer, finance, inventory and team workflows.", "/service-site-1.webp"],
-  ["SECURITY", "Building permissions and auditability into the product early.", "/imvo-contact-team.webp"],
-  ["PRODUCT", "How to move from an idea to a system people can actually use.", "/about-africa.jpg"],
+  ["MANAGEMENT", "Designing software around the operation, not around the template.", "https://images.pexels.com/photos/3862089/pexels-photo-3862089.jpeg?auto=compress&cs=tinysrgb&w=1400"],
+  ["TECHNOLOGIES", "When a custom platform is better than adding another tool.", "https://images.pexels.com/photos/12899153/pexels-photo-12899153.jpeg?auto=compress&cs=tinysrgb&w=1400"],
+  ["ECOMMERCE", "What a serious commerce platform needs beyond the storefront.", "https://images.pexels.com/photos/3183185/pexels-photo-3183185.jpeg?auto=compress&cs=tinysrgb&w=1400"],
+  ["AI & AUTOMATION", "Where automation creates real operational leverage.", "https://images.pexels.com/photos/3861957/pexels-photo-3861957.jpeg?auto=compress&cs=tinysrgb&w=1400"],
+  ["SYSTEMS", "Ownership, access, backups and handover after launch.", "https://images.pexels.com/photos/37605911/pexels-photo-37605911.jpeg?auto=compress&cs=tinysrgb&w=1400"],
+  ["ENTERPRISE", "Connecting customer, finance, inventory and team workflows.", "https://images.pexels.com/photos/7693683/pexels-photo-7693683.jpeg?auto=compress&cs=tinysrgb&w=1400"],
+  ["SECURITY", "Building permissions and auditability into the product early.", "https://images.pexels.com/photos/5380664/pexels-photo-5380664.jpeg?auto=compress&cs=tinysrgb&w=1400"],
+  ["PRODUCT", "How to move from an idea to a system people can actually use.", "https://images.pexels.com/photos/5466236/pexels-photo-5466236.jpeg?auto=compress&cs=tinysrgb&w=1400"],
 ];
 
 const presencePoints = [
@@ -45,7 +79,7 @@ export default function SystemsPageClient() {
     while (padded.length < 4) padded.push(group.title);
     return padded.slice(0, 4).map((item, index) => ({
       title: item,
-      image: serviceImages[(activeService * 2 + index) % serviceImages.length],
+      image: serviceImageSets[activeService][index],
     }));
   }, [activeService, group]);
 
@@ -74,10 +108,14 @@ export default function SystemsPageClient() {
         </div>
       </section>
 
-      <section className={styles.mediaStrip} aria-label="IMVO Systems showcase">
-        <video autoPlay muted loop playsInline preload="metadata">
-          <source src="/hero-1.mp4" type="video/mp4" />
-        </video>
+      <section className={styles.mediaStrip} aria-label="African software engineer coding in a modern office">
+        <Image
+          src="https://images.pexels.com/photos/19805876/pexels-photo-19805876.jpeg?auto=compress&cs=tinysrgb&w=2200"
+          alt="African software engineer coding on laptop and desktop screens in a modern Nairobi office"
+          fill
+          priority
+          sizes="100vw"
+        />
       </section>
 
       <section className={styles.vServices}>
@@ -183,7 +221,12 @@ export default function SystemsPageClient() {
       </section>
 
       <section className={styles.partnerCta}>
-        <Image src="/imvo-contact-team.webp" alt="IMVO Systems team collaboration" fill sizes="100vw" />
+        <Image
+          src="https://images.pexels.com/photos/5466236/pexels-photo-5466236.jpeg?auto=compress&cs=tinysrgb&w=2000"
+          alt="Technology team collaborating around a laptop in a modern office"
+          fill
+          sizes="100vw"
+        />
         <div className={styles.partnerShade} />
         <div className={styles.partnerCopy}>
           <h2>Your Technology Partner is Here.</h2>
