@@ -220,7 +220,7 @@ export default function SiteHeader({
             position: "relative",
             zIndex: 2,
             display: "grid",
-            gridTemplateColumns: "minmax(180px, .8fr) auto minmax(520px, 1.6fr)",
+            gridTemplateColumns: "minmax(160px, .78fr) auto minmax(0, 1.65fr)",
             alignItems: "center",
             gap: 26,
             padding: "0 28px",
