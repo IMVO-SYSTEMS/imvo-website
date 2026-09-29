@@ -351,6 +351,63 @@ export default function DomicileEditorial() {
           </div>
         </div>
       </section>
+
+      <footer className={styles.footer}>
+        <div className={styles.footerInner}>
+          <div className={styles.footerBrand}>
+            <Image
+              src="/domicile/domicile-white.webp"
+              alt="DŌMICILE — Property Management by IMVO Group"
+              width={1495}
+              height={376}
+              className={styles.footerLogo}
+            />
+            <p>
+              Property management and ongoing property care in Kigali, Rwanda —
+              coordinated through one dependable local point of contact.
+            </p>
+            <a href={whatsappUrl} target="_blank" rel="noreferrer" className={styles.footerCta}>
+              Start a conversation <Icon name="arrow" size={14}/>
+            </a>
+          </div>
+
+          <div className={styles.footerColumn}>
+            <small>EXPLORE</small>
+            <a href="#home">Home</a>
+            <a href="#process">How it works</a>
+            <a href="#owner">Owner experience</a>
+            <a href="#difference">Features</a>
+            <Link href="/about">About IMVO Group</Link>
+          </div>
+
+          <div className={styles.footerColumn}>
+            <small>PROPERTY CARE</small>
+            <span>Property oversight</span>
+            <span>Routine inspections</span>
+            <span>Maintenance coordination</span>
+            <span>Owner approvals</span>
+            <span>Reports & property records</span>
+            <span>Owner-away care</span>
+          </div>
+
+          <div className={styles.footerColumn}>
+            <small>CONTACT</small>
+            <a href="mailto:domicile@imvogroup.com">domicile@imvogroup.com</a>
+            <a href="tel:+250799409409">+250 799 409 409</a>
+            <span>Kigali, Rwanda</span>
+            <a href={whatsappUrl} target="_blank" rel="noreferrer">WhatsApp DŌMICILE ↗</a>
+          </div>
+        </div>
+
+        <div className={styles.footerBottom}>
+          <span>© 2026 DŌMICILE / IMVO GROUP</span>
+          <div>
+            <Link href="/privacy">Privacy Policy</Link>
+            <Link href="/terms">Terms</Link>
+            <Link href="/">IMVO Group ↗</Link>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
