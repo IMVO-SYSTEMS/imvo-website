@@ -948,11 +948,11 @@ function CinematicHero({ content }: { content?: HomePageContent | null }) {
           style={{
             marginTop: 20,
             marginBottom: 0,
-            maxWidth: 940,
-            fontSize: "clamp(23px, 2.25vw, 34px)",
-            fontWeight: 440,
-            lineHeight: 1.34,
-            letterSpacing: "-0.015em",
+            maxWidth: 980,
+            fontSize: "clamp(32px, 3.5vw, 52px)",
+            fontWeight: 430,
+            lineHeight: 1.12,
+            letterSpacing: "-0.035em",
             color: "rgba(255,255,255,0.94)",
           }}
         >
@@ -964,10 +964,10 @@ function CinematicHero({ content }: { content?: HomePageContent | null }) {
           animate={isHeroContentReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 22 }}
           transition={{ ...transition, delay: 0.52 }}
           style={{
-            margin: "16px 0 0",
-            maxWidth: 740,
-            fontSize: "clamp(14px, 1.18vw, 18px)",
-            lineHeight: 1.65,
+            margin: "20px 0 0",
+            maxWidth: 720,
+            fontSize: "clamp(14px, 1.12vw, 17px)",
+            lineHeight: 1.58,
             fontWeight: 430,
             letterSpacing: "-0.008em",
             color: "rgba(255,255,255,0.68)",
@@ -985,8 +985,8 @@ function CinematicHero({ content }: { content?: HomePageContent | null }) {
           <Link
             href="/projects"
             style={{
-              width: 220,
-              minHeight: 56,
+              width: 205,
+              minHeight: 52,
               padding: "0 20px",
               border: "1px solid rgba(255,255,255,0.96)",
               borderRadius: 999,
@@ -1000,7 +1000,7 @@ function CinematicHero({ content }: { content?: HomePageContent | null }) {
               letterSpacing: "0.075em",
               textTransform: "uppercase",
               textDecoration: "none",
-              boxShadow: "0 14px 34px rgba(0,0,0,0.16)",
+              boxShadow: "0 16px 40px rgba(0,0,0,0.20)",
             }}
           >
             {heroButtonLabel}
