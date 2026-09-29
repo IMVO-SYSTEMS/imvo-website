@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styles from "./SystemsPage.module.css";
 import { SystemsHeader, SystemsFooter } from "./SystemsShared";
 import { serviceGroups } from "./systemData";
@@ -63,6 +63,8 @@ const insightCards = [
   ["PRODUCT", "How to move from an idea to a system people can actually use.", "https://images.pexels.com/photos/5466236/pexels-photo-5466236.jpeg?auto=compress&cs=tinysrgb&w=1400"],
 ];
 
+const heroHeadline = "We build growth-ready digital systems for ambitious organisations";
+
 const presencePoints = [
   { label: "Kigali", className: styles.pinKigali },
   { label: "East Africa", className: styles.pinEastAfrica },
@@ -72,7 +74,39 @@ const presencePoints = [
 
 export default function SystemsPageClient() {
   const [activeService, setActiveService] = useState(0);
+  const [typedHeadline, setTypedHeadline] = useState("");
   const group = serviceGroups[activeService];
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) {
+      setTypedHeadline(heroHeadline);
+      return;
+    }
+
+    let index = 0;
+    let timer: ReturnType<typeof setTimeout>;
+    let cancelled = false;
+
+    const typeNext = () => {
+      if (cancelled) return;
+      index += 1;
+      setTypedHeadline(heroHeadline.slice(0, index));
+
+      if (index < heroHeadline.length) {
+        const character = heroHeadline[index - 1];
+        const delay = character === " " ? 18 : character === "-" ? 95 : 36;
+        timer = setTimeout(typeNext, delay);
+      }
+    };
+
+    timer = setTimeout(typeNext, 320);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, []);
 
   const visibleCards = useMemo(() => {
     const padded = [...group.items];
@@ -91,7 +125,10 @@ export default function SystemsPageClient() {
         <div className={styles.vHeroInner}>
           <div className={styles.vHeroTitle}>
             <p>Digital Transformation & Technology Services</p>
-            <h1>We build growth-ready digital systems for ambitious organisations<span>_</span></h1>
+            <h1 className={styles.typedHero} aria-label={heroHeadline}>
+              <span aria-hidden="true">{typedHeadline}</span>
+              <span aria-hidden="true" className={styles.typeCursor}>_</span>
+            </h1>
           </div>
 
           <div className={styles.vHeroBody}>
