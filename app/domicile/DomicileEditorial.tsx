@@ -400,7 +400,16 @@ export default function DomicileEditorial() {
         </div>
 
         <div className={styles.footerBottom}>
-          <span>© 2026 DŌMICILE / IMVO GROUP</span>
+          <div className={styles.footerCopyright}>
+            <Image
+              src="/domicile/logo-icon-white.webp"
+              alt=""
+              width={727}
+              height={919}
+              className={styles.footerIcon}
+            />
+            <span>© 2026 DŌMICILE / IMVO GROUP</span>
+          </div>
           <div>
             <Link href="/privacy">Privacy Policy</Link>
             <Link href="/terms">Terms</Link>
