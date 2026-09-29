@@ -15,7 +15,7 @@ export default function SystemsContactPage() {
     <main className={styles.page}>
       <SystemsHeader />
       <section className={styles.innerHero}>
-        <Image src="/imvo-contact-team.webp" alt="Contact IMVO Systems" fill priority className={styles.innerHeroImage} />
+        <Image src="https://images.pexels.com/photos/3862089/pexels-photo-3862089.jpeg?auto=compress&cs=tinysrgb&w=2200" alt="Technology professionals discussing a project around a laptop" fill priority className={styles.innerHeroImage} />
         <div className={styles.innerHeroWash} />
         <div className={styles.innerHeroContent}>
           <p className={styles.kickerLight}>IMVO Systems / Contact</p>
