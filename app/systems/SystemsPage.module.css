@@ -1239,13 +1239,14 @@
   .divisionSwitch { width: 238px; }
   .divisionSwitch > nav { transform: scale(.68); }
   .primaryNav { gap: 13px; font-size: 10px; }
-  .primaryNav > a:nth-last-child(-n+2) { display: none; }
 }
 
 @media (max-width: 1100px) {
-  .headerInner { grid-template-columns: 170px minmax(0, 1fr) auto; }
-  .divisionSwitch { display: none; }
-  .primaryNav { gap: 14px; font-size: 10px; }
+  .headerInner { grid-template-columns: 150px 214px minmax(0, 1fr) auto; }
+  .brand { width: 148px; }
+  .divisionSwitch { display: flex; width: 214px; }
+  .divisionSwitch > nav { transform: scale(.62); transform-origin: left center; }
+  .primaryNav { gap: 11px; font-size: 9px; }
   .vHeroInner { gap: 56px; }
   .logoCloud { grid-template-columns: repeat(5, 1fr); }
   .footerTop { grid-template-columns: 1.2fr repeat(2, .8fr); }
