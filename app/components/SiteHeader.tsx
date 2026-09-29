@@ -157,8 +157,8 @@ export default function SiteHeader({
       ? "rgba(247,247,244,0.96)"
       : "rgba(247,247,244,0.90)"
     : isScrolled || mobileMenuOpen
-      ? "linear-gradient(to bottom, rgba(18,18,18,0.58), rgba(18,18,18,0.42))"
-      : "linear-gradient(to bottom, rgba(255,255,255,0.16), rgba(255,255,255,0.10))";
+      ? "linear-gradient(to bottom, rgba(5,12,23,0.76), rgba(5,12,23,0.58))"
+      : "linear-gradient(to bottom, rgba(5,12,23,0.48), rgba(5,12,23,0.18))";
 
   return (
     <>
@@ -237,14 +237,14 @@ export default function SiteHeader({
               }
             }}
           >
-            <Brand size="lg" variant={isSystems ? "dark" : "light"} />
+            <Brand size="md" variant={isSystems ? "dark" : "light"} />
           </Link>
 
           <PracticeSwitcher variant={isSystems ? "dark" : "light"} />
 
           <nav
             className="desktopNav"
-            style={{ display: "flex", alignItems: "center", gap: 28 }}
+            style={{ display: "flex", alignItems: "center", gap: 24 }}
           >
             {currentNav.map((item) => (
               <Link
@@ -269,7 +269,7 @@ export default function SiteHeader({
                 background: isSystems ? "#0a0a0a" : "rgba(255,255,255,0.96)",
                 color: isSystems ? "white" : "black",
                 padding: isScrolled ? "10px 22px" : "11px 24px",
-                borderRadius: 2,
+                borderRadius: 999,
                 fontWeight: 800,
                 fontSize: 14,
                 textDecoration: "none",
@@ -395,17 +395,26 @@ export default function SiteHeader({
                 />
               </Link>
               <span style={{ width: 1, height: 20, background: foreground, opacity: 0.2 }} />
-              <Link href="/domicile" onClick={closeMenu} aria-label="DŌMICILE">
+              <Link
+                href="/domicile"
+                onClick={closeMenu}
+                aria-label="DŌMICILE"
+                style={{
+                  display: "block",
+                  width: 82,
+                  aspectRatio: "1495 / 292",
+                  overflow: "hidden",
+                  opacity: 0.78,
+                }}
+              >
                 <img
-                  src={isSystems
-                    ? "/domicile/domicile-black-no-tagline.svg"
-                    : "/domicile/domicile-white-no-tagline.svg"}
+                  src="/domicile/domicile-white.webp"
                   alt="DŌMICILE"
                   style={{
                     display: "block",
-                    width: 80,
+                    width: "100%",
                     height: "auto",
-                    opacity: 0.62,
+                    filter: isSystems ? "invert(1)" : "none",
                   }}
                 />
               </Link>
