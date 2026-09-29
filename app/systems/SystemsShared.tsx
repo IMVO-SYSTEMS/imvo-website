@@ -68,10 +68,10 @@ export function SystemsFooter() {
 
         <div className={styles.footerColumn}>
           <strong>Capabilities</strong>
-          <Link href="/systems/services#custom-software">Custom software</Link>
-          <Link href="/systems/services#web-mobile">Web & mobile products</Link>
-          <Link href="/systems/services#automation">Automation & AI</Link>
-          <Link href="/systems/services#cloud">Cloud & support</Link>
+          <Link href="/systems/services#product-development">Custom software</Link>
+          <Link href="/systems/services#digital-experience">Web & mobile products</Link>
+          <Link href="/systems/services#innovation-services">Automation & AI</Link>
+          <Link href="/systems/services#managed-services">Cloud & support</Link>
         </div>
 
         <div className={styles.footerColumn}>
@@ -84,8 +84,8 @@ export function SystemsFooter() {
         <div className={styles.footerColumn}>
           <strong>Contact</strong>
           <Link href="/systems/contact">Project enquiry</Link>
-          <Link href="mailto:systems@imvogroup.com">systems@imvogroup.com</Link>
-          <Link href="/">imvogroup.com</Link>
+          <span>Kigali, Rwanda</span>
+          <Link href="/">IMVO Group</Link>
         </div>
       </div>
 
