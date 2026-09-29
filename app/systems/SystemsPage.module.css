@@ -10,7 +10,7 @@
   min-height: 100vh;
   background: #fff;
   color: var(--ink);
-  font-family: "Segoe UI", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-family: "Helvetica Neue", "Segoe UI", Arial, Helvetica, sans-serif;
 }
 
 .page *,
@@ -209,7 +209,7 @@
   line-height: .96;
   letter-spacing: -.052em;
   font-weight: 700;
-  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Helvetica Neue", "Segoe UI", Arial, Helvetica, sans-serif;
 }
 
 .typedHero {
@@ -314,7 +314,7 @@
   font-size: 27px;
   line-height: 1.15;
   font-weight: 400;
-  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Helvetica Neue", "Segoe UI", Arial, Helvetica, sans-serif;
   letter-spacing: -.03em;
 }
 
