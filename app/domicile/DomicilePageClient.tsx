@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
-import styles from "./DomicilePage.module.css";\nimport PracticeSwitcher from "../components/PracticeSwitcher";
+import styles from "./DomicilePage.module.css";
+import PracticeSwitcher from "../components/PracticeSwitcher";
 
 type FormState = {
   name: string;
