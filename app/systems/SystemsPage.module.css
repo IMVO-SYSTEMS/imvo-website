@@ -24,9 +24,11 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255,255,255,.985);
-  border-bottom: 1px solid #dfe3e8;
-  backdrop-filter: blur(16px);
+  background: rgba(0,15,38,.94);
+  border-bottom: 1px solid rgba(255,255,255,.10);
+  backdrop-filter: blur(22px) saturate(145%);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
+  box-shadow: 0 14px 36px rgba(0,15,38,.16);
 }
 
 .headerInner {
@@ -34,14 +36,14 @@
   min-height: 70px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 190px 280px minmax(0, 1fr) auto;
+  grid-template-columns: 176px 294px minmax(0, 1fr) auto;
   align-items: center;
-  gap: 24px;
+  gap: 22px;
 }
 
 .brand {
   display: inline-flex;
-  width: 190px;
+  width: 176px;
   align-items: center;
 }
 
@@ -49,7 +51,7 @@
   display: block;
   width: 100%;
   height: auto;
-  filter: none;
+  filter: invert(1) brightness(2);
 }
 
 .divisionSwitch {
@@ -72,7 +74,7 @@
   justify-content: center;
   align-items: center;
   gap: 22px;
-  color: #252a31;
+  color: rgba(255,255,255,.82);
   font-size: 11px;
   line-height: 1;
   font-weight: 500;
@@ -97,7 +99,7 @@
   right: 100%;
   bottom: -1px;
   height: 2px;
-  background: var(--imperial);
+  background: rgba(255,255,255,.98);
   transition: right .18s ease;
 }
 
@@ -125,8 +127,8 @@
   left: -18px;
   min-width: 224px;
   padding: 10px;
-  background: #fff;
-  border: 1px solid var(--line);
+  background: #071a39;
+  border: 1px solid rgba(255,255,255,.12);
   border-radius: 2px;
   box-shadow: 0 18px 46px rgba(4,19,40,.12);
   opacity: 0;
@@ -144,15 +146,15 @@
 .navMenu a {
   display: block;
   padding: 10px 11px;
-  color: #343a43;
+  color: rgba(255,255,255,.78);
   font-size: 11px;
   line-height: 1.25;
   font-weight: 450;
 }
 
 .navMenu a:hover {
-  background: #f3f5f8;
-  color: var(--imperial);
+  background: rgba(255,255,255,.08);
+  color: #fff;
 }
 
 .headerCta {
@@ -164,7 +166,7 @@
   padding: 0 18px;
   border-radius: 999px;
   background: var(--imperial);
-  color: #fff !important;
+  color: var(--imperial-deep) !important;
   font-size: 11px;
   line-height: 1;
   font-weight: 650;
@@ -173,7 +175,7 @@
 }
 
 .headerCta:hover {
-  background: var(--imperial-mid);
+  background: #fff;
   transform: translateY(-1px);
 }
 
@@ -358,7 +360,7 @@
   right: 100%;
   bottom: -1px;
   height: 2px;
-  background: var(--imperial);
+  background: #fff;
   transition: right .18s ease;
 }
 
