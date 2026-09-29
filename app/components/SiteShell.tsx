@@ -7,13 +7,15 @@ import { usePathname } from "next/navigation";
 
 import BackToTop from "./BackToTop";
 import DomicileWidget from "./DomicileWidget";
-import IntroLoader from "./IntroLoader";
 import SiteFooter from "./SiteFooter";
 import SiteHeader from "./SiteHeader";
 import SmoothScrollProvider from "./SmoothScrollProvider";
 import type { SiteSettings } from "@/sanity/types/siteContent";
 import type { StudioStatusContent } from "@/sanity/types/cmsBackend";
 
+const IntroLoader = dynamic(() => import("./IntroLoader"), {
+  ssr: false,
+});
 const ContactEnhancements = dynamic(() => import("./ContactEnhancements"), {
   ssr: false,
 });
@@ -58,6 +60,18 @@ export default function SiteShell({
   const pathname = usePathname();
   const [homeEnhancementsReady, setHomeEnhancementsReady] = useState(false);
   const isSystems = pathname.startsWith("/systems");
+
+  useEffect(() => {
+    if (pathname === "/") return;
+
+    try {
+      window.sessionStorage.setItem("imvo:intro-seen", "1");
+    } catch {
+      // Session storage can be unavailable in strict privacy modes.
+    }
+
+    document.documentElement.dataset.imvoIntroComplete = "true";
+  }, [pathname]);
 
   useEffect(() => {
     if (pathname !== "/" || homeEnhancementsReady) return;
