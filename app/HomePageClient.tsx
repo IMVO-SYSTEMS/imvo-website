@@ -869,21 +869,11 @@ function CinematicHero({ content }: { content?: HomePageContent | null }) {
     return () => window.clearTimeout(timer);
   }, []);
 
-  const rawHeroKicker = content?.heroKicker?.trim();
-  const rawHeroIntro = content?.heroIntro?.trim();
-  const heroKicker =
-    rawHeroKicker && !/INTELLECTU.*MENS.*VISIO.*ORIGO/i.test(rawHeroKicker)
-      ? rawHeroKicker
-      : "BUILT ENVIRONMENT DESIGN & DEVELOPMENT";
+  const heroKicker = "BUILT ENVIRONMENT DESIGN & DEVELOPMENT";
   const heroLead =
-    rawHeroIntro &&
-    !/^(IMVO develops residential, commercial, and institutional environments|We shape enduring environments through design)/i.test(
-      rawHeroIntro,
-    )
-      ? rawHeroIntro
-      : "IMVO shapes residential, commercial, and institutional environments through built-environment design, development strategy, site coordination, and execution-aware planning.";
+    "IMVO shapes residential, commercial, and institutional environments.";
   const heroSupport =
-    "Guided by spatial clarity, contextual sensitivity, technical discipline, and long-term architectural value.";
+    "Built-environment design, development strategy, site coordination, and execution-aware planning.";
   const heroButtonLabel = (content?.heroButtonLabel || "EXPLORE WORK")
     .replace(/[↗→]/g, "")
     .trim();
@@ -948,11 +938,11 @@ function CinematicHero({ content }: { content?: HomePageContent | null }) {
           style={{
             marginTop: 20,
             marginBottom: 0,
-            maxWidth: 980,
-            fontSize: "clamp(32px, 3.5vw, 52px)",
-            fontWeight: 430,
-            lineHeight: 1.12,
-            letterSpacing: "-0.035em",
+            maxWidth: 900,
+            fontSize: "clamp(48px, 5.2vw, 78px)",
+            fontWeight: 700,
+            lineHeight: 1.01,
+            letterSpacing: "-0.055em",
             color: "rgba(255,255,255,0.94)",
           }}
         >
@@ -964,10 +954,10 @@ function CinematicHero({ content }: { content?: HomePageContent | null }) {
           animate={isHeroContentReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 22 }}
           transition={{ ...transition, delay: 0.52 }}
           style={{
-            margin: "20px 0 0",
+            margin: "22px 0 0",
             maxWidth: 720,
-            fontSize: "clamp(14px, 1.12vw, 17px)",
-            lineHeight: 1.58,
+            fontSize: "clamp(15px, 1.2vw, 18px)",
+            lineHeight: 1.5,
             fontWeight: 430,
             letterSpacing: "-0.008em",
             color: "rgba(255,255,255,0.68)",
