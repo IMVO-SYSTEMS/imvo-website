@@ -235,6 +235,7 @@
 }
 
 .mediaStrip {
+  position: relative;
   width: 100%;
   height: clamp(340px, 38vw, 560px);
   background: #d9dee5;
