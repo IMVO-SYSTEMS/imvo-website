@@ -16,7 +16,7 @@ export default function SystemsProjectsPage() {
     <main className={styles.page}>
       <SystemsHeader />
       <section className={styles.innerHero}>
-        <Image src="/service-process.webp" alt="IMVO Systems selected systems" fill priority className={styles.innerHeroImage} />
+        <Image src="https://images.pexels.com/photos/3861957/pexels-photo-3861957.jpeg?auto=compress&cs=tinysrgb&w=2200" alt="Laptop displaying data analytics for digital systems" fill priority className={styles.innerHeroImage} />
         <div className={styles.innerHeroWash} />
         <div className={styles.innerHeroContent}>
           <p className={styles.kickerLight}>IMVO Systems / Projects</p>
