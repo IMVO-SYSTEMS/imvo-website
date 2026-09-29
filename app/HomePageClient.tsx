@@ -905,7 +905,7 @@ function CinematicHero({ content }: { content?: HomePageContent | null }) {
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(90deg, rgba(5,5,5,0.80) 0%, rgba(5,5,5,0.52) 38%, rgba(5,5,5,0.14) 68%, rgba(5,5,5,0.02) 100%), linear-gradient(to top, rgba(5,5,5,0.88) 0%, rgba(5,5,5,0.20) 54%, rgba(5,5,5,0.03) 100%)",
+            "linear-gradient(90deg, rgba(5,10,18,0.72) 0%, rgba(5,10,18,0.44) 38%, rgba(5,10,18,0.12) 68%, rgba(5,10,18,0.01) 100%), linear-gradient(to top, rgba(5,10,18,0.74) 0%, rgba(5,10,18,0.16) 54%, rgba(5,10,18,0.02) 100%)",
           pointerEvents: "none",
           opacity: isHeroContentReady ? 1 : 0,
           transition: "opacity 700ms ease",
@@ -921,7 +921,7 @@ function CinematicHero({ content }: { content?: HomePageContent | null }) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
-          paddingBottom: "14vh",
+          paddingBottom: "11vh",
           opacity: isHeroContentReady ? 1 : 0,
           transition: "opacity 700ms ease",
         }}
@@ -948,10 +948,10 @@ function CinematicHero({ content }: { content?: HomePageContent | null }) {
           style={{
             marginTop: 20,
             marginBottom: 0,
-            maxWidth: 860,
-            fontSize: "clamp(21px, 2vw, 29px)",
-            fontWeight: 430,
-            lineHeight: 1.46,
+            maxWidth: 940,
+            fontSize: "clamp(23px, 2.25vw, 34px)",
+            fontWeight: 440,
+            lineHeight: 1.34,
             letterSpacing: "-0.015em",
             color: "rgba(255,255,255,0.94)",
           }}
@@ -965,8 +965,8 @@ function CinematicHero({ content }: { content?: HomePageContent | null }) {
           transition={{ ...transition, delay: 0.52 }}
           style={{
             margin: "16px 0 0",
-            maxWidth: 760,
-            fontSize: "clamp(14px, 1.15vw, 17px)",
+            maxWidth: 740,
+            fontSize: "clamp(14px, 1.18vw, 18px)",
             lineHeight: 1.65,
             fontWeight: 430,
             letterSpacing: "-0.008em",
@@ -989,7 +989,7 @@ function CinematicHero({ content }: { content?: HomePageContent | null }) {
               minHeight: 56,
               padding: "0 20px",
               border: "1px solid rgba(255,255,255,0.96)",
-              borderRadius: 2,
+              borderRadius: 999,
               background: "rgba(255,255,255,0.98)",
               color: "#050505",
               display: "inline-flex",
