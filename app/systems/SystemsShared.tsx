@@ -35,23 +35,11 @@ export function SystemsHeader() {
           </div>
 
           <Link href="/systems/projects">Projects</Link>
-
-          <div className={styles.navDrop}>
-            <Link href="/systems/about">About us <span>⌄</span></Link>
-            <div className={styles.navMenu}>
-              <Link href="/systems/about">About IMVO Systems</Link>
-              <Link href="/systems/projects">Our Projects</Link>
-              <Link href="#testimonials">Testimonials</Link>
-            </div>
-          </div>
-
-          <Link href="#testimonials">Testimonials</Link>
-          <Link href="/careers">Careers</Link>
-          <Link href="#insights">Blog</Link>
+          <Link href="/systems/about">About</Link>
         </nav>
 
         <Link className={styles.headerCta} href="/systems/contact">
-          Contact Us <span>→</span>
+          Start a project <span>→</span>
         </Link>
       </div>
     </header>
