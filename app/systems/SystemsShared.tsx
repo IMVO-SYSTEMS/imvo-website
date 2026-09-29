@@ -49,17 +49,52 @@ export function SystemsHeader() {
 export function SystemsFooter() {
   return (
     <footer className={styles.footer}>
-      <div className={styles.footerInner}>
-        <div className={styles.footerBrand}>
+      <div className={styles.footerTop}>
+        <div className={styles.footerIdentity}>
           <img src="/brand/imvo-systems.svg" alt="IMVO Systems" />
-          <p>Digital products and business systems by IMVO Group.</p>
+          <p>IMVO GROUP · KIGALI, RWANDA</p>
+          <strong>Digital products and business systems.</strong>
+          <span>Product strategy, software engineering, integrations, automation and long-term digital support.</span>
+          <Link href="/systems/contact">Start a project →</Link>
         </div>
-        <div className={styles.footerLinks}>
-          <Link href="/systems">Systems</Link>
+
+        <div className={styles.footerColumn}>
+          <strong>Systems</strong>
+          <Link href="/systems/services">Services</Link>
+          <Link href="/systems/projects">Projects</Link>
+          <Link href="/systems/industries">Industries</Link>
           <Link href="/systems/about">About</Link>
-          <Link href="/systems/contact">Contact</Link>
+        </div>
+
+        <div className={styles.footerColumn}>
+          <strong>Capabilities</strong>
+          <Link href="/systems/services#custom-software">Custom software</Link>
+          <Link href="/systems/services#web-mobile">Web & mobile products</Link>
+          <Link href="/systems/services#automation">Automation & AI</Link>
+          <Link href="/systems/services#cloud">Cloud & support</Link>
+        </div>
+
+        <div className={styles.footerColumn}>
+          <strong>IMVO Group</strong>
           <Link href="/">IMVO Studio</Link>
+          <Link href="/systems">IMVO Systems</Link>
           <Link href="/domicile">DŌMICILE</Link>
+        </div>
+
+        <div className={styles.footerColumn}>
+          <strong>Contact</strong>
+          <Link href="/systems/contact">Project enquiry</Link>
+          <Link href="mailto:systems@imvogroup.com">systems@imvogroup.com</Link>
+          <Link href="/">imvogroup.com</Link>
+        </div>
+      </div>
+
+      <div className={styles.footerBottom}>
+        <span>© 2026 IMVO DESIGN GROUP LTD · KIGALI, RWANDA</span>
+        <div>
+          <Link href="/privacy">Privacy</Link>
+          <Link href="/terms">Terms</Link>
+          <Link href="/">IMVO Group ↗</Link>
         </div>
       </div>
     </footer>
