@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
 import styles from "./SystemsPage.module.css";
 import { SystemsHeader, SystemsFooter } from "./SystemsShared";
 import { serviceGroups } from "./systemData";
@@ -63,8 +64,6 @@ const insightCards = [
   ["PRODUCT", "How to move from an idea to a system people can actually use.", "https://images.pexels.com/photos/5466236/pexels-photo-5466236.jpeg?auto=compress&cs=tinysrgb&w=1400"],
 ];
 
-const heroHeadline = "We build growth-ready digital systems for ambitious organisations";
-
 const presencePoints = [
   { label: "Kigali", className: styles.pinKigali },
   { label: "East Africa", className: styles.pinEastAfrica },
@@ -74,40 +73,6 @@ const presencePoints = [
 
 export default function SystemsPageClient() {
   const [activeService, setActiveService] = useState(0);
-  const [typedHeadline, setTypedHeadline] = useState("");
-  const group = serviceGroups[activeService];
-
-  useEffect(() => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion) {
-      setTypedHeadline(heroHeadline);
-      return;
-    }
-
-    let index = 0;
-    let timer: ReturnType<typeof setTimeout>;
-    let cancelled = false;
-
-    const typeNext = () => {
-      if (cancelled) return;
-      index += 1;
-      setTypedHeadline(heroHeadline.slice(0, index));
-
-      if (index < heroHeadline.length) {
-        const character = heroHeadline[index - 1];
-        const delay = character === " " ? 18 : character === "-" ? 95 : 36;
-        timer = setTimeout(typeNext, delay);
-      }
-    };
-
-    timer = setTimeout(typeNext, 320);
-
-    return () => {
-      cancelled = true;
-      clearTimeout(timer);
-    };
-  }, []);
-
   const visibleCards = useMemo(() => {
     const padded = [...group.items];
     while (padded.length < 4) padded.push(group.title);
@@ -121,38 +86,58 @@ export default function SystemsPageClient() {
     <main className={styles.page}>
       <SystemsHeader />
 
-      <section className={styles.vHero}>
-        <div className={styles.vHeroInner}>
-          <div className={styles.vHeroTitle}>
-            <p>Digital Transformation & Technology Services</p>
-            <h1 className={styles.typedHero} aria-label={heroHeadline}>
-              <span aria-hidden="true">{typedHeadline}</span>
-              <span aria-hidden="true" className={styles.typeCursor}>_</span>
-            </h1>
-          </div>
-
-          <div className={styles.vHeroBody}>
-            <h2>A Kigali-based technology and product delivery practice supporting organisations across Rwanda and beyond.</h2>
-            <p>
-              From custom software and web products to mobile experiences, enterprise integration, cloud operations, AI and automation, IMVO Systems turns real business needs into dependable digital systems.
-            </p>
-            <div className={styles.credibilityRow}>
-              <span><b>KIGALI</b><small>Rwanda HQ</small></span>
-              <span><b>PRODUCT</b><small>Design + Build</small></span>
-              <span><b>SYSTEMS</b><small>Operate + Improve</small></span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.mediaStrip} aria-label="African software engineer coding in a modern office">
+      <section className={styles.systemsHero}>
         <Image
           src="https://images.pexels.com/photos/19805876/pexels-photo-19805876.jpeg?auto=compress&cs=tinysrgb&w=2200"
-          alt="African software engineer coding on laptop and desktop screens in a modern Nairobi office"
+          alt="Software product team working in a modern office"
           fill
           priority
           sizes="100vw"
+          className={styles.systemsHeroImage}
         />
+        <div className={styles.systemsHeroShade} />
+
+        <div className={styles.systemsHeroInner}>
+          <motion.div
+            className={styles.systemsHeroCopy}
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: .75, ease: [0.16,1,0.3,1] }}
+          >
+            <span>DIGITAL SYSTEMS · KIGALI</span>
+            <h1>Systems that move<br/>the business <em>forward.</em></h1>
+            <p>
+              IMVO Systems designs and builds dependable digital products, platforms and automations around the way organisations actually work.
+            </p>
+            <div className={styles.systemsHeroActions}>
+              <Link href="/systems/contact">Start a project <b>→</b></Link>
+              <Link href="/systems/projects">View selected work <b>↗</b></Link>
+            </div>
+            <div className={styles.systemsProof}>
+              <div><b>PRODUCT + ENGINEERING</b><small>From concept to working software</small></div>
+              <div><b>BUSINESS-FIRST</b><small>Built around real operations</small></div>
+              <div><b>OPERATE + IMPROVE</b><small>Support beyond launch</small></div>
+            </div>
+          </motion.div>
+
+          <motion.aside
+            className={styles.systemsHeroCard}
+            initial={{ opacity: 0, x: 34, rotateY: -5 }}
+            animate={{ opacity: 1, x: 0, rotateY: 0 }}
+            transition={{ duration: .85, delay: .16, ease: [0.16,1,0.3,1] }}
+          >
+            <i />
+            <small>IMVO SYSTEMS</small>
+            <h2>From workflow<br/>to working system.</h2>
+            <p>One team connecting strategy, product design, engineering and operational thinking.</p>
+            <div className={styles.systemsCapabilityList}>
+              <span>Custom software</span>
+              <span>Web & mobile products</span>
+              <span>Integrations & automation</span>
+              <span>Cloud, support & improvement</span>
+            </div>
+          </motion.aside>
+        </div>
       </section>
 
       <section className={styles.vServices}>
