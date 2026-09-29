@@ -45,11 +45,9 @@ export default function PracticeSwitcher({
         aria-current={isDomicile ? "page" : undefined}
         aria-label="DŌMICILE"
       >
-        <img
-          className={styles.domicileLogo}
-          src="/domicile/domicile-black-no-tagline.svg"
-          alt="DŌMICILE"
-        />
+        <span className={styles.domicileLogo} aria-hidden="true">
+          <img src="/domicile/domicile-white.webp" alt="" />
+        </span>
       </Link>
     </nav>
   );
