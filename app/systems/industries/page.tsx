@@ -16,7 +16,7 @@ export default function SystemsIndustriesPage() {
     <main className={styles.page}>
       <SystemsHeader />
       <section className={styles.innerHero}>
-        <Image src="/about-africa.jpg" alt="Technology for businesses and institutions" fill priority className={styles.innerHeroImage} />
+        <Image src="https://images.pexels.com/photos/7698802/pexels-photo-7698802.jpeg?auto=compress&cs=tinysrgb&w=2200" alt="Business team analysing data and technology in an office meeting" fill priority className={styles.innerHeroImage} />
         <div className={styles.innerHeroWash} />
         <div className={styles.innerHeroContent}>
           <p className={styles.kickerLight}>IMVO Systems / Industries</p>
