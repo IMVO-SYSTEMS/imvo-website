@@ -149,10 +149,7 @@
 }
 
 @media (max-width: 760px) {
-  .fixed { display: none; }
-  .inline {
-    width: max-content;
-    max-width: calc(100vw - 32px);
-  }
+  .fixed,
+  .inline { display: none; }
   .link { width: 78px; }
 }
