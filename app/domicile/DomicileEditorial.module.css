@@ -29,8 +29,8 @@
 .heroShade{
   position:absolute;inset:0;
   background:
-    radial-gradient(circle at 70% 40%,rgba(0,0,0,.06),rgba(0,0,0,.18) 52%,rgba(2,16,35,.56) 100%),
-    linear-gradient(90deg,rgba(4,19,40,.88) 0%,rgba(4,19,40,.62) 34%,rgba(4,19,40,.15) 62%,rgba(4,19,40,.2));
+    radial-gradient(circle at 70% 36%,rgba(0,0,0,.02),rgba(0,0,0,.22) 48%,rgba(2,12,31,.66) 100%),
+    linear-gradient(90deg,rgba(3,15,37,.94) 0%,rgba(3,15,37,.72) 34%,rgba(3,15,37,.25) 62%,rgba(3,15,37,.36));
 }
 .header{
   position:relative;z-index:5;
@@ -102,28 +102,26 @@
 }
 .heroStats>div{padding:0 18px;border-left:1px solid rgba(255,255,255,.22)}
 .heroStats>div:first-child{padding-left:0;border-left:0}
-.heroStats strong{display:block;font-size:27px;font-weight:400}
-.heroStats small{display:block;margin-top:4px;font-size:8px;color:rgba(255,255,255,.66)}
+.heroStats strong{display:block;font-size:9px;font-weight:750;letter-spacing:.10em;color:#fff}
+.heroStats small{display:block;margin-top:7px;max-width:128px;font-size:8px;line-height:1.35;color:rgba(255,255,255,.58)}
 .glassCard{
   justify-self:end;
   width:min(390px,100%);
   padding:28px 30px;
-  border:1px solid rgba(255,255,255,.35);
+  border:1px solid rgba(255,255,255,.28);
   border-radius:30px;
-  background:linear-gradient(135deg,rgba(255,255,255,.23),rgba(255,255,255,.09));
-  backdrop-filter:blur(24px);
-  box-shadow:0 28px 65px rgba(0,0,0,.28);
+  background:linear-gradient(135deg,rgba(255,255,255,.20),rgba(255,255,255,.07));
+  backdrop-filter:blur(28px) saturate(122%);
+  -webkit-backdrop-filter:blur(28px) saturate(122%);
+  box-shadow:0 32px 72px rgba(0,0,0,.34);
+  animation:domicileFloat 7s ease-in-out infinite;
 }
+@keyframes domicileFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .glassCard>i{display:block;width:2px;height:45px;background:#f0c6a3;margin-bottom:20px}
 .glassCard h2{margin:0;font-size:39px;line-height:1.05;font-weight:300;letter-spacing:-.04em}
 .glassCard p{margin:16px 0 22px;font-size:13px;line-height:1.45;color:rgba(255,255,255,.83)}
-.ratingRow{display:flex;align-items:center;gap:16px}
-.avatars{display:flex}
-.avatars span{display:grid;place-items:center;width:38px;height:38px;margin-left:-8px;border:2px solid rgba(255,255,255,.82);border-radius:50%;background:linear-gradient(160deg,#a97860,#1d2f3d);font-size:10px;font-weight:700}
-.avatars span:first-child{margin-left:0}
-.ratingRow>div:last-child{display:flex;align-items:center;gap:8px}
-.ratingRow b{font-size:13px;color:#ffd85f;letter-spacing:.08em}
-.ratingRow small{font-size:8px;line-height:1.25;color:#fff}
+.ratingRow{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.ratingRow>span{display:inline-flex;align-items:center;min-height:28px;padding:0 9px;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(4,20,42,.20);font-size:7px;letter-spacing:.08em;color:rgba(255,255,255,.78)}
 
 .difference{
   position:relative;
@@ -273,8 +271,8 @@
 .ownerCopy h2{margin:12px 0 0;font-size:58px;line-height:.96;letter-spacing:-.05em;font-weight:300}
 .ownerCopy p{max-width:470px;margin:20px 0 0;font-size:13px;line-height:1.55;color:rgba(255,255,255,.78)}
 .storeBadges{display:flex;gap:9px;margin-top:24px}
-.storeBadges>div{min-width:130px;padding:7px 12px;border:1px solid rgba(255,255,255,.55);border-radius:8px;background:#020811;color:white}
-.storeBadges small{display:block;font-size:6px}.storeBadges b{display:block;margin-top:2px;font-size:13px}
+.storeBadges>div{min-width:154px;padding:10px 13px;border:1px solid rgba(255,255,255,.24);border-radius:12px;background:rgba(2,8,17,.52);color:white;backdrop-filter:blur(10px)}
+.storeBadges small{display:block;font-size:6px;letter-spacing:.10em;color:rgba(255,255,255,.52)}.storeBadges b{display:block;margin-top:4px;font-size:11px;font-weight:600}
 .phones{
   position:absolute;z-index:4;
   left:42%;bottom:-36px;
@@ -512,4 +510,8 @@
   height:32px;
   object-fit:contain;
   opacity:.92;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .glassCard{animation:none}
 }
