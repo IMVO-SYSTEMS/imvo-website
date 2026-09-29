@@ -13,16 +13,31 @@ const constructionNodes = [
   { startX: 0, startY: 290, endX: 0, endY: 74, delay: 0.26 },
 ];
 
+const INTRO_SESSION_KEY = "imvo:intro-seen";
+
 export default function IntroLoader() {
   const pathname = usePathname();
   const shouldReduceMotion = useReducedMotion();
   const [isDirectHomeEntry] = useState(() => pathname === "/");
-  const [show, setShow] = useState(isDirectHomeEntry);
+  const [show, setShow] = useState(() => {
+    if (pathname !== "/") return false;
+    try {
+      return window.sessionStorage.getItem(INTRO_SESSION_KEY) !== "1";
+    } catch {
+      return true;
+    }
+  });
   const [isFinishing, setIsFinishing] = useState(false);
   const previousOverflowRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (!isDirectHomeEntry) return;
+
+    if (!show) {
+      document.documentElement.dataset.imvoIntroComplete = "true";
+      window.dispatchEvent(new Event("imvo:intro-complete"));
+      return;
+    }
 
     delete document.documentElement.dataset.imvoIntroComplete;
 
@@ -76,7 +91,7 @@ export default function IntroLoader() {
       window.clearTimeout(safetyTimer);
       window.clearTimeout(removeTimer);
     };
-  }, [isDirectHomeEntry, shouldReduceMotion]);
+  }, [isDirectHomeEntry, shouldReduceMotion, show]);
 
   useEffect(() => {
     const html = document.documentElement;
@@ -104,6 +119,12 @@ export default function IntroLoader() {
 
   const handleIntroExitComplete = () => {
     if (!isDirectHomeEntry) return;
+
+    try {
+      window.sessionStorage.setItem(INTRO_SESSION_KEY, "1");
+    } catch {
+      // Session storage can be unavailable in strict privacy modes.
+    }
 
     document.documentElement.dataset.imvoIntroComplete = "true";
     window.dispatchEvent(new Event("imvo:intro-complete"));
