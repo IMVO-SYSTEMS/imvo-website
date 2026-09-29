@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "./SystemsPage.module.css";
 import PracticeSwitcher from "../components/PracticeSwitcher";
+import { serviceGroups, industries } from "./systemData";
 
 export function SystemsHeader() {
   return (
@@ -10,17 +11,47 @@ export function SystemsHeader() {
           <img src="/brand/imvo-systems.svg" alt="IMVO Systems" />
         </Link>
 
-        <div className={styles.headerCenter}>
+        <div className={styles.divisionSwitch}>
           <PracticeSwitcher placement="inline" variant="light" />
-          <nav className={styles.nav} aria-label="IMVO Systems navigation">
-            <Link href="/systems">Overview</Link>
-            <Link href="/systems/about">About</Link>
-            <Link href="/systems/contact">Contact</Link>
-          </nav>
         </div>
 
+        <nav className={styles.primaryNav} aria-label="IMVO Systems navigation">
+          <div className={styles.navDrop}>
+            <Link href="/systems/services">Services <span>⌄</span></Link>
+            <div className={styles.navMenu}>
+              {serviceGroups.map((group) => (
+                <Link key={group.id} href={"/systems/services#" + group.id}>{group.title}</Link>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.navDrop}>
+            <Link href="/systems/industries">Industries <span>⌄</span></Link>
+            <div className={styles.navMenu}>
+              {industries.map(([title]) => (
+                <Link key={title} href="/systems/industries">{title}</Link>
+              ))}
+            </div>
+          </div>
+
+          <Link href="/systems/projects">Projects</Link>
+
+          <div className={styles.navDrop}>
+            <Link href="/systems/about">About us <span>⌄</span></Link>
+            <div className={styles.navMenu}>
+              <Link href="/systems/about">About IMVO Systems</Link>
+              <Link href="/systems/projects">Our Projects</Link>
+              <Link href="#testimonials">Testimonials</Link>
+            </div>
+          </div>
+
+          <Link href="#testimonials">Testimonials</Link>
+          <Link href="/careers">Careers</Link>
+          <Link href="#insights">Blog</Link>
+        </nav>
+
         <Link className={styles.headerCta} href="/systems/contact">
-          Talk to Systems
+          Contact Us <span>→</span>
         </Link>
       </div>
     </header>
