@@ -103,6 +103,10 @@
   filter: invert(1);
 }
 
+.light {
+  color: #fff;
+}
+
 .dark {
   border-color: rgba(7,26,57,.11);
   background: rgba(7,26,57,.08);
