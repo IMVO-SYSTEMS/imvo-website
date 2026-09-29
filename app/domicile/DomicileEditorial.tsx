@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import type { ReactNode } from "react";
 import styles from "./DomicileEditorial.module.css";
 
 const whatsappUrl =
@@ -46,7 +47,7 @@ function Icon({ name, size = 18 }: { name: IconName; size?: number }) {
     "aria-hidden": true,
   };
 
-  const p: Record<IconName, React.ReactNode> = {
+  const p: Record<IconName, ReactNode> = {
     play: <><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4z"/></>,
     arrow: <><path d="M4 12h15"/><path d="m14 7 5 5-5 5"/></>,
     check: <><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.2 2.2 4.8-5"/></>,
