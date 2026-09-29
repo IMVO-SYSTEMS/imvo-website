@@ -73,6 +73,7 @@ const presencePoints = [
 
 export default function SystemsPageClient() {
   const [activeService, setActiveService] = useState(0);
+  const group = serviceGroups[activeService];
   const visibleCards = useMemo(() => {
     const padded = [...group.items];
     while (padded.length < 4) padded.push(group.title);
