@@ -239,10 +239,10 @@ export default function DomicileEditorial() {
               <a href="#process" className={styles.playButton}><Icon name="play" size={18}/> See how it works</a>
             </div>
             <div className={styles.heroStats}>
-              <div><strong>100+</strong><small>Properties managed</small></div>
-              <div><strong>98%</strong><small>Owner satisfaction</small></div>
-              <div><strong>24/7</strong><small>Local support</small></div>
-              <div><strong>4x</strong><small>Faster issue resolution</small></div>
+              <div><strong>OWNER VIEW</strong><small>Status, approvals and reports</small></div>
+              <div><strong>LOCAL CARE</strong><small>One accountable point of contact</small></div>
+              <div><strong>PRIVATE</strong><small>Property information by default</small></div>
+              <div><strong>KIGALI</strong><small>Local coordination on the ground</small></div>
             </div>
           </motion.div>
 
@@ -251,8 +251,9 @@ export default function DomicileEditorial() {
             <h2>Property care,<br/>in one place.</h2>
             <p>Real people. Local expertise.<br/>Complete peace of mind.</p>
             <div className={styles.ratingRow}>
-              <div className={styles.avatars}><span>A</span><span>M</span><span>J</span></div>
-              <div><b>★★★★★</b><small>4.9/5<br/>from property owners</small></div>
+              <span>OWNER VISIBILITY</span>
+              <span>LOCAL COORDINATION</span>
+              <span>CLEAR RECORD</span>
             </div>
           </motion.div>
         </div>
@@ -301,8 +302,8 @@ export default function DomicileEditorial() {
           <h2>Your property.<br/>Everywhere you are.</h2>
           <p>The DŌMICILE app keeps you connected with real-time updates, photos, approvals and messages — all in one place, anytime, anywhere.</p>
           <div className={styles.storeBadges}>
-            <div><small>Download on the</small><b> App Store</b></div>
-            <div><small>GET IT ON</small><b>▶ Google Play</b></div>
+            <div><small>OWNER VIEW</small><b>Property status</b></div>
+            <div><small>DECISIONS</small><b>Approvals & reports</b></div>
           </div>
         </div>
 
