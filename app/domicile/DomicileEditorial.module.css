@@ -376,3 +376,108 @@
   .chatMap{bottom:12px}
   .solutionOrbit{bottom:10px}
 }
+
+
+.footer{
+  position:relative;
+  background:#071a39;
+  color:#fff;
+  padding:64px max(32px,calc((100vw - 1440px)/2)) 28px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.footerInner{
+  display:grid;
+  grid-template-columns:1.6fr .8fr 1fr 1fr;
+  gap:48px;
+  align-items:start;
+}
+.footerBrand{
+  max-width:430px;
+}
+.footerLogo{
+  width:250px;
+  height:auto;
+  object-fit:contain;
+  object-position:left center;
+}
+.footerBrand p{
+  max-width:410px;
+  margin:22px 0 0;
+  font-size:13px;
+  line-height:1.55;
+  color:rgba(255,255,255,.68);
+}
+.footerCta{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:44px;
+  margin-top:24px;
+  padding:0 16px;
+  border-radius:999px;
+  background:#fff;
+  color:#081a36!important;
+  font-size:11px;
+  font-weight:700;
+}
+.footerColumn{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.footerColumn small{
+  margin-bottom:8px;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:.14em;
+  color:rgba(255,255,255,.46);
+}
+.footerColumn a,
+.footerColumn span{
+  width:max-content;
+  max-width:100%;
+  font-size:11px;
+  line-height:1.4;
+  color:rgba(255,255,255,.78);
+}
+.footerColumn a{
+  transition:color .2s ease, transform .2s ease;
+}
+.footerColumn a:hover{
+  color:#fff;
+  transform:translateX(2px);
+}
+.footerBottom{
+  display:flex;
+  justify-content:space-between;
+  gap:30px;
+  align-items:center;
+  margin-top:54px;
+  padding-top:20px;
+  border-top:1px solid rgba(255,255,255,.12);
+}
+.footerBottom>span{
+  font-size:8px;
+  letter-spacing:.08em;
+  color:rgba(255,255,255,.44);
+}
+.footerBottom>div{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+}
+.footerBottom a{
+  font-size:9px;
+  color:rgba(255,255,255,.54);
+}
+.footerBottom a:hover{color:#fff}
+
+@media(max-width:900px){
+  .footerInner{grid-template-columns:1.3fr 1fr;gap:38px 28px}
+}
+@media(max-width:620px){
+  .footer{padding-left:20px;padding-right:20px}
+  .footerInner{grid-template-columns:1fr;gap:30px}
+  .footerLogo{width:220px}
+  .footerBottom{align-items:flex-start;flex-direction:column}
+}
