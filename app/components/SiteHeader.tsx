@@ -157,8 +157,8 @@ export default function SiteHeader({
       ? "rgba(247,247,244,0.96)"
       : "rgba(247,247,244,0.90)"
     : isScrolled || mobileMenuOpen
-      ? "linear-gradient(to bottom, rgba(5,12,23,0.76), rgba(5,12,23,0.58))"
-      : "linear-gradient(to bottom, rgba(5,12,23,0.48), rgba(5,12,23,0.18))";
+      ? "linear-gradient(to bottom, rgba(4,13,29,0.91), rgba(4,13,29,0.74))"
+      : "linear-gradient(to bottom, rgba(4,13,29,0.68), rgba(4,13,29,0.26))";
 
   return (
     <>
@@ -219,11 +219,12 @@ export default function SiteHeader({
           style={{
             position: "relative",
             zIndex: 2,
-            display: "flex",
-            justifyContent: "space-between",
+            display: "grid",
+            gridTemplateColumns: "minmax(180px, .8fr) auto minmax(520px, 1.6fr)",
             alignItems: "center",
-            padding: "0 32px",
-            maxWidth: 1440,
+            gap: 26,
+            padding: "0 28px",
+            maxWidth: 1480,
             margin: "0 auto",
           }}
         >
@@ -237,14 +238,20 @@ export default function SiteHeader({
               }
             }}
           >
-            <Brand size="md" variant={isSystems ? "dark" : "light"} />
+            <Brand size="sm" variant={isSystems ? "dark" : "light"} />
           </Link>
 
-          <PracticeSwitcher variant={isSystems ? "dark" : "light"} />
+          <PracticeSwitcher placement="inline" variant={isSystems ? "dark" : "light"} />
 
           <nav
             className="desktopNav"
-            style={{ display: "flex", alignItems: "center", gap: 24 }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
+              gap: 22,
+              minWidth: 0,
+            }}
           >
             {currentNav.map((item) => (
               <Link
@@ -254,8 +261,8 @@ export default function SiteHeader({
                   color: foreground,
                   textDecoration: "none",
                   fontWeight: 700,
-                  fontSize: 14,
-                  opacity: 0.92,
+                  fontSize: 13,
+                  opacity: 0.9,
                   textShadow: isSystems ? "none" : "0 1px 8px rgba(0,0,0,0.16)",
                 }}
               >
@@ -268,10 +275,10 @@ export default function SiteHeader({
               style={{
                 background: isSystems ? "#0a0a0a" : "rgba(255,255,255,0.96)",
                 color: isSystems ? "white" : "black",
-                padding: isScrolled ? "10px 22px" : "11px 24px",
+                padding: isScrolled ? "10px 20px" : "11px 22px",
                 borderRadius: 999,
                 fontWeight: 800,
-                fontSize: 14,
+                fontSize: 13,
                 textDecoration: "none",
                 boxShadow: isSystems
                   ? "0 10px 26px rgba(0,0,0,0.08)"
