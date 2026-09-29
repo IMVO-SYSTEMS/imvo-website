@@ -220,7 +220,7 @@ export default function DomicileEditorial() {
               <a href="#process">How it works</a>
               <a href="#owner">Owner experience</a>
               <a href="#difference">Features</a>
-              <a href="/about">About</a>
+              <Link href="/about">About</Link>
             </nav>
           </div>
           <div className={styles.headerActions}>
@@ -266,7 +266,7 @@ export default function DomicileEditorial() {
           <span>THE DŌMICILE DIFFERENCE</span>
           <h2>More than property<br/>management.<br/><em>A better way to own.</em></h2>
           <p>DŌMICILE connects every part of property care — people, processes and information — so you always know what’s happening, and what comes next.</p>
-          <a href="/about">Our story <Icon name="arrow" size={14}/></a>
+          <Link href="/about">Our story <Icon name="arrow" size={14}/></Link>
         </div>
         <div className={styles.laptopWrap}><Laptop /></div>
         <div className={styles.handNote}>Real data.<br/>Real clarity.<br/>Total control.<i>↙</i></div>
