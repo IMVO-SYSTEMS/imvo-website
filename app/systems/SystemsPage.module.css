@@ -48,7 +48,7 @@
 .brand img {
   width: 100%;
   height: auto;
-  filter: brightness(0) saturate(100%) invert(9%) sepia(52%) saturate(2969%) hue-rotate(194deg) brightness(76%) contrast(111%);
+  filter: none;
 }
 
 .primaryNav {
@@ -235,13 +235,14 @@
 }
 
 .mediaStrip {
+  position: relative;
   width: 100%;
   height: clamp(340px, 38vw, 560px);
   background: #d9dee5;
   overflow: hidden;
 }
 
-.mediaStrip video {
+.mediaStrip img {
   width: 100%;
   height: 100%;
   object-fit: cover;

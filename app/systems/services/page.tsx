@@ -16,7 +16,7 @@ export default function SystemsServicesPage() {
     <main className={styles.page}>
       <SystemsHeader />
       <section className={styles.innerHero}>
-        <Image src="/about-future.jpg" alt="IMVO Systems technology services" fill priority className={styles.innerHeroImage} />
+        <Image src="https://images.pexels.com/photos/12899153/pexels-photo-12899153.jpeg?auto=compress&cs=tinysrgb&w=2200" alt="Software development team reviewing code in a modern office" fill priority className={styles.innerHeroImage} />
         <div className={styles.innerHeroWash} />
         <div className={styles.innerHeroContent}>
           <p className={styles.kickerLight}>IMVO Systems / Services</p>

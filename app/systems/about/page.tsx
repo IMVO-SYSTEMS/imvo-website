@@ -23,7 +23,7 @@ export default function SystemsAboutPage() {
     <main className={styles.page}>
       <SystemsHeader />
       <section className={styles.innerHero}>
-        <Image src="/about-hero.webp" alt="About IMVO Systems" fill priority className={styles.innerHeroImage} />
+        <Image src="https://images.pexels.com/photos/5466236/pexels-photo-5466236.jpeg?auto=compress&cs=tinysrgb&w=2200" alt="Diverse technology team collaborating in a modern office" fill priority className={styles.innerHeroImage} />
         <div className={styles.innerHeroWash} />
         <div className={styles.innerHeroContent}>
           <p className={styles.kickerLight}>IMVO Systems / About us</p>

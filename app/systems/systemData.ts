@@ -13,7 +13,7 @@ export const serviceGroups: ServiceGroup[] = [
     index: "01",
     title: "Digital Experience",
     summary: "Customer-facing digital products designed to feel clear, fast and consistent across every screen.",
-    image: "/about-future.jpg",
+    image: "https://images.pexels.com/photos/3862089/pexels-photo-3862089.jpeg?auto=compress&cs=tinysrgb&w=1800",
     items: ["Mobile Applications", "Web Applications", "UI/UX Design & Branding", "Branding & Digital Identity"],
   },
   {
@@ -21,7 +21,7 @@ export const serviceGroups: ServiceGroup[] = [
     index: "02",
     title: "Product Development",
     summary: "From first working version to mature software products, built with a disciplined delivery model.",
-    image: "/service-process.webp",
+    image: "https://images.pexels.com/photos/12899153/pexels-photo-12899153.jpeg?auto=compress&cs=tinysrgb&w=1800",
     items: ["MVP Development", "Low-code Development", "Software Development", "IT Staff Augmentation", "Software Quality Assurance"],
   },
   {
@@ -29,7 +29,7 @@ export const serviceGroups: ServiceGroup[] = [
     index: "03",
     title: "Managed Services",
     summary: "Practical support for the infrastructure, security and software your operation depends on every day.",
-    image: "/services-hero.webp",
+    image: "https://images.pexels.com/photos/37605911/pexels-photo-37605911.jpeg?auto=compress&cs=tinysrgb&w=1800",
     items: ["Cloud Operations", "DevSecOps", "Cybersecurity", "Software Maintenance"],
   },
   {
@@ -37,7 +37,7 @@ export const serviceGroups: ServiceGroup[] = [
     index: "04",
     title: "Enterprise Solutions",
     summary: "Connected platforms that reduce fragmentation across teams, data, customers and operational workflows.",
-    image: "/contact-hero.webp",
+    image: "https://images.pexels.com/photos/7693683/pexels-photo-7693683.jpeg?auto=compress&cs=tinysrgb&w=1800",
     items: ["ERP / CRM & System Integration", "Cloud Migration", "Workflow Integration", "Data & Reporting Systems"],
   },
   {
@@ -45,7 +45,7 @@ export const serviceGroups: ServiceGroup[] = [
     index: "05",
     title: "Innovation Services",
     summary: "Emerging technology applied where it can create a measurable operational or customer advantage.",
-    image: "/about-process.jpg",
+    image: "https://images.pexels.com/photos/3861957/pexels-photo-3861957.jpeg?auto=compress&cs=tinysrgb&w=1800",
     items: ["AI & Machine Learning", "IoT & Connected Systems", "Automation", "Blockchain & Emerging Technology"],
   },
   {
@@ -53,7 +53,7 @@ export const serviceGroups: ServiceGroup[] = [
     index: "06",
     title: "Overseas Market Expansion",
     summary: "Technology and local execution support for organisations entering Rwanda and the wider East African market.",
-    image: "/about-africa.jpg",
+    image: "https://images.pexels.com/photos/36733315/pexels-photo-36733315.jpeg?auto=compress&cs=tinysrgb&w=1800",
     items: ["Rwanda Market Entry", "East Africa Market Expansion", "Local Technology Partner", "Digital Market Setup"],
   },
   {
@@ -61,7 +61,7 @@ export const serviceGroups: ServiceGroup[] = [
     index: "07",
     title: "Grant Advisory",
     summary: "Structured technical scoping and documentation for innovation programmes, investment readiness and funded digital projects.",
-    image: "/about-rwanda.jpg",
+    image: "https://images.pexels.com/photos/10376212/pexels-photo-10376212.jpeg?auto=compress&cs=tinysrgb&w=1800",
     items: ["Digital Project Scoping", "Technology Proposal Support", "Innovation Funding Readiness", "Delivery Documentation"],
   },
 ];
@@ -89,25 +89,25 @@ export const caseStudies = [
   {
     title: "Commerce Platform",
     tag: "MARKETPLACE / OPERATIONS",
-    image: "/about-future.jpg",
+    image: "https://images.pexels.com/photos/3183185/pexels-photo-3183185.jpeg?auto=compress&cs=tinysrgb&w=1800",
     text: "Product discovery, catalogue logic, services booking, inventory connections and an easier path from browsing to purchase.",
   },
   {
     title: "Hospitality Ordering",
     tag: "FOOD / DELIVERY / OPERATIONS",
-    image: "/service-process.webp",
+    image: "https://images.pexels.com/photos/7698802/pexels-photo-7698802.jpeg?auto=compress&cs=tinysrgb&w=1800",
     text: "Customer ordering, kitchen flow, delivery assignment, reporting and operational controls designed as one connected system.",
   },
   {
     title: "Property Operations",
     tag: "REAL ESTATE / MAINTENANCE",
-    image: "/contact-hero.webp",
+    image: "https://images.pexels.com/photos/7567557/pexels-photo-7567557.jpeg?auto=compress&cs=tinysrgb&w=1800",
     text: "Owner, property and maintenance workflows brought into a focused digital operating experience.",
   },
   {
     title: "Business Control Systems",
     tag: "INTERNAL TOOLS / REPORTING",
-    image: "/services-hero.webp",
+    image: "https://images.pexels.com/photos/3861957/pexels-photo-3861957.jpeg?auto=compress&cs=tinysrgb&w=1800",
     text: "Dashboards, workflow automation, permissions, audit trails and reporting for teams that need reliable operational visibility.",
   },
 ];
