@@ -104,10 +104,7 @@ function TestimonialEnhancer() {
   const [mount, setMount] = useState<TestimonialMount | null>(null);
 
   useEffect(() => {
-    if (pathname !== "/about") {
-      setMount(null);
-      return;
-    }
+    if (pathname !== "/about") return;
 
     let originalSection: HTMLElement | null = null;
     let originalDisplay = "";
