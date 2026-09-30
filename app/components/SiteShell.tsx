@@ -19,10 +19,10 @@ const IntroLoader = dynamic(() => import("./IntroLoader"), {
 const ContactEnhancements = dynamic(() => import("./ContactEnhancements"), {
   ssr: false,
 });
-const IMVOPreviewExperience = dynamic(() => import("./IMVOPreviewExperience"), {
+const IMVOEditorialEnhancements = dynamic(() => import("./IMVOEditorialEnhancements"), {
   ssr: false,
 });
-const IMVOPreviewCorrections = dynamic(() => import("./IMVOPreviewCorrections"), {
+const IMVOEditorialCorrections = dynamic(() => import("./IMVOEditorialCorrections"), {
   ssr: false,
 });
 const IMVOStudioPhotography = dynamic(() => import("./IMVOStudioPhotography"), {
@@ -150,8 +150,8 @@ export default function SiteShell({
         <SiteHeader deferUntilIntroComplete={pathname === "/"} />
         {!isSystems ? <DomicileWidget /> : null}
         {pathname === "/contact" ? <ContactEnhancements /> : null}
-        {needsPreviewExperience ? <IMVOPreviewExperience /> : null}
-        {needsPreviewCorrections ? <IMVOPreviewCorrections /> : null}
+        {needsPreviewExperience ? <IMVOEditorialEnhancements /> : null}
+        {needsPreviewCorrections ? <IMVOEditorialCorrections /> : null}
         <main id="main-content" tabIndex={-1}>
           {children}
           {needsPhotography ? <IMVOStudioPhotography /> : null}
