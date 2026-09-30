@@ -7,7 +7,7 @@ import { m } from "framer-motion";
 
 const projects = [
   { image: "/chosen/urban-villa.png", title: "Urban Villa", location: "Kamonyi, Southern Province" },
-  { image: "/chosen/verdea-hotel.png", title: "VERDÉA Boutique Hotel & Residences", location: "Kigali, Rwanda" },
+  { image: "/chosen/verdea-2.png", title: "VERDÉA Boutique Hotel & Residences", location: "Kigali, Rwanda" },
   { image: "/chosen/prism-residences.png", title: "PRISM Residences", location: "Modern Apartments | Rwanda" },
   { image: "/chosen/grand-horizon.png", title: "GRAND HORIZON Hotel", location: "Kigali, Rwanda" },
   { image: "/chosen/photo-axis.png", title: "Axis Logistics Center", location: "Musanze Industrial Park" },
