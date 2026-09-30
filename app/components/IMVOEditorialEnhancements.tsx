@@ -104,10 +104,7 @@ function TestimonialEnhancer() {
   const [mount, setMount] = useState<TestimonialMount | null>(null);
 
   useEffect(() => {
-    if (pathname !== "/about") {
-      setMount(null);
-      return;
-    }
+    if (pathname !== "/about") return;
 
     let originalSection: HTMLElement | null = null;
     let originalDisplay = "";
@@ -150,7 +147,7 @@ function TestimonialEnhancer() {
       originalDisplay = originalSection.style.display;
       originalSection.style.display = "none";
       slot = document.createElement("div");
-      slot.dataset.imvoTestimonialPreview = "true";
+      slot.dataset.imvoTestimonialEnhancement = "true";
       originalSection.parentElement?.insertBefore(slot, originalSection);
       setMount({ slot, heading, testimonials });
     };
@@ -261,7 +258,7 @@ function EditorialUIEnhancer() {
       }
 
       document.querySelectorAll<HTMLElement>("a, button").forEach((element) => {
-        if (element.closest("[data-imvo-testimonial-preview='true']")) return;
+        if (element.closest("[data-imvo-testimonial-enhancement='true']")) return;
         // SiteHeader already has its final approved CTA geometry. Do not let
         // the generic editorial enhancer morph the header after hydration.
         if (element.closest("header")) return;
@@ -335,7 +332,7 @@ function EditorialUIEnhancer() {
   return null;
 }
 
-function PreviewStyles() {
+function EditorialStyles() {
   return (
     <style>{`
       /* Clean editorial CTA system: no jelly, no automatic treatment of selections. */
@@ -759,10 +756,10 @@ function PreviewStyles() {
   );
 }
 
-export default function IMVOPreviewExperience() {
+export default function IMVOEditorialEnhancements() {
   return (
     <>
-      <PreviewStyles />
+      <EditorialStyles />
       <EditorialUIEnhancer />
       <TestimonialEnhancer />
     </>

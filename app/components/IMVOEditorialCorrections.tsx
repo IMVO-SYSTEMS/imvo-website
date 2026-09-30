@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 const normalize = (value: string) => value.replace(/\s+/g, " ").trim();
 
-export default function IMVOPreviewCorrections() {
+export default function IMVOEditorialCorrections() {
   const pathname = usePathname();
 
   useEffect(() => {
