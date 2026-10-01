@@ -1,0 +1,48 @@
+name: Cloudflare compatibility
+
+on:
+  push:
+    branches:
+      - chore/cloudflare-migration-20261001
+  pull_request:
+    paths:
+      - "app/**"
+      - "sanity/**"
+      - "package.json"
+      - "package-lock.json"
+      - "next.config.ts"
+      - "vite.config.ts"
+      - "wrangler.jsonc"
+      - ".github/workflows/cloudflare-compat.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci --legacy-peer-deps
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Next.js build
+        run: npm run build:next
+
+      - name: Cloudflare compatibility
+        run: npx vinext check
+
+      - name: Cloudflare production build
+        run: npm run build:cloudflare
