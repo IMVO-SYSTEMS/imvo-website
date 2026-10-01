@@ -6,3 +6,5 @@ This branch prepares the IMVO website for an isolated Cloudflare Workers deploym
 - Sanity remains the CMS; its public project defaults remain unchanged.
 - Cloudflare staging uses Wrangler with `--keep-vars`.
 - The production cutover happens only after Studio, Systems, DŌMICILE and the embedded Sanity Studio are verified.
+
+Sanity peer installation mode is enabled for the Cloudflare build so the existing CMS dependency graph installs consistently in CI.
