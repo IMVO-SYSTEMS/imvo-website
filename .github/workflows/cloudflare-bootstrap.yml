@@ -36,7 +36,7 @@ jobs:
           npm pkg set scripts.build:next="next build"
           npm pkg set scripts.build:cloudflare="vite build"
           npm pkg set scripts.deploy:cloudflare="wrangler deploy --keep-vars"
-          npm install --package-lock-only
+          npm install --package-lock-only --legacy-peer-deps
 
       - name: Commit migration configuration
         run: |
