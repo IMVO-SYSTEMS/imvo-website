@@ -1,0 +1,42 @@
+name: Deploy IMVO to Cloudflare
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: imvo-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      NPM_CONFIG_LEGACY_PEER_DEPS: "true"
+      CLOUDFLARE_ACCOUNT_ID: "65a20d72fe62824693dd2c16e9a3b909"
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      - name: Use Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Cloudflare production bundle
+        run: npm run build:cloudflare
+
+      - name: Deploy to Cloudflare Workers
+        run: npm run deploy:cloudflare
