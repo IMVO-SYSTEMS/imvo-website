@@ -1,0 +1,37 @@
+name: Add Sanity Cloudflare peer
+
+on:
+  push:
+    branches:
+      - chore/cloudflare-migration-20261001
+    paths:
+      - ".github/workflows/cloudflare-sanity-peer.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/cloudflare-migration-20261001
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Add Sanity peer dependency
+        run: npm install styled-components@^6.1.19 --save --legacy-peer-deps
+      - name: Commit dependency
+        run: |
+          git config user.name "IMVO Systems Migration"
+          git config user.email "actions@users.noreply.github.com"
+          git add package.json package-lock.json
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "chore: add Sanity styled-components peer"
+          git push origin HEAD:chore/cloudflare-migration-20261001

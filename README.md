@@ -11,7 +11,7 @@ This repository contains the public IMVO digital experience, including Studio, S
 - TypeScript
 - Tailwind CSS
 - Sanity CMS
-- Vercel
+- Cloudflare Workers
 
 ## Local development
 
@@ -20,11 +20,13 @@ npm ci
 npm run dev
 ```
 
-Before merging production changes:
+Production validation:
 
 ```bash
 npm run lint
-npm run build
+npm run build:next
+npx vinext check
+npm run build:cloudflare
 ```
 
 ## Structure
@@ -36,6 +38,7 @@ npm run build
 - `scripts/` — maintenance and migration tooling
 - `docs/` — active technical and handoff documentation
 - `.github/` — GitHub workflows
+- `wrangler.jsonc` — Cloudflare Worker runtime configuration
 
 ## Security
 
@@ -43,6 +46,8 @@ Keep credentials in local or deployment environment variables. Never commit prod
 
 ## Deployment
 
-Production is managed through Vercel. GitHub ownership is under the **IMVO-SYSTEMS** organization.
+Production hosting is prepared for **Cloudflare Workers**. Sanity remains the content-management backend.
+
+The canonical deployment branch is **main** under the **IMVO-SYSTEMS** GitHub organization.
 
 A pre-transfer recovery branch is retained for rollback and historical reference.
