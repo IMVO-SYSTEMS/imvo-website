@@ -9,9 +9,11 @@ on:
       - main
     paths:
       - "app/**"
+      - "components/**"
       - "sanity/**"
       - "package.json"
       - "package-lock.json"
+      - ".npmrc"
       - "next.config.ts"
       - "vite.config.ts"
       - "wrangler.jsonc"
@@ -35,7 +37,7 @@ jobs:
           cache: npm
 
       - name: Install
-        run: npm ci --legacy-peer-deps
+        run: npm ci
 
       - name: Lint report
         continue-on-error: true
