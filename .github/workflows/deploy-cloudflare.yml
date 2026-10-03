@@ -39,4 +39,7 @@ jobs:
         run: npm run build:cloudflare
 
       - name: Deploy to Cloudflare Workers
-        run: npm run deploy:cloudflare
+        run: |
+          CLEAN_CF_TOKEN="$(printf '%s' "$CLOUDFLARE_API_TOKEN" | tr -d '\r\n')"
+          export CLOUDFLARE_API_TOKEN="$CLEAN_CF_TOKEN"
+          npm run deploy:cloudflare
