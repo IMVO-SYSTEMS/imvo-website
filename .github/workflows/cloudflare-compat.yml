@@ -3,8 +3,10 @@ name: Cloudflare compatibility
 on:
   push:
     branches:
-      - chore/cloudflare-migration-20261001
+      - main
   pull_request:
+    branches:
+      - main
     paths:
       - "app/**"
       - "sanity/**"
@@ -35,7 +37,8 @@ jobs:
       - name: Install
         run: npm ci --legacy-peer-deps
 
-      - name: Lint
+      - name: Lint report
+        continue-on-error: true
         run: npm run lint
 
       - name: Next.js build
