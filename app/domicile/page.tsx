@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import DomicileEditorial from "./DomicileEditorial";
-import DomicileCmsHydratorSafe from "./DomicileCmsHydratorSafe";
 import { getDomicilePageContent, getFaqs, getSeoEntry } from "@/sanity/lib/cmsBackend";
 import { mergeCmsMetadata } from "@/app/lib/cmsMetadata";
 import type { SeoEntry } from "@/sanity/types/cmsBackend";
@@ -80,8 +79,7 @@ export default async function DomicilePage() {
 
   return (
     <>
-      <DomicileEditorial />
-      <DomicileCmsHydratorSafe content={content} faqs={faqs} />
+      <DomicileEditorial content={content} faqs={faqs} />
     </>
   );
 }
