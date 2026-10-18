@@ -259,8 +259,8 @@ export default function SystemsPageClient() {
         </div>
 
         <div className={styles.insightCards}>
-          {insightCards.map(([category, title, image]) => (
-            <Link href="/systems/services" key={title} className={styles.insightCard}>
+          {insightCards.map(([category, title, image], index) => (
+            <Link href={"/systems/insights#note-" + (index + 1)} key={title} className={styles.insightCard}>
               <Image src={image} alt="" fill sizes="(max-width: 760px) 47vw, 25vw" />
               <div className={styles.insightShade} />
               <span>{category}</span>
