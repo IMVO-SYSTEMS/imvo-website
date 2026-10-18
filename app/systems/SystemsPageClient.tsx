@@ -6,7 +6,7 @@ import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import styles from "./SystemsPage.module.css";
 import { SystemsHeader, SystemsFooter } from "./SystemsShared";
-import { serviceGroups } from "./systemData";
+import { serviceGroups, caseStudies } from "./systemData";
 
 const serviceImageSets = [
   [
@@ -105,10 +105,10 @@ export default function SystemsPageClient() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: .75, ease: [0.16,1,0.3,1] }}
           >
-            <span>DIGITAL SYSTEMS · KIGALI</span>
-            <h1>Systems that move<br/>the business <em>forward.</em></h1>
+            <span>IMVO SYSTEMS · SOFTWARE & DIGITAL PRODUCTS · KIGALI</span>
+            <h1>We build what<br/>moves you <em>forward.</em></h1>
             <p>
-              IMVO Systems designs and builds dependable digital products, platforms and automations around the way organisations actually work.
+              A technology and development partner for ambitious organisations. We design, engineer and maintain digital products, connected platforms, cloud services and automation.
             </p>
             <div className={styles.systemsHeroActions}>
               <Link href="/systems/contact">Start a project <b>→</b></Link>
@@ -167,6 +167,33 @@ export default function SystemsPageClient() {
               <Image src={card.image} alt="" fill sizes="(max-width: 760px) 82vw, 25vw" />
               <div className={styles.cardShade} />
               <strong>{card.title}</strong>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className={styles.featuredSection} id="selected-work">
+        <div className={styles.featuredIntro}>
+          <div>
+            <span>SELECTED WORK / IMVO SYSTEMS</span>
+            <h2>Products built for<br/><em>the real world.</em></h2>
+          </div>
+          <div>
+            <p>From ordering platforms and commerce to property management and digital companions — thoughtful products engineered around people and operations.</p>
+            <Link href="/systems/projects">Explore all projects <b>↗</b></Link>
+          </div>
+        </div>
+        <div className={styles.featuredGrid}>
+          {caseStudies.map((project) => (
+            <Link className={styles.featuredCard} href={project.href} key={project.title}>
+              <Image src={project.image} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" />
+              <div className={styles.featuredShade}/>
+              <div className={styles.featuredText}>
+                <span>{project.tag}</span>
+                <h3>{project.title}</h3>
+                <p>{project.text}</p>
+                <small>{project.phase} <b>↗</b></small>
+              </div>
             </Link>
           ))}
         </div>
@@ -233,12 +260,12 @@ export default function SystemsPageClient() {
 
         <div className={styles.insightCards}>
           {insightCards.map(([category, title, image]) => (
-            <article key={title} className={styles.insightCard}>
+            <Link href="/systems/services" key={title} className={styles.insightCard}>
               <Image src={image} alt="" fill sizes="(max-width: 760px) 47vw, 25vw" />
               <div className={styles.insightShade} />
               <span>{category}</span>
               <h3>{title}</h3>
-            </article>
+            </Link>
           ))}
         </div>
       </section>
