@@ -28,14 +28,15 @@ export default function SystemsProjectsPage() {
       <section className={styles.contentSection}>
         <div className={styles.projectPageGrid}>
           {caseStudies.map((project) => (
-            <article className={styles.projectPageCard} key={project.title}>
+            <Link className={styles.projectPageCard} href={project.href} key={project.title}>
               <Image src={project.image} alt="" fill sizes="(max-width: 900px) 100vw, 50vw" />
               <div>
                 <span>{project.tag}</span>
                 <h3>{project.title}</h3>
                 <p>{project.text}</p>
+                <strong className={styles.projectVisit}>{project.phase} ↗</strong>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </section>
