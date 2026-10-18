@@ -41,6 +41,7 @@ export function SystemsHeader() {
           <Link href="/systems/projects">Projects</Link>
           <Link href="/systems/about">About</Link>
           <Link href="/systems/careers">Careers</Link>
+          <Link href="/systems/insights">Insights</Link>
         </nav>
 
         <button type="button" className={styles.mobileToggle} aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} aria-controls="systems-mobile-menu" onClick={() => setMenuOpen((open) => !open)}><span /><span /><span /></button>
@@ -54,6 +55,7 @@ export function SystemsHeader() {
         <Link href="/systems/industries" onClick={() => setMenuOpen(false)}>Industries <span>→</span></Link>
         <Link href="/systems/projects" onClick={() => setMenuOpen(false)}>Projects <span>→</span></Link>
         <Link href="/systems/about" onClick={() => setMenuOpen(false)}>About <span>→</span></Link>
+        <Link href="/systems/insights" onClick={() => setMenuOpen(false)}>Insights <span>→</span></Link>
         <Link href="/systems/careers" onClick={() => setMenuOpen(false)}>Careers <span>→</span></Link>
         <Link href="/systems/contact" onClick={() => setMenuOpen(false)}>Start a project <span>→</span></Link>
       </nav>
@@ -80,6 +82,7 @@ export function SystemsFooter() {
           <Link href="/systems/industries">Industries</Link>
           <Link href="/systems/about">About</Link>
           <Link href="/systems/careers">Careers</Link>
+          <Link href="/systems/insights">Insights</Link>
         </div>
 
         <div className={styles.footerColumn}>
