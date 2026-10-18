@@ -1,9 +1,13 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import styles from "./SystemsPage.module.css";
 import PracticeSwitcher from "../components/PracticeSwitcher";
 import { serviceGroups, industries } from "./systemData";
 
 export function SystemsHeader() {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <header className={styles.header}>
       <div className={styles.headerInner}>
@@ -36,12 +40,23 @@ export function SystemsHeader() {
 
           <Link href="/systems/projects">Projects</Link>
           <Link href="/systems/about">About</Link>
+          <Link href="/systems/careers">Careers</Link>
         </nav>
 
+        <button type="button" className={styles.mobileToggle} aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} aria-controls="systems-mobile-menu" onClick={() => setMenuOpen((open) => !open)}><span /><span /><span /></button>
         <Link className={styles.headerCta} href="/systems/contact">
           Start a project <span>→</span>
         </Link>
       </div>
+      <nav id="systems-mobile-menu" className={styles.mobileMenu} data-open={menuOpen} aria-label="Mobile IMVO Systems navigation">
+        <Link href="/systems" onClick={() => setMenuOpen(false)}>Overview <span>→</span></Link>
+        <Link href="/systems/services" onClick={() => setMenuOpen(false)}>Services <span>→</span></Link>
+        <Link href="/systems/industries" onClick={() => setMenuOpen(false)}>Industries <span>→</span></Link>
+        <Link href="/systems/projects" onClick={() => setMenuOpen(false)}>Projects <span>→</span></Link>
+        <Link href="/systems/about" onClick={() => setMenuOpen(false)}>About <span>→</span></Link>
+        <Link href="/systems/careers" onClick={() => setMenuOpen(false)}>Careers <span>→</span></Link>
+        <Link href="/systems/contact" onClick={() => setMenuOpen(false)}>Start a project <span>→</span></Link>
+      </nav>
     </header>
   );
 }
@@ -64,6 +79,7 @@ export function SystemsFooter() {
           <Link href="/systems/projects">Projects</Link>
           <Link href="/systems/industries">Industries</Link>
           <Link href="/systems/about">About</Link>
+          <Link href="/systems/careers">Careers</Link>
         </div>
 
         <div className={styles.footerColumn}>
