@@ -1637,3 +1637,8 @@
 @media (max-width:900px) { .divisionSwitch { display:none; } .headerInner { grid-template-columns:160px 1fr auto auto; } .mobileToggle { display:block; order:3; } .mobileMenu[data-open="true"] { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0; background:#081326; border-top:1px solid rgba(255,255,255,.15); padding:12px max(22px,calc((100vw - 750px)/2)); } .mobileMenu a { display:flex; justify-content:space-between; align-items:center; padding:16px 9px; color:white; font-size:13px; border-bottom:1px solid rgba(255,255,255,.10); } .mobileMenu a span { color:#ff526d; } .featuredIntro { grid-template-columns:1fr; gap:22px; } }
 @media (max-width:680px) { .headerInner { grid-template-columns:1fr auto auto; gap:10px; } .mobileToggle { width:36px; height:36px; padding:8px; } .mobileMenu[data-open="true"] { grid-template-columns:1fr; padding:8px 16px; } .featuredSection { padding:72px 0; } .featuredIntro { width:calc(100% - 34px); } .featuredIntro h2 { font-size:45px; } .featuredGrid { grid-template-columns:1fr; width:calc(100% - 20px); } .featuredCard { min-height:410px; } .featuredText { left:20px; right:20px; bottom:20px; } }
 @media (prefers-reduced-motion: reduce) { .featuredCard > img { transition:none; } }
+
+/* Accessible pointer/keyboard navigation on the Systems preview */
+.navDrop:focus-within .navMenu { opacity:1; visibility:visible; transform:translateY(0); }
+.navMenu a:focus-visible,.primaryNav a:focus-visible,.headerCta:focus-visible,.mobileToggle:focus-visible,.mobileMenu a:focus-visible,.serviceTabs button:focus-visible,.featuredCard:focus-visible { outline:3px solid #ff526e; outline-offset:3px; }
+.servicePageRow { scroll-margin-top:100px; }
