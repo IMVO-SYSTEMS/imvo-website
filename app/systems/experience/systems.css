@@ -116,3 +116,5 @@ html:has(.systems-site){scroll-padding-top:122px}
  .systems-site .team-feature{grid-template-columns:1fr;gap:28px}.systems-site .team-feature-image img{height:310px}.systems-site .team-feature>div>p:not(.eyebrow){font-size:13px;margin-bottom:16px}
 }
 @media(prefers-reduced-motion:reduce){.systems-site .logo-track{animation:none;transform:none}.systems-site .logo-track .logo-sequence[aria-hidden="true"]{display:none}.systems-site .logo-row-right{display:none}.systems-site .logo-row{height:auto;mask-image:none}.systems-site .logo-sequence{flex-wrap:wrap;justify-content:center;width:100vw}.systems-site .collaborator-logo{width:150px}.systems-site .testimonial-track{transition:none!important}}
+
+@media(max-width:365px){.systems-site .header .studio-logo{width:130px}.systems-site .header .header-contact{white-space:nowrap;flex-shrink:0;font-size:11px;padding:8px 11px;min-height:38px}.systems-site .header .mobile-toggle{flex-shrink:0}}
