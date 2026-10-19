@@ -1,33 +1,112 @@
-# IMVO Systems release design QA
+# IMVO Studio homepage design QA
 
-Date: 19 October 2026. Target: the user's approved IMVO Systems preview, based on https://vinova.sg/, integrated at `/systems` in the existing IMVO Group site. Red, white and charcoal; preserve Studio and DŌMICILE.
+Date: 19 October 2026. Scope: the official Studio homepage `/` in the existing
+IMVO Group repository. Source visual truth: https://heronaiapp.com/ and its
+captured drawing states. The user's brief preserves IMVO colours and content,
+while closely adapting the CAD cursor, drawing assembly, pinned scroll and
+sideways movement. Existing Systems and DŌMICILE destinations remain in place.
 
-## Visual comparison
+## Evidence and comparison
 
-Opened the reference and the production Worker preview in the same browser. Inspected their combined screenshot: [desktop comparison](docs/systems/qa/desktop-comparison.jpg). Both use the wide split hero, Poppins type, restrained grey secondary text, rounded red contact action, full-width technology film, service tabs, presence map, logo rows, testimonial columns, consultation banner, insights and substantial footer. Header height, page gutters, headline scale, film boundary and overall density follow the approved preview.
+Desktop browser viewport: 1363 × 936 CSS pixels; both source and implementation
+captures are 1363 × 936 image pixels, density 1. No density resampling was needed
+before the combined comparison. Evidence lives in the task QA workspace:
 
-Intentional adaptations: IMVO Systems wordmark and Kigali copy; actual IMVO team and collaborator photographs/logos; Web/Mobile/Cloud/AI capabilities in place of third-party certifications; published IMVO Group testimonials with explicit Group attribution; IMVO product directions using clearly described temporary illustrative interface imagery; tools grid and IMVO division footer links. No copied claims of delivery, ratings, certifications or overseas offices.
+- Source hero: `/workspace/scratch/934a30c439ff/reference/heron-hero.jpg`.
+- Source completed plan: `/workspace/scratch/934a30c439ff/reference/heron-plan.jpg`.
+- Implementation hero: `/workspace/scratch/934a30c439ff/imvo-hero-final.jpg`.
+- Implementation completed plan: `/workspace/scratch/934a30c439ff/imvo-plan-final.jpg`.
+- Full-view combined comparison: `/workspace/scratch/934a30c439ff/imvo-desktop-comparison.jpg`.
+- Completed-plan combined comparison: `/workspace/scratch/934a30c439ff/imvo-plan-comparison.jpg`.
+- Focused header/type comparison: `/workspace/scratch/934a30c439ff/imvo-focused-comparison.jpg`.
+- Phone comparison: `/workspace/scratch/934a30c439ff/imvo-mobile-comparison.jpg`.
+- Wide implementation: `/workspace/scratch/934a30c439ff/imvo-wide-final.jpg`.
+- Horizontal projects: `/workspace/scratch/934a30c439ff/imvo-projects-final.jpg`.
 
-Fonts: local Poppins 300/400/600/700; restrained Roboto Mono labels. Red accent `#e51320`, charcoal text and footer, white sections. Tools use official Simple Icons SVGs. Reference media is local with provenance in `docs/systems/reference-imagery.json`.
+Both full-view and focused comparisons were opened together and inspected.
+The hero retains the framed drawing, large house elevation, restrained metadata,
+CAD coordinates, split headline/copy band and bordered navigation. Intentional
+adaptations: IMVO Studio wordmark, sentence-case IMVO copy, existing monochrome
+paper/ink theme, a larger readable headline band, and IMVO division links. The
+completed plan is the same source geometry, with IMVO's dark presentation and
+right-hand design-process narrative. Original raster bytes and vector paths are
+local source assets; no illustrative geometry was approximated.
 
-## Viewports and interactions
+## Required fidelity surfaces
 
-- Desktop: production page inspected at 1363 CSS pixels. No horizontal document overflow or broken loaded images. Tools: All 11, Cloud & delivery 3, restore All 11. Film dialog opens and closes. Service footer `?group=market-expansion` lands at the correct section below the fixed header. Contact `?section=enquiry` lands at the form. Gallery opens, advances 1/3 to 2/3 and closes with Escape. Collaboration dialog opens and links to a correctly scoped enquiry.
-- Phone 390: [service page](docs/systems/qa/systems-phone390.jpg). Mobile menu → Services → Digital Experience → Mobile App Development navigates to its native route and closes the drawer. Measured document client/scroll width both 390; no broken loaded images.
-- Tablet 768: [long service heading](docs/systems/qa/systems-tablet768.jpg). Heading and image fit; client/scroll width both 768.
-- Phone 320: [final contact layout](docs/systems/qa/systems-phone320-final.jpg). Header contact label stays on one line, navigation remains usable, and client/scroll width both 320. Empty enquiry blocks review with six invalid controls. Dummy details successfully review; Edit retains the values. Send was deliberately not exercised, so no test email was delivered.
-- Testimonials retain the verified 3-second transition on a 5-second interval, providing about 2 seconds stationary between moves. Manual previous/next, pause/play, hover/focus pause, loop snapping and visibility gating are present. Manual next advances the track. Prior timing trace verified repeated movement and stops; this release preserves that motion code.
-- Logo rows have computed normal/reverse directions at 68 seconds. Pause control stops both tracks. Repeated copies are hidden from assistive technology. Reduced-motion CSS and controls are implemented and reviewed; OS-level emulation was not available in this browser.
-- The approved preview's service/industry menus, tabs, filters, pagination, article search, process/FAQ, country selector and enquiry download behavior are retained. Additional native route smoke tests cover every published Systems route.
+- Typography: Arial/Helvetica continues the site's neutral sans-serif direction;
+  Courier labels provide a compact technical hierarchy. BT Grotesk is not copied.
+  Desktop and phone headings wrap intentionally; no clipped navigation labels.
+- Spacing/layout: the thin frame, split copy band and generous drawing canvas
+  follow the reference. Intentional darker process sheet, clear captions and
+  a horizontal IMVO project rail. Header and pinned sheet positions were measured.
+- Colours/tokens: existing paper, ink and black palette; no reference orange.
+  Drawing layers brightened for contrast against the black process sheet.
+  Focus indicators, pressed buttons and expanded panels are visible.
+- Image quality: source elevation and all plan layers remain sharp, aligned to
+  their original aspect ratios. Existing IMVO projects and team photos are used.
+  No broken loaded images. Five known PNG covers use existing WebP equivalents.
+- Content: IMVO service descriptions, regional positioning, project collection,
+  team and legal destinations are retained through existing data sources.
+  Temporary reference illustrations are labelled Drawing study and separated
+  from the IMVO portfolio; provenance/replacement points are documented.
 
-## Verification and corrections
+## Interactions and responsive verification
 
-The first automated route check found that a client search-parameter hook inside Suspense omitted content from the initial HTML. Query values now pass from native server pages to the client experience. Both Next.js and Cloudflare production builds, lint, compatibility and the complete HTTP suite pass on commit `7ec1dafdd420fbfaadb1ee42fb3f7d840ecdbf9d` (Actions run `39181511989`). The suite verifies 63 Systems routes, division footer links, six essential media assets, five Group routes and unknown-route 404 behavior. TypeScript passes locally.
+- Desktop: elevation progression, CAD crosshair/coordinates, plan assembly,
+  furniture and dimension layers, leftward plan transition and caption changes.
+  Buttons 03 and 04 select the expected stages; the sheet stays pinned at y=0.
+- Project Next moves the rail; observed offset -987.36 px at progress 0.3554.
+  A project card opens `/projects/project-02`, headed URBAN VILLA Apartment.
+- Service 02 opens with `aria-expanded=true`; scope CTAs lead to `/contact#quote`.
+- Phone layouts were rendered inside real 390 × 844 and 320 × 844 iframe
+  viewports. Client/scroll widths matched at 375/375 and 305/305 respectively
+  (15 px browser scrollbars). No document horizontal overflow. The actual
+  device OS and touch input were not emulated.
+- Phone menu opens; Escape closes it and restores the toggle. Process stage 03
+  becomes pressed and its corresponding caption is shown. The phone project
+  rail uses native horizontal overflow with arrow controls.
+- Wide desktop: 2048 × 1152 iframe, client/scroll widths 2033/2033; full-view
+  screenshot inspected. Header, drawing and headline band fit without clipping.
+- Main desktop document widths 1348/1348; no horizontal document overflow.
+- Existing `/systems` and `/domicile` pages opened successfully in the same
+  Worker preview; DŌMICILE heading: A better view of every property.
+- Page console checked: no application errors or warnings. Browser-extension
+  metadata errors were excluded as unrelated to the application.
+- Reduced-motion styles and event preference handling were reviewed in source;
+  OS-level preference emulation was unavailable. Completed drawings and native
+  horizontal overflow are the reduced-motion fallback.
 
-Final screenshot review caught a wrapping contact label at 320 pixels. The final CSS reduces the small-screen logo and uses a non-wrapping contact action; the final production build and browser measurements pass. All changes are scoped to Systems except the existing public enquiry identifier shared with Studio and the public CMS request timeout/fallback safeguard.
+## Comparison history and fixes
 
-Console: no application errors in the production preview. Browser extension metadata noise was excluded by its `chrome-extension://` source.
+1. P1: the first hero frame showed sparse unrecognisable line fragments.
+   Fixed with a complete underlying drawing and a restrained vector overlay.
+   Reopened the final hero and combined comparison: the house is clear at entry.
+2. P1: inherited body overflow created a second scroll container, defeating
+   sticky sheets. Scoped html/body overflow to clip/visible only when this
+   homepage is mounted. Re-tested: process sticky y=0 while stages advance.
+3. P2: facade vector/raster overlap was too strong. Reduced and aligned the
+   source-vector overlay; inspected the final hero at desktop and phone sizes.
+4. P2: the plan's original grey walls were too dim on IMVO black. Brightened
+   walls, furniture and dimensions; re-captured the completed plan and compared.
+5. P2: Discuss this scope initially led to Services. Corrected to the existing
+   project enquiry destination; final rendered link verified in the wide frame.
 
-Open P0/P1/P2 design issues: none. Email-delivery success is not claimed as an exercised test; the form uses the existing production service and reports success only after a successful service response. Temporary reference images remain as the user requested.
+No actionable P0/P1/P2 findings remain for this approved adaptation.
 
-Final result: passed
+## Validation and limits
+
+TypeScript and the Cloudflare production build pass for this source. `git diff
+--check` passes. The existing 63-route CLI suite was attempted but its separate
+Worker could not start in this execution environment (`uv_interface_addresses`);
+it is not reported as passing. The primary division routes were checked in the
+supervised browser preview. The earlier Systems release report is preserved at
+`docs/systems/qa/previous-release-report.md`.
+
+## Follow-up polish
+
+Replace the temporary drawing studies with IMVO-owned elevation and plan layers,
+using the documented shared crop and coordinate system. This is the user's
+explicitly deferred asset refinement, not a blocking interaction issue.
+
+final result: passed
