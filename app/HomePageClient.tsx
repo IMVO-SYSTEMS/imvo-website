@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { LazyMotion, m } from "framer-motion";
 import HeroRotatingVideo from "./components/HeroRotatingVideo";
 import PortfolioSlider from "./components/PortfolioSlider";
@@ -11,6 +12,8 @@ import type { HomePageContent } from "@/sanity/types/siteContent";
 
 const loadHomeMotionFeatures = () =>
   import("./components/homeMotionFeatures").then((module) => module.default);
+
+const StudioDrawingJourney = dynamic(() => import("./components/StudioDrawingJourney"));
 
 const ArchitecturalDrawingLines = () => (
   <div
@@ -1328,7 +1331,7 @@ export default function HomePageClient({
 
   return (
     <LazyMotion features={loadHomeMotionFeatures} strict>
-      <div style={{ background: "#050505", color: "white", overflow: "hidden" }}>
+      <div style={{ background: "#050505", color: "white", overflow: "clip" }}>
       {/* 1. NATIVE STICKY HERO */}
       <CinematicHero content={content} />
       <HomeRegionalReachTeaser content={content} />
@@ -1468,8 +1471,10 @@ export default function HomePageClient({
         <ProjectIntelligence content={content} />
         <ApproachPrinciples content={content} />
 
+        <StudioDrawingJourney projects={featuredProjects} />
+
         {/* 2. MANIFESTO */}
-        <section className="mobilePad" style={{ padding: "72px 0 96px 0" }}>
+        <section id="studio-approach" tabIndex={-1} className="mobilePad" style={{ padding: "72px 0 96px 0" }}>
           <div className="containerWide">
             <div
               style={{ maxWidth: 1000, margin: "0 auto", textAlign: "center" }}

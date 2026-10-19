@@ -1,0 +1,165 @@
+/* Scoped chapter tokens. The established IMVO palette and type remain the foundation. */
+.journey {
+  --drawing-paper: var(--paper);
+  --drawing-ink: var(--ink);
+  --drawing-line: color-mix(in srgb, var(--drawing-ink) 19%, transparent);
+  --drawing-muted: color-mix(in srgb, var(--drawing-ink) 65%, var(--drawing-paper));
+  --drawing-grid: color-mix(in srgb, var(--drawing-ink) 2.5%, transparent);
+  --drawing-space-1: 4px;
+  --drawing-space-2: 8px;
+  --drawing-space-3: 12px;
+  --drawing-space-4: 16px;
+  --drawing-space-5: 24px;
+  --drawing-space-6: 32px;
+  --drawing-space-7: 48px;
+  --drawing-space-8: 64px;
+  --drawing-space-9: 96px;
+  --drawing-hairline: 1px;
+  --drawing-target: 44px;
+  --drawing-tiny: 10px;
+  --drawing-label: 11px;
+  --drawing-copy: 13px;
+  --drawing-body: 16px;
+  --drawing-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --drawing-title: clamp(36px, 4.8vw, 72px);
+  --drawing-caption: clamp(20px, 2.3vw, 36px);
+  --drawing-duration: 240ms;
+  --house-opacity: 1;
+  --elevation-draw: 1;
+  --elevation-fill: 100%;
+  --elevation-ink: 0;
+  --plan-opacity: 1;
+  --wall-progress: 1.2;
+  --furniture-opacity: 1;
+  --dimensions-opacity: 1;
+  --photo-scale: 1;
+  position: relative;
+  color: var(--drawing-ink);
+  background: var(--drawing-paper);
+  isolation: isolate;
+}
+.journey *, .journey *::before, .journey *::after { box-sizing: border-box; }
+.journey h2, .journey h3, .journey p, .journey figure { margin: 0; }
+.journey button, .journey a { -webkit-tap-highlight-color: transparent; }
+.journey a { color: inherit; text-decoration: none; }
+.journey :is(a, button):focus-visible { outline: var(--drawing-space-1) solid currentColor; outline-offset: var(--drawing-space-1); }
+.journey a:active, .journey button:active { opacity: .65; }
+.sheet { position: relative; padding: var(--drawing-space-4); overflow: clip; }
+.sheetFrame { position: absolute; pointer-events: none; inset: var(--drawing-space-2); border: var(--drawing-hairline) solid var(--drawing-line); }
+.sheetFrame::before, .sheetFrame::after { content: "+"; position: absolute; top: var(--drawing-space-1); font: var(--drawing-body) var(--drawing-mono); }
+.sheetFrame::before { left: var(--drawing-space-1); }
+.sheetFrame::after { right: var(--drawing-space-1); }
+.topline, .bottomline { position: relative; z-index: 4; display: flex; align-items: center; justify-content: space-between; gap: var(--drawing-space-4); padding: var(--drawing-space-4); font: var(--drawing-label)/1.4 var(--drawing-mono); }
+.skip { display: inline-flex; align-items: center; gap: var(--drawing-space-3); min-height: var(--drawing-target); }
+.skip:hover { text-decoration: underline; text-underline-offset: var(--drawing-space-1); }
+.skip svg, .scrollHint svg, .projectOpen svg { width: var(--drawing-space-4); height: var(--drawing-space-4); }
+.track { display: grid; }
+.drawingPanel { position: relative; }
+.elevation { position: relative; }
+.chapterTitle { padding: var(--drawing-space-7) var(--drawing-space-4) 0; text-align: center; }
+.chapterTitle > span { display: block; margin-bottom: var(--drawing-space-4); font: var(--drawing-label) var(--drawing-mono); }
+.chapterTitle h2 { font-size: var(--drawing-title); font-weight: 600; letter-spacing: -.055em; line-height: 1.03; }
+.house { position: relative; width: 92%; max-width: calc(var(--drawing-space-9) * 14); aspect-ratio: 2060 / 1037; margin: 0 auto; }
+.houseLines, .houseFill { position: absolute; width: 100%; height: 100%; inset: 0; object-fit: contain; }
+.houseLines { opacity: var(--elevation-ink); }
+.houseLines path { fill: none; stroke: var(--drawing-ink); stroke-width: 1.2; stroke-dasharray: 1; stroke-dashoffset: clamp(0, calc(1 - var(--elevation-draw) * 1.5 + var(--line-index) * .007), 1); }
+.houseFill { clip-path: inset(0 calc(100% - var(--elevation-fill)) 0 0); }
+.plan { position: relative; width: min(100%, 102svh); aspect-ratio: 1156 / 1117; margin: auto; }
+.plan > * { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.planGhost { opacity: .045; }
+.planWalls { overflow: visible; }
+.planWalls path { --part-p: clamp(0, calc((var(--wall-progress) - var(--part-delay)) * 1.25), 1); fill: var(--drawing-ink); transform: translate(calc(var(--part-x) * (1 - var(--part-p))), calc(var(--part-y) * (1 - var(--part-p)))); opacity: var(--part-p); }
+.planFurniture { opacity: var(--furniture-opacity); }
+.planDimensions { opacity: var(--dimensions-opacity); }
+.projectPanel { padding: var(--drawing-space-6); }
+.projectHeading { display: flex; justify-content: space-between; gap: var(--drawing-space-4); margin-bottom: var(--drawing-space-5); font: var(--drawing-label)/1.4 var(--drawing-mono); }
+.projectImage { display: block; position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--drawing-ink); }
+.projectImage img { transform: scale(var(--photo-scale)); }
+.projectOpen { position: absolute; bottom: var(--drawing-space-5); right: var(--drawing-space-5); display: flex; align-items: center; gap: var(--drawing-space-5); padding: var(--drawing-space-4) var(--drawing-space-5); background: var(--drawing-paper); color: var(--drawing-ink); font: var(--drawing-copy) var(--drawing-mono); transition: background var(--drawing-duration), color var(--drawing-duration); }
+.projectImage:hover .projectOpen { background: var(--drawing-ink); color: var(--drawing-paper); }
+.projectCaption { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--drawing-space-5); padding-top: var(--drawing-space-5); }
+.projectCaption h3 { font-size: var(--drawing-caption); font-weight: 500; letter-spacing: -.04em; line-height: 1.1; max-width: 65%; }
+.projectCaption > span { font: var(--drawing-label)/1.5 var(--drawing-mono); text-align: right; }
+.caption { display: none; }
+.bottomline { border-top: var(--drawing-hairline) solid var(--drawing-line); padding-block: var(--drawing-space-2); background: var(--drawing-paper); }
+.sheetNumber { padding-right: var(--drawing-space-8); }
+.stages { display: flex; }
+.stages button { appearance: none; background: transparent; color: var(--drawing-ink); border: var(--drawing-hairline) solid transparent; min-width: var(--drawing-target); min-height: var(--drawing-target); font: var(--drawing-label) var(--drawing-mono); cursor: pointer; transition: background var(--drawing-duration), color var(--drawing-duration); }
+.stages button[aria-pressed="true"], .stages button:hover:not(:disabled) { background: var(--drawing-ink); color: var(--drawing-paper); }
+.stages button:disabled { opacity: .35; cursor: default; }
+.cursor { display: none; }
+.progress { display: none; }
+.staticSteps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); list-style: none; gap: var(--drawing-space-6); margin: 0; padding: var(--drawing-space-6); border-top: var(--drawing-hairline) solid var(--drawing-line); }
+.staticSteps h3 { font-size: var(--drawing-body); margin-bottom: var(--drawing-space-3); }
+.staticSteps p { font-size: var(--drawing-copy); line-height: 1.6; }
+
+/* Overflow clipping must not create a new scroll container around this sticky chapter. */
+:global(html):has(.journey), :global(body):has(.journey) { overflow-x: clip; overflow-y: visible; }
+.journey[data-motion="scrub"] { height: 680svh; }
+.journey[data-motion="scrub"] .sheet { position: sticky; top: 0; height: 100svh; padding: 0; }
+.journey[data-motion="scrub"] .sheet::before { content: ""; pointer-events: none; position: absolute; z-index: 3; inset: var(--drawing-space-4); border-block: var(--drawing-space-2) solid transparent; background: repeating-linear-gradient(90deg, var(--drawing-line) 0 var(--drawing-hairline), transparent var(--drawing-hairline) var(--drawing-space-2)) top / 100% var(--drawing-space-2) no-repeat, repeating-linear-gradient(90deg, var(--drawing-line) 0 var(--drawing-hairline), transparent var(--drawing-hairline) var(--drawing-space-2)) bottom / 100% var(--drawing-space-2) no-repeat; }
+.journey[data-motion="scrub"] .topline { position: absolute; top: var(--drawing-space-4); left: var(--drawing-space-4); right: var(--drawing-space-4); }
+.journey[data-motion="scrub"] .track { position: absolute; inset: 0; display: flex; width: 100%; transform: translate3d(var(--journey-travel, 0%), 0, 0); will-change: transform; }
+.journey[data-motion="scrub"] .drawingPanel, .journey[data-motion="scrub"] .projectPanel { flex: 0 0 100%; height: 100%; }
+.journey[data-motion="scrub"] .drawingPanel { background-image: linear-gradient(var(--drawing-grid) var(--drawing-hairline), transparent var(--drawing-hairline)), linear-gradient(90deg, var(--drawing-grid) var(--drawing-hairline), transparent var(--drawing-hairline)); background-size: var(--drawing-space-9) var(--drawing-space-9); }
+.journey[data-motion="scrub"] .elevation { position: absolute; inset: 0; opacity: var(--house-opacity); }
+.journey[data-motion="scrub"] .chapterTitle { position: absolute; top: 13%; left: var(--drawing-space-6); right: var(--drawing-space-6); padding: 0; }
+.journey[data-motion="scrub"] .house { position: absolute; left: 50%; top: 53%; width: min(94vw, 132svh); transform: translate(-50%, -40%); margin: 0; }
+.journey[data-motion="scrub"] .plan { position: absolute; left: 50%; top: 50%; width: min(100vw, 94svh); transform: translate(-50%, -50%); opacity: var(--plan-opacity); }
+.journey[data-motion="scrub"] .projectPanel { display: flex; flex-direction: column; padding: var(--drawing-space-9) var(--drawing-space-6) var(--drawing-space-8); }
+.journey[data-motion="scrub"] .projectImage { flex: 1; min-height: 0; aspect-ratio: auto; }
+.journey[data-motion="scrub"] .caption { position: absolute; bottom: var(--drawing-space-9); left: var(--drawing-space-6); width: min(22vw, 250px); display: block; background: var(--drawing-paper); border: var(--drawing-hairline) solid var(--drawing-line); font-size: var(--drawing-copy); line-height: 1.5; }
+.captionLabel { padding: var(--drawing-space-2) var(--drawing-space-3); font: var(--drawing-tiny) var(--drawing-mono); color: var(--drawing-paper); background: var(--drawing-ink); }
+.caption p { padding: var(--drawing-space-3); }
+.studyNote { display: none; }
+.scrollHint { display: flex; align-items: center; justify-content: space-between; gap: var(--drawing-space-3); padding: 0 var(--drawing-space-3) var(--drawing-space-3); color: var(--drawing-muted); font: var(--drawing-tiny)/1.5 var(--drawing-mono); }
+.journey[data-motion="scrub"] .bottomline { position: absolute; bottom: var(--drawing-space-4); left: var(--drawing-space-4); right: var(--drawing-space-4); }
+.journey[data-motion="scrub"] .progress { display: block; position: absolute; left: var(--drawing-space-2); right: var(--drawing-space-2); bottom: var(--drawing-space-2); height: var(--drawing-hairline); background: var(--drawing-line); }
+.progress span { display: block; height: 100%; width: var(--journey-progress, 0%); background: var(--drawing-ink); }
+.journey[data-motion="scrub"] .staticSteps { display: none; }
+.journey:not([data-motion="scrub"]) .houseFill { clip-path: none; }
+.journey:not([data-motion="scrub"]) .houseLines { display: none; }
+.journey:not([data-motion="scrub"]) .plan { opacity: 1; }
+.journey:not([data-motion="scrub"]) .planWalls path { transform: none; opacity: 1; }
+.journey:not([data-motion="scrub"]) .planFurniture, .journey:not([data-motion="scrub"]) .planDimensions { opacity: 1; }
+.journey:not([data-motion="scrub"]) .projectImage img { transform: none; }
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .journey[data-motion="scrub"] .sheet { cursor: crosshair; }
+  .cursor[data-visible="true"] { display: block; position: absolute; inset: 0; z-index: 5; pointer-events: none; color: var(--drawing-muted); }
+  .cursor i { position: absolute; background: var(--drawing-line); }
+  .cursor i:first-child { top: var(--cursor-y); left: 0; width: 100%; height: var(--drawing-hairline); }
+  .cursor i:nth-child(2) { left: var(--cursor-x); top: 0; height: 100%; width: var(--drawing-hairline); }
+  .cursor > span { position: absolute; left: calc(var(--cursor-x) + var(--drawing-space-3)); top: calc(var(--cursor-y) + var(--drawing-space-3)); padding: var(--drawing-space-1); background: var(--drawing-paper); font: var(--drawing-tiny) var(--drawing-mono); white-space: nowrap; }
+}
+
+@media (max-width: 760px) {
+  .journey { --drawing-title: clamp(32px, 8vw, 52px); --drawing-caption: 24px; }
+  .journey[data-motion="scrub"] { height: 500svh; }
+  .topline, .bottomline { padding-inline: var(--drawing-space-2); font-size: var(--drawing-tiny); gap: var(--drawing-space-2); }
+  .topline > span { max-width: 45%; }
+  .skip { gap: var(--drawing-space-2); max-width: 45%; }
+  .journey[data-motion="scrub"] .chapterTitle { top: 20%; left: var(--drawing-space-4); right: var(--drawing-space-4); }
+  .journey[data-motion="scrub"] .house { top: 51%; width: 104vw; }
+  .journey[data-motion="scrub"] .plan { width: 112vw; top: 45%; }
+  .journey[data-motion="scrub"] .caption { left: var(--drawing-space-5); bottom: calc(var(--drawing-space-8) + var(--drawing-space-4)); width: min(64vw, 270px); }
+  .caption p { font-size: var(--drawing-label); }
+  .scrollHint { display: none; }
+  .studyLabel { display: none; }
+  .studyNote { display: block; padding: 0 var(--drawing-space-3) var(--drawing-space-3); color: var(--drawing-muted); font: var(--drawing-tiny) var(--drawing-mono); }
+  .sheetNumber { display: none; }
+  .bottomline { justify-content: flex-start; padding-inline: 0; }
+  .stages button { min-width: var(--drawing-target); min-height: var(--drawing-target); }
+  .journey[data-motion="scrub"] .projectPanel { padding: var(--drawing-space-9) var(--drawing-space-5) calc(var(--drawing-space-9) * 2.5); }
+  .projectPanel { padding: var(--drawing-space-5); }
+  .projectHeading { font-size: var(--drawing-tiny); }
+  .projectCaption { flex-direction: column; gap: var(--drawing-space-3); }
+  .projectCaption h3 { max-width: 100%; }
+  .projectCaption > span { text-align: left; }
+  .projectOpen { bottom: var(--drawing-space-4); right: var(--drawing-space-4); padding: var(--drawing-space-3); font-size: var(--drawing-label); }
+  .staticSteps { grid-template-columns: 1fr; padding: var(--drawing-space-5); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .journey *, .journey *::before, .journey *::after { transition: none !important; scroll-behavior: auto !important; }
+}
