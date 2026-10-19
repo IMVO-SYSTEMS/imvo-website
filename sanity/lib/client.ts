@@ -12,4 +12,6 @@ export const sanityClient = createClient({
   apiVersion: sanityApiVersion,
   useCdn: true,
   perspective: "published",
+  timeout: 5000,
+  maxRetries: 0,
 });

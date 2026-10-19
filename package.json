@@ -18,7 +18,9 @@
     "deploy:vinext": "vinext-cloudflare deploy --config dist/server/wrangler.json",
     "build:next": "next build",
     "build:cloudflare": "vite build",
-    "deploy:cloudflare": "wrangler deploy --keep-vars"
+    "deploy:cloudflare": "wrangler deploy --keep-vars",
+    "test:systems": "node --experimental-strip-types scripts/check-systems-routes.mjs",
+    "preview:cloudflare": "node scripts/preview-cloudflare.mjs --port 4173"
   },
   "dependencies": {
     "@sanity/orderable-document-list": "^2.0.14",
@@ -26,12 +28,14 @@
     "@vinext/cloudflare": "latest",
     "framer-motion": "^12.40.0",
     "lenis": "^1.3.23",
+    "lucide-react": "^1.59.0",
     "next": "16.1.6",
     "next-sanity": "^13.1.3",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-server-dom-webpack": "19.2.8",
     "sanity": "^6.5.0",
+    "simple-icons": "^16.35.0",
     "styled-components": "^6.5.3",
     "vinext": "latest"
   },
