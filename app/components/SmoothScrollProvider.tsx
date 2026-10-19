@@ -1,8 +1,14 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Lenis from "lenis";
+
+const StudioScrollContext = createContext<((top: number) => void) | null>(null);
+
+export function useStudioScroll() {
+  return useContext(StudioScrollContext);
+}
 
 export default function SmoothScrollProvider({
   children,
@@ -12,6 +18,14 @@ export default function SmoothScrollProvider({
   const pathname = usePathname();
   const lenisRef = useRef<Lenis | null>(null);
   const isFirstRoute = useRef(true);
+
+  const scrollToPosition = useCallback((top: number) => {
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(top, { immediate: true, force: true });
+    } else {
+      window.scrollTo({ top, left: 0, behavior: "instant" });
+    }
+  }, []);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -66,5 +80,5 @@ export default function SmoothScrollProvider({
     return () => window.cancelAnimationFrame(frameId);
   }, [pathname]);
 
-  return <>{children}</>;
+  return <StudioScrollContext.Provider value={scrollToPosition}>{children}</StudioScrollContext.Provider>;
 }
