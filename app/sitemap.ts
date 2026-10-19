@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { getAllProjects } from "@/sanity/lib/projects";
 import { getGrowthSettings } from "@/sanity/lib/cmsBackend";
 
+import {systemsRoutes} from "./systems/routeInfo";
+
 const siteUrl = "https://www.imvogroup.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -55,5 +57,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     }));
 
-  return [...coreRoutes, ...projectRoutes];
+  const extraSystemsRoutes: MetadataRoute.Sitemap = systemsRoutes.map(route=>`/systems${route?"/"+route:""}`).filter(route=>!hiddenRoutes.has(route)&&!coreRoutes.some(entry=>new URL(entry.url).pathname===route)).map(route=>({url:`${siteUrl}${route}`,changeFrequency:"monthly" as const,priority:0.7}));
+  return [...coreRoutes,...projectRoutes,...extraSystemsRoutes];
 }

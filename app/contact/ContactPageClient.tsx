@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
+import { PUBLIC_ENQUIRY_ACCESS_KEY } from "@/app/lib/enquiryConfig";
 import type { ContactPageContent } from "@/sanity/types/siteContent";
 
 const inquiryTypes = [
@@ -166,7 +167,7 @@ const FieldError = ({ message }: { message?: string }) =>
 const transition = { duration: 1.4, ease: [0.16, 1, 0.3, 1] as const };
 const fastTransition = { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const };
 
-const WEB3FORMS_ACCESS_KEY = "a729c40b-0f25-4c34-9495-2b265db92f2f";
+const WEB3FORMS_ACCESS_KEY = PUBLIC_ENQUIRY_ACCESS_KEY;
 
 const ArchitecturalModel = () => {
   const labels = [
