@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { useSearchParams } from 'next/navigation';
 import { X, ChevronLeft, ChevronRight, ArrowUp } from 'lucide-react';
 import { asset } from './data.js';
 import { Header, Footer, PageHero, ProjectStories, FinalCTA, NotFound, Button } from './ui.jsx';
@@ -34,13 +33,13 @@ function Dialog({
   }} aria-label={modal?.type === 'film' ? 'IMVO Systems film' : modal?.type === 'role' ? 'Systems collaboration' : 'Systems project gallery'}><button className="modal-close" onClick={onClose} aria-label="Close dialog"><X size={25} /></button>{modal?.type === 'film' && <video controls autoPlay playsInline src={asset('hero-film.mp4')} />} {modal?.type === 'gallery' && <><img src={asset(modal.images[slide])} alt={'IMVO product preview, image ' + (slide + 1)} /><div className="gallery-controls"><button aria-label="Previous gallery image" onClick={() => setSlide((slide + modal.images.length - 1) % modal.images.length)}><ChevronLeft /></button><span>{slide + 1} / {modal.images.length}</span><button aria-label="Next gallery image" onClick={() => setSlide((slide + 1) % modal.images.length)}><ChevronRight /></button></div></>}{modal?.type === 'role' && <div className="role-modal"><span className="eyebrow">Expressions of interest</span><h2>{modal.role.title}</h2><p>{modal.role.description}</p><p>Introduce your experience, interests, and the type of collaboration you have in mind. Specific opportunities and engagement terms are discussed with the team.</p><Button to={'contact?topic=' + encodeURIComponent('Working with IMVO · ' + modal.role.title)} onClick={onClose}>Introduce yourself</Button></div>}</dialog>;
 }
 
-/** @param {{route?:string,reviews?:Array<{text?:string,author?:string,role?:string,company?:string}>}} props */
+/** @param {{route?:string,query?:string,reviews?:Array<{text?:string,author?:string,role?:string,company?:string}>}} props */
 export default function SystemsExperience({
   route = '',
+  query = '',
   reviews = []
 }) {
-  const params = useSearchParams();
-  const query = params.toString();
+  const params = new URLSearchParams(query);
   const [modal, setModal] = useState(null),
     [showTop, setShowTop] = useState(false);
   useEffect(() => {
