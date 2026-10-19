@@ -106,7 +106,7 @@ function resolveHours(
   };
 }
 
-function StudioStatusPanel({ content }: { content: StudioStatusContent }) {
+export function StudioStatusPanel({ content }: { content: StudioStatusContent }) {
   const timezone = content.timezone || "Africa/Kigali";
   const [now, setNow] = useState(() => new Date());
 

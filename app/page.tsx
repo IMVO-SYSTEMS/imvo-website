@@ -1,7 +1,4 @@
-import HomePageClient from "./HomePageClient";
-import HomeSectionVisibility from "./components/HomeSectionVisibility";
-import HomeWelcomeEnhancements from "./components/HomeWelcomeEnhancements";
-import styles from "./home-lcp.module.css";
+import StudioCanvas from "./studio-canvas/StudioCanvas";
 import { getHomePageContent } from "@/sanity/lib/siteContent";
 import { getAllProjects, getFeaturedProjects } from "@/sanity/lib/projects";
 import { getHomePageControls, getTeamMembers } from "@/sanity/lib/cmsBackend";
@@ -21,13 +18,5 @@ export default async function HomePage() {
   const resolvedContent: HomePageContent | null = structuredTeam.length
     ? { ...(content || {}), teamMembers: structuredTeam }
     : content;
-  const welcomeProjects = allProjects.slice(0, 10);
-
-  return (
-    <div className={styles.homePageFirstPaint}>
-      <HomePageClient content={resolvedContent} featuredProjects={featuredProjects} />
-      <HomeWelcomeEnhancements content={resolvedContent} projects={welcomeProjects} />
-      <HomeSectionVisibility controls={controls} content={resolvedContent} />
-    </div>
-  );
+  return <StudioCanvas content={resolvedContent} projects={allProjects} featuredProjects={featuredProjects} controls={controls} />;
 }

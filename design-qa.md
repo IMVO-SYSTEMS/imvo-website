@@ -1,84 +1,67 @@
-# IMVO Studio preservation and drawing integration — design QA
+# IMVO Studio architectural canvas — design QA
 
-Date: 19 October 2026. Scope: restore the approved IMVO homepage foundation and integrate an additive architectural drawing chapter. This is a review preview, not a replacement visual direction or a production release.
+Date: 19 October 2026. Scope: the complete Studio homepage and shared public Studio frame. The latest brief supersedes the former additive-chapter scope: remove the video hero, carry the Heron architectural direction through the page, and keep original IMVO content and section order.
 
-## Source visual truth and scope
+## Source of visual truth
 
-- Original IMVO homepage and shared shell: commit `3fa1aadf6a5d2e0b9cac9c1ad6064b03c2140990`.
-- Browser-captured original hero: `/workspace/scratch/934a30c439ff/imvo-backbone-hero.jpg`.
-- Heron drawing workspace: `https://heronaiapp.com/`; source capture `/workspace/scratch/934a30c439ff/reference/heron-plan.jpg`.
-- Source elevation capture: `/workspace/scratch/934a30c439ff/reference/heron-hero.jpg`.
-- New chapter uses the original source vector geometry and supplied reference illustration layers. Its visible study label distinguishes those drawings from the actual adjacent IMVO project.
+The live `https://heronaiapp.com/` experience and the user's sequential screenshots are the chosen references. The reference was loaded, allowed to complete delayed effects, and scrolled through its plan assembly. Rejected generated concepts are not implementation targets.
 
-The user's correction is the controlling brief: keep the video hero, live studio status, division logos, rolling header text, photography, content structure and existing behavior. Bring the reference's drafting cursor, assembling floor plan and lateral scroll into that foundation. This is not a pixel clone of Heron's entire homepage.
+IMVO adopts the architectural sheet, line-to-shade house, square navigation, drafting corners, live annotation boxes, wall/furniture/dimension sequence, lateral reveal, alternating drawing studies and large brand finish. The black default, white option, real studio status, original copy, people, project photography, regional content and inquiry paths are intentional IMVO adaptations. Product claims and orange compliance alerts are not copied into IMVO's content.
 
-## Browser-rendered evidence
+## Browser-rendered comparison inputs
 
-Primary desktop viewport: 1363 × 936 CSS pixels; captures are 1363 × 936 pixels at density 1. Both source and implementation use this viewport for the full-view comparisons. Browser scrollbar leaves a document content width of 1348px. Comparison sheets fit both captures to identical panels without distorting their aspect ratio; focused crops retain source pixel density.
+Both combined images below were opened and inspected as side-by-side visual inputs:
 
-- Restored original hero: `/workspace/scratch/934a30c439ff/imvo-restored-hero-final.jpg`.
-- Matched original/new hero comparison: `/workspace/scratch/934a30c439ff/imvo-preservation-hero-comparison.jpg`.
-- Elevation transition after alignment fix: `/workspace/scratch/934a30c439ff/imvo-integrated-elevation-final.jpg`.
-- Completed floor plan after final scroll-controller fix: `/workspace/scratch/934a30c439ff/imvo-integrated-plan-final.jpg`.
-- First full-view plan comparison: `/workspace/scratch/934a30c439ff/imvo-integration-qa-first.jpg`.
-- Final full-view plan comparison: `/workspace/scratch/934a30c439ff/imvo-integration-qa-final.jpg`.
-- Focused original/new headers, elevation alignment, dimensions and controls: `/workspace/scratch/934a30c439ff/imvo-integration-focused-final.jpg`.
-- Sideways reveal of actual IMVO project photography: `/workspace/scratch/934a30c439ff/imvo-integrated-project-v1.jpg`. The final controller changes the scroll synchronization, not this panel's geometry.
-- Final phone layouts: `/workspace/scratch/934a30c439ff/imvo-integrated-mobile-final.jpg`.
-- Wide screen review: `/workspace/scratch/934a30c439ff/imvo-integrated-wide-final.jpg`.
+- `/workspace/scratch/934a30c439ff/canvas-qa/hero-comparison.jpg`: live Heron hero alongside final IMVO white and black renders.
+- `/workspace/scratch/934a30c439ff/canvas-qa/plan-comparison.jpg`: live Heron assembled plan alongside IMVO technical and lateral principles stages.
 
-Phone iframe CSS viewports: 390 × 844 and 320 × 812; document content widths 375 and 305, respectively. Neither document overflows horizontally. All five controls measure 44 × 44. The smallest phone's final stage was activated and then returned to the technical stage.
+The desktop browser reports 1363 × 936 CSS pixels; individual capture content areas differ slightly with scrollbar handling. Comparison panels uniformly fit each capture without distortion. They check hierarchy, line/image alignment, plan layers and spatial relationships; they are not a claim of a pixel-identical clone. IMVO's longer original headline intentionally wraps differently.
 
-Wide iframe CSS viewport: 2048 × 1152; document width and scroll width both 2033. It was displayed at scale 0.55 in the review harness so the full sheet and its controls could be inspected within the cloud browser. The wide evidence is a layout check, not a 1:1 pixel comparison.
+Additional inspected evidence in that folder: `hero-final-black.jpg`, `hero-final-white.jpg`, `plan-final-white.jpg`, `plan-final-black.jpg`, `portfolio.jpg`, `team.jpg`, `mobile-final-360.jpg`, and `wide-final-1920-scaled.jpg`. The last capture displays a real 1920 × 1080 iframe at a fitted review scale; its CSS viewport remains 1920 pixels.
 
-## Findings and comparison history
+## Findings resolved
 
-1. [P1, resolved] The previous release replaced the homepage structure and bypassed the shared shell. Restored the exact earlier `app/page.tsx` pipeline and root shell behavior. The original header, division switcher, video, studio signal, photo enhancements, original project rail, portfolio and footer now render. The matched hero comparison confirms the retained composition, type wrapping, CTA, imagery and status position.
-2. [P1, resolved] First-pass elevation vectors did not align with the shaded source asset. Aligned the source vector viewport with the illustration canvas and faded the drawing strokes as shading completes. Post-fix elevation and focused crops show continuous floor lines and matching building edges.
-3. [P2, resolved] The first plan framing crowded the dimensions against the bottom controls. Reduced the plan's viewport-relative size and separated the footer with the paper surface. The final plan and focused crop show the complete dimension extent above the controls.
-4. [P2, resolved] The phone drawing was wide enough to clip peripheral dimensions, and controls risked overlap with the retained DŌMICILE widget. Reduced the phone plan width, kept 44px targets and moved stage controls left. The final 390/320 captures show the complete plan and a reachable fifth control.
-5. [P1, resolved] Native stage jumps could be overridden by the existing smooth-scroll inertia. Exposed a stable position function from the existing Lenis provider and used it for stage navigation and continuing through the studio. Final browser checks hold the technical stage at approximately 70% on desktop and the smallest phone after changing direction; the continue link lands at the original approach section with focus and a top offset of 0.375px.
-6. [P3, resolved] The initial drawing grid was more prominent than the reference. Reduced its ink contribution to keep the drawings dominant.
+1. [P1] The previous page retained its old visual structure with one added chapter. Replaced the full homepage composition while retaining original content queries, section order and CMS visibility controls.
+2. [P1] Legacy PNG/JPEG paths relied on imperative photo replacement. Added an explicit mapping to actual existing WebP assets. The rendered-home check validates all 46 local images; browser captures show actual project and team photographs.
+3. [P1] Transparent furniture/dimension images require a different filter from white-paper studies. Theme-specific transparent-layer filters now retain the thin details on black and white.
+4. [P2] Phone status cards could cover the elevation. The cards now sit below the house. The 360/390 layouts retain visible clock, hours, location and inquiry action without document overflow.
+5. [P2] Status styles inherited dark-only metadata colors. Scoped overrides make the real status component readable in both themes. The inquiry label also inherits the inverted hover color.
+6. [P2] The DŌMICILE SVG wrapper referenced an external raster which cannot render inside an SVG image. The header now displays the actual raster directly, cropped through CSS and filtered for the selected theme. All three division logos are visible in final captures.
+7. [P2] Final plan movement clipped peripheral dimensions and crowded the heading. Reduced lateral travel and widened the heading allowance. Final captures show the complete dimension extent and a clear two-line heading.
+8. [P2] Invisible principle controls are inert until their stage; the drawing container uses a group role so interactive markers remain accessible.
+9. [P3] Added pause/play to the repeating discipline ticker. Hover/focus pauses it, and reduced motion makes it static.
 
-## Required fidelity surfaces
+## Content and fidelity
 
-- Fonts and typography: existing homepage family, header rolling text, original heading scale, copy wrapping and labels are retained. New chapter display text inherits the site family; small drafting labels use a scoped monospace token. Long project titles wrap on phones. The two hero captures and focused header comparison show no font or hierarchy replacement.
-- Spacing and layout rhythm: original homepage sections remain in their original order, with the drawing chapter inserted after principles. The sheet uses a fine frame, large centered drawing and small lower-left caption. Full-view and focused comparisons check the source proportions, completed dimension extent, foot controls and mobile spacing.
-- Colors and tokens: the chapter references IMVO's existing paper/ink tokens. The dark cinematic hero, original header treatment, studio signal and dark content sections remain. A paper drawing chapter is the intentional addition. No Heron orange product alerts or unrelated brand palette is introduced.
-- Image quality and assets: source vector/raster layers remain original reference geometry/assets rather than approximations. Source illustrations retain transparency. The adjacent project reveal uses actual IMVO project data and cover photography. All five chapter images completed loading with non-zero intrinsic dimensions. Original team photography enhancement remains present.
-- Copy and content: existing CMS-backed home content and visibility pipeline is restored. Project intelligence, studio principles, manifesto, metrics, full portfolio, work in progress, services, team and CTA are present. Added captions describe IMVO's process; reference drawings carry an illustrative-study label and do not claim to be the adjacent project.
+- Fonts: the existing local Inter family supplies consistent weights; small drafting labels use a scoped monospace token. Original copy remains sentence case with responsive line wrapping.
+- Rhythm: fine square frames, large drawings, small captions, boxed status, alternating services, horizontal photography and the final brand sheet form one visual system across the homepage.
+- Colors: charcoal/white/gray tokens govern the homepage. Primary and secondary text have readable contrast in both themes; focus outlines remain visible. Original photography reveals color on hover/focus.
+- Assets: original project/team photos and existing source vectors are reused at preserved aspect ratios. Temporary public reference studies are labeled illustrative and their origins are listed in `docs/studio-architectural-canvas.md`.
+- Content: hero, regional reach, quick look, project intelligence, principles, manifesto/metrics, all 14 curated portfolio projects, work in progress, services, four biographies and CTA remain in order. CMS section controls, team overrides, status schedules and notices remain connected.
 
-## Interaction and preservation checks
+## Interactions and responsive checks
 
-- Hero video loaded `/hero-1.mp4`, `readyState` 4, `paused` false.
-- Live studio signal renders current Kigali time and operating state.
-- Exactly one original primary header renders; original division logos and rolling navigation implementation are unchanged.
-- Original hero, header, switcher, welcome enhancements, portfolio slider and photo components match their original source. The smooth-scroll provider adds a context API without replacing its animation or route-reset behavior.
-- Original project rail Next control remains available and functional.
-- Drawing stages move forward and backward; walls, furniture and dimensions build in order; lateral travel reaches -100% at selected work.
-- Keyboard traversal from stage controls to the project link reveals its panel. Enter opens `/projects/project-01`; the existing project detail renders the correct title.
-- Continue link exits the long drawing sequence, focuses the original approach section and updates the anchor.
-- Fine-pointer crosshair and coordinate readout appear only within the drawing sheet. It does not capture pointer events or keyboard focus.
-- Browser application errors/warnings: zero. Browser-extension metadata errors were excluded because they do not originate in the application.
-- TypeScript: `npx tsc --noEmit` passed.
-- Build: `npm run build:cloudflare` passed.
-- Patch whitespace: `git diff --check` passed.
+- The hero completes without scrolling; Replay is available. There is no video element on the homepage.
+- Theme switching and persistence work. Final desktop and phone captures confirm white-theme status metadata.
+- The technical stage reaches approximately 69% with walls, furniture and dimensions. The final stage reaches approximately 97%, reveals the original principles, and shifts the plan aside without clipping its peripheral dimensions.
+- Plan markers and principle rows reveal the associated original text. Mobile controls select stages directly, and all principle content stays available below the drawing.
+- Portfolio Next selects project 02; focusing project 14 reveals CASA SIENA and disables Next at the end. All 14 original projects remain present.
+- Regional selection changes the pressed state and country readout (Kenya was activated). The Consultancy study's second marker changes its note to Clear project direction.
+- The team accordion reveals the original biography; all four portraits render.
+- The phone menu opens with all Studio/division destinations; Escape closes it and restores the trigger. Keyboard focus is visible in both themes.
+- Responsive CSS viewports: 360 × 800 (document width 345), 390 × 844 (document width 375), 1920 × 1080 (document width 1905). The difference is the browser scrollbar; none has horizontal document overflow.
+- Discuss your project reaches `/contact#quote` and the existing Submit your inquiry form. No test inquiry was sent.
+- Browser application errors: zero. Extension-origin messages are excluded.
 
-## Limits and follow-up polish
+## Engineering checks and limits
 
-The reduced-motion/static version was reviewed in code: it unpins the chapter, exposes complete drawings and explanations, disables obsolete stage navigation and removes image transforms. The cloud browser did not expose OS motion-preference emulation, so that setting was not dynamically exercised. Touch layouts were inspected through real-width browser iframes; physical touchscreen gesture feel is a follow-up check. No blanket accessibility compliance claim is made.
+- `npx tsc --noEmit`: passed.
+- `npm run build:cloudflare`: passed on the final application source.
+- `npm run test:studio`: passed — one H1, no video, four valid section anchors, 46 local image responses and nine navigation destinations.
+- Existing `npm run test:systems`: passed — 63 Systems pages, six media assets, division/footer links, five Group routes and 404 handling.
+- `git diff --check`: passed.
+- Scroll effects use passive listeners, frame-scheduled updates, proximity gating and cleanup. Reduced-motion rules expose complete content and remove pinning and the decorative cursor.
 
-The retained global header may cover the sheet's top annotations while reappearing during reverse scrolling; the drawings and stage controls remain usable. This follows the existing approved header behavior. Source plans remain temporary illustrative studies until replaced with IMVO drawing layers.
-
-## Implementation checklist
-
-- [x] Preserve the approved homepage and its existing content pipeline.
-- [x] Add the drawing chapter without new replacement navigation or footer.
-- [x] Compare the restored hero and source drawing experience at matched viewports.
-- [x] Resolve actionable P1/P2 visual and scrolling issues and recapture the result.
-- [x] Verify narrow phones, desktop, wide layout, stage controls, project link and skip path.
-- [x] Review cleanup, passive listeners, isolated CSS and reduced-motion fallback.
-- [x] Build and check TypeScript successfully.
-- [x] Keep this revision as a separate review preview.
+Reduced motion was reviewed in code; this browser does not expose OS motion-preference emulation. Phone layouts were checked in actual CSS-width frames rather than on physical touch hardware. No blanket accessibility certification is claimed. Reference drawings remain temporary illustrative studies as requested. The responsive review harness exists only in local compiled output and is excluded from source and production builds.
 
 final result: passed
