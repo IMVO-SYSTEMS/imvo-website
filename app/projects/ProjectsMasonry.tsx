@@ -37,8 +37,8 @@ export default function ProjectsMasonry({
       <style>{`
         .projects-index-section {
           padding: 82px 0 110px;
-          background: #050505;
-          color: #fff;
+          background: var(--sc-bg);
+          color: var(--sc-ink);
         }
 
         .projects-index-header {
@@ -47,11 +47,11 @@ export default function ProjectsMasonry({
           gap: 36px;
           align-items: end;
           padding-bottom: 34px;
-          border-bottom: 1px solid rgba(255,255,255,0.14);
+          border-bottom: 1px solid color-mix(in srgb, var(--sc-ink) 14%, transparent);
         }
 
         .projects-index-kicker {
-          color: rgba(255,255,255,0.44);
+          color: color-mix(in srgb, var(--sc-ink) 44%, transparent);
           font-size: 11px;
           font-weight: 800;
           letter-spacing: 0.18em;
@@ -78,10 +78,10 @@ export default function ProjectsMasonry({
         .projects-index-filter {
           min-height: 38px;
           padding: 0 15px;
-          border: 1px solid rgba(255,255,255,0.18);
+          border: 1px solid color-mix(in srgb, var(--sc-ink) 18%, transparent);
           border-radius: 2px;
           background: transparent;
-          color: rgba(255,255,255,0.72);
+          color: color-mix(in srgb, var(--sc-ink) 72%, transparent);
           cursor: pointer;
           font-size: 11px;
           font-weight: 800;
@@ -92,9 +92,9 @@ export default function ProjectsMasonry({
 
         .projects-index-filter:hover,
         .projects-index-filter.is-active {
-          border-color: #fff;
-          background: #fff;
-          color: #050505;
+          border-color: var(--sc-ink);
+          background: var(--sc-ink);
+          color: var(--sc-bg);
         }
 
         .projects-index-grid {
@@ -103,8 +103,8 @@ export default function ProjectsMasonry({
           gap: 1px;
           width: 100%;
           margin-top: 48px;
-          border: 1px solid rgba(255,255,255,0.12);
-          background: rgba(255,255,255,0.12);
+          border: 1px solid color-mix(in srgb, var(--sc-ink) 12%, transparent);
+          background: color-mix(in srgb, var(--sc-ink) 12%, transparent);
         }
 
         .projects-index-card {
@@ -112,7 +112,7 @@ export default function ProjectsMasonry({
           grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
           width: 100%;
           min-height: clamp(330px, 24vw, 410px);
-          background: #090909;
+          background: var(--sc-bg);
           overflow: hidden;
         }
 
@@ -133,7 +133,7 @@ export default function ProjectsMasonry({
           display: block;
           min-height: 100%;
           overflow: hidden;
-          background: #111;
+          background: var(--sc-bg);
         }
 
         .projects-index-media img {
@@ -150,7 +150,7 @@ export default function ProjectsMasonry({
           content: "";
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(0,0,0,0.34), transparent 56%);
+          background: linear-gradient(to top, color-mix(in srgb, var(--sc-bg) 34%, transparent), transparent 56%);
           pointer-events: none;
         }
 
@@ -161,16 +161,16 @@ export default function ProjectsMasonry({
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          background: #0b0b0b;
+          background: var(--sc-bg);
           transition: background 280ms ease;
         }
 
         .projects-index-card:hover .projects-index-info {
-          background: #111;
+          background: var(--sc-bg);
         }
 
         .projects-index-number {
-          color: rgba(255,255,255,0.88);
+          color: color-mix(in srgb, var(--sc-ink) 88%, transparent);
           font-size: clamp(48px, 4.4vw, 74px);
           font-weight: 300;
           letter-spacing: -0.08em;
@@ -179,7 +179,7 @@ export default function ProjectsMasonry({
 
         .projects-index-meta {
           margin-top: 20px;
-          color: rgba(255,255,255,0.42);
+          color: color-mix(in srgb, var(--sc-ink) 42%, transparent);
           font-size: 9px;
           font-weight: 800;
           letter-spacing: 0.12em;
@@ -190,7 +190,7 @@ export default function ProjectsMasonry({
         .projects-index-title {
           max-width: 440px;
           margin: 11px 0 0;
-          color: #fff;
+          color: var(--sc-ink);
           font-size: clamp(21px, 2vw, 32px);
           font-weight: 850;
           letter-spacing: -0.045em;
@@ -202,7 +202,7 @@ export default function ProjectsMasonry({
           max-width: 460px;
           margin: 14px 0 0;
           overflow: hidden;
-          color: rgba(255,255,255,0.58);
+          color: color-mix(in srgb, var(--sc-ink) 58%, transparent);
           font-size: 12px;
           line-height: 1.65;
           -webkit-box-orient: vertical;
@@ -216,8 +216,8 @@ export default function ProjectsMasonry({
           gap: 18px;
           margin-top: 24px;
           padding-top: 16px;
-          border-top: 1px solid rgba(255,255,255,0.1);
-          color: #fff;
+          border-top: 1px solid color-mix(in srgb, var(--sc-ink) 10%, transparent);
+          color: var(--sc-ink);
           text-decoration: none;
           font-size: 10px;
           font-weight: 850;

@@ -54,3 +54,6 @@ jobs:
 
       - name: Systems route and asset smoke checks
         run: npm run test:systems
+
+      - name: Studio interactions, fonts and page-theme smoke checks
+        run: npm run test:studio

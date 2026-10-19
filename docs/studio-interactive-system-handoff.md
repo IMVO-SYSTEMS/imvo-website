@@ -16,11 +16,24 @@ Implemented so far:
 - Centered division logos including mobile second row, global drafting pointer with trailing line, native cursor fallback for touch/reduced motion, discreet page navigator.
 - TypeScript passes at checkpoint.
 
-Remaining before release:
-1. Complete page-body theme/layout coverage for About, Services/details, Projects/details, Contact, Careers, legal, Systems and DŌMICILE; preserve native forms, routes, testimonials, downloads and footer links.
-2. Make real project-plan viewers interactive without inventing room names or measurements.
-3. Complete production build and meaningful smoke tests; visually inspect on supported browser if available. Check hold/resume, annotations, fixed status, centered logos, 360/390/1920 widths, both themes, services shortening and no horizontal overflow.
-4. Commit final QA notes, open PR, await existing CI, merge exact checked head, await Cloudflare production deployment and verify official URL.
+Additional implementation completed:
+- About, Services and all service details, Projects and project details, Contact, Careers and all legal page bodies now consume the shared palette and typography. Section framing, spacing and controls follow the homepage system; old DOM-rewriting enhancement layers are no longer mounted.
+- Projects index has an interactive plan-led introduction. Published project plans support location selection, 100–300% zoom, reset and bounded drag; selected drawing links carry the real project title into the Contact brief without inventing room or dimensional data.
+- Systems and DŌMICILE marketing pages share the font pair, black/white themes, corner language and global cursor through DivisionFrame. Native navigation, routes, enquiries, review source, carousel behavior, workspace tabs and Android download remain intact.
+- Every homepage plan study, including the closing CTA, is interactive. Desktop services occupy 180svh total; mobile offers one scene and direct stage controls.
+- Existing Cloudflare compatibility CI now includes the expanded Studio smoke test.
+
+Verification completed locally:
+- `npx tsc --noEmit`: passed.
+- `npm run build:cloudflare`: passed.
+- `npm run test:studio`: passed: one H1, no video hero, live progress markup, non-dismissible status, 4 valid anchors, 45 image assets, 14 themed destinations, actual published plan controls and five valid WOFF2 files.
+- `git diff --check`: passed after whitespace cleanup.
+
+Remaining release work:
+1. Record Systems route-check result, push the checked source and open PR.
+2. Await existing GitHub compatibility/Next build/Cloudflare/route CI before merging the exact head.
+3. Await official Cloudflare deployment; verify actual website interactions and both themes in the browser and correct observed issues. Internal managed preview is unavailable because the environment has no control-browser skill; do not claim pre-deployment visual QA.
+4. Add final release evidence and update this handoff if further work remains.
 
 ## Runtime
 - Repository checkout: /workspace/scratch/934a30c439ff/imvo-studio-redesign (may reset; clone remote branch if absent).
