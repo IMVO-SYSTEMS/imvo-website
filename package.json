@@ -20,7 +20,8 @@
     "build:cloudflare": "vite build",
     "deploy:cloudflare": "wrangler deploy --keep-vars",
     "test:systems": "node --experimental-strip-types scripts/check-systems-routes.mjs",
-    "preview:cloudflare": "node scripts/preview-cloudflare.mjs --port 4173"
+    "preview:cloudflare": "node scripts/preview-cloudflare.mjs --port 4173",
+    "test:studio": "node scripts/check-studio-canvas.mjs"
   },
   "dependencies": {
     "@sanity/orderable-document-list": "^2.0.14",
