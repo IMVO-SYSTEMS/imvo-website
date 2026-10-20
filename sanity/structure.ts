@@ -49,6 +49,7 @@ export const structure: StructureResolver = (S, context) =>
             .title("Structured Collections")
             .items([
               S.documentTypeListItem("teamMember").title("Team Members"),
+              S.documentTypeListItem("testimonial").title("Client Testimonials"),
               S.documentTypeListItem("faq").title("FAQs"),
               S.documentTypeListItem("career").title("Careers"),
             ]),
