@@ -581,3 +581,16 @@
  .studioMarqueeTrack,.studioMarqueeTrack[data-direction="right"]{animation:none;width:auto;max-width:100%;flex-wrap:wrap}
  .studioMarqueeCard{flex:1 1 240px}
 }
+
+/* Map labels remain legible in the wider regional starting camera. */
+.regionAtlas .atlasCountryLabel text{font-size:11px;stroke-width:3.2;paint-order:stroke;letter-spacing:.03em}
+.regionAtlas .atlasCountryLabel[data-selected="true"] text{font-size:12px}
+.regionAtlas .atlasKigali text{font-size:8px}
+/* Client reviews glide continuously in opposite directions, including on hover. */
+.studioMarqueeRows:hover .studioMarqueeTrack,.studioMarqueeRows:focus-within .studioMarqueeTrack{animation-play-state:running}
+.studioMarqueeCard>div strong{display:block;margin-bottom:6px}
+.studioMarqueeCard>div p{font:11px/1.4 var(--sc-mono);color:#aaa}
+.studioMarqueeCard>span>span{color:#f5f5f5;letter-spacing:.13em;font-size:15px}
+@media(prefers-reduced-motion:reduce){
+ .studioMarqueeRows:hover .studioMarqueeTrack,.studioMarqueeRows:focus-within .studioMarqueeTrack{animation:none}
+}

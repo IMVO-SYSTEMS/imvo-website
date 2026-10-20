@@ -37,7 +37,7 @@ function countryFit(iso:string){
 }
 function point(lon:number,lat:number){return {x:20+(lon+18)/72*920,y:20+(38-lat)/74*710};}
 const kigali=point(30.0619,-1.9441);
-const REGIONAL_CAMERA={center:"__REGION__",zoom:2.45};
+const REGIONAL_CAMERA={center:"__REGION__",zoom:1.85};
 
 export const regionCountryNames=regionalCountries.map(c=>c.name);
 export default function RegionAtlas({country,onCountryChange}:{country:string;onCountryChange:(name:string)=>void}){
@@ -83,7 +83,7 @@ export default function RegionAtlas({country,onCountryChange}:{country:string;on
  const focused=index.get(camera.center)||countries[0];
  const cityTarget=selectedCity&&activeCity?activeCity:null;
  const countryBox=countryBounds.get(focused.iso);
- const c=camera.center==="__AFRICA__"?point(17,0):camera.center==="__REGION__"?point(29,-3.8):cityTarget?point(cityTarget.lon,cityTarget.lat):countryBox?{x:countryBox.cx,y:countryBox.cy}:point(...focused.center);
+ const c=camera.center==="__AFRICA__"?point(17,0):camera.center==="__REGION__"?point(28,-3.8):cityTarget?point(cityTarget.lon,cityTarget.lat):countryBox?{x:countryBox.cx,y:countryBox.cy}:point(...focused.center);
  const scale=camera.zoom;
  const transform=`translate(${+(480-c.x*scale).toFixed(2)}px, ${+(365-c.y*scale).toFixed(2)}px) scale(${scale})`;
  const home=country==="Rwanda";
@@ -107,7 +107,7 @@ export default function RegionAtlas({country,onCountryChange}:{country:string;on
      })}
      {outlines.map(outline=>{
        const b=countryBounds.get(outline.iso);if(!b)return null;
-       const visible=camera.zoom<1.65||outline.iso===selected.iso;
+       const visible=camera.center==="__REGION__"?regionalCountries.some(r=>r.iso===outline.iso):camera.zoom<1.65||outline.iso===selected.iso;
        if(!visible)return null;
        const unit=1/Math.max(1,camera.zoom);
        return <g key={"name-"+outline.iso} className={styles.atlasCountryLabel}
