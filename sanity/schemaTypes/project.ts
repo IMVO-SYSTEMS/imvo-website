@@ -98,7 +98,8 @@ export const projectType = defineType({
     }),
     defineField({
       name: "gallery",
-      title: "Project gallery",
+      title: "Project gallery (drag images to set display order)",
+      description: "Upload finished project photographs and visuals, then drag to reorder. Add an accurate description to each image.",
       type: "array",
       group: "media",
       of: [
@@ -121,12 +122,18 @@ export const projectType = defineType({
     defineField({
       name: "drawings",
       title: "Plans and drawings",
+      description: "Upload plans and elevations. Use clear titles/alternative text; only publish drawings you have permission to show.",
       type: "array",
       group: "media",
       of: [
         defineArrayMember({
           type: "image",
           options: { hotspot: true },
+          fields: [defineField({
+            name: "alt", title: "Drawing description", type: "string",
+            description: "Describe the drawing without disclosing confidential project information.",
+            validation: (rule) => rule.max(180)
+          })],
         }),
       ],
       options: { layout: "grid" },
@@ -210,7 +217,7 @@ export const projectType = defineType({
     }),
     defineField({
       name: "featured",
-      title: "Feature this project",
+      title: "Feature this project on IMVO homepage",
       description:
         "Shows this project in the homepage 'On the boards' section when it is among the first three featured projects in the Projects list.",
       type: "boolean",
