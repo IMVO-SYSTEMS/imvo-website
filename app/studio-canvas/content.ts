@@ -22,7 +22,7 @@ export const teamMembers = [
       "Experienced in civil engineering, infrastructure systems, and urbanism, with a focus on technical coordination, project execution, coordinated delivery, and planning-oriented solutions that support sustainable and resilient development.",
   },
   {
-    name: "KANGWAGYE Sharon",
+    name: "NGUTETE K. Sharon",
     role: "Project Coordination & Growth Lead",
     image: "/team4.png",
     description:
