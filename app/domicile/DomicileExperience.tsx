@@ -388,7 +388,7 @@ export default function DomicileExperience() {
       </section>
 
       <section className={styles.imvoSection}>
-        <div className={styles.imvoCopy}><p className={styles.kicker}>Backed by IMVO Group</p><h2>Property care with built-environment thinking behind it.</h2><p>DŌMICILE combines property coordination with IMVO Group's design, technical and built-environment perspective.</p><Link href="/">Visit IMVO Group <ArrowIcon /></Link></div>
+        <div className={styles.imvoCopy}><p className={styles.kicker}>Backed by IMVO Group</p><h2>Property care with built-environment thinking behind it.</h2><p>DŌMICILE combines property coordination with IMVO Group&apos;s design, technical and built-environment perspective.</p><Link href="/">Visit IMVO Group <ArrowIcon /></Link></div>
         <div className={styles.imvoPillars}><div><b>Local team</b><span>Kigali-based coordination</span></div><div><b>Trusted network</b><span>Appropriate service providers</span></div><div><b>Professional records</b><span>Reports, approvals and history</span></div><div><b>Discretion</b><span>Privacy built into the service</span></div></div>
         <div className={styles.imvoMark}><Image src="/imvo-black.png" alt="IMVO Group" width={320} height={110} unoptimized /></div>
       </section>
