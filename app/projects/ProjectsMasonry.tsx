@@ -21,7 +21,7 @@ const transition = {
 };
 
 function optimizedLocalCover(src:string){
- const match=/\\/(p01-01|p02-1|p03-1|p04-1|p05-1|p06-1)\\.(?:png|jpe?g|webp)$/i.exec(src);
+ const match=/\/(p01-01|p02-1|p03-1|p04-1|p05-1|p06-1)\.(?:png|jpe?g|webp)$/i.exec(src);
  return match?`/studio-optimized/${match[1]}-960.webp`:null;
 }
 
