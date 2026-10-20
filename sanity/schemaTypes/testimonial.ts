@@ -23,6 +23,11 @@ export const testimonialType = defineType({
     defineField({ name: "company", title: "Company / organisation", type: "string", validation: (rule) => rule.max(160) }),
     defineField({ name: "date", title: "Date", type: "date" }),
     defineField({
+      name: "rating", title: "Verified star rating (optional)", type: "number",
+      description: "Only enter the source's real rating. Leave empty for a written review without a verified star score.",
+      validation: (rule) => rule.integer().min(1).max(5),
+    }),
+    defineField({
       name: "source",
       title: "Source / context",
       type: "string",
