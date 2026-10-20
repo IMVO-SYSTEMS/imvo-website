@@ -1,7 +1,7 @@
 # IMVO interactive architectural system — 20 October 2026
 
 ## User-approved direction
-Continue the deployed architectural canvas, preserving all original content and working integrations. Apply reference typography, interactive drawings, global drafting cursor, centered division marks, an anchored studio status, a tower that fills on scroll, one compact changing service scene, section shortcuts and useful linked annotations. Extend black/white styling through all public page bodies, including division marketing surfaces. The user has authorized completing and publishing the checked work.
+Continue the deployed architectural canvas, preserving all original content and working integrations. Apply reference typography, interactive drawings, global drafting cursor, centered division marks, an anchored studio status, a tower that fills on scroll, one compact changing service scene, section shortcuts and useful linked annotations. Extend black/white styling across Studio pages only. Systems and DŌMICILE must retain their own independently approved presentation, typography and header; do not apply the Studio shell to them. The user has authorized completing and publishing the checked work.
 
 ## Durable checkpoint
 Branch: `feat/studio-interactive-system-20261020`. Base: `e729edad12992163a7f2b6231bedfbbfda1b00f4` (PR #53). This document travels with every checkpoint so another model can continue without reconstructing the approved design.
@@ -19,7 +19,7 @@ Implemented so far:
 Additional implementation completed:
 - About, Services and all service details, Projects and project details, Contact, Careers and all legal page bodies now consume the shared palette and typography. Section framing, spacing and controls follow the homepage system; old DOM-rewriting enhancement layers are no longer mounted.
 - Projects index has an interactive plan-led introduction. Published project plans support location selection, 100–300% zoom, reset and bounded drag; selected drawing links carry the real project title into the Contact brief without inventing room or dimensional data.
-- Systems and DŌMICILE marketing pages share the font pair, black/white themes, corner language and global cursor through DivisionFrame. Native navigation, routes, enquiries, review source, carousel behavior, workspace tabs and Android download remain intact.
+- Historic PR #54 shared the Studio theme with Systems and DŌMICILE, but this was explicitly reversed in PR #56. Their original independent experiences and native integrations are preserved; the Studio theme belongs to Studio pages alone.
 - Every homepage plan study, including the closing CTA, is interactive. Desktop services occupy 180svh total; mobile offers one scene and direct stage controls.
 - Existing Cloudflare compatibility CI now includes the expanded Studio smoke test.
 
@@ -44,17 +44,18 @@ Live browser verification completed:
 - Tower fill changed from 69% to 94% during scrolling.
 - Projects index displays its interactive plan introduction. Published project-plan zoom reaches 150%, selection opens its note, and Discuss this drawing transfers the project title to the Contact brief.
 - Contact form is present with the expected prefilled brief; it was not submitted.
-- Systems and DŌMICILE render in the shared theme; native division menus and the Android download URL remain present. About and Services page-body font/theme coverage and the global drafting cursor were also checked (native cursor computed as none after pointer movement). No horizontal overflow or broken loaded images was observed at the desktop viewport.
+- Systems and DŌMICILE were tested in the shared theme as part of PR #54, but that styling was later rejected; PR #56 restores their prior layouts. About and Services page-body font/theme coverage and the global drafting cursor were also checked (native cursor computed as none after pointer movement). No horizontal overflow or broken loaded images was observed at the desktop viewport.
 
 Final display corrections on branch `fix/studio-drawing-release-qa-20261020`:
 - Invert white-on-alpha /drawings/ project images in the white theme so real plans stay visible.
 - Give opened assembling-plan annotations a bounded width, full opacity and exclusive use of the caption area.
 - Compact the title-only About introduction so its frame no longer reserves a large empty hero area.
 
-Remaining before final handoff:
-1. Pass the existing CI for this narrow correction, merge its exact head and await deployment.
-2. Recheck actual plan visibility and annotation/caption separation, return the official URL and leave the live homepage open.
-3. Mobile and wide CSS were reviewed, but native responsive browser emulation and the managed control-browser skill are unavailable in this environment. Do not claim a fresh mobile screenshot verification. Existing responsive breakpoints and reduced-motion alternatives are preserved.
+Last release notes:
+- PR #55 merged (commit `797f9bb2`) to correct white-theme plans, annotation collisions and the About introduction.
+- The latest user feedback on 20 October requires Studio to stand alone, not to override Systems or DŌMICILE. PR #56 implements that correction, preserving Studio interactions and making Studio h1/h2 uppercase using the local BT Grotesk font. Systems keeps Poppins/Roboto Mono and its original red developer-site design; DŌMICILE keeps DomicileInter and imperial-blue visual treatment.
+- CI should run with 63 Systems routes and the Studio smoke check that now asserts the **absence** of Studio framing on division routes.
+- Before calling the site final, check PR #56 compatibility CI, merge, verify the Cloudflare production run and inspect live pages at desktop and mobile widths. Do not claim unperformed visual or mobile verification.
 
 ## Runtime
 - Repository checkout: /workspace/scratch/934a30c439ff/imvo-studio-redesign (may reset; clone remote branch if absent).
@@ -64,7 +65,7 @@ Remaining before final handoff:
 - Do not rebuild while a compiled preview is running.
 - Official root: https://www.imvogroup.com/
 - GitHub: IMVO-SYSTEMS/imvo-website; native GitHub blob/tree/commit/ref tools available. Use expected_sha when advancing branch; never overwrite unknown changes.
-- app/systems/AGENTS.md requires preserving native routes, enquiry delivery, published reviews and Studio/DŌMICILE links. Latest user explicitly requests shared black/white theme, overriding earlier red visual preference.
+- app/systems/AGENTS.md requires preserving native routes, enquiry delivery, published reviews and Studio/DŌMICILE links. The latest user direction explicitly restores the original red Systems design and independent DŌMICILE identity.
 
 ## Fonts observed on Heron on 20 October 2026
 Base: https://cdn.prod.website-files.com/6a4b5161f0d11f1602cc3bbf/
