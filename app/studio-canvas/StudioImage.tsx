@@ -6,6 +6,14 @@ function source(src: ImgHTMLAttributes<HTMLImageElement>["src"]) {
  const candidate = explicit[src] || src.replace(/\.(png|jpe?g)$/i,".webp");
  return localImages.has(candidate) ? candidate : src;
 }
+const responsiveCovers = new Set(["p01-01", "p02-1", "p03-1", "p04-1", "p05-1", "p06-1"]);
 export default function StudioImage({src,...props}: ImgHTMLAttributes<HTMLImageElement>) {
- return <img {...props} src={source(src)} />;
+ const resolved=source(src);
+ // Opt into small derivatives only at image positions with an explicit sizes hint.
+ // Larger architectural drawings elsewhere keep their original, full-resolution files.
+ const name=typeof resolved==="string"?/^\\/(p\\d{2}(?:-\\d{1,2})?)\\.webp$/.exec(resolved)?.[1]:undefined;
+ const srcSet=name&&responsiveCovers.has(name)&&props.sizes
+  ? `/studio-optimized/${name}-480.webp 480w, /studio-optimized/${name}-960.webp 960w`
+  : undefined;
+ return <img {...props} src={resolved} srcSet={props.srcSet||srcSet}/>;
 }
