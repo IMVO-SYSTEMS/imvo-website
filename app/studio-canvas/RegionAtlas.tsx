@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { ArrowUpRight, LocateFixed, Minus, Plus } from "lucide-react";
 import { africaCountryOutlines } from "./africaCountryOutlines";
+import { additionalAfricaCities } from "./africaCityPoints";
 import styles from "./StudioCanvas.module.css";
 
 type CountryInfo={iso:string; name:string; center:[number,number]; capital:string; pin:[number,number]; zoom:number};
@@ -22,7 +23,7 @@ const countries:CountryInfo[]=[...regionalCountries,...africaCountryOutlines
  .map(c=>({iso:c.iso,name:c.name,center:[c.lon,c.lat] as [number,number],
  capital:c.name,pin:[c.lon,c.lat] as [number,number],zoom:1.7}))];
 type City={name:string;iso:string;lon:number;lat:number;capital?:boolean};
-const cities:City[]=[
+const curatedCities:City[]=[
  ["RWA","Kigali",30.0619,-1.9441,1],["RWA","Musanze",29.634,-1.499,0],["RWA","Rubavu",29.26,-1.679,0],["RWA","Huye",29.74,-2.596,0],["RWA","Rusizi",28.908,-2.484,0],["RWA","Rwamagana",30.434,-1.948,0],
  ["UGA","Kampala",32.5825,.3476,1],["UGA","Entebbe",32.44,.06,0],["UGA","Jinja",33.203,.424,0],["UGA","Gulu",32.299,2.779,0],
  ["KEN","Nairobi",36.8219,-1.2921,1],["KEN","Mombasa",39.668,-4.043,0],["KEN","Kisumu",34.761,-.092,0],["KEN","Nakuru",36.066,-.303,0],
@@ -40,6 +41,7 @@ const cities:City[]=[
  ["CAF","Bangui",18.562,4.394,1],["COG","Brazzaville",15.283,-4.263,1],["ERI","Asmara",38.931,15.322,1],
  ["CPV","Praia",-23.512,14.921,1],["STP","São Tomé",6.727,.336,1],["COM","Moroni",43.255,-11.704,1],["MUS","Port Louis",57.499,-20.161,1],["SYC","Victoria",55.45,-4.62,1]
 ].map(([iso,name,lon,lat,capital])=>({iso:String(iso),name:String(name),lon:Number(lon),lat:Number(lat),capital:!!capital}));
+const cities:City[]=[...curatedCities,...additionalAfricaCities.filter(city=>!curatedCities.some(c=>c.iso===city.iso&&c.name.toLowerCase()===city.name.toLowerCase()))];
 const index=new Map(countries.map(c=>[c.name,c]));
 const outlines=africaCountryOutlines;
 // Fit the *entire selected country's outline* within the map, without
@@ -53,7 +55,7 @@ function cameraFor(iso:string){
  const b=bounds.get(iso);if(!b)return {center:[30.0619,-1.9441] as [number,number],zoom:2.15};
  const x=(b.x0+b.x1)/2,y=(b.y0+b.y1)/2;
  return {center:[(x-20)/920*72-18,38-(y-20)/710*74] as [number,number],
- zoom:Math.min(32,Math.max(1.1,700/Math.max(12,b.x1-b.x0),525/Math.max(12,b.y1-b.y0)))};
+ zoom:Math.max(1.1,Math.min(32,700/Math.max(12,b.x1-b.x0),525/Math.max(12,b.y1-b.y0)))};
 }
 function point(lon:number,lat:number){return {x:20+(lon+18)/72*920,y:20+(38-lat)/74*710};}
 const kigali=point(30.0619,-1.9441);
@@ -64,7 +66,7 @@ export default function RegionAtlas({country,onCountryChange}:{country:string;on
  const [camera,setCamera]=useState(()=>({center:country,zoom:cameraFor(selected.iso).zoom}));
  const [selectedCity,setSelectedCity]=useState<string|null>(null);
  const [showCities,setShowCities]=useState(true);
- const cityList=cities.filter(c=>c.iso===selected.iso);
+ const cityList=cities.filter(c=>c.iso===selected.iso).slice(0,12);
  const activeCity=cityList.find(c=>c.name===selectedCity)||cityList.find(c=>c.capital)||cityList[0];
  const focusCountry=(name:string)=>{setSelectedCity(null);onCountryChange(name);};
  const focusCity=(name:string)=>{setSelectedCity(name);setCamera(current=>({center:country,zoom:Math.min(5,Math.max(current.zoom,cameraFor(selected.iso).zoom+1))}));};
