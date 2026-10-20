@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type { AboutPageContent } from "@/sanity/types/siteContent";
+import StudioTestimonials from "./StudioTestimonials";
 
 // --- ANIMATED BLUEPRINT COMPONENT ---
 const BlueprintBackground = () => (
@@ -68,21 +69,6 @@ const timeline = [
   { year: "2021", title: "Asian Architectural Exposure", description: "International study and immersion in major Chinese cities, including Xi'an, integrating broad urban masterplanning concepts into the firm's approach." },
   { year: "2022", title: "Middle Eastern Scaling", description: "Architectural exposure across Dubai, Sharjah, and Abu Dhabi. Absorbing advanced modernism, extreme structural scaling, and high-end commercial aesthetics." },
   { year: "2023", title: "Rwandan Execution", description: "Official commencement of large-scale operations in Rwanda, translating global design exposure into contextually sensitive, local execution." },
-];
-
-const testimonials = [
-  { text: "I had an excellent experience with IMVO GROUP AFRICA! Their team is professional, attentive, and dedicated to outstanding service. Communication was seamless, and their commitment to quality and sustainability is impressive. Highly recommended!", author: "Eric IRANKUNDA", date: "6 months ago" },
-  { text: "Working with IMVO was a moving experience. They don't just focus on the commercial aspect; their designs genuinely empower people and elevate the built environment.", author: "Peace Aime HIRWA", date: "February 2022" },
-  { text: "Thank you for the amazing work you have done for us. Your attention to detail is highly appreciated!", author: "Umutoni Leon Clement", date: "March 2020" },
-  { text: "It was an absolute pleasure working with the team.", author: "Nkuliye Stewart", date: "February 2021" },
-  { text: "A display of absolute professionalism from concept to execution.", author: "Bahiga Jean Claude", date: "August 2020" },
-  { text: "The spatial clarity and execution-aware mindset of IMVO set them apart in the region.", author: "Ukiriho Rene J Felix", date: "Client Review" },
-  { text: "Their technical discipline and understanding of structural proportion gave us complete confidence.", author: "Dushime Brown", date: "Client Review" },
-  { text: "A brilliant studio. The team's ability to navigate complex zoning and environmental constraints is remarkable.", author: "Lishirabake Olivier", date: "Client Review" },
-  { text: "IMVO delivered a contextually sensitive design that perfectly aligned with our operational ambitions.", author: "Shema Blaise Ally", date: "Client Review" },
-  { text: "High-end aesthetic merged with strict engineering standards.", author: "Ndizihiwe Alain JS", date: "Client Review" },
-  { text: "From the initial site analysis to the final photorealistic visualizations, their communication was flawless.", author: "Staphord N.S", date: "Client Review" },
-  { text: "A highly collaborative and innovative team. They protected the design intent through every phase of construction.", author: "Olivier Kamali", date: "Client Review" }
 ];
 
 const transition = { duration: 1.4, ease: [0.16, 1, 0.3, 1] as const };
@@ -364,14 +350,10 @@ export default function AboutPageClient({ content }: { content?: AboutPageConten
         image: member.image?.url || teamMembers[index]?.image || "/team1.png",
       }))
     : teamMembers;
-  const activeTestimonials = content?.testimonials?.length
-    ? content.testimonials.map((item) => ({
-        text: item.text || "",
-        author: item.author || "IMVO client",
-        date: item.date || "Client review",
-      }))
-    : testimonials;
-  const stageDefaults = [
+  const activeTestimonials = (content?.testimonials||[])
+    .filter(item=>item.text?.trim()&&item.author?.trim())
+    .map(item=>({text:item.text!.trim(),author:item.author!.trim(),date:[item.role,item.company,item.source||item.date].filter(Boolean).join(" · ")}));
+    const stageDefaults = [
     { step: "01", name: "Brief & Site", desc: "Zoning, ambition, and topography analysis.", icon: "M20 10 L40 10 L40 50 L20 50 Z M30 20 L50 20 L50 60 L30 60 Z" },
     { step: "02", name: "Concept", desc: "Volumetric studies and spatial strategies.", icon: "M30 10 L50 20 L30 30 L10 20 Z M10 20 L10 50 L30 60 L30 30 Z M50 20 L50 50 L30 60 Z" },
     { step: "03", name: "Schematic", desc: "Detailed floor plans and aesthetic language.", icon: "M10 10 L50 10 L50 50 L10 50 Z M25 10 L25 50 M10 25 L50 25" },
@@ -603,35 +585,8 @@ export default function AboutPageClient({ content }: { content?: AboutPageConten
         </div>
       </section>
 
-      {/* 10. TESTIMONIALS SECTION */}
-      <section className="mobilePad" style={{ padding: "96px 0", background: "var(--sc-bg)", position: "relative", zIndex: 10 }}>
-        <div className="containerWide">
-          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={transition} style={{ textAlign: "center", marginBottom: 60 }}>
-
-            <h2 style={{ marginTop: 16, fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 900, letterSpacing: "-0.02em" }}>{content?.reviewsHeading || "Trusted by visionaries."}</h2>
-          </motion.div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "30px" }}>
-            {activeTestimonials.map((testimonial, index) => (
-              <motion.div key={index} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ ...transition, delay: (index % 3) * 0.15 }} style={{ background: "var(--sc-bg)", padding: "40px", border: "1px solid color-mix(in srgb, var(--sc-ink) 5%, transparent)", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                <div>
-                  <div style={{ display: "flex", gap: 4, marginBottom: 20 }}>
-                     {[...Array(5)].map((_, i) => (
-                        <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="#FFC107" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                        </svg>
-                     ))}
-                  </div>
-                  <p style={{ fontSize: 15, lineHeight: 1.8, color: "color-mix(in srgb, var(--sc-ink) 80%, transparent)", margin: "0 0 30px 0" }}>“{testimonial.text}”</p>
-                </div>
-                <div>
-                  <div style={{ fontSize: 14, fontWeight: 800 }}>{testimonial.author}</div>
-                  <div style={{ fontSize: 12, color: "color-mix(in srgb, var(--sc-ink) 40%, transparent)", marginTop: 4 }}>{testimonial.date}</div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* A single accessible editorial slider, only for genuine published CMS reviews. */}
+      <StudioTestimonials reviews={activeTestimonials} heading={content?.reviewsHeading||"Trusted by visionaries."}/>
 
       {/* 11. PREMIUM FINAL CTA (With Studio Deck Link) */}
       <section className="mobilePad" style={{ padding: "112px 0", textAlign: "center", borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 5%, transparent)", background: "var(--sc-bg)", position: "relative", overflow: "hidden" }}>
