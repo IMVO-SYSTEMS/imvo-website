@@ -476,10 +476,83 @@
 
 
 /* Principle details stay within the architecture study, never expand the page. */
-.connectedDesign{position:relative}
+.connectedDesign{position:absolute}
 .principleFloat{position:absolute;z-index:35;left:var(--sc-s3);right:var(--sc-s3);top:14%;max-height:65%;overflow:auto;background:var(--sc-bg);color:var(--sc-ink);border:1px solid var(--sc-ink);box-shadow:4px 4px 0 color-mix(in srgb,var(--sc-ink) 16%,transparent)}
 .principleFloat>div{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 15px;background:var(--sc-ink);color:var(--sc-bg)}
 .principleFloat strong{font:600 var(--sc-label)/1.2 var(--sc-font)}
 .principleFloat button{border:0;width:35px;height:35px;display:grid;place-items:center;font-size:23px}
 .principleFloat p{font:var(--sc-label)/1.5 var(--sc-font);padding:15px}
 @media(max-width:760px){.principleFloat{top:6%;max-height:82%}}
+
+/* Oct 20: restore the original architectural composition and keep details near drawings. */
+.planViewport{overflow:visible}
+.connectedDesign{position:absolute;top:15%;right:var(--sc-gutter);width:34%;z-index:6}
+.planDrawing .drawingInteraction .detailNote{
+ left:clamp(12px,calc(var(--point-x) + 25px),calc(100% - 290px));
+ right:auto;top:clamp(12px,calc(var(--point-y) - 105px),calc(100% - 215px));
+ width:min(265px,calc(100% - 24px));max-height:min(215px,75%);overflow:auto;
+}
+.planDrawing .drawingInteraction .detailNote[data-anchor-side="start"]{
+ left:clamp(12px,calc(var(--point-x) - 290px),calc(100% - 290px));right:auto;
+}
+.planDrawing .drawingInteraction .detailNote[data-anchor-side="end"]{right:auto}
+.heroCanvas .drawingInteraction:has(.detailNote){z-index:10}
+.heroCanvas .drawingInteraction .detailNote{
+ left:clamp(12px,calc(var(--point-x) + 25px),calc(100% - 295px));right:auto;
+ top:clamp(42px,calc(var(--point-y) - 100px),calc(100% - 225px));
+ width:min(265px,calc(100% - 24px));max-height:min(225px,70%);overflow:auto;
+}
+.heroCanvas .drawingInteraction .detailNote[data-anchor-side="start"]{
+ left:clamp(12px,calc(var(--point-x) - 295px),calc(100% - 295px));right:auto;
+}
+.heroCanvas .drawingInteraction .detailNote[data-anchor-side="end"]{right:auto}
+.drawingInteraction .detailNote{animation:none}
+.detailConnector{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:9}
+.detailConnector path{fill:none;stroke:var(--sc-ink);stroke-width:1;stroke-dasharray:5 4;vector-effect:non-scaling-stroke}
+.drawingInteraction .detailNote{z-index:10}
+@media(max-width:760px){
+ .connectedDesign{position:absolute}
+ .heroCanvas .drawingInteraction .detailNote,
+ .heroCanvas .drawingInteraction .detailNote[data-anchor-side="start"],
+ .heroCanvas .drawingInteraction .detailNote[data-anchor-side="end"]{
+  left:var(--sc-s3);right:auto;top:clamp(8px,calc(var(--point-y) - 165px),115px);
+  width:min(230px,calc(100% - 22px));max-height:180px;
+ }
+ .planDrawing .drawingInteraction .detailNote,
+ .planDrawing .drawingInteraction .detailNote[data-anchor-side="start"],
+ .planDrawing .drawingInteraction .detailNote[data-anchor-side="end"]{
+  left:clamp(10px,calc(var(--point-x) - 55px),calc(100% - 245px));
+  right:auto;top:clamp(8px,calc(var(--point-y) - 170px),calc(100% - 185px));
+  width:min(235px,calc(100% - 20px));max-height:185px;
+ }
+}
+
+/* Review #73: locked two-column plan study, with drawing notes in the right column. */
+@media(min-width:761px){
+ .planViewport{left:var(--sc-gutter);right:var(--sc-gutter);top:var(--sc-s10);bottom:calc(var(--sc-s10) + var(--sc-s7));display:grid;grid-template-columns:minmax(0,62fr) minmax(290px,38fr);column-gap:clamp(22px,3vw,56px)}
+ .planDrawing{position:relative;inset:auto;grid-column:1;width:100%;height:100%;transform:scale(var(--plan-scale));transform-origin:center center}
+ .connectedDesign{position:relative;inset:auto;grid-column:2;align-self:center;width:100%;max-height:85%;overflow-y:auto;z-index:7;transform:translateX(calc((1 - var(--principle-reveal))*28px));padding:clamp(10px,1.2vw,22px);border:1px solid var(--sc-line);background:var(--sc-bg)}
+ .planInteractive{z-index:8}
+ .planIntro{z-index:9;max-width:18ch}
+ .planSideDetail{position:relative;width:100%;margin-bottom:14px;border:1px solid var(--sc-ink);background:var(--sc-bg);z-index:10}
+ .planSideDetail>div{display:flex;align-items:center;justify-content:space-between;background:var(--sc-ink);color:var(--sc-bg);padding:8px 12px;gap:8px}
+ .planSideDetail strong{font:var(--sc-meta)/1.4 var(--sc-mono)}
+ .planSideDetail button{border:0;min-width:32px;height:32px}
+ .planSideDetail p{font-size:var(--sc-label);line-height:1.45;padding:12px}
+ .planSideDetail>a{display:flex;justify-content:space-between;padding:12px;border-top:1px solid var(--sc-line);font:var(--sc-meta)/1.4 var(--sc-mono)}
+ .heroCanvas .drawingInteraction .detailNote,
+ .heroCanvas .drawingInteraction .detailNote[data-anchor-side="start"],
+ .heroCanvas .drawingInteraction .detailNote[data-anchor-side="end"]{
+   left:clamp(12px,calc(var(--point-x) - 275px),calc(56% - 275px));
+   right:auto;top:clamp(72px,calc(var(--point-y) - 65px),calc(100% - 240px));
+   width:min(250px,calc(100% - 24px));max-height:220px;z-index:50
+ }
+ .heroCanvas .drawingInteraction:has(.detailNote){z-index:15}
+}
+@media(max-width:760px){
+ .planSideDetail{position:relative;margin:10px 0;border:1px solid var(--sc-ink);background:var(--sc-bg)}
+ .planSideDetail>div{display:flex;justify-content:space-between;background:var(--sc-ink);color:var(--sc-bg);padding:8px}
+ .planSideDetail button{padding:6px}
+ .planSideDetail p,.planSideDetail>a{display:block;padding:10px;font-size:12px}
+ .connectedDesign{display:none}
+}
