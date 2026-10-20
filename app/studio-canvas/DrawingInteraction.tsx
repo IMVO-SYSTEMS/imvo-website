@@ -1,5 +1,5 @@
 "use client";
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Minus, Plus, X } from "lucide-react";
 import StudioImage from "./StudioImage";
@@ -35,18 +35,41 @@ const details:Record<DrawingKind,Detail[]>={
 /** Coordinates describe illustrative studies, not surveyed project data. */
 export function DrawingInteraction({kind,label='Explore the drawing',compact=false,dockId}:{kind:DrawingKind;label?:string;compact?:boolean;dockId?:string}){
  const id=useId(),[selected,setSelected]=useState<number|null>(null),[hover,setHover]=useState<number|null>(null);
- const buttons=useRef<(HTMLButtonElement|null)[]>([]),items=details[kind],active=hover??selected;
+ const buttons=useRef<(HTMLButtonElement|null)[]>([]);
+ const surface=useRef<HTMLDivElement|null>(null),noteRef=useRef<HTMLElement|null>(null);
+ const [leader,setLeader]=useState<{width:number;height:number;path:string}|null>(null);
+ const items=details[kind],active=hover??selected;
+ useEffect(()=>{
+  if(selected===null){setLeader(null);return;}
+  const update=()=>{
+   const root=surface.current,note=noteRef.current,button=buttons.current[selected];
+   if(!root||!note||!button)return;
+   const r=root.getBoundingClientRect(),n=note.getBoundingClientRect(),b=button.getBoundingClientRect();
+   const x=b.left+b.width/2-r.left,y=b.top+b.height/2-r.top;
+   const left=n.left-r.left,right=n.right-r.left,top=n.top-r.top,bottom=n.bottom-r.top;
+   const tx=x<left?left:x>right?right:Math.max(left,Math.min(right,x));
+   const ty=y<top?top:y>bottom?bottom:Math.max(top,Math.min(bottom,y));
+   setLeader({width:r.width,height:r.height,path:`M ${x} ${y} L ${tx} ${ty}`});
+  };
+  update();
+  const observer=typeof ResizeObserver!=="undefined"?new ResizeObserver(update):null;
+  if(surface.current)observer?.observe(surface.current);
+  if(noteRef.current)observer?.observe(noteRef.current);
+  window.addEventListener("resize",update);
+  return ()=>{observer?.disconnect();window.removeEventListener("resize",update);};
+ },[selected,kind]);
  const close=()=>{const last=selected;setSelected(null);if(last!==null)buttons.current[last]?.focus();};
- return <div className={styles.drawingInteraction} data-compact={compact} role="group" aria-label={label} onKeyDown={e=>{if(e.key==='Escape'&&selected!==null){e.preventDefault();close();}else if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)&&(e.target as HTMLElement).matches('button[data-detail]')){e.preventDefault();const next=((selected??0)+(['ArrowRight','ArrowDown'].includes(e.key)?1:items.length-1))%items.length;setSelected(next);buttons.current[next]?.focus();}}}>
+ return <div ref={surface} className={styles.drawingInteraction} data-compact={compact} role="group" aria-label={label} onKeyDown={e=>{if(e.key==='Escape'&&selected!==null){e.preventDefault();close();}else if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)&&(e.target as HTMLElement).matches('button[data-detail]')){e.preventDefault();const next=((selected??0)+(['ArrowRight','ArrowDown'].includes(e.key)?1:items.length-1))%items.length;setSelected(next);buttons.current[next]?.focus();}}}>
  <svg className={styles.detailRegions} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" onClick={e=>{const b=e.currentTarget.getBoundingClientRect(),x=(e.clientX-b.left)/b.width*100,y=(e.clientY-b.top)/b.height*100;setSelected(items.reduce((best,item,i)=>Math.hypot(item.x-x,item.y-y)<Math.hypot(items[best].x-x,items[best].y-y)?i:best,0));}}>
  {items.map((item,i)=><polygon key={item.title} points={item.area} data-active={active===i} onPointerEnter={()=>setHover(i)} onPointerLeave={()=>setHover(null)}/>)}
- {selected!==null&&<path className={styles.detailLeader} d={`M ${items[selected].x} ${items[selected].y} L ${items[selected].x} 100`}/>}</svg>
+</svg>
+ {leader&&selected!==null&&<svg className={styles.detailConnector} viewBox={`0 0 ${leader.width} ${leader.height}`} preserveAspectRatio="none" aria-hidden="true"><path d={leader.path}/></svg>}
  {items.map((item,i)=><button key={item.title} ref={el=>{buttons.current[i]=el;}} data-detail type="button" className={styles.detailPoint} style={{left:`${item.x}%`,top:`${item.y}%`}} aria-label={`Explore ${item.title.toLowerCase()}`} aria-expanded={selected===i} aria-controls={selected===i?`${id}-note`:undefined} onPointerEnter={()=>setHover(i)} onPointerLeave={()=>setHover(null)} onClick={()=>setSelected(i)}>{String(i+1).padStart(2,'0')}</button>)}
  {selected!==null&&(()=>{
    const item=items[selected];
    const position=item.x>=51?"start":"end";
-   const offsetY=item.y>62?5:item.y<38?51:20;
-   const note=<aside id={`${id}-note`} className={styles.detailNote} data-anchor-side={position} style={{"--detail-y":offsetY+"%"} as React.CSSProperties} aria-label={item.title}>
+   
+   const note=<aside ref={noteRef} id={`${id}-note`} className={styles.detailNote} data-anchor-side={position} style={{"--point-x":item.x+"%","--point-y":item.y+"%"} as React.CSSProperties} aria-label={item.title}>
       <div><strong>{String(selected+1).padStart(2,"0")} / {item.title}</strong><button type="button" aria-label="Close drawing detail" onClick={close}><X size={14}/></button></div>
       <p>{item.text}</p><Link href={item.href}>{item.action}<ArrowUpRight size={14}/></Link>
    </aside>;
