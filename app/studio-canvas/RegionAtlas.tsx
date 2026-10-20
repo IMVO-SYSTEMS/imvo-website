@@ -42,35 +42,48 @@ const cities:City[]=[
 ].map(([iso,name,lon,lat,capital])=>({iso:String(iso),name:String(name),lon:Number(lon),lat:Number(lat),capital:!!capital}));
 const index=new Map(countries.map(c=>[c.name,c]));
 const outlines=africaCountryOutlines;
+// Fit the *entire selected country's outline* within the map, without
+// clipping its southern/northern edges. Coordinates are projected SVG pixels.
+const bounds=new Map(outlines.map(country=>{
+ const nums=(country.path.match(/-?\\d+(?:\\.\\d+)?/g)||[]).map(Number);
+ const xx:number[]=[],yy:number[]=[];for(let i=0;i+1<nums.length;i+=2){xx.push(nums[i]);yy.push(nums[i+1]);}
+ return [country.iso,{x0:Math.min(...xx),x1:Math.max(...xx),y0:Math.min(...yy),y1:Math.max(...yy)}] as const;
+}));
+function cameraFor(iso:string){
+ const b=bounds.get(iso);if(!b)return {center:[30.0619,-1.9441] as [number,number],zoom:2.15};
+ const x=(b.x0+b.x1)/2,y=(b.y0+b.y1)/2;
+ return {center:[(x-20)/920*72-18,38-(y-20)/710*74] as [number,number],
+ zoom:Math.min(32,Math.max(1.1,700/Math.max(12,b.x1-b.x0),525/Math.max(12,b.y1-b.y0)))};
+}
 function point(lon:number,lat:number){return {x:20+(lon+18)/72*920,y:20+(38-lat)/74*710};}
 const kigali=point(30.0619,-1.9441);
 
 export const regionCountryNames=regionalCountries.map(c=>c.name);
 export default function RegionAtlas({country,onCountryChange}:{country:string;onCountryChange:(name:string)=>void}){
  const selected=index.get(country)||countries[0];
- const [camera,setCamera]=useState(()=>({center:country,zoom:selected.zoom}));
+ const [camera,setCamera]=useState(()=>({center:country,zoom:cameraFor(selected.iso).zoom}));
  const [selectedCity,setSelectedCity]=useState<string|null>(null);
  const [showCities,setShowCities]=useState(true);
  const cityList=cities.filter(c=>c.iso===selected.iso);
  const activeCity=cityList.find(c=>c.name===selectedCity)||cityList.find(c=>c.capital)||cityList[0];
  const focusCountry=(name:string)=>{setSelectedCity(null);onCountryChange(name);};
- const focusCity=(name:string)=>{setSelectedCity(name);setCamera(current=>({center:country,zoom:Math.min(5,Math.max(current.zoom,selected.zoom+1))}));};
- const homeReset=()=>{setSelectedCity("Kigali");setCamera({center:"Rwanda",zoom:2.15});onCountryChange("Rwanda");};
- const zoomBy=(value:number)=>setCamera(c=>({...c,zoom:Math.max(.9,Math.min(5,Math.round((c.zoom+value)*100)/100))}));
+ const focusCity=(name:string)=>{setSelectedCity(name);setCamera(current=>({center:country,zoom:Math.min(5,Math.max(current.zoom,cameraFor(selected.iso).zoom+1))}));};
+ const homeReset=()=>{setSelectedCity("Kigali");setCamera({center:"Rwanda",zoom:cameraFor("RWA").zoom});onCountryChange("Rwanda");};
+ const zoomBy=(value:number)=>setCamera(c=>({...c,zoom:Math.max(.9,Math.min(36,Math.round((c.zoom+value*Math.max(1,c.zoom*.13))*100)/100))}));
  const previous=useRef(country);
  useEffect(()=>{
   if(previous.current===country)return;
   previous.current=country;
   // Overview first, then approach the newly chosen country. Reset stays instant when reduced motion is requested.
   const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if(reduce){setCamera({center:country,zoom:selected.zoom});return;}
+  if(reduce){setCamera({center:country,zoom:cameraFor(selected.iso).zoom});return;}
   setCamera(current=>({center:current.center,zoom:1}));
-  const t=window.setTimeout(()=>setCamera({center:country,zoom:selected.zoom}),360);
+  const t=window.setTimeout(()=>setCamera({center:country,zoom:cameraFor(selected.iso).zoom}),360);
   return ()=>window.clearTimeout(t);
  },[country,selected.zoom]);
  const focused=index.get(camera.center)||countries[0];
  const cityTarget=selectedCity&&activeCity?activeCity:null;
- const c=cityTarget?point(cityTarget.lon,cityTarget.lat):point(...focused.center);
+ const c=cityTarget?point(cityTarget.lon,cityTarget.lat):point(...cameraFor(focused.iso).center);
  const scale=camera.zoom;
  const transform=`translate(${+(480-c.x*scale).toFixed(2)}px, ${+(365-c.y*scale).toFixed(2)}px) scale(${scale})`;
  const home=country==="Rwanda";
