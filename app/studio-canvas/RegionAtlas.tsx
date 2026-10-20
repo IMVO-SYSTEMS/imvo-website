@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { ArrowUpRight, LocateFixed, Minus, Plus } from "lucide-react";
 import { africaCountryOutlines } from "./africaCountryOutlines";
+import { africaGeoNamesCities } from "./africaGeoNamesCities";
 import styles from "./StudioCanvas.module.css";
 
 type CountryInfo={iso:string; name:string; center:[number,number]; capital:string; pin:[number,number]; zoom:number};
@@ -52,6 +53,7 @@ const extraCities:City[]=[
  ["MOZ","Nacala",40.672,-14.542],["MOZ","Quelimane",36.887,-17.878],["MOZ","Tete",33.586,-16.156],["MOZ","Pemba",40.518,-12.974],["MOZ","Chimoio",33.483,-19.116],["MOZ","Xai-Xai",33.645,-25.051]
 ].map(([iso,name,lon,lat])=>({iso:String(iso),name:String(name),lon:Number(lon),lat:Number(lat)}));
 cities.push(...extraCities);
+for(const city of africaGeoNamesCities){if(!cities.some(existing=>existing.iso===city.iso&&existing.name.toLocaleLowerCase()===city.name.toLocaleLowerCase()))cities.push({iso:city.iso,name:city.name,lon:city.lon,lat:city.lat});}
 const index=new Map(countries.map(c=>[c.name,c]));
 const outlines=africaCountryOutlines;
 function point(lon:number,lat:number){return {x:20+(lon+18)/72*920,y:20+(38-lat)/74*710};}
@@ -63,7 +65,7 @@ export default function RegionAtlas({country,onCountryChange}:{country:string;on
  const [camera,setCamera]=useState(()=>({center:country,zoom:country==="Rwanda"?2.9:Math.min(4.9,selected.zoom*1.65)}));
  const [selectedCity,setSelectedCity]=useState<string|null>(null);
  const [showCities,setShowCities]=useState(true);
- const cityList=cities.filter(c=>c.iso===selected.iso);
+ const cityList=cities.filter(c=>c.iso===selected.iso).slice(0,12);
  const activeCity=cityList.find(c=>c.name===selectedCity)||cityList.find(c=>c.capital)||cityList[0];
  const focusCountry=(name:string)=>{setSelectedCity(null);onCountryChange(name);};
  const focusCity=(name:string)=>{setSelectedCity(name);setCamera(current=>({center:country,zoom:Math.min(5,Math.max(current.zoom,selected.zoom+1))}));};
@@ -127,6 +129,6 @@ export default function RegionAtlas({country,onCountryChange}:{country:string;on
  {cityList.length>0&&<div className={styles.atlasCityList} aria-label={"Cities in "+selected.name}>{cityList.map(city=><button type="button" key={city.name} aria-pressed={city.name===activeCity?.name} onClick={()=>focusCity(city.name)}>{city.name}</button>)}</div>}</div>
    <a href={home?"/contact#quote":"/about"}>{home?"Start a project":"Explore regional reach"} <ArrowUpRight size={16}/></a>
   </div>
-  <div className={styles.atlasAttribution}>COUNTRY BOUNDARIES: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noreferrer">NATURAL EARTH</a> · PUBLIC DOMAIN · IMVO ORIGINAL MAP INTERACTIONS</div>
+  <div className={styles.atlasAttribution}>COUNTRY BOUNDARIES: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noreferrer">NATURAL EARTH</a> · GEONAMES CITIES (CC BY 4.0) · IMVO ORIGINAL MAP</div>
  </div>;
 }
