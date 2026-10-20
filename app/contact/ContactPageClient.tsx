@@ -1050,10 +1050,12 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
           }}
         >
           <Image
-            src={content?.heroImage?.url || "/contact-hero.png"}
+            src={content?.heroImage?.url || "/contact-hero.webp"}
             alt={content?.heroImage?.alt || "Contact IMVO"}
             fill
             priority
+            fetchPriority="high"
+            sizes="(max-width: 900px) 100vw, 55vw"
             style={{
               objectFit: "cover",
               filter: "grayscale(100%) brightness(0.8)",
