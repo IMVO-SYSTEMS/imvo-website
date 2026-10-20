@@ -119,3 +119,11 @@
 
 .contactDrawing{display:grid;grid-template-columns:1.1fr 1fr;gap:var(--sc-s8);align-items:center}.contactDrawing>h2{font-size:var(--sc-title);order:1;max-width:16ch}.contactDrawing>.explorer{order:2;min-height:0;height:400px;aspect-ratio:auto}.contactDrawing>.explorer .detailNote{max-width:85%;width:300px}.contactDrawing>.corners{display:none}
 @media(max-width:760px){.contactDrawing{grid-template-columns:1fr;padding-block:var(--sc-s8)}.contactDrawing>h2{font-size:var(--sc-title)}.contactDrawing>.explorer{height:330px}}
+/* Published repository plans use white ink on transparency. Keep them legible on paper. */
+.frame[data-theme="white"] .projectPlan img[src^="/drawings/"]{filter:invert(1)}
+/* An opened annotation takes the caption's place instead of covering it. */
+.planInteractive{opacity:1}
+.planInteractive[inert]{visibility:hidden}
+.planDrawing .detailNote{width:min(280px,43%);left:var(--sc-s7)}
+.planSticky:has(.detailNote) .planCaption{visibility:hidden;pointer-events:none}
+@media(max-width:760px){.planDrawing .detailNote{width:calc(100% - var(--sc-s8));left:var(--sc-s7);bottom:0}}
