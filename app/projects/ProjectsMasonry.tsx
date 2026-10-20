@@ -20,6 +20,11 @@ const transition = {
   ease: [0.16, 1, 0.3, 1] as const,
 };
 
+function optimizedLocalCover(src:string){
+ const match=/\/(p01-01|p02-1|p03-1|p04-1|p05-1|p06-1)\.(?:png|jpe?g|webp)$/i.exec(src);
+ return match?`/studio-optimized/${match[1]}-960.webp`:null;
+}
+
 export default function ProjectsMasonry({
   projects: allProjects,
 }: {
@@ -346,8 +351,9 @@ export default function ProjectsMasonry({
                   aria-label={`View ${project.title}`}
                 >
                   <Image
-                    src={project.cover}
+                    src={optimizedLocalCover(project.cover) || project.cover}
                     alt={project.title}
+                    unoptimized={Boolean(optimizedLocalCover(project.cover))}
                     fill
                     sizes="(max-width: 700px) 100vw, (max-width: 1180px) 60vw, 27vw"
                     style={{ objectFit: "cover" }}
