@@ -53,6 +53,7 @@ export default function RegionAtlas({country,onCountryChange}:{country:string;on
  const cityList=cities.filter(c=>c.iso===selected.iso);
  const activeCity=cityList.find(c=>c.name===selectedCity)||cityList.find(c=>c.capital)||cityList[0];
  const focusCountry=(name:string)=>{setSelectedCity(null);onCountryChange(name);};
+ const focusCity=(name:string)=>{setSelectedCity(name);setCamera(current=>({center:country,zoom:Math.min(5,Math.max(current.zoom,selected.zoom+1))}));};
  const homeReset=()=>{setSelectedCity("Kigali");setCamera({center:"Rwanda",zoom:2.15});onCountryChange("Rwanda");};
  const zoomBy=(value:number)=>setCamera(c=>({...c,zoom:Math.max(.9,Math.min(5,Math.round((c.zoom+value)*100)/100))}));
  const previous=useRef(country);
@@ -67,7 +68,8 @@ export default function RegionAtlas({country,onCountryChange}:{country:string;on
   return ()=>window.clearTimeout(t);
  },[country,selected.zoom]);
  const focused=index.get(camera.center)||countries[0];
- const c=point(...focused.center);
+ const cityTarget=selectedCity&&activeCity?activeCity:null;
+ const c=cityTarget?point(cityTarget.lon,cityTarget.lat):point(...focused.center);
  const scale=camera.zoom;
  const transform=`translate(${+(480-c.x*scale).toFixed(2)}px, ${+(365-c.y*scale).toFixed(2)}px) scale(${scale})`;
  const home=country==="Rwanda";
@@ -80,7 +82,7 @@ export default function RegionAtlas({country,onCountryChange}:{country:string;on
  <div className={styles.atlasOptions}><label htmlFor="imvo-africa-country">COUNTRY</label><select id="imvo-africa-country" value={selected.name} onChange={e=>focusCountry(e.target.value)}>{countries.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(c=><option key={c.iso} value={c.name}>{c.name}</option>)}</select>
  <label className={styles.atlasShowCities}><input type="checkbox" checked={showCities} onChange={e=>setShowCities(e.target.checked)}/> CITY LABELS</label></div>
   <div className={styles.atlasViewport}>
-   <svg viewBox="0 0 960 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label={`Real geographic boundaries of East and Central African countries, currently focused on ${country}`}>
+   <svg viewBox="0 0 960 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label={`Africa map of national borders and cities, currently focused on ${country}`}>
     <g className={styles.atlasGrid} aria-hidden="true">{Array.from({length:24},(_,i)=><path key={i} d={`M ${i*48} 0 V760`}/>)}{Array.from({length:19},(_,i)=><path key={i} d={`M 0 ${i*44} H960`}/>)}</g>
     <g className={styles.atlasGeography} style={{transform} as CSSProperties}>
      {outlines.map(outline=>{
@@ -96,7 +98,7 @@ export default function RegionAtlas({country,onCountryChange}:{country:string;on
      </g>}
      {showCities&&cityList.map(city=>{const p=point(city.lon,city.lat),inverse=1/Math.max(1,camera.zoom);return <g key={city.name} className={styles.atlasCity} data-active={city.name===activeCity?.name?"true":undefined}
       transform={"translate("+p.x+","+p.y+") scale("+inverse+")"} role="button" tabIndex={0} aria-label={"Show "+city.name+", "+selected.name}
-      onClick={()=>setSelectedCity(city.name)} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();setSelectedCity(city.name);}}}>
+      onClick={()=>focusCity(city.name)} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();focusCity(city.name);}}}>
       <circle r={city.capital?5:3.5}/><circle r={city.capital?11:8} className={styles.atlasCityHalo}/>
       <text x="12" y="-8">{city.name.toUpperCase()}</text></g>})}
     </g>
@@ -108,7 +110,7 @@ export default function RegionAtlas({country,onCountryChange}:{country:string;on
    <div><span className={styles.eyebrow}>SELECTED TERRITORY / {selected.iso}</span><strong>{home?"KIGALI, RWANDA":selected.name.toUpperCase()}</strong><p>{home?"IMVO Studio is based in Kigali, Rwanda. Select a city or travel to another country."
  :regionalCountries.some(c=>c.iso===selected.iso)?"Regional design interests. Cities are geographic references, not IMVO offices."
  :"Explore African geography. No IMVO office or project presence is implied."}</p>
- {cityList.length>0&&<div className={styles.atlasCityList} aria-label={"Cities in "+selected.name}>{cityList.map(city=><button type="button" key={city.name} aria-pressed={city.name===activeCity?.name} onClick={()=>setSelectedCity(city.name)}>{city.name}</button>)}</div>}</div>
+ {cityList.length>0&&<div className={styles.atlasCityList} aria-label={"Cities in "+selected.name}>{cityList.map(city=><button type="button" key={city.name} aria-pressed={city.name===activeCity?.name} onClick={()=>focusCity(city.name)}>{city.name}</button>)}</div>}</div>
    <a href={home?"/contact#quote":"/about"}>{home?"Start a project":"Explore regional reach"} <ArrowUpRight size={16}/></a>
   </div>
   <div className={styles.atlasAttribution}>COUNTRY BOUNDARIES: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noreferrer">NATURAL EARTH</a> · PUBLIC DOMAIN · IMVO ORIGINAL MAP INTERACTIONS</div>
