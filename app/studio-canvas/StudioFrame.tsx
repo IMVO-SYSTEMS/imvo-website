@@ -48,7 +48,7 @@ export default function StudioFrame({children,settings,studioStatus}:{children:R
  const toggle=()=>{const next=theme==='black'?'white':'black';setTheme(next);try{localStorage.setItem('imvo:studio-theme',next);}catch{}};
  const close=()=>{setOpen(false);trigger.current?.focus();};
  const socials=settings?.socialLinks?.length?settings.socialLinks:defaultSocials;
- return <StatusContext.Provider value={studioStatus||defaultStatus}><div className={styles.frame} data-studio-frame data-theme={theme}>
+ return <StatusContext.Provider value={studioStatus||defaultStatus}><link rel="preload" href="/fonts/studio/bt-grotesk-bold.woff2" as="font" type="font/woff2" crossOrigin="anonymous"/><link rel="preload" href="/fonts/studio/bt-grotesk-regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous"/><div className={styles.frame} data-studio-frame data-theme={theme}>
   <a className={styles.skipLink} href="#main-content">Skip to main content</a>
   <header className={styles.header}>
    <Link href="/" className={styles.brand} aria-label="IMVO Studio home"><StudioImage src="/brand/imvo-main.svg" alt="IMVO" width="230" height="54"/></Link>
