@@ -1,0 +1,53 @@
+name: Import IMVO approved portraits once
+
+on:
+  push:
+    branches:
+      - feat/mapchart-direction-africa-city-atlas-20261020
+    paths:
+      - .github/workflows/import-imvo-portraits-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  import-portraits:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout import branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Download and verify user approved images
+        env:
+          PORTRAIT_DOWNLOAD_URL: https://d2ol7oe51mr4n9.cloudfront.net/user_3ENlEezMenC2lRloW59bpB2N77p/277ac823-90bb-4211-8125-aa1c32390ac7.zip
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --max-time 120 --silent --show-error "$PORTRAIT_DOWNLOAD_URL" -o /tmp/approved-portraits.zip
+          echo "059f20189e5fbc55316197e0ff60c8591002428ddb72b3e719a88e044d36bcba  /tmp/approved-portraits.zip" | sha256sum --check --status
+          mkdir -p /tmp/imvo-approved
+          unzip -q /tmp/approved-portraits.zip 'public/studio-portraits/*.webp' -d /tmp/imvo-approved
+          test "$(find /tmp/imvo-approved/public/studio-portraits -name '*.webp' -type f | wc -l)" -eq 8
+          mkdir -p public/studio-portraits
+          for number in 1 2 3 4; do
+            for theme in dark light; do
+              file="/tmp/imvo-approved/public/studio-portraits/team${number}-${theme}.webp"
+              test -s "$file"
+              cp "$file" public/studio-portraits/
+            done
+          done
+          ls -lh public/studio-portraits
+      - name: Commit approved portrait files
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/studio-portraits/team{1,2,3,4}-{dark,light}.webp
+          if git diff --cached --quiet; then
+            echo "Approved portrait images already committed."
+          else
+            git commit -m "Install eight approved IMVO portrait variants"
+            git push origin "HEAD:feat/mapchart-direction-africa-city-atlas-20261020"
+          fi
