@@ -12,7 +12,7 @@ Implemented so far:
 - Studio status stays anchored; no dismissal or dragging.
 - Shared DrawingInteraction and DrawingExplorer: hover areas, numbered keyboard controls, connected useful notes, actual service links, Escape returns focus, restrained zoom/reset.
 - Drawing overlays on hero, main assembling plan, all three intelligence studies and tower.
-- ServiceJourney replaces three stacked rows with one 235svh desktop scene, direct accessible stage controls and a compact mobile version.
+- ServiceJourney replaces three stacked rows with one 180svh desktop scene, direct accessible stage controls and a compact mobile version.
 - Centered division logos including mobile second row, global drafting pointer with trailing line, native cursor fallback for touch/reduced motion, discreet page navigator.
 - TypeScript passes at checkpoint.
 
@@ -29,11 +29,32 @@ Verification completed locally:
 - `npm run test:studio`: passed: one H1, no video hero, live progress markup, non-dismissible status, 4 valid anchors, 45 image assets, 14 themed destinations, actual published plan controls and five valid WOFF2 files.
 - `git diff --check`: passed after whitespace cleanup.
 
-Remaining release work:
-1. Record Systems route-check result, push the checked source and open PR.
-2. Await existing GitHub compatibility/Next build/Cloudflare/route CI before merging the exact head.
-3. Await official Cloudflare deployment; verify actual website interactions and both themes in the browser and correct observed issues. Internal managed preview is unavailable because the environment has no control-browser skill; do not claim pre-deployment visual QA.
-4. Add final release evidence and update this handoff if further work remains.
+Release state as of 20 October 2026:
+- PR #54 merged as `af11175fca888281bd1a3bf1a54f530c980b9e5f`; tree `afb309de53189a154051e8aa0ab17c100f808a32`.
+- Compatibility run `39340528175`, job `118360635340`: all steps passed, including lint, Next.js build, Cloudflare compatibility/build, 63 Systems routes and the expanded Studio suite.
+- Production deployment run `39365056360`, job `118439883115`: success.
+- Actual official site verified in the cloud browser: https://www.imvogroup.com/.
+
+Live browser verification completed:
+- Hero automatic construction reaches 100%; a 1.2-second hold redraws to 21%, release pauses, a second hold resumes to 42%, and Complete reaches 100%.
+- House detail annotation opens with /services/design; Escape dismisses and restores focus; studio status has no dismissal control.
+- White/black themes work. Computed hero font is BT Grotesk, 44.1713px at the observed 1363px viewport, matching the reference measurement. Three division marks are centered within the document viewport.
+- Section shortcuts work. One 180svh service scene changes to Strategy by native scrolling and to Execution by keyboard controls.
+- Assembling plan reaches its technical stage; selectable room note and linked design action work.
+- Tower fill changed from 69% to 94% during scrolling.
+- Projects index displays its interactive plan introduction. Published project-plan zoom reaches 150%, selection opens its note, and Discuss this drawing transfers the project title to the Contact brief.
+- Contact form is present with the expected prefilled brief; it was not submitted.
+- Systems and DŌMICILE render in the shared theme; native division menus and the Android download URL remain present. About and Services page-body font/theme coverage and the global drafting cursor were also checked (native cursor computed as none after pointer movement). No horizontal overflow or broken loaded images was observed at the desktop viewport.
+
+Final display corrections on branch `fix/studio-drawing-release-qa-20261020`:
+- Invert white-on-alpha /drawings/ project images in the white theme so real plans stay visible.
+- Give opened assembling-plan annotations a bounded width, full opacity and exclusive use of the caption area.
+- Compact the title-only About introduction so its frame no longer reserves a large empty hero area.
+
+Remaining before final handoff:
+1. Pass the existing CI for this narrow correction, merge its exact head and await deployment.
+2. Recheck actual plan visibility and annotation/caption separation, return the official URL and leave the live homepage open.
+3. Mobile and wide CSS were reviewed, but native responsive browser emulation and the managed control-browser skill are unavailable in this environment. Do not claim a fresh mobile screenshot verification. Existing responsive breakpoints and reduced-motion alternatives are preserved.
 
 ## Runtime
 - Repository checkout: /workspace/scratch/934a30c439ff/imvo-studio-redesign (may reset; clone remote branch if absent).
