@@ -675,10 +675,6 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
   const cellsBySector = rwandaLocationData?.cellsBySector || {};
   const villagesByCell = rwandaLocationData?.villagesByCell || {};
 
-  if (!mounted) {
-    return <div style={{ background: "var(--sc-bg)", minHeight: "100vh" }} />;
-  }
-
   const toggleService = (service: string) => {
     setSelectedServices((prev) =>
       prev.includes(service)
@@ -1007,7 +1003,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
 
 
           <motion.h1
-            initial={{ opacity: 0, y: 40 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...transition, delay: 0.2 }}
             style={{
@@ -1024,7 +1020,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...transition, delay: 0.35 }}
             style={{
@@ -1040,7 +1036,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
         </div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
+          initial={false}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ ...transition, delay: 0.25 }}
           style={{
