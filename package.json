@@ -7,17 +7,17 @@
     "url": "https://github.com/IMVO-SYSTEMS/imvo-website.git"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "node scripts/build-studio-thumbnails.mjs && next dev",
+    "build": "node scripts/build-studio-thumbnails.mjs && next build",
     "start": "next start",
     "lint": "eslint",
     "cms:migrate": "sanity exec scripts/migrate-cms-backend.ts --with-user-token",
-    "dev:vinext": "vite dev --port 3001",
+    "dev:vinext": "node scripts/build-studio-thumbnails.mjs && vite dev --port 3001",
     "build:vinext": "vite build",
     "start:vinext": "wrangler dev --config dist/server/wrangler.json",
     "deploy:vinext": "vinext-cloudflare deploy --config dist/server/wrangler.json",
-    "build:next": "next build",
-    "build:cloudflare": "vite build",
+    "build:next": "node scripts/build-studio-thumbnails.mjs && next build",
+    "build:cloudflare": "node scripts/build-studio-thumbnails.mjs && vite build",
     "deploy:cloudflare": "wrangler deploy --keep-vars",
     "test:systems": "node --experimental-strip-types scripts/check-systems-routes.mjs",
     "preview:cloudflare": "node scripts/preview-cloudflare.mjs --port 4173",
@@ -38,7 +38,8 @@
     "sanity": "^6.5.0",
     "simple-icons": "^16.35.0",
     "styled-components": "^6.5.3",
-    "vinext": "latest"
+    "vinext": "latest",
+    "sharp": "0.34.5"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "1",
