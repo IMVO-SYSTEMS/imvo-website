@@ -602,8 +602,8 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
 
     setIsRwandaLocationsLoading(true);
     try {
-      const module = await import("./rwandaLocations.json");
-      setRwandaLocationData(module.default as unknown as RwandaLocationData);
+      const locationsModule = await import("./rwandaLocations.json");
+      setRwandaLocationData(locationsModule.default as unknown as RwandaLocationData);
     } catch (error) {
       console.error("Rwanda location data failed to load:", error);
     } finally {
@@ -1050,10 +1050,12 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
           }}
         >
           <Image
-            src={content?.heroImage?.url || "/contact-hero.png"}
+            src={content?.heroImage?.url || "/contact-hero.webp"}
             alt={content?.heroImage?.alt || "Contact IMVO"}
             fill
             priority
+            fetchPriority="high"
+            sizes="(max-width: 900px) 100vw, 55vw"
             style={{
               objectFit: "cover",
               filter: "grayscale(100%) brightness(0.8)",
