@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { ArrowUpRight, LocateFixed, Minus, Plus } from "lucide-react";
 import { africaCountryOutlines } from "./africaCountryOutlines";
+import { africaPopulatedPlaces } from "./africaPopulatedPlaces";
 import styles from "./StudioCanvas.module.css";
 
 type CountryInfo={iso:string; name:string; center:[number,number]; capital:string; pin:[number,number]; zoom:number};
@@ -22,7 +23,7 @@ const countries:CountryInfo[]=[...regionalCountries,...africaCountryOutlines
  .map(c=>({iso:c.iso,name:c.name,center:[c.lon,c.lat] as [number,number],
  capital:c.name,pin:[c.lon,c.lat] as [number,number],zoom:1.7}))];
 type City={name:string;iso:string;lon:number;lat:number;capital?:boolean};
-const cities:City[]=[
+const manualCities:City[]=[
  ["RWA","Kigali",30.0619,-1.9441,1],["RWA","Musanze",29.634,-1.499,0],["RWA","Rubavu",29.26,-1.679,0],["RWA","Huye",29.74,-2.596,0],["RWA","Rusizi",28.908,-2.484,0],["RWA","Rwamagana",30.434,-1.948,0],
  ["UGA","Kampala",32.5825,.3476,1],["UGA","Entebbe",32.44,.06,0],["UGA","Jinja",33.203,.424,0],["UGA","Gulu",32.299,2.779,0],
  ["KEN","Nairobi",36.8219,-1.2921,1],["KEN","Mombasa",39.668,-4.043,0],["KEN","Kisumu",34.761,-.092,0],["KEN","Nakuru",36.066,-.303,0],
@@ -40,37 +41,51 @@ const cities:City[]=[
  ["CAF","Bangui",18.562,4.394,1],["COG","Brazzaville",15.283,-4.263,1],["ERI","Asmara",38.931,15.322,1],
  ["CPV","Praia",-23.512,14.921,1],["STP","São Tomé",6.727,.336,1],["COM","Moroni",43.255,-11.704,1],["MUS","Port Louis",57.499,-20.161,1],["SYC","Victoria",55.45,-4.62,1]
 ].map(([iso,name,lon,lat,capital])=>({iso:String(iso),name:String(name),lon:Number(lon),lat:Number(lat),capital:!!capital}));
+const cities:City[]=[
+ ...africaPopulatedPlaces.map(p=>({iso:p.iso,name:p.name,lon:p.lon,lat:p.lat,capital:p.capital})),
+ ...manualCities.filter(c=>!africaPopulatedPlaces.some(p=>p.iso===c.iso&&p.name.toLowerCase()===c.name.toLowerCase()))
+];
 const index=new Map(countries.map(c=>[c.name,c]));
 const outlines=africaCountryOutlines;
 function point(lon:number,lat:number){return {x:20+(lon+18)/72*920,y:20+(38-lat)/74*710};}
 const kigali=point(30.0619,-1.9441);
+/** Geometrically fit each selected country into the same boxed map viewport. */
+const countryBounds=new Map<string,{x:number;y:number;zoom:number}>(africaCountryOutlines.map(c=>{
+ const points=[...c.path.matchAll(/(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/g)].map(m=>({x:Number(m[1]),y:Number(m[2])}));
+ if(!points.length){const p=point(c.lon,c.lat);return [c.iso,{x:p.x,y:p.y,zoom:9}] as const;}
+ const xs=points.map(p=>p.x),ys=points.map(p=>p.y);
+ const l=Math.min(...xs),r=Math.max(...xs),t=Math.min(...ys),b=Math.max(...ys);
+ return [c.iso,{x:(l+r)/2,y:(t+b)/2,zoom:Math.max(1.15,Math.min(32,(960*.81)/Math.max(7,r-l),(760*.73)/Math.max(7,b-t)))}] as const;
+}));
+const getCountryCamera=(c:CountryInfo)=>({center:c.name,zoom:countryBounds.get(c.iso)?.zoom??c.zoom});
 
 export const regionCountryNames=regionalCountries.map(c=>c.name);
 export default function RegionAtlas({country,onCountryChange}:{country:string;onCountryChange:(name:string)=>void}){
  const selected=index.get(country)||countries[0];
- const [camera,setCamera]=useState(()=>({center:country,zoom:selected.zoom}));
+ const [camera,setCamera]=useState(()=>getCountryCamera(selected));
  const [selectedCity,setSelectedCity]=useState<string|null>(null);
  const [showCities,setShowCities]=useState(true);
- const cityList=cities.filter(c=>c.iso===selected.iso);
+ const cityList=cities.filter(c=>c.iso===selected.iso).sort((a,b)=>Number(b.capital)-Number(a.capital));
  const activeCity=cityList.find(c=>c.name===selectedCity)||cityList.find(c=>c.capital)||cityList[0];
  const focusCountry=(name:string)=>{setSelectedCity(null);onCountryChange(name);};
- const focusCity=(name:string)=>{setSelectedCity(name);setCamera(current=>({center:country,zoom:Math.min(5,Math.max(current.zoom,selected.zoom+1))}));};
- const homeReset=()=>{setSelectedCity("Kigali");setCamera({center:"Rwanda",zoom:2.15});onCountryChange("Rwanda");};
- const zoomBy=(value:number)=>setCamera(c=>({...c,zoom:Math.max(.9,Math.min(5,Math.round((c.zoom+value)*100)/100))}));
+ const focusCity=(name:string)=>{setSelectedCity(name);setCamera(current=>({center:country,zoom:Math.min(34,Math.max(current.zoom,getCountryCamera(selected).zoom*1.25))}));};
+ const homeReset=()=>{setSelectedCity(null);setCamera(getCountryCamera(regionalCountries[0]));onCountryChange("Rwanda");};
+ const zoomBy=(value:number)=>setCamera(c=>({...c,zoom:Math.max(.8,Math.min(40,Math.round((c.zoom+value*Math.max(1,c.zoom*.18))*100)/100))}));
  const previous=useRef(country);
  useEffect(()=>{
   if(previous.current===country)return;
   previous.current=country;
   // Overview first, then approach the newly chosen country. Reset stays instant when reduced motion is requested.
   const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if(reduce){setCamera({center:country,zoom:selected.zoom});return;}
+  if(reduce){setCamera(getCountryCamera(selected));return;}
   setCamera(current=>({center:current.center,zoom:1}));
-  const t=window.setTimeout(()=>setCamera({center:country,zoom:selected.zoom}),360);
+  const t=window.setTimeout(()=>setCamera(getCountryCamera(selected)),360);
   return ()=>window.clearTimeout(t);
- },[country,selected.zoom]);
+ },[country,selected.iso]);
  const focused=index.get(camera.center)||countries[0];
  const cityTarget=selectedCity&&activeCity?activeCity:null;
- const c=cityTarget?point(cityTarget.lon,cityTarget.lat):point(...focused.center);
+ const b=countryBounds.get(focused.iso);
+ const c=cityTarget?point(cityTarget.lon,cityTarget.lat):b??point(...focused.center);
  const scale=camera.zoom;
  const transform=`translate(${+(480-c.x*scale).toFixed(2)}px, ${+(365-c.y*scale).toFixed(2)}px) scale(${scale})`;
  const home=country==="Rwanda";
@@ -97,11 +112,21 @@ export default function RegionAtlas({country,onCountryChange}:{country:string;on
      {!home&&<g className={styles.atlasSelectedPin} transform={`translate(${point(...selected.pin).x},${point(...selected.pin).y})`}>
       <circle r="6"/><path d="M-18 0H18 M0 -18V18"/>
      </g>}
-     {showCities&&cityList.map(city=>{const p=point(city.lon,city.lat),inverse=1/Math.max(1,camera.zoom);return <g key={city.name} className={styles.atlasCity} data-active={city.name===activeCity?.name?"true":undefined}
+     {showCities&&cityList.slice(0,12).map(city=>{const p=point(city.lon,city.lat),inverse=1/Math.max(1,camera.zoom);return <g key={city.name} className={styles.atlasCity} data-active={city.name===activeCity?.name?"true":undefined}
       transform={"translate("+p.x+","+p.y+") scale("+inverse+")"} role="button" tabIndex={0} aria-label={"Show "+city.name+", "+selected.name}
       onClick={()=>focusCity(city.name)} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();focusCity(city.name);}}}>
       <circle r={city.capital?5:3.5}/><circle r={city.capital?11:8} className={styles.atlasCityHalo}/>
       <text x="12" y="-8">{city.name.toUpperCase()}</text></g>})}
+     {outlines.map(outline=>{
+       const known=countries.find(c=>c.iso===outline.iso);
+       const bounds=countryBounds.get(outline.iso);
+       if(!known||!bounds)return null;
+       const inverse=1/Math.max(1,camera.zoom);
+       return <g key={"label-"+outline.iso} className={styles.atlasCountryName}
+        data-active={known.iso===selected.iso?"true":undefined}
+        transform={"translate("+bounds.x+","+bounds.y+") scale("+inverse+")"}
+        aria-hidden="true"><text textAnchor="middle">{known.name.toUpperCase()}</text></g>;
+     })}
     </g>
    </svg>
    <div className={styles.atlasCoordinates} aria-hidden="true"><span>WGS84 / {(activeCity?.lat??selected.pin[1]).toFixed(4)}°, {(activeCity?.lon??selected.pin[0]).toFixed(4)}°</span><span>{home?"01 / BASE":"02 / REGIONAL VIEW"}</span></div>

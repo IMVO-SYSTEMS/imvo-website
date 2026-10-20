@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import AboutPageClient from "./AboutPageClient";
-import AboutTestimonialsController from "./AboutTestimonialsController";
 import { getAboutPageContent } from "@/sanity/lib/siteContent";
-import { getSeoEntry, getTeamMembers } from "@/sanity/lib/cmsBackend";
+import { getSeoEntry, getTeamMembers, getTestimonials } from "@/sanity/lib/cmsBackend";
 import { mergeCmsMetadata } from "@/app/lib/cmsMetadata";
 import type { AboutPageContent } from "@/sanity/types/siteContent";
 
@@ -36,9 +35,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const [content, structuredTeam] = await Promise.all([
+  const [content, structuredTeam, curatedReviews] = await Promise.all([
     getAboutPageContent(),
     getTeamMembers(),
+    getTestimonials(),
   ]);
 
   const testimonials = (content?.testimonials || [])
@@ -58,13 +58,14 @@ export default async function AboutPage() {
         .join(" · "),
     }));
 
-  // AboutPageClient has a historical hard-coded fallback when its testimonials
-  // array is empty. Supply one blank item only in the zero-review state so
-  // those legacy quotes never reappear in rendered HTML; the controller then
-  // hides the entire Client Perspectives section.
-  const renderedTestimonials = testimonials.length
-    ? testimonials
-    : [{ text: "", author: "", date: "" }];
+  // Studio collection reviews are independently editable and publishable.
+  // The About Page's own review array takes priority while valid and active.
+  // Do not display blank placeholders or unverified hard-coded client quotes.
+  const renderedTestimonials = testimonials.filter(item=>item.text?.trim()&&item.author?.trim()).length
+    ? testimonials.filter(item=>item.text?.trim()&&item.author?.trim())
+    : curatedReviews.filter(item=>item.quote?.trim()&&item.author?.trim()).map(item=>({
+        text:item.quote,author:item.author,date:[item.role,item.company,item.source||item.date].filter(Boolean).join(" · "),
+      }));
 
   const resolvedContent: AboutPageContent = {
     ...(content || {}),
@@ -75,7 +76,6 @@ export default async function AboutPage() {
   return (
     <>
       <AboutPageClient content={resolvedContent} />
-      <AboutTestimonialsController hasTestimonials={testimonials.length > 0} />
     </>
   );
 }

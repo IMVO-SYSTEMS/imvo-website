@@ -398,3 +398,57 @@
  .atlasCityList{gap:4px}
  .atlasAttribution{padding:9px 12px;font-size:7px}
 }
+
+
+/* Close-focus national atlas: measured borders, prominent country labels and live city labels. */
+.atlasSelectable,.atlasBorder{vector-effect:non-scaling-stroke;stroke-width:1.2}
+.atlasCountryName{pointer-events:none}
+.atlasCountryName text{font:700 13px/1 "BT Grotesk",Arial,sans-serif;letter-spacing:.04em;fill:var(--sc-ink);paint-order:stroke;stroke:var(--sc-bg);stroke-width:3px;opacity:.86}
+.atlasCountryName[data-active=true] text{font-size:17px;fill:#f04b21;stroke-width:4px;opacity:1}
+.atlasCity text{opacity:.86;font:10px/1 var(--sc-mono);fill:var(--sc-ink);paint-order:stroke;stroke:var(--sc-bg);stroke-width:3px}
+.atlasCity[data-active=true] text{font-weight:700;opacity:1;fill:#f04b21}
+.atlasViewport{overflow:hidden}
+.atlasGeography{transform-origin:0 0;transition:transform .98s cubic-bezier(.2,.8,.2,1)}
+.atlasCity circle,.atlasKigali circle,.atlasSelectedPin circle{vector-effect:non-scaling-stroke}
+
+/* Hotspot details are overlay cards *inside* the drawing frame, never rows below it. */
+.drawingInteraction[data-note-placement=anchored]{pointer-events:none;z-index:12}
+.drawingInteraction[data-note-placement=anchored] .detailNote{
+ position:absolute!important;inset:auto!important;z-index:20!important;
+ width:min(31%,300px)!important;max-width:min(300px,90%)!important;
+ min-width:190px;max-height:48%;overflow:auto;
+ box-shadow:6px 6px 0 color-mix(in srgb,var(--sc-ink) 17%,transparent)!important;
+ background:var(--sc-bg)!important;color:var(--sc-ink)!important;
+ border:1px solid var(--sc-ink)!important;pointer-events:auto;
+ animation:fadeIn .18s ease-out!important;transform:none!important;
+}
+.drawingInteraction[data-note-placement=anchored] .detailNote[data-anchor-side=start]{right:2%!important;left:auto!important}
+.drawingInteraction[data-note-placement=anchored] .detailNote[data-anchor-side=end]{left:2%!important;right:auto!important}
+.drawingInteraction[data-note-placement=anchored] .detailNote[data-anchor-vertical=top]{top:2%!important;bottom:auto!important}
+.drawingInteraction[data-note-placement=anchored] .detailNote[data-anchor-vertical=bottom]{bottom:3%!important;top:auto!important}
+.drawingDock:empty,.heroDetailDock:empty,.planDetailDock:empty{display:none!important}
+.explorer:has(.drawingDock:not(:empty)){height:100%!important;aspect-ratio:1!important;overflow:hidden!important}
+.heroCanvas>.drawingInteraction[data-note-placement=anchored] .detailNote{
+ left:2%!important;right:auto!important;width:min(25%,300px)!important;
+ max-height:35%!important;min-width:230px;top:auto!important;bottom:10%!important;
+}
+.heroCanvas>.drawingInteraction[data-note-placement=anchored] .detailNote[data-anchor-vertical=top]{
+ top:10%!important;bottom:auto!important
+}
+@media(max-width:760px){
+ .atlasCountryName text{font-size:13px}
+ .drawingInteraction[data-note-placement=anchored] .detailNote{
+  width:min(76%,285px)!important;min-width:0!important;max-height:52%!important;
+ }
+ .heroCanvas>.drawingInteraction[data-note-placement=anchored] .detailNote{
+  left:4%!important;right:auto!important;top:2%!important;bottom:auto!important;
+  width:min(70%,270px)!important;max-height:31%!important;min-width:0!important;
+ }
+ .heroCanvas>.drawingInteraction[data-note-placement=anchored] .detailNote[data-anchor-vertical=bottom]{
+  top:2%!important;bottom:auto!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ .atlasGeography{transition:none}
+ .drawingInteraction[data-note-placement=anchored] .detailNote{animation:none!important}
+}

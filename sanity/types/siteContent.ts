@@ -72,6 +72,7 @@ export type HomePageContent = {
   teamKicker?: string;
   teamHeading?: string;
   teamImage?: CmsImage;
+  useCmsTeamImage?: boolean;
   teamMembers?: TeamMember[];
   ctaKicker?: string;
   ctaHeading?: string;

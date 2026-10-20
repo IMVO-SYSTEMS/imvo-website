@@ -1,6 +1,5 @@
 "use client";
 import { useId, useRef, useState } from "react";
-import { createPortal } from "react-dom";
 import Link from "next/link";
 import { ArrowUpRight, Minus, Plus, X } from "lucide-react";
 import StudioImage from "./StudioImage";
@@ -38,20 +37,21 @@ export function DrawingInteraction({kind,label='Explore the drawing',compact=fal
  const id=useId(),[selected,setSelected]=useState<number|null>(null),[hover,setHover]=useState<number|null>(null);
  const buttons=useRef<(HTMLButtonElement|null)[]>([]),items=details[kind],active=hover??selected;
  const close=()=>{const last=selected;setSelected(null);if(last!==null)buttons.current[last]?.focus();};
- return <div className={styles.drawingInteraction} data-compact={compact} role="group" aria-label={label} onKeyDown={e=>{if(e.key==='Escape'&&selected!==null){e.preventDefault();close();}else if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)&&(e.target as HTMLElement).matches('button[data-detail]')){e.preventDefault();const next=((selected??0)+(['ArrowRight','ArrowDown'].includes(e.key)?1:items.length-1))%items.length;setSelected(next);buttons.current[next]?.focus();}}}>
+ return <div className={styles.drawingInteraction} data-compact={compact} data-note-placement="anchored" aria-live="polite" role="group" aria-label={label} onKeyDown={e=>{if(e.key==='Escape'&&selected!==null){e.preventDefault();close();}else if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)&&(e.target as HTMLElement).matches('button[data-detail]')){e.preventDefault();const next=((selected??0)+(['ArrowRight','ArrowDown'].includes(e.key)?1:items.length-1))%items.length;setSelected(next);buttons.current[next]?.focus();}}}>
  <svg className={styles.detailRegions} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" onClick={e=>{const b=e.currentTarget.getBoundingClientRect(),x=(e.clientX-b.left)/b.width*100,y=(e.clientY-b.top)/b.height*100;setSelected(items.reduce((best,item,i)=>Math.hypot(item.x-x,item.y-y)<Math.hypot(items[best].x-x,items[best].y-y)?i:best,0));}}>
  {items.map((item,i)=><polygon key={item.title} points={item.area} data-active={active===i} onPointerEnter={()=>setHover(i)} onPointerLeave={()=>setHover(null)}/>)}
  {selected!==null&&<path className={styles.detailLeader} d={`M ${items[selected].x} ${items[selected].y} L ${items[selected].x} 100`}/>}</svg>
  {items.map((item,i)=><button key={item.title} ref={el=>{buttons.current[i]=el;}} data-detail type="button" className={styles.detailPoint} style={{left:`${item.x}%`,top:`${item.y}%`}} aria-label={`Explore ${item.title.toLowerCase()}`} aria-expanded={selected===i} aria-controls={selected===i?`${id}-note`:undefined} onPointerEnter={()=>setHover(i)} onPointerLeave={()=>setHover(null)} onClick={()=>setSelected(i)}>{String(i+1).padStart(2,'0')}</button>)}
  {selected!==null&&(()=>{
    const item=items[selected];
-   const position=item.x<40?"start":item.x>60?"end":"middle";
-   const note=<aside id={`${id}-note`} className={styles.detailNote} data-anchor-side={position} aria-label={item.title}>
+   const position=item.x<=50?"start":"end";
+   const vertical=item.y<=50?"bottom":"top";
+   const note=<aside id={`${id}-note`} className={styles.detailNote} data-anchor-side={position} data-anchor-vertical={vertical} aria-label={item.title}>
       <div><strong>{String(selected+1).padStart(2,"0")} / {item.title}</strong><button type="button" aria-label="Close drawing detail" onClick={close}><X size={14}/></button></div>
       <p>{item.text}</p><Link href={item.href}>{item.action}<ArrowUpRight size={14}/></Link>
    </aside>;
-   const dock=dockId&&typeof document!=="undefined"?document.getElementById(dockId):null;
-   return dock?createPortal(note,dock):note;
+   // Render within this drawing: overlays never push subsequent content down.
+   return note;
  })()}
  </div>;
 }

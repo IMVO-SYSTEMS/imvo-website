@@ -104,7 +104,8 @@ export const homePageType = defineType({
     defineField({ name: "services", title: "Service summaries", type: "array", group: "portfolio", of: [titleTextItem], validation: (rule) => rule.max(6) }),
     defineField({ name: "teamKicker", title: "Team label", type: "string", group: "team" }),
     defineField({ name: "teamHeading", title: "Team heading", type: "text", rows: 3, group: "team" }),
-    defineField({ ...imageWithAlt, name: "teamImage", title: "Team group image", group: "team" }),
+    defineField({ ...imageWithAlt, name: "teamImage", title: "Alternative team group image", description: "Upload a replacement here and enable the switch below when ready.", group: "team" }),
+    defineField({ name: "useCmsTeamImage", title: "Use CMS team group image on website", type: "boolean", description: "Off: use the approved IMVO hand-drawn team illustration. On: use the alternative group image above.", group: "team", initialValue: false }),
     defineField({
       name: "teamMembers",
       title: "Legacy embedded team members",
