@@ -1,5 +1,7 @@
 import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
 import type { StructureResolver } from "sanity/structure";
+import { BookOpen, Images, MessageSquareQuote } from "lucide-react";
+import EditorGuide from "./components/EditorGuide";
 
 const singleton = (
   S: Parameters<StructureResolver>[0],
@@ -15,6 +17,10 @@ export const structure: StructureResolver = (S, context) =>
   S.list()
     .title("IMVO Website Content")
     .items([
+      S.listItem().title("START HERE · Publishing guide").icon(BookOpen)
+        .child(S.component(EditorGuide).title("Publishing guide")),
+      orderableDocumentListDeskItem({ type: "project", title: "Projects · Add / Edit / Arrange", S, context }),
+      S.documentTypeListItem("testimonial").title("Client Testimonials · Publish / Hide").icon(MessageSquareQuote),
       singleton(S, "Site Settings", "siteSettings", "siteSettings"),
       S.divider(),
       S.listItem()
@@ -53,12 +59,6 @@ export const structure: StructureResolver = (S, context) =>
               S.documentTypeListItem("career").title("Careers"),
             ]),
         ),
-      orderableDocumentListDeskItem({
-        type: "project",
-        title: "Projects",
-        S,
-        context,
-      }),
       S.divider(),
       S.listItem()
         .title("Operations")
