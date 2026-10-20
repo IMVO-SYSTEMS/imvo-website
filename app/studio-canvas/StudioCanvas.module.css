@@ -241,3 +241,79 @@
 }
 @media(hover:none){.memberImage>.memberSketch{opacity:1}.memberImage>.memberPhotograph{opacity:0;transform:none}.member:focus-within .memberPhotograph{opacity:1}.member:focus-within .memberSketch{opacity:0}}
 @media(prefers-reduced-motion:reduce){.memberImage>.memberSketch,.memberImage>.memberPhotograph,.memberPortraitFrame{transition:none}}
+
+
+/* IMVO regional atlas: real boundaries, Kigali pin and animated pull-back/country focus. */
+.regionAtlas{display:flex;flex-direction:column;min-width:0;min-height:610px;background:var(--sc-bg);border-left:var(--sc-hairline) solid var(--sc-line);overflow:hidden}
+.atlasHeader{display:flex;align-items:center;justify-content:space-between;gap:var(--sc-s4);padding:var(--sc-s5) var(--sc-s6);border-bottom:var(--sc-hairline) solid var(--sc-line);font:var(--sc-meta)/1.3 var(--sc-mono);letter-spacing:.015em}
+.atlasHeader button{display:inline-flex;align-items:center;gap:var(--sc-s3);border:var(--sc-hairline) solid var(--sc-line);padding:var(--sc-s3) var(--sc-s4);min-height:var(--sc-target);font:var(--sc-meta)/1.4 var(--sc-mono)}
+.atlasHeader button:hover,.atlasHeader button:focus-visible{background:var(--sc-ink);color:var(--sc-bg)}
+.atlasViewport{flex:1;min-height:430px;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 45%,color-mix(in srgb,var(--sc-ink) 5%,var(--sc-bg)),var(--sc-bg) 60%)}
+.atlasViewport>svg{display:block;width:100%;height:100%}
+.atlasGrid path{stroke:var(--sc-line);stroke-width:.6;stroke-dasharray:2 5;opacity:.75;fill:none}
+.atlasGeography{transform-origin:0 0;transform-box:view-box;transition:transform 1.05s cubic-bezier(.19,1,.22,1);will-change:transform}
+.atlasBorder,.atlasSelectable{stroke:var(--sc-ink);stroke-width:.95;vector-effect:non-scaling-stroke;fill:var(--sc-bg);transition:fill .3s ease,stroke .3s ease}
+.atlasBorder{opacity:.35;fill:color-mix(in srgb,var(--sc-ink) 3%,var(--sc-bg));pointer-events:none}
+.atlasSelectable{fill:color-mix(in srgb,var(--sc-ink) 7%,var(--sc-bg));cursor:pointer}
+.atlasSelectable:hover,.atlasSelectable:focus-visible{fill:color-mix(in srgb,var(--sc-ink) 17%,var(--sc-bg));outline:none;stroke-width:2}
+.atlasSelectable[data-active=true]{fill:color-mix(in srgb,#fa4b22 16%,var(--sc-bg));stroke:#f04b21;stroke-width:2}
+.atlasKigali{pointer-events:none}
+.atlasKigali circle:first-child{fill:none;stroke:#f04b21;stroke-width:1.3;vector-effect:non-scaling-stroke;opacity:.8}
+.atlasKigali circle:nth-child(2){fill:#f04b21}
+.atlasKigali path{fill:none;stroke:#f04b21;stroke-width:1;vector-effect:non-scaling-stroke}
+.atlasKigali text{font:9px var(--sc-mono);fill:var(--sc-ink);paint-order:stroke;stroke:var(--sc-bg);stroke-width:3}
+.atlasSelectedPin circle{fill:#f04b21;stroke:var(--sc-bg);stroke-width:1.4;vector-effect:non-scaling-stroke}
+.atlasSelectedPin path{fill:none;stroke:#f04b21;stroke-width:1;vector-effect:non-scaling-stroke}
+.atlasCoordinates{position:absolute;left:var(--sc-s6);right:var(--sc-s6);bottom:var(--sc-s5);display:flex;align-items:center;justify-content:space-between;gap:var(--sc-s4);pointer-events:none;color:var(--sc-soft);font:9px/1.2 var(--sc-mono)}
+.atlasReadout{display:grid;grid-template-columns:1fr auto;align-items:center;gap:var(--sc-s6);border-top:var(--sc-hairline) solid var(--sc-line);padding:var(--sc-s6)}
+.atlasReadout strong{display:block;font-size:clamp(18px,2vw,29px);line-height:1.1;letter-spacing:-.06em;margin-block:var(--sc-s2)}
+.atlasReadout p{font:var(--sc-meta)/1.45 var(--sc-mono);color:var(--sc-soft);max-width:50ch}
+.atlasReadout>a{display:flex;align-items:center;gap:var(--sc-s3);border:var(--sc-hairline) solid var(--sc-line);padding:var(--sc-s4);font:var(--sc-meta)/1.35 var(--sc-mono)}
+.atlasReadout>a:hover{background:var(--sc-ink);color:var(--sc-bg)}
+/* A true four-person drawing grid, with unchanged framed name/role strips. */
+.teamGrid{grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
+.member{min-width:0}
+.member:nth-child(3n){border-right:var(--sc-hairline) solid var(--sc-line)}
+.member:nth-child(4n){border-right:0}
+.memberDetails .memberToggle{font-size:clamp(12px,1.23vw,21px)!important;letter-spacing:-.05em;line-height:1.1;text-wrap:balance;overflow-wrap:anywhere;padding-right:15px}
+.memberDetails .memberToggle span{display:block;min-width:0;max-width:100%}
+.memberDetails>p{text-wrap:balance}
+.memberImage{border:var(--sc-hairline) solid var(--sc-line)}
+/* All drawing descriptions live in explicit frame areas, never over photos/plans. */
+.heroDetailDock:empty,.drawingDock:empty,.planDetailDock:empty{display:none}
+.heroDetailDock:not(:empty){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-bottom:var(--sc-hairline) solid var(--sc-line);padding:var(--sc-s5) var(--sc-gutter);background:var(--sc-bg)}
+.heroDetailDock .detailNote,.drawingDock .detailNote,.planDetailDock .detailNote{position:relative;left:auto;right:auto;top:auto;bottom:auto;max-width:none;width:100%;z-index:1;box-shadow:none;animation:none}
+.heroDetailDock .detailNote[data-anchor-side=start]{grid-column:1}
+.heroDetailDock .detailNote[data-anchor-side=middle]{grid-column:2}
+.heroDetailDock .detailNote[data-anchor-side=end]{grid-column:3}
+.drawingDock:not(:empty){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:var(--sc-s4);border-top:var(--sc-hairline) solid var(--sc-line);background:var(--sc-bg)}
+.drawingDock .detailNote[data-anchor-side=start]{grid-column:1/3}
+.drawingDock .detailNote[data-anchor-side=middle]{grid-column:2/4}
+.drawingDock .detailNote[data-anchor-side=end]{grid-column:2/4}
+.explorer:has(.drawingDock:not(:empty)){height:auto!important;min-height:0;aspect-ratio:auto;overflow:visible}
+.explorer:has(.drawingDock:not(:empty)) .explorerViewport{position:relative;inset:auto;width:100%;height:auto;aspect-ratio:1;overflow:hidden}
+.explorer:has(.drawingDock:not(:empty)) .explorerTools{position:absolute;right:var(--sc-s4);top:calc(min(100vw,100%) - var(--sc-s9));bottom:auto}
+.explorer[data-compact=true]:has(.drawingDock:not(:empty)) .explorerViewport{height:260px;aspect-ratio:auto}
+.explorer[data-compact=true]:has(.drawingDock:not(:empty)) .explorerTools{top:calc(260px - var(--sc-s9))}
+.planDetailDock:not(:empty){width:100%;display:block;padding:0 0 var(--sc-s6);flex:none}
+.planDetailDock .detailNote{width:100%;max-width:none}
+.connectedDesign:has(.planDetailDock:not(:empty)){overflow-y:auto;overscroll-behavior:contain;justify-content:flex-start}
+.heroCanvas .detailNote,.planDrawing .detailNote,.explorerViewport .detailNote{display:none}
+@media(min-width:761px) and (max-width:1100px){.teamGrid{grid-template-columns:repeat(4,minmax(0,1fr))}.memberDetails .memberToggle{font-size:12px!important}.atlasReadout{grid-template-columns:1fr}.atlasReadout>a{justify-self:start}}
+@media(max-width:760px){
+ .regionAtlas{min-height:460px;border-left:0;border-top:var(--sc-hairline) solid var(--sc-line)}
+ .atlasViewport{min-height:370px}
+ .atlasHeader{padding:var(--sc-s3) var(--sc-s4)}
+ .atlasReadout{grid-template-columns:1fr;padding:var(--sc-s4)}
+ .atlasReadout>a{justify-self:start}
+ .atlasCoordinates{font-size:8px;left:var(--sc-s4);right:var(--sc-s4)}
+ .teamGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:0;padding:0}
+ .member:nth-child(3n){border-right:var(--sc-hairline) solid var(--sc-line)}
+ .member:nth-child(even){border-right:0}
+ .memberDetails .memberToggle{font-size:clamp(12px,3.3vw,17px)!important}
+ .heroDetailDock:not(:empty),.drawingDock:not(:empty){grid-template-columns:minmax(0,1fr);padding:var(--sc-s3);gap:0}
+ .heroDetailDock .detailNote[data-anchor-side],.drawingDock .detailNote[data-anchor-side]{grid-column:1}
+ .explorer:has(.drawingDock:not(:empty)) .explorerTools{right:var(--sc-s3);top:calc(min(100vw,100%) - var(--sc-s9))}
+ .planDetailDock:not(:empty){padding:var(--sc-s2)}
+}
+@media(prefers-reduced-motion:reduce){.atlasGeography{transition:none}.atlasSelectable{transition:none}}

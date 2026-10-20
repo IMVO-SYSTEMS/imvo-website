@@ -1,5 +1,6 @@
 "use client";
 import { useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { ArrowUpRight, Minus, Plus, X } from "lucide-react";
 import StudioImage from "./StudioImage";
@@ -33,19 +34,28 @@ const details:Record<DrawingKind,Detail[]>={
  {title:'Context at ground level',text:'Arrival, landscape and the spaces around a building connect its larger ambition with the experience of people.',href:strategy,action:'Explore context & feasibility',x:59,y:79,area:'17,70 87,70 87,92 17,92'}]
 };
 /** Coordinates describe illustrative studies, not surveyed project data. */
-export function DrawingInteraction({kind,label='Explore the drawing',compact=false}:{kind:DrawingKind;label?:string;compact?:boolean}){
+export function DrawingInteraction({kind,label='Explore the drawing',compact=false,dockId}:{kind:DrawingKind;label?:string;compact?:boolean;dockId?:string}){
  const id=useId(),[selected,setSelected]=useState<number|null>(null),[hover,setHover]=useState<number|null>(null);
  const buttons=useRef<(HTMLButtonElement|null)[]>([]),items=details[kind],active=hover??selected;
  const close=()=>{const last=selected;setSelected(null);if(last!==null)buttons.current[last]?.focus();};
  return <div className={styles.drawingInteraction} data-compact={compact} role="group" aria-label={label} onKeyDown={e=>{if(e.key==='Escape'&&selected!==null){e.preventDefault();close();}else if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)&&(e.target as HTMLElement).matches('button[data-detail]')){e.preventDefault();const next=((selected??0)+(['ArrowRight','ArrowDown'].includes(e.key)?1:items.length-1))%items.length;setSelected(next);buttons.current[next]?.focus();}}}>
  <svg className={styles.detailRegions} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" onClick={e=>{const b=e.currentTarget.getBoundingClientRect(),x=(e.clientX-b.left)/b.width*100,y=(e.clientY-b.top)/b.height*100;setSelected(items.reduce((best,item,i)=>Math.hypot(item.x-x,item.y-y)<Math.hypot(items[best].x-x,items[best].y-y)?i:best,0));}}>
  {items.map((item,i)=><polygon key={item.title} points={item.area} data-active={active===i} onPointerEnter={()=>setHover(i)} onPointerLeave={()=>setHover(null)}/>)}
- {selected!==null&&<path className={styles.detailLeader} d={`M ${items[selected].x} ${items[selected].y} L 17 77 L 7 77`}/>}</svg>
+ {selected!==null&&<path className={styles.detailLeader} d={`M ${items[selected].x} ${items[selected].y} L ${items[selected].x} 100`}/>}</svg>
  {items.map((item,i)=><button key={item.title} ref={el=>{buttons.current[i]=el;}} data-detail type="button" className={styles.detailPoint} style={{left:`${item.x}%`,top:`${item.y}%`}} aria-label={`Explore ${item.title.toLowerCase()}`} aria-expanded={selected===i} aria-controls={selected===i?`${id}-note`:undefined} onPointerEnter={()=>setHover(i)} onPointerLeave={()=>setHover(null)} onClick={()=>setSelected(i)}>{String(i+1).padStart(2,'0')}</button>)}
- {selected!==null&&<aside id={`${id}-note`} className={styles.detailNote} aria-label={items[selected].title}><div><strong>{items[selected].title}</strong><button type="button" aria-label="Close drawing detail" onClick={close}><X size={14}/></button></div><p>{items[selected].text}</p><Link href={items[selected].href}>{items[selected].action}<ArrowUpRight size={14}/></Link></aside>}
+ {selected!==null&&(()=>{
+   const item=items[selected];
+   const position=item.x<40?"start":item.x>60?"end":"middle";
+   const note=<aside id={`${id}-note`} className={styles.detailNote} data-anchor-side={position} aria-label={item.title}>
+      <div><strong>{String(selected+1).padStart(2,"0")} / {item.title}</strong><button type="button" aria-label="Close drawing detail" onClick={close}><X size={14}/></button></div>
+      <p>{item.text}</p><Link href={item.href}>{item.action}<ArrowUpRight size={14}/></Link>
+   </aside>;
+   const dock=dockId&&typeof document!=="undefined"?document.getElementById(dockId):null;
+   return dock?createPortal(note,dock):note;
+ })()}
  </div>;
 }
 export default function DrawingExplorer({src,kind,label,compact=false,eager=false}:{src:string;kind:DrawingKind;label:string;compact?:boolean;eager?:boolean}){
- const [zoom,setZoom]=useState(1);
- return <div className={styles.explorer} data-drawing-surface data-compact={compact} role="group" aria-label={label}><div className={styles.explorerViewport}><div className={styles.explorerArt} style={{transform:`scale(${zoom})`}}><StudioImage src={src} alt={label} width="1116" height="1116" loading={eager?"eager":"lazy"} fetchPriority={eager?"high":undefined} decoding="async"/><DrawingInteraction kind={kind} label={`Explore ${label.toLowerCase()}`} compact={compact}/></div></div><div className={styles.explorerTools} role="group" aria-label="Drawing zoom"><button type="button" aria-label="Zoom out drawing" disabled={zoom<=1} onClick={()=>setZoom(z=>Math.max(1,z-.25))}><Minus size={14}/></button><button type="button" aria-label="Reset drawing zoom" onClick={()=>setZoom(1)}>{Math.round(zoom*100)}%</button><button type="button" aria-label="Zoom in drawing" disabled={zoom>=1.5} onClick={()=>setZoom(z=>Math.min(1.5,z+.25))}><Plus size={14}/></button></div></div>;
+ const [zoom,setZoom]=useState(1),dockId=useId();
+ return <div className={styles.explorer} data-drawing-surface data-compact={compact} role="group" aria-label={label}><div className={styles.explorerViewport}><div className={styles.explorerArt} style={{transform:`scale(${zoom})`}}><StudioImage src={src} alt={label} width="1116" height="1116" loading={eager?"eager":"lazy"} fetchPriority={eager?"high":undefined} decoding="async"/><DrawingInteraction kind={kind} label={`Explore ${label.toLowerCase()}`} compact={compact} dockId={dockId}/></div></div><div className={styles.explorerTools} role="group" aria-label="Drawing zoom"><button type="button" aria-label="Zoom out drawing" disabled={zoom<=1} onClick={()=>setZoom(z=>Math.max(1,z-.25))}><Minus size={14}/></button><button type="button" aria-label="Reset drawing zoom" onClick={()=>setZoom(1)}>{Math.round(zoom*100)}%</button><button type="button" aria-label="Zoom in drawing" disabled={zoom>=1.5} onClick={()=>setZoom(z=>Math.min(1.5,z+.25))}><Plus size={14}/></button></div><div id={dockId} className={styles.drawingDock} aria-live="polite"/></div>;
 }
