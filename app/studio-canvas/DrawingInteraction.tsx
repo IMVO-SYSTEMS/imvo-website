@@ -50,8 +50,7 @@ export function DrawingInteraction({kind,label='Explore the drawing',compact=fal
       <div><strong>{String(selected+1).padStart(2,"0")} / {item.title}</strong><button type="button" aria-label="Close drawing detail" onClick={close}><X size={14}/></button></div>
       <p>{item.text}</p><Link href={item.href}>{item.action}<ArrowUpRight size={14}/></Link>
    </aside>;
-   const dock=dockId&&typeof document!=="undefined"?document.getElementById(dockId):null;
-   return dock?createPortal(note,dock):note;
+   return note;
  })()}
  </div>;
 }
