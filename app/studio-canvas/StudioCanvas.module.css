@@ -325,3 +325,33 @@
  position:relative;left:auto;right:auto;top:auto;bottom:auto;
  width:100%;max-width:none;transform:none;margin:0;
 }
+
+
+/* Approved IMVO portrait pairs: ink on black in dark mode, ink on paper in light mode. */
+.memberImage>.memberSketchDark,.memberImage>.memberSketchLight{
+ position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%;
+ transition:opacity .55s ease,transform .65s var(--sc-ease);
+}
+.memberImage>.memberSketchDark{opacity:1}
+.memberImage>.memberSketchLight{opacity:0}
+.frame[data-theme="black"] .memberImage{background:#050505}
+.frame[data-theme="white"] .memberImage{background:#faf9f6}
+.frame[data-theme="white"] .memberImage>.memberSketchDark{opacity:0}
+.frame[data-theme="white"] .memberImage>.memberSketchLight{opacity:1}
+.member:hover .memberImage>.memberSketchDark,
+.member:hover .memberImage>.memberSketchLight,
+.member:focus-within .memberImage>.memberSketchDark,
+.member:focus-within .memberImage>.memberSketchLight{opacity:0;transform:scale(1.025)}
+.member:hover .memberImage>.memberPhotograph,
+.member:focus-within .memberImage>.memberPhotograph{opacity:1;transform:scale(.96)}
+@media(hover:none){
+ .memberImage>.memberSketchDark{opacity:1}
+ .frame[data-theme="white"] .memberImage>.memberSketchLight{opacity:1}
+ .frame[data-theme="white"] .memberImage>.memberSketchDark{opacity:0}
+ .member:focus-within .memberImage>.memberPhotograph{opacity:1}
+ .member:focus-within .memberImage>.memberSketchDark,
+ .member:focus-within .memberImage>.memberSketchLight{opacity:0}
+}
+@media(prefers-reduced-motion:reduce){
+ .memberImage>.memberSketchDark,.memberImage>.memberSketchLight{transition:none}
+}
