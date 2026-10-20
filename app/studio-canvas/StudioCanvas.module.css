@@ -207,7 +207,7 @@
 @media(max-width:760px){
  .heroCanvas{height:calc(100svh - var(--sc-header) - 12px);min-height:770px;max-height:950px}
  .house{inset:5% -8% auto;height:36%;width:auto}
- .heroStatus{top:41%;left:var(--sc-s5);right:var(--sc-s5);width:auto;max-width:none}
+ .heroStatus{top:41%;left:var(--sc-s5);right:var(--sc-s5);width:auto;max-width:none;display:block;grid-template-columns:none;gap:0}
  .studioDesk{box-shadow:4px 4px 0 color-mix(in srgb,var(--sc-ink) 11%,transparent)}
  .studioDeskTop{padding:8px 12px}
  .studioDeskMetrics>div{gap:4px;padding:8px 6px}
