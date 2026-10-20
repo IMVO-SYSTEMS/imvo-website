@@ -398,3 +398,17 @@
  .atlasCityList{gap:4px}
  .atlasAttribution{padding:9px 12px;font-size:7px}
 }
+
+
+/* Full country framing: readable map country names, exactly two active city labels. */
+.atlasCountryLabel{pointer-events:none;user-select:none}
+.atlasCountryLabel text{font:600 9px/1.1 var(--sc-mono);letter-spacing:.01em;fill:var(--sc-ink);paint-order:stroke;stroke:var(--sc-bg);stroke-width:2.5;opacity:.82}
+.atlasCountryLabel[data-selected="true"] text{font-weight:700;font-size:12px;fill:#e95728;opacity:1}
+.atlasCity text{opacity:1;font-weight:600;stroke-width:3.2}
+.atlasCity[data-active="true"] text{fill:#e95728}
+.atlasViewport svg [role="button"]:focus-visible{outline:none;filter:drop-shadow(0 0 2px #f04b21)}
+@media(max-width:760px){
+ .atlasCountryLabel text{font-size:7.5px}
+ .atlasCountryLabel[data-selected="true"] text{font-size:10px}
+ .atlasCity text{font-size:9px}
+}
