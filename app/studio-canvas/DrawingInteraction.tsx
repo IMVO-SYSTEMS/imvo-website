@@ -7,7 +7,7 @@ import styles from "./StudioCanvas.module.css";
 export type DrawingKind='elevation'|'office'|'residential'|'development'|'plan'|'tower';
 type Detail={title:string;text:string;href:string;action:string;x:number;y:number;area:string};
 const design='/services/design',strategy='/services/consultancy',execution='/services/site-coordination';
-const details:Record<DrawingKind,Detail[]>={
+export const details:Record<DrawingKind,Detail[]>={
  elevation:[
  {title:'Light & ventilation',text:'Windows connect the interior to daylight, views and natural airflow. IMVO develops openings alongside orientation and everyday use.',href:design,action:'Explore our design approach',x:49,y:42,area:'38,26 61,26 61,62 38,62'},
  {title:'Access & circulation',text:'An entrance should make arrival and movement clear. Levels, access and the way people use a building are considered together.',href:strategy,action:'Discuss your project direction',x:34,y:71,area:'27,61 39,61 39,79 27,79'},
@@ -33,7 +33,7 @@ const details:Record<DrawingKind,Detail[]>={
  {title:'Context at ground level',text:'Arrival, landscape and the spaces around a building connect its larger ambition with the experience of people.',href:strategy,action:'Explore context & feasibility',x:59,y:79,area:'17,70 87,70 87,92 17,92'}]
 };
 /** Coordinates describe illustrative studies, not surveyed project data. */
-export function DrawingInteraction({kind,label='Explore the drawing',compact=false,dockId}:{kind:DrawingKind;label?:string;compact?:boolean;dockId?:string}){
+export function DrawingInteraction({kind,label='Explore the drawing',compact=false,dockId,onSelect,externalPanel=false}:{kind:DrawingKind;label?:string;compact?:boolean;dockId?:string;onSelect?:(index:number|null)=>void;externalPanel?:boolean}){
  const id=useId(),[selected,setSelected]=useState<number|null>(null),[hover,setHover]=useState<number|null>(null);
  const buttons=useRef<(HTMLButtonElement|null)[]>([]);
  const surface=useRef<HTMLDivElement|null>(null),noteRef=useRef<HTMLElement|null>(null);
@@ -58,14 +58,14 @@ export function DrawingInteraction({kind,label='Explore the drawing',compact=fal
   window.addEventListener("resize",update);
   return ()=>{observer?.disconnect();window.removeEventListener("resize",update);};
  },[selected,kind]);
- const close=()=>{const last=selected;setSelected(null);if(last!==null)buttons.current[last]?.focus();};
- return <div ref={surface} className={styles.drawingInteraction} data-compact={compact} role="group" aria-label={label} onKeyDown={e=>{if(e.key==='Escape'&&selected!==null){e.preventDefault();close();}else if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)&&(e.target as HTMLElement).matches('button[data-detail]')){e.preventDefault();const next=((selected??0)+(['ArrowRight','ArrowDown'].includes(e.key)?1:items.length-1))%items.length;setSelected(next);buttons.current[next]?.focus();}}}>
- <svg className={styles.detailRegions} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" onClick={e=>{const b=e.currentTarget.getBoundingClientRect(),x=(e.clientX-b.left)/b.width*100,y=(e.clientY-b.top)/b.height*100;setSelected(items.reduce((best,item,i)=>Math.hypot(item.x-x,item.y-y)<Math.hypot(items[best].x-x,items[best].y-y)?i:best,0));}}>
+ const close=()=>{const last=selected;setSelected(null);onSelect?.(null);if(last!==null)buttons.current[last]?.focus();};
+ return <div ref={surface} className={styles.drawingInteraction} data-compact={compact} role="group" aria-label={label} onKeyDown={e=>{if(e.key==='Escape'&&selected!==null){e.preventDefault();close();}else if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)&&(e.target as HTMLElement).matches('button[data-detail]')){e.preventDefault();const next=((selected??0)+(['ArrowRight','ArrowDown'].includes(e.key)?1:items.length-1))%items.length;setSelected(next);onSelect?.(next);buttons.current[next]?.focus();}}}>
+ <svg className={styles.detailRegions} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" onClick={e=>{const b=e.currentTarget.getBoundingClientRect(),x=(e.clientX-b.left)/b.width*100,y=(e.clientY-b.top)/b.height*100;const next=items.reduce((best,item,i)=>Math.hypot(item.x-x,item.y-y)<Math.hypot(items[best].x-x,items[best].y-y)?i:best,0);setSelected(next);onSelect?.(next);}}>
  {items.map((item,i)=><polygon key={item.title} points={item.area} data-active={active===i} onPointerEnter={()=>setHover(i)} onPointerLeave={()=>setHover(null)}/>)}
 </svg>
- {leader&&selected!==null&&<svg className={styles.detailConnector} viewBox={`0 0 ${leader.width} ${leader.height}`} preserveAspectRatio="none" aria-hidden="true"><path d={leader.path}/></svg>}
- {items.map((item,i)=><button key={item.title} ref={el=>{buttons.current[i]=el;}} data-detail type="button" className={styles.detailPoint} style={{left:`${item.x}%`,top:`${item.y}%`}} aria-label={`Explore ${item.title.toLowerCase()}`} aria-expanded={selected===i} aria-controls={selected===i?`${id}-note`:undefined} onPointerEnter={()=>setHover(i)} onPointerLeave={()=>setHover(null)} onClick={()=>setSelected(i)}>{String(i+1).padStart(2,'0')}</button>)}
- {selected!==null&&(()=>{
+ {!externalPanel&&leader&&selected!==null&&<svg className={styles.detailConnector} viewBox={`0 0 ${leader.width} ${leader.height}`} preserveAspectRatio="none" aria-hidden="true"><path d={leader.path}/></svg>}
+ {items.map((item,i)=><button key={item.title} ref={el=>{buttons.current[i]=el;}} data-detail type="button" className={styles.detailPoint} style={{left:`${item.x}%`,top:`${item.y}%`}} aria-label={`Explore ${item.title.toLowerCase()}`} aria-expanded={selected===i} aria-controls={selected===i?`${id}-note`:undefined} onPointerEnter={()=>setHover(i)} onPointerLeave={()=>setHover(null)} onClick={()=>{setSelected(i);onSelect?.(i);}}>{String(i+1).padStart(2,'0')}</button>)}
+ {!externalPanel&&selected!==null&&(()=>{
    const item=items[selected];
    const position=item.x>=51?"start":"end";
    
