@@ -35,14 +35,14 @@ function Team({content}:{content?:HomePageContent|null}){
  const [open,setOpen]=useState<number|null>(null);
  const members=content?.teamMembers?.length
   ? content.teamMembers.map((member,index)=>({
-    name:member.name||teamMembers[index]?.name||"Team member",
+    name:member.name?.toLowerCase().includes("kangwagye")?"NGUTETE K. Sharon":(member.name||teamMembers[index]?.name||"Team member"),
     role:member.role||"",description:member.description||"",
     image:member.image?.url||teamMembers[index]?.image||"/team1.png"
    }))
   : teamMembers;
  return <section id="studio-team" className={styles.team} tabIndex={-1} data-studio-section="team" aria-labelledby="team-heading">
   <Heading label={content?.teamKicker||"Team"} title={content?.teamHeading||"A studio shaped by collaboration, technical focus, and shared responsibility."} id="team-heading"/>
-  <div className={styles.teamLandscape} data-reveal><StudioImage src={content?.teamImage?.url||"/team.png"} alt={content?.teamImage?.alt||"The IMVO team in the studio"} width="1440" height="780" loading="lazy"/><CornerMarks/></div>
+  <div className={styles.teamLandscape} data-reveal><StudioImage src="/studio/team-composite.webp" alt="The IMVO studio team illustrated in an architectural pencil sketch" width="1586" height="992" loading="lazy" decoding="async"/><CornerMarks/></div>
   <div className={styles.teamGrid}>{members.map((member,index)=><article key={member.name} className={styles.member} data-reveal>
     <StudioPortrait src={member.image} alt={member.name} index={index}/>
     <div className={styles.memberDetails}><h3><button className={styles.memberToggle} type="button" aria-expanded={open===index} aria-controls={`team-bio-${index}`} onClick={()=>setOpen(open===index?null:index)}><span>{member.name}</span>{open===index?<Minus size={15}/>:<Plus size={15}/>}</button></h3><p>{member.role}</p></div>
