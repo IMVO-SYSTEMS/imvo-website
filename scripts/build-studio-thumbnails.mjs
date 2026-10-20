@@ -61,7 +61,7 @@ for (const name of ["team1", "team2", "team3", "team4"]) {
     const target = path.join(portraitDir, `${name}-${mode}.webp`);
     if (await stat(target).catch(() => null)) continue;
     const transform = sharp(sketch).resize({ width: 760, withoutEnlargement: true });
-    if (mode === "dark") transform.negate();
+    // Until approved art is committed, keep the original paper sketch in both modes.
     await transform.webp({ quality: 81, effort: 4 }).toFile(target);
     console.log(`IMVO ${name} ${mode}: generated fallback (replace with approved artwork)`);
   }
