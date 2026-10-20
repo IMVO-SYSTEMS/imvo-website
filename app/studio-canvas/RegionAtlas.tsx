@@ -50,7 +50,7 @@ export default function RegionAtlas({country,onCountryChange}:{country:string;on
     <g className={styles.atlasGrid} aria-hidden="true">{Array.from({length:24},(_,i)=><path key={i} d={`M ${i*48} 0 V760`}/>)}{Array.from({length:19},(_,i)=><path key={i} d={`M 0 ${i*44} H960`}/>)}</g>
     <g className={styles.atlasGeography} style={{transform} as CSSProperties}>
      {outlines.map(outline=>{
-      const c=index.size&&countries.find(x=>x.iso===outline.iso);
+      const c=countries.find(x=>x.iso===outline.iso);
       const selectable=!!c;
       return <path key={outline.iso} d={outline.path} className={selectable?styles.atlasSelectable:styles.atlasBorder} data-active={c?.name===country?"true":undefined} onClick={c?()=>onCountryChange(c.name):undefined} role={selectable?"button":undefined} tabIndex={selectable?0:undefined} aria-label={c?`Zoom to ${c.name}`:undefined} onKeyDown={c?e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();onCountryChange(c.name);}}:undefined}/>;
      })}
