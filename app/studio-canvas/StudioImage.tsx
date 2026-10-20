@@ -11,7 +11,7 @@ export default function StudioImage({src,...props}: ImgHTMLAttributes<HTMLImageE
  const resolved=source(src);
  // Opt into small derivatives only at image positions with an explicit sizes hint.
  // Larger architectural drawings elsewhere keep their original, full-resolution files.
- const name=typeof resolved==="string"?/^\\/(p\\d{2}(?:-\\d{1,2})?)\\.webp$/.exec(resolved)?.[1]:undefined;
+ const name=typeof resolved==="string"?/^\/(p\d{2}(?:-\d{1,2})?)\.webp$/.exec(resolved)?.[1]:undefined;
  const srcSet=name&&responsiveCovers.has(name)&&props.sizes
   ? `/studio-optimized/${name}-480.webp 480w, /studio-optimized/${name}-960.webp 960w`
   : undefined;
