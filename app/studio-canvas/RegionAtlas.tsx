@@ -47,7 +47,7 @@ const outlines=africaCountryOutlines;
 // Fit the *entire selected country's outline* within the map, without
 // clipping its southern/northern edges. Coordinates are projected SVG pixels.
 const bounds=new Map(outlines.map(country=>{
- const nums=(country.path.match(/-?\\d+(?:\\.\\d+)?/g)||[]).map(Number);
+ const nums=(country.path.match(/-?\d+(?:\.\d+)?/g)||[]).map(Number);
  const xx:number[]=[],yy:number[]=[];for(let i=0;i+1<nums.length;i+=2){xx.push(nums[i]);yy.push(nums[i+1]);}
  return [country.iso,{x0:Math.min(...xx),x1:Math.max(...xx),y0:Math.min(...yy),y1:Math.max(...yy)}] as const;
 }));
