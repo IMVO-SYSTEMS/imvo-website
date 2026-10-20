@@ -602,8 +602,8 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
 
     setIsRwandaLocationsLoading(true);
     try {
-      const module = await import("./rwandaLocations.json");
-      setRwandaLocationData(module.default as unknown as RwandaLocationData);
+      const locationsModule = await import("./rwandaLocations.json");
+      setRwandaLocationData(locationsModule.default as unknown as RwandaLocationData);
     } catch (error) {
       console.error("Rwanda location data failed to load:", error);
     } finally {
