@@ -1,7 +1,7 @@
 import type {Metadata} from 'next';
 import {services,industries,projects,articles} from './experience/data.js';
 const mainPages:Record<string,[string,string]>={
- '':['Digital Transformation & IT Consulting','Product strategy, digital design, software engineering, cloud, automation and connected business systems from Kigali, Rwanda.'],
+ '':['Software Development & Digital Systems in Kigali, Rwanda','IMVO Systems is a Kigali-based technology practice developing websites, web and mobile apps, custom software, business platforms and practical AI automation.'],
  services:['Services','Explore product design, web and mobile development, enterprise integration, cloud, AI and support from IMVO Systems.'],
  industries:['Industries','Useful technology for commerce, hospitality, property, education, healthcare and the organisations behind them.'],
  projects:['Projects','Selected IMVO product directions, connected platforms and demonstration concepts.'],
@@ -20,5 +20,5 @@ export function getSystemsRoute(route:string){
  if(type==='insights'){const item=articles.find(e=>e.id===id);return item?{title:item.title,description:item.summary}:null}
  return null;
 }
-export function systemsMetadata(route:string):Metadata{const page=getSystemsRoute(route);if(!page)return {title:'Page not found'};const path=`/systems${route?'/'+route:''}`,title=`${page.title} | IMVO Systems`;return {title:{absolute:title},description:page.description,alternates:{canonical:path},openGraph:{type:'website',title,description:page.description,url:path,siteName:'IMVO Systems',images:[{url:'/imvo-team-main.webp',alt:'The IMVO Group team'}]},twitter:{card:'summary_large_image',title,description:page.description,images:['/imvo-team-main.webp']}}}
+export function systemsMetadata(route:string):Metadata{const page=getSystemsRoute(route);if(!page)return {title:'Page not found'};const path=`/systems${route?'/'+route:''}`,title=`${page.title} | IMVO Systems`;return {title:{absolute:title},description:page.description,keywords:route===''?['IMVO Systems','IMVO Systems Rwanda','IMVO software development','software development Kigali','custom software Rwanda','web development Kigali','business systems Rwanda','mobile app development Rwanda']:undefined,alternates:{canonical:path},openGraph:{type:'website',title,description:page.description,url:path,siteName:'IMVO Systems',images:[{url:'/imvo-team-main.webp',alt:'The IMVO Group team'}]},twitter:{card:'summary_large_image',title,description:page.description,images:['/imvo-team-main.webp']}}}
 export const systemsRoutes=[...Object.keys(mainPages),...services.map(x=>`services/${x.id}`),...industries.map(x=>`industries/${x.id}`),...projects.map(x=>`projects/${x.id}`),...articles.map(x=>`insights/${x.id}`)];
