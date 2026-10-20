@@ -474,7 +474,7 @@ export default function DomicileRebuild() {
         <div className={styles.backedCopy}>
           <p>BACKED BY IMVO GROUP</p>
           <h2>Property care with built-environment thinking behind it.</h2>
-          <span>DŌMICILE combines property coordination with IMVO Group's design, technical and built-environment perspective.</span>
+          <span>DŌMICILE combines property coordination with IMVO Group&apos;s design, technical and built-environment perspective.</span>
           <Link href="/">VISIT IMVO GROUP <b>↗</b></Link>
         </div>
         <div className={styles.backedGrid}>
