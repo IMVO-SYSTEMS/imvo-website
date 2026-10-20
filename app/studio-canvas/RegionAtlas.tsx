@@ -110,10 +110,10 @@ export default function RegionAtlas({country,onCountryChange}:{country:string;on
        className={styles.atlasCountryLabel} data-active={outline.iso===selected.iso?"true":undefined}
        transform={"translate("+p.x+","+p.y+") scale("+inv+")"} aria-hidden="true">
        <text textAnchor="middle">{outline.name.toUpperCase()}</text></g>})}
-     <g className={styles.atlasKigali} transform={`translate(${kigali.x},${kigali.y})`}>
+     <g className={styles.atlasKigali} transform={`translate(${kigali.x},${kigali.y}) scale(${1/Math.max(1,camera.zoom)})`}>
        <circle r="16"/><circle r="5"/><path d="M-24 0H24 M0 -24V24"/><text x="22" y="-11">KIGALI / IMVO BASE</text>
      </g>
-     {!home&&<g className={styles.atlasSelectedPin} transform={`translate(${point(...selected.pin).x},${point(...selected.pin).y})`}>
+     {!home&&<g className={styles.atlasSelectedPin} transform={`translate(${point(...selected.pin).x},${point(...selected.pin).y}) scale(${1/Math.max(1,camera.zoom)})`}>
       <circle r="6"/><path d="M-18 0H18 M0 -18V18"/>
      </g>}
      {showCities&&cityList.map(city=>{const p=point(city.lon,city.lat),inverse=1/Math.max(1,camera.zoom);return <g key={city.name} className={styles.atlasCity} data-active={city.name===activeCity?.name?"true":undefined}
