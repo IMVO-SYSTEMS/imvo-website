@@ -11,7 +11,13 @@ export type StudioReview={
 export default function StudioTestimonials({reviews}:{reviews:StudioReview[]}){
  const [index,setIndex]=useState(0),[paused,setPaused]=useState(false),[hovered,setHovered]=useState(false);
  const count=reviews.length,active=reviews[Math.min(index,count-1)];
- const railItems=reviews.map((review,i)=>({key:"review-"+i,...review}));
+ const pendingCards: Array<StudioReview & {key:string}>=[
+  {key:"pending-1",author:"CLIENT REVIEW 01",quote:"Awaiting an approved client message."},
+  {key:"pending-2",author:"CLIENT REVIEW 02",quote:"This space is reserved for genuine client feedback."},
+  {key:"pending-3",author:"CLIENT REVIEW 03",quote:"Client names and ratings appear after approval."},
+  {key:"pending-4",author:"CLIENT REVIEW 04",quote:"Verified project experiences will be featured here."}
+ ];
+ const railItems=reviews.length?reviews.map((review,i)=>({key:"review-"+i,...review})):pendingCards;
  useEffect(()=>{
   if(count<2||paused||hovered||typeof window==="undefined")return;
   if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
@@ -47,14 +53,14 @@ export default function StudioTestimonials({reviews}:{reviews:StudioReview[]}){
    <div><span className={styles.eyebrow}>CLIENT FEEDBACK / EDITORIAL APPROVAL</span><h3>Every project starts with trust.</h3><p>Client testimonials will appear here once an approved review has been published. Discover our work and the people behind it in the meantime.</p></div>
    <Link href="/projects">EXPLORE OUR WORK <ArrowUpRight size={18}/></Link>
   </div>}
-  {railItems.length>0&&<div className={styles.studioMarqueeRows} aria-label="Published client testimonials">
+  <div className={styles.studioMarqueeRows} aria-label={count?"Published client testimonials":"Testimonial layout awaiting approved client reviews"}>
    {["left","right"].map(direction=><div key={direction} className={styles.studioMarqueeTrack} data-direction={direction}>
     {Array.from({length:Math.max(4,railItems.length)*2},(_,i)=>{const item=railItems[i%railItems.length];return <article key={direction+"-"+i} className={styles.studioMarqueeCard} aria-hidden={i>=Math.max(4,railItems.length)}>
-      <span>{item.rating&&item.rating>=1&&item.rating<=5?<span aria-label={item.rating+" out of 5 stars"}>{"★".repeat(Math.round(item.rating))}</span>:"CLIENT TESTIMONIAL / APPROVED"}</span>
-      <blockquote>“{item.quote}”</blockquote>
+      <span>{count>0&&item.rating&&item.rating>=1&&item.rating<=5?<span aria-label={item.rating+" out of 5 stars"}>{"★".repeat(Math.round(item.rating))}</span>:count?"CLIENT TESTIMONIAL / APPROVED":"PENDING CLIENT APPROVAL"}</span>
+      <blockquote>{count>0?`“${item.quote}”`:item.quote}</blockquote>
       <div><strong>{item.author}</strong>{[item.role,item.company].filter(Boolean).length>0&&<p>{[item.role,item.company].filter(Boolean).join(" · ")}</p>}</div>
     </article>;})}
    </div>)}
-  </div>}
+  </div>
  </section>;
 }
