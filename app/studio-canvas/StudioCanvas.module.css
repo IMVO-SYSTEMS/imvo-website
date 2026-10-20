@@ -127,3 +127,5 @@
 .planDrawing .detailNote{width:min(280px,43%);left:var(--sc-s7)}
 .planSticky:has(.detailNote) .planCaption{visibility:hidden;pointer-events:none}
 @media(max-width:760px){.planDrawing .detailNote{width:calc(100% - var(--sc-s8));left:var(--sc-s7);bottom:0}}
+/* The About introduction contains only a title; size its frame to the content. */
+.main[data-studio-route="/about"] .innerPage>div>section:first-of-type{min-height:0!important;padding-block:var(--sc-s9)!important}

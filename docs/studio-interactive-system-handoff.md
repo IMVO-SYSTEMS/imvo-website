@@ -44,11 +44,12 @@ Live browser verification completed:
 - Tower fill changed from 69% to 94% during scrolling.
 - Projects index displays its interactive plan introduction. Published project-plan zoom reaches 150%, selection opens its note, and Discuss this drawing transfers the project title to the Contact brief.
 - Contact form is present with the expected prefilled brief; it was not submitted.
-- Systems and DŌMICILE render in the shared theme; native division menus and the Android download URL remain present. No horizontal overflow or broken loaded images was observed at the desktop viewport.
+- Systems and DŌMICILE render in the shared theme; native division menus and the Android download URL remain present. About and Services page-body font/theme coverage and the global drafting cursor were also checked (native cursor computed as none after pointer movement). No horizontal overflow or broken loaded images was observed at the desktop viewport.
 
 Final display corrections on branch `fix/studio-drawing-release-qa-20261020`:
 - Invert white-on-alpha /drawings/ project images in the white theme so real plans stay visible.
 - Give opened assembling-plan annotations a bounded width, full opacity and exclusive use of the caption area.
+- Compact the title-only About introduction so its frame no longer reserves a large empty hero area.
 
 Remaining before final handoff:
 1. Pass the existing CI for this narrow correction, merge its exact head and await deployment.
