@@ -1,0 +1,27 @@
+name: Import approved IMVO team drawing once
+on:
+  push:
+    branches: [feat/studio-regions-drawing-reviews-cms-20261020]
+    paths: [.github/workflows/import-imvo-team-drawing-once.yml]
+permissions: {contents: write}
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: true}
+      - name: Validate and install approved team artwork
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --max-time 120 --silent --show-error 'https://d2ol7oe51mr4n9.cloudfront.net/user_3ENlEezMenC2lRloW59bpB2N77p/f7fb0243-e0d3-4a90-aaf9-1ddda644b234.png' -o /tmp/team-approved.png
+          echo '36c073fd1de79bcbb89d9d5ac92d1c9befd81767dbb5ed5a23d3d0535de0a1c9  /tmp/team-approved.png' | sha256sum -c
+          mkdir -p public/studio
+          cp /tmp/team-approved.png public/studio/team-portrait-drawing-approved.png
+      - name: Commit original team drawing
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/studio/team-portrait-drawing-approved.png
+          git commit -m 'Install user approved four-person IMVO team drawing'
+          git push origin HEAD:feat/studio-regions-drawing-reviews-cms-20261020
