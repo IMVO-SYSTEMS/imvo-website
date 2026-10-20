@@ -456,7 +456,7 @@ export default function AboutPageClient({ content }: { content?: AboutPageConten
               </p>
             </motion.div>
             <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, margin: "-100px" }} transition={{ ...transition, delay: 0.2 }} style={{ flex: "2 1 600px", position: "relative", width: "100%", aspectRatio: "16/10", background: "var(--sc-bg)", overflow: "hidden" }}>
-              <Image src={content?.cultureImage?.url || "/team.png"} alt={content?.cultureImage?.alt || "IMVO Office Team Photo"} fill sizes="(max-width: 900px) 100vw, 70vw" style={{ objectFit: "cover", filter: "grayscale(100%)" }} />
+              <Image src={content?.cultureImage?.url || "/studio-team-illustrated.webp"} alt={content?.cultureImage?.alt || "IMVO Office Team Photo"} fill sizes="(max-width: 900px) 100vw, 70vw" style={{ objectFit: "cover", filter: "grayscale(100%)" }} />
             </motion.div>
           </div>
         </div>
