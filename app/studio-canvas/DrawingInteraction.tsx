@@ -1,6 +1,5 @@
 "use client";
 import { useId, useRef, useState } from "react";
-import { createPortal } from "react-dom";
 import Link from "next/link";
 import { ArrowUpRight, Minus, Plus, X } from "lucide-react";
 import StudioImage from "./StudioImage";
@@ -50,8 +49,9 @@ export function DrawingInteraction({kind,label='Explore the drawing',compact=fal
       <div><strong>{String(selected+1).padStart(2,"0")} / {item.title}</strong><button type="button" aria-label="Close drawing detail" onClick={close}><X size={14}/></button></div>
       <p>{item.text}</p><Link href={item.href}>{item.action}<ArrowUpRight size={14}/></Link>
    </aside>;
-   const dock=dockId&&typeof document!=="undefined"?document.getElementById(dockId):null;
-   return dock?createPortal(note,dock):note;
+   // Keep the annotation inside the drawing surface, in an anchored floating card.
+   // Do not portal to a dock that changes section height or hides adjacent content.
+   return note;
  })()}
  </div>;
 }

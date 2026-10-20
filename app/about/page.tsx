@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import AboutPageClient from "./AboutPageClient";
 import AboutTestimonialsController from "./AboutTestimonialsController";
 import { getAboutPageContent } from "@/sanity/lib/siteContent";
-import { getSeoEntry, getTeamMembers } from "@/sanity/lib/cmsBackend";
+import { getSeoEntry, getTeamMembers, getTestimonials } from "@/sanity/lib/cmsBackend";
 import { mergeCmsMetadata } from "@/app/lib/cmsMetadata";
 import type { AboutPageContent } from "@/sanity/types/siteContent";
 
@@ -36,12 +36,15 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const [content, structuredTeam] = await Promise.all([
+  const [content, structuredTeam, structuredTestimonials] = await Promise.all([
     getAboutPageContent(),
     getTeamMembers(),
+    getTestimonials(),
   ]);
 
-  const testimonials = (content?.testimonials || [])
+  const testimonials = (structuredTestimonials.length
+    ? structuredTestimonials.map(item=>({text:item.quote,author:item.author,role:item.role,company:item.company,source:item.source,date:item.date,featured:item.featured,active:item.active,order:item.order}))
+    : content?.testimonials || [])
     .map((item, index) => ({ ...item, __index: index }))
     .filter((item) => item.active !== false)
     .sort((a, b) => {

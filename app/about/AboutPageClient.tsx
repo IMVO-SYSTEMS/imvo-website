@@ -55,7 +55,7 @@ const teamMembers = [
     description: "Combines expertise in IT development, strategic consultancy, and project coordination.",
   },
   {
-    name: "KANGWAGYE Sharon",
+    name: "NGUTETE K. Sharon",
     role: "Project Coordination & Growth Lead",
     image: "/team4.png",
     description: "Experienced in digital commerce, market strategy, and growth coordination.",

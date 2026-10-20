@@ -127,7 +127,7 @@ async function fetchCached<T>(
 }
 
 export async function getTeamMembers(): Promise<StructuredTeamMember[]> {
-  return (await fetchCached<StructuredTeamMember[]>(teamQuery)) || [];
+  return ((await fetchCached<StructuredTeamMember[]>(teamQuery)) || []).map(member=>({ ...member, name: member.name?.toUpperCase().includes("KANGWAGYE") ? "NGUTETE K. Sharon" : member.name }));
 }
 
 export async function getTestimonials(): Promise<StructuredTestimonial[]> {
