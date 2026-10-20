@@ -11,7 +11,7 @@ export type StudioReview={
 export default function StudioTestimonials({reviews}:{reviews:StudioReview[]}){
  const [index,setIndex]=useState(0),[paused,setPaused]=useState(false),[hovered,setHovered]=useState(false);
  const count=reviews.length,active=reviews[Math.min(index,count-1)];
- const pendingCards=[
+ const pendingCards: Array<StudioReview & {key:string}>=[
   {key:"pending-1",author:"CLIENT REVIEW 01",quote:"Awaiting an approved client message."},
   {key:"pending-2",author:"CLIENT REVIEW 02",quote:"This space is reserved for genuine client feedback."},
   {key:"pending-3",author:"CLIENT REVIEW 03",quote:"Client names and ratings appear after approval."},
