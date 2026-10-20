@@ -49,7 +49,8 @@ export default function RegionAtlas({country,onCountryChange}:{country:string;on
  const focusCountry=(name:string)=>{setSelectedCity(null);onCountryChange(name);};
  const focusCity=(name:string)=>{setSelectedCity(name);setCamera({center:country,zoom:Math.min(23,countryFit(selected.iso)*1.45)});};
  const homeReset=()=>{setSelectedCity(null);setCamera({center:"Rwanda",zoom:countryFit("RWA")});onCountryChange("Rwanda");};
- const zoomBy=(value:number)=>setCamera(c=>({...c,zoom:Math.max(.8,Math.min(24,Math.round((c.zoom+value)*100)/100))}));
+ const africaOverview=()=>{setSelectedCity(null);setCamera({center:"__AFRICA__",zoom:.72});};
+ const zoomBy=(value:number)=>setCamera(c=>({...c,zoom:Math.max(.65,Math.min(24,Math.round((c.zoom+value)*100)/100))}));
  const previous=useRef(country);
  useEffect(()=>{
   if(previous.current===country)return;
@@ -64,13 +65,14 @@ export default function RegionAtlas({country,onCountryChange}:{country:string;on
  const focused=index.get(camera.center)||countries[0];
  const cityTarget=selectedCity&&activeCity?activeCity:null;
  const countryBox=countryBounds.get(focused.iso);
- const c=cityTarget?point(cityTarget.lon,cityTarget.lat):countryBox?{x:countryBox.cx,y:countryBox.cy}:point(...focused.center);
+ const c=camera.center==="__AFRICA__"?point(17,0):cityTarget?point(cityTarget.lon,cityTarget.lat):countryBox?{x:countryBox.cx,y:countryBox.cy}:point(...focused.center);
  const scale=camera.zoom;
  const transform=`translate(${+(480-c.x*scale).toFixed(2)}px, ${+(365-c.y*scale).toFixed(2)}px) scale(${scale})`;
  const home=country==="Rwanda";
  return <div className={styles.regionAtlas} data-drawing-surface role="group" aria-label="Interactive geographical map of IMVO's regional focus" data-country={country}>
   <header className={styles.atlasHeader}><span>AFRICA / INTERACTIVE ATLAS</span><div className={styles.atlasHeaderControls}>
  <button onClick={homeReset} type="button"><LocateFixed size={13}/> KIGALI / BASE</button>
+ <button onClick={africaOverview} type="button" aria-label="Show entire African continent">AFRICA VIEW</button>
  <button type="button" aria-label="Zoom out map" onClick={()=>zoomBy(-.4)}><Minus size={13}/></button>
  <button type="button" aria-label="Zoom in map" onClick={()=>zoomBy(.4)}><Plus size={13}/></button>
  </div></header>
