@@ -1,6 +1,6 @@
 import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
 import type { StructureResolver } from "sanity/structure";
-import { BookOpen, Images, MessageSquareQuote } from "lucide-react";
+import { BookOpen, MessageSquareQuote } from "lucide-react";
 import EditorGuide from "./components/EditorGuide";
 
 const singleton = (
