@@ -7,9 +7,9 @@ import type { SeoEntry } from "@/sanity/types/cmsBackend";
 export const revalidate = 300;
 
 const fallbackMetadata: Metadata = {
-  title: "DŌMICILE | Property Management",
+  title: { absolute: "DŌMICILE Rwanda | Property Management in Kigali | IMVO Group" },
   description:
-    "DŌMICILE is property management by IMVO Group for owners who want one reliable point of contact for the ongoing care, maintenance and coordination of their property in Kigali, Rwanda.",
+    "DŌMICILE by IMVO Group provides property management in Kigali, Rwanda: inspections, maintenance coordination, owner approvals and trusted care for local and diaspora property owners.",
   category: "Property Management",
   keywords: [
     "property management Kigali",
@@ -19,6 +19,10 @@ const fallbackMetadata: Metadata = {
     "property inspection Kigali",
     "diaspora property management Rwanda",
     "DŌMICILE",
+    "Domicile Rwanda",
+    "Domicile Kigali",
+    "Domicile property management",
+    "property management for overseas owners Rwanda",
     "Domicile by IMVO Group",
   ],
   alternates: {
@@ -27,7 +31,7 @@ const fallbackMetadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://www.imvogroup.com/domicile",
-    title: "DŌMICILE | Your property, handled.",
+    title: "DŌMICILE Rwanda | Property Management in Kigali",
     description:
       "Property management by IMVO Group. One reliable point of contact for the ongoing care, maintenance and coordination of your property.",
     siteName: "IMVO Group",
@@ -41,7 +45,7 @@ const fallbackMetadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "DŌMICILE | Your property, handled.",
+    title: "DŌMICILE Rwanda | Property Management in Kigali",
     description:
       "Property management by IMVO Group for property owners in Kigali, Rwanda.",
     images: ["/domicile/exact/estate-hero.png"],
@@ -79,6 +83,22 @@ export default async function DomicilePage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({
+        "@context":"https://schema.org",
+        "@graph":[
+          {"@type":"Service","@id":"https://www.imvogroup.com/domicile#service",
+           name:"DŌMICILE Property Management",alternateName:["Domicile Rwanda","Domicile by IMVO Group"],
+           serviceType:"Property management and property care",
+           description:"Property oversight, routine inspections, maintenance coordination, owner approvals and reporting in Kigali, Rwanda.",
+           url:"https://www.imvogroup.com/domicile",
+           provider:{"@id":"https://www.imvogroup.com/#organization"},
+           areaServed:{"@type":"Place",name:"Kigali, Rwanda"}},
+          {"@type":"WebPage","@id":"https://www.imvogroup.com/domicile#webpage",
+           url:"https://www.imvogroup.com/domicile",name:"DŌMICILE Rwanda | Property Management in Kigali",
+           isPartOf:{"@id":"https://www.imvogroup.com/#website"},
+           about:{"@id":"https://www.imvogroup.com/domicile#service"}}
+        ]
+      }).replace(/</g,"\\u003c")}} />
       <DomicileEditorial content={content} faqs={faqs} />
     </>
   );
