@@ -35,7 +35,7 @@ type SanityProjectRecord = {
 };
 
 const projectsQuery = defineQuery(`
-  *[_type == "project"] | order(coalesce(orderRank, "zzzzzz") asc, coalesce(order, 100) asc, year desc, _createdAt desc) {
+  *[_type == "project" && websiteVisible != false] | order(coalesce(orderRank, "zzzzzz") asc, coalesce(order, 100) asc, year desc, _createdAt desc) {
     "id": _id,
     "slug": slug.current,
     title,

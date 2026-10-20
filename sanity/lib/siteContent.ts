@@ -128,7 +128,7 @@ const canonicalTeamImageByName = (name?: string) => {
     return "/team2.png";
   }
 
-  if (normalizedName.includes("KANGWAGYE") && normalizedName.includes("SHARON")) {
+  if ((normalizedName.includes("KANGWAGYE") || normalizedName.includes("NGUTETE")) && normalizedName.includes("SHARON")) {
     return "/team4.png";
   }
 
@@ -150,7 +150,7 @@ const canonicalTeamRoleByName = (name?: string) => {
     return "Strategy & Digital Systems Lead";
   }
 
-  if (normalizedName.includes("KANGWAGYE") && normalizedName.includes("SHARON")) {
+  if ((normalizedName.includes("KANGWAGYE") || normalizedName.includes("NGUTETE")) && normalizedName.includes("SHARON")) {
     return "Project Coordination & Growth Lead";
   }
 
@@ -169,6 +169,7 @@ function withCanonicalTeamFallbacks<T extends { teamMembers?: TeamMember[] }>(
 
       return {
         ...member,
+        name: /SHARON/i.test(member.name||"") && /KANGWAGYE|NGUTETE/i.test(member.name||"") ? "NGUTETE K. Sharon" : member.name,
         role: member.role || canonicalTeamRoleByName(member.name),
         image: member.image?.url
           ? member.image

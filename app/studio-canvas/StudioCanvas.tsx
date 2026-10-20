@@ -16,6 +16,7 @@ import { useScrollScene } from "./useScrollScene";
 import { teamMembers, inProgressProjects, projectIntelligenceItems, studioServices, portfolioProjects } from "./content";
 import StudioImage from "./StudioImage";
 import StudioPortrait from "./StudioPortrait";
+import StudioTestimonials, { type StudioReview } from "./StudioTestimonials";
 import RegionAtlas, { regionCountryNames } from "./RegionAtlas";
 import styles from "./StudioCanvas.module.css";
 function Heading({label,title,text,id}:{label:string;title:string;text?:string;id?:string}){return <div className={styles.sectionHeading}><div><h2 id={id}>{title}</h2></div>{text&&<p>{text}</p>}</div>;}
@@ -35,14 +36,13 @@ function Team({content}:{content?:HomePageContent|null}){
  const [open,setOpen]=useState<number|null>(null);
  const members=content?.teamMembers?.length
   ? content.teamMembers.map((member,index)=>({
-    name:member.name||teamMembers[index]?.name||"Team member",
+    name:/KANGWAGYE|NGUTETE/i.test(member.name||"")?"NGUTETE K. Sharon":member.name||teamMembers[index]?.name||"Team member",
     role:member.role||"",description:member.description||"",
     image:member.image?.url||teamMembers[index]?.image||"/team1.png"
    }))
   : teamMembers;
  return <section id="studio-team" className={styles.team} tabIndex={-1} data-studio-section="team" aria-labelledby="team-heading">
   <Heading label={content?.teamKicker||"Team"} title={content?.teamHeading||"A studio shaped by collaboration, technical focus, and shared responsibility."} id="team-heading"/>
-  <div className={styles.teamLandscape} data-reveal><StudioImage src={content?.teamImage?.url||"/team.png"} alt={content?.teamImage?.alt||"The IMVO team in the studio"} width="1440" height="780" loading="lazy"/><CornerMarks/></div>
   <div className={styles.teamGrid}>{members.map((member,index)=><article key={member.name} className={styles.member} data-reveal>
     <StudioPortrait src={member.image} alt={member.name} index={index}/>
     <div className={styles.memberDetails}><h3><button className={styles.memberToggle} type="button" aria-expanded={open===index} aria-controls={`team-bio-${index}`} onClick={()=>setOpen(open===index?null:index)}><span>{member.name}</span>{open===index?<Minus size={15}/>:<Plus size={15}/>}</button></h3><p>{member.role}</p></div>
@@ -51,7 +51,7 @@ function Team({content}:{content?:HomePageContent|null}){
  </section>;
 }
 function Count({value,suffix=''}:{value:number;suffix?:string}){const ref=useRef<HTMLSpanElement>(null);useEffect(()=>{const el=ref.current;if(!el||matchMedia('(prefers-reduced-motion: reduce)').matches)return;let raf=0;const observer=new IntersectionObserver(([entry])=>{if(!entry.isIntersecting)return;observer.disconnect();const start=performance.now();const paint=(time:number)=>{const p=Math.min(1,(time-start)/1400),initial=value===2017?2000:0;el.textContent=`${Math.round(initial+(value-initial)*(1-Math.pow(1-p,3)))}${suffix}`;if(p<1)raf=requestAnimationFrame(paint);};raf=requestAnimationFrame(paint);},{threshold:.5});observer.observe(el);return()=>{cancelAnimationFrame(raf);observer.disconnect();};},[value,suffix]);return <span ref={ref} aria-label={`${value}${suffix}`}>{value}{suffix}</span>;}
-export default function StudioCanvas({content,projects,featuredProjects,controls}:{content:HomePageContent|null;projects:Project[];featuredProjects:Project[];controls?:HomeSectionControls|null}){
+export default function StudioCanvas({content,projects,featuredProjects,controls,reviews=[]}:{content:HomePageContent|null;projects:Project[];featuredProjects:Project[];controls?:HomeSectionControls|null;reviews?:StudioReview[]}){
  const root=useRef<HTMLDivElement>(null);const[country,setCountry]=useState('Rwanda'),[tickerPaused,setTickerPaused]=useState(false);
  const countries=regionCountryNames,allProjects=projects.length?projects:PROJECTS;
  const intelligence=content?.intelligenceItems?.length?content.intelligenceItems:projectIntelligenceItems;
@@ -70,6 +70,7 @@ export default function StudioCanvas({content,projects,featuredProjects,controls
   {controls?.showProgress!==false&&<section className={styles.onBoards} id="on-the-boards" tabIndex={-1} data-studio-section="progress" aria-labelledby="boards-heading"><Heading label={content?.progressKicker||'In progress'} title={content?.progressHeading||'On the boards.'} text={content?.progressText||'A look at conceptual studies, wireframes, and developments currently taking shape in the studio.'} id="boards-heading"/><div className={styles.boardsGrid}>{progress.map((item,index)=><Link href={item.href} key={`${item.title}-${index}`} className={styles.boardProject} data-reveal><div><StudioImage src={item.image} alt={item.title} width="720" height="540" loading="lazy"/><CornerMarks/><span className={styles.viewProject}>Explore <ArrowUpRight size={16}/></span></div><span className={styles.eyebrow}>{item.type}</span><h3>{item.title}</h3><p>{item.concept}</p></Link>)}</div></section>}
   {controls?.showServices!==false&&<ServiceJourney content={content}/>}
   {controls?.showTeam!==false&&<Team content={content}/>}
+  {controls?.showTestimonials!==false&&<StudioTestimonials reviews={reviews}/>}
   {controls?.showFinalCta!==false&&<section className={styles.contact} id="start-a-project" tabIndex={-1} data-studio-section="cta" aria-labelledby="contact-heading"><div className={styles.contactMeta}><span>Kigali, Rwanda / East Africa</span></div><div className={styles.contactDrawing} data-drawing-surface><DrawingExplorer src="/studio/study-residential.jpg" kind="residential" label="Start a project — illustrative residential study"/><CornerMarks/><h2 id="contact-heading">{content?.ctaHeading||'Let’s shape an environment that endures.'}</h2></div><Link className={styles.contactLink} href="/contact#quote">{content?.ctaButtonLabel||'Request a Quote'}<ArrowUpRight/></Link><div className={styles.contactMeta}><span>Design / Strategy / Execution</span><StudioJump href="#studio-opening">Back to the first line <ArrowDown size={13} className={styles.upArrow}/></StudioJump></div></section>}
  </div>;
 }

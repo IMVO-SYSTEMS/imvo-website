@@ -16,6 +16,7 @@ export type StructuredTestimonial = {
   company?: string;
   date?: string;
   source?: string;
+  rating?: number;
   featured?: boolean;
   active?: boolean;
   order?: number;
@@ -142,6 +143,7 @@ export type HomeSectionControls = {
   showProgress?: boolean;
   showServices?: boolean;
   showTeam?: boolean;
+  showTestimonials?: boolean;
   showStudioStatus?: boolean;
   showFinalCta?: boolean;
 };

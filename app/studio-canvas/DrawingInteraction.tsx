@@ -1,6 +1,5 @@
 "use client";
 import { useId, useRef, useState } from "react";
-import { createPortal } from "react-dom";
 import Link from "next/link";
 import { ArrowUpRight, Minus, Plus, X } from "lucide-react";
 import StudioImage from "./StudioImage";
@@ -45,13 +44,13 @@ export function DrawingInteraction({kind,label='Explore the drawing',compact=fal
  {items.map((item,i)=><button key={item.title} ref={el=>{buttons.current[i]=el;}} data-detail type="button" className={styles.detailPoint} style={{left:`${item.x}%`,top:`${item.y}%`}} aria-label={`Explore ${item.title.toLowerCase()}`} aria-expanded={selected===i} aria-controls={selected===i?`${id}-note`:undefined} onPointerEnter={()=>setHover(i)} onPointerLeave={()=>setHover(null)} onClick={()=>setSelected(i)}>{String(i+1).padStart(2,'0')}</button>)}
  {selected!==null&&(()=>{
    const item=items[selected];
-   const position=item.x<40?"start":item.x>60?"end":"middle";
-   const note=<aside id={`${id}-note`} className={styles.detailNote} data-anchor-side={position} aria-label={item.title}>
+   const position=item.x>=51?"start":"end";
+   const offsetY=item.y>62?5:item.y<38?51:20;
+   const note=<aside id={`${id}-note`} className={styles.detailNote} data-anchor-side={position} style={{"--detail-y":offsetY+"%"} as React.CSSProperties} aria-label={item.title}>
       <div><strong>{String(selected+1).padStart(2,"0")} / {item.title}</strong><button type="button" aria-label="Close drawing detail" onClick={close}><X size={14}/></button></div>
       <p>{item.text}</p><Link href={item.href}>{item.action}<ArrowUpRight size={14}/></Link>
    </aside>;
-   const dock=dockId&&typeof document!=="undefined"?document.getElementById(dockId):null;
-   return dock?createPortal(note,dock):note;
+   return note;
  })()}
  </div>;
 }

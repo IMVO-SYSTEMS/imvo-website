@@ -398,3 +398,88 @@
  .atlasCityList{gap:4px}
  .atlasAttribution{padding:9px 12px;font-size:7px}
 }
+
+
+/* Full country framing: readable map country names, exactly two active city labels. */
+.atlasCountryLabel{pointer-events:none;user-select:none}
+.atlasCountryLabel text{font:600 9px/1.1 var(--sc-mono);letter-spacing:.01em;fill:var(--sc-ink);paint-order:stroke;stroke:var(--sc-bg);stroke-width:2.5;opacity:.82}
+.atlasCountryLabel[data-selected="true"] text{font-weight:700;font-size:12px;fill:#e95728;opacity:1}
+.atlasCity text{opacity:1;font-weight:600;stroke-width:3.2}
+.atlasCity[data-active="true"] text{fill:#e95728}
+.atlasViewport svg [role="button"]:focus-visible{outline:none;filter:drop-shadow(0 0 2px #f04b21)}
+@media(max-width:760px){
+ .atlasCountryLabel text{font-size:7.5px}
+ .atlasCountryLabel[data-selected="true"] text{font-size:10px}
+ .atlasCity text{font-size:9px}
+}
+
+
+/* IMVO client perspectives: original editorial panel, never fabricated quotations. */
+.studioReviews{background:#0c0c0c;color:#f9f9f9;border-block:1px solid #393939;padding:clamp(50px,7vw,125px) var(--sc-gutter)}
+.studioReviewsHeading{text-align:center;margin:0 auto clamp(28px,4vw,65px)}
+.studioReviewsHeading .eyebrow{color:#bbb;font:10px/1.5 var(--sc-mono);letter-spacing:.09em}
+.studioReviewsHeading h2{color:#fff!important;font:700 clamp(36px,5vw,82px)/1.02 "BT Grotesk",sans-serif!important;letter-spacing:-.06em;margin:22px auto 0;max-width:100%;text-align:center}
+.studioReviewCard,.studioReviewEmpty{border:1px solid #3c3c3c;min-height:350px;padding:clamp(22px,3.4vw,64px);display:flex;flex-direction:column;justify-content:space-between;gap:32px}
+.studioReviewMeta{display:flex;justify-content:space-between;align-items:center;gap:20px;font:11px/1.4 var(--sc-mono);color:#bebebe}
+.studioReviewMeta>span:nth-child(2){letter-spacing:.11em}
+.studioReviewQuote{margin:0;max-width:980px;display:grid;grid-template-columns:60px 1fr;align-items:start}
+.studioReviewQuote>span{font:700 110px/1 var(--sc-font);color:#ef4f26;margin-top:-16px}
+.studioReviewQuote p{font:500 clamp(20px,2.8vw,43px)/1.25 "BT Grotesk",sans-serif;color:#fff;letter-spacing:-.035em}
+.studioReviewByline{display:flex;justify-content:space-between;align-items:center;gap:22px;padding-top:22px;border-top:1px solid #353535}
+.studioReviewByline>div:first-child{display:flex;flex-direction:column;gap:7px}
+.studioReviewByline strong{font:600 clamp(15px,1.55vw,23px)/1.15 var(--sc-font)}
+.studioReviewByline span{font:12px/1.35 var(--sc-mono);color:#aaa}
+.studioReviewControls{display:flex;gap:0}
+.studioReviewControls button{display:grid;place-items:center;width:48px;height:48px;border:1px solid #474747;color:#fff;margin-left:-1px}
+.studioReviewControls button:hover,.studioReviewControls button:focus-visible{background:#f04b21;color:#fff;border-color:#f04b21}
+.studioReviewControls button:disabled{opacity:.35;cursor:not-allowed}
+.studioReviewPagination{display:flex;align-items:center;gap:8px}
+.studioReviewPagination button{height:3px;width:40px;background:#555;border:0}
+.studioReviewPagination button[aria-current="true"]{background:#f04b21}
+.studioReviewEmpty{flex-direction:row;align-items:end;min-height:280px}
+.studioReviewEmpty h3{font-size:clamp(25px,3vw,50px)!important;line-height:1.05;margin:18px 0}
+.studioReviewEmpty p{font:var(--sc-label)/1.55 var(--sc-font);color:#bdbdbd;max-width:56ch}
+.studioReviewEmpty>a{display:inline-flex;align-items:center;gap:30px;white-space:nowrap;padding:18px;border:1px solid #444;color:#fff;font:11px var(--sc-mono)}
+.studioReviewEmpty>a:hover{background:#f04b21}
+@media(max-width:760px){
+ .studioReviewsHeading h2{font-size:clamp(30px,8.3vw,46px)!important}
+ .studioReviewQuote{grid-template-columns:30px 1fr}
+ .studioReviewQuote>span{font-size:62px;margin-top:-5px}
+ .studioReviewQuote p{font-size:clamp(19px,5vw,27px)}
+ .studioReviewByline{flex-wrap:wrap}
+ .studioReviewEmpty{display:flex;align-items:start;flex-direction:column}
+ .studioReviewCard{min-height:310px}
+ .studioReviewControls button{width:44px;height:44px}
+}
+/* Floating contextual drawing details: overlay within its own illustration, never
+   push the next section down and never occupy the adjacent text column. */
+.drawingInteraction .detailNote,
+.heroCanvas .drawingInteraction .detailNote,
+.planDrawing .drawingInteraction .detailNote,
+.explorerViewport .drawingInteraction .detailNote{
+ display:block;position:absolute;z-index:40;pointer-events:auto;
+ left:var(--detail-x,8%);top:var(--detail-y,12%);bottom:auto;right:auto;
+ width:min(270px,calc(100% - 22px));max-width:calc(100% - 22px);
+ border:1px solid var(--sc-ink);background:var(--sc-bg);box-shadow:3px 3px 0 color-mix(in srgb,var(--sc-ink) 20%,transparent);
+}
+.drawingInteraction .detailNote[data-anchor-side="end"]{left:auto;right:var(--sc-s3)}
+.drawingInteraction .detailNote[data-anchor-side="start"]{left:var(--sc-s3)}
+.explorer[data-compact="true"] .drawingInteraction .detailNote{width:min(220px,calc(100% - 14px));max-height:94%;overflow:auto;top:var(--detail-y,3%)}
+.heroDetailDock,.drawingDock,.planDetailDock{display:none!important;min-height:0!important;height:0!important;visibility:hidden!important;padding:0!important;border:0!important}
+.planSticky:has(.detailNote) .planCaption{visibility:visible;pointer-events:auto}
+@media(max-width:760px){
+ .heroCanvas .drawingInteraction .detailNote{width:min(235px,75%);max-height:95%;overflow:auto;top:8%;left:var(--sc-s3)}
+ .planDrawing .drawingInteraction .detailNote{width:min(230px,75%);max-height:92%;overflow:auto;top:5%}
+ .explorerViewport .drawingInteraction .detailNote{width:min(220px,80%);max-height:93%;overflow:auto}
+ .drawingInteraction .detailNote p{font-size:11px;line-height:1.35}
+}
+
+
+/* Principle details stay within the architecture study, never expand the page. */
+.connectedDesign{position:relative}
+.principleFloat{position:absolute;z-index:35;left:var(--sc-s3);right:var(--sc-s3);top:14%;max-height:65%;overflow:auto;background:var(--sc-bg);color:var(--sc-ink);border:1px solid var(--sc-ink);box-shadow:4px 4px 0 color-mix(in srgb,var(--sc-ink) 16%,transparent)}
+.principleFloat>div{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 15px;background:var(--sc-ink);color:var(--sc-bg)}
+.principleFloat strong{font:600 var(--sc-label)/1.2 var(--sc-font)}
+.principleFloat button{border:0;width:35px;height:35px;display:grid;place-items:center;font-size:23px}
+.principleFloat p{font:var(--sc-label)/1.5 var(--sc-font);padding:15px}
+@media(max-width:760px){.principleFloat{top:6%;max-height:82%}}

@@ -104,7 +104,7 @@ export const homePageType = defineType({
     defineField({ name: "services", title: "Service summaries", type: "array", group: "portfolio", of: [titleTextItem], validation: (rule) => rule.max(6) }),
     defineField({ name: "teamKicker", title: "Team label", type: "string", group: "team" }),
     defineField({ name: "teamHeading", title: "Team heading", type: "text", rows: 3, group: "team" }),
-    defineField({ ...imageWithAlt, name: "teamImage", title: "Team group image", group: "team" }),
+    defineField({ ...imageWithAlt, name: "teamImage", title: "Legacy group photo (unused on homepage)", description:"The group photograph has been removed from the public Studio homepage. Kept only to preserve historic media.", group: "team", readOnly: true }),
     defineField({
       name: "teamMembers",
       title: "Legacy embedded team members",
@@ -140,6 +140,7 @@ export const homePageType = defineType({
         defineField({ name: "showProgress", title: "In-progress / featured work", type: "boolean", initialValue: true }),
         defineField({ name: "showServices", title: "Services summary", type: "boolean", initialValue: true }),
         defineField({ name: "showTeam", title: "Team", type: "boolean", initialValue: true }),
+        defineField({ name: "showTestimonials", title: "Client testimonials", type: "boolean", initialValue: true }),
         defineField({ name: "showStudioStatus", title: "Studio Status", type: "boolean", initialValue: true }),
         defineField({ name: "showFinalCta", title: "Final call to action", type: "boolean", initialValue: true }),
       ],

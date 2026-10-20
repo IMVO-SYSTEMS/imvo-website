@@ -31,7 +31,7 @@ const teamQuery = defineQuery(`
 const testimonialQuery = defineQuery(`
   *[_type == "testimonial" && active != false]
     | order(coalesce(featured, false) desc, coalesce(order, 100) asc, date desc) {
-      _id, quote, author, role, company, date, source, featured, active, order
+      _id, quote, author, role, company, date, source, rating, featured, active, order
     }
 `);
 
@@ -127,7 +127,12 @@ async function fetchCached<T>(
 }
 
 export async function getTeamMembers(): Promise<StructuredTeamMember[]> {
-  return (await fetchCached<StructuredTeamMember[]>(teamQuery)) || [];
+  const records=(await fetchCached<StructuredTeamMember[]>(teamQuery)) || [];
+  return records.map(member=>({
+    ...member,
+    name:/SHARON/i.test(member.name||"")&&/KANGWAGYE|NGUTETE/i.test(member.name||"")
+      ?"NGUTETE K. Sharon":member.name,
+  }));
 }
 
 export async function getTestimonials(): Promise<StructuredTestimonial[]> {
