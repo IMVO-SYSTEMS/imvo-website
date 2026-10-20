@@ -27,3 +27,25 @@ for (const name of covers) {
     console.log(`Portfolio image ${name} ${width}px: ${original.size} -> ${optimized.size} bytes`);
   }
 }
+
+// Original IMVO team photos -> light pencil study. The photographic originals
+// remain separate and are revealed on hover/focus. No third-party artwork.
+const sketchDir = path.join(sourceDir, "studio-sketches");
+await mkdir(sketchDir, { recursive: true });
+for (const name of ["team1", "team2", "team3", "team4"]) {
+  const input = path.join(sourceDir, `${name}.webp`);
+  const original = await stat(input).catch(() => null);
+  if (!original) throw new Error(`Missing IMVO team image: ${input}`);
+
+  const mono = await sharp(input).rotate()
+    .resize({ width: 760, withoutEnlargement: true })
+    .grayscale().normalise().toBuffer();
+  const dodgeLayer = await sharp(mono).negate().blur(13).toBuffer();
+  const output = path.join(sketchDir, `${name}.webp`);
+  await sharp(mono)
+    .composite([{ input: dodgeLayer, blend: "colour-dodge" }])
+    .webp({ quality: 81, effort: 4 })
+    .toFile(output);
+  const optimized = await stat(output);
+  console.log(`IMVO pencil portrait ${name}: ${original.size} -> ${optimized.size} bytes`);
+}

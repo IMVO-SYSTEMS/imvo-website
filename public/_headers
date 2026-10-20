@@ -1,0 +1,16 @@
+# No new Cloudflare services required. Static assets only; never cache HTML, RSC,
+# studio schedules, CMS responses, enquiries, or any authenticated routes here.
+/fonts/studio/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/studio-sketches/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/studio-optimized/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/brand/*
+  Cache-Control: public, max-age=86400
+
+/studio/*
+  Cache-Control: public, max-age=86400
