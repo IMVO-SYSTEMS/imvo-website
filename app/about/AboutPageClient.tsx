@@ -11,25 +11,25 @@ const BlueprintBackground = () => (
     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style={{ position: "absolute", top: 0, left: 0 }}>
       {/* Dense Architectural Grid Matrix */}
       <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
-        <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="1"/>
+        <path d="M 100 0 L 0 0 0 100" fill="none" stroke="color-mix(in srgb, var(--sc-ink) 5%, transparent)" strokeWidth="1"/>
       </pattern>
       <rect width="100%" height="100%" fill="url(#grid)" />
 
       {/* Primary Horizontal & Vertical Draft Lines */}
-      <motion.path d="M -100 250 L 3000 250" stroke="rgba(255,255,255,0.7)" strokeWidth="2" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 7, repeat: Infinity, ease: "linear" }} />
-      <motion.path d="M -100 600 L 3000 600" stroke="rgba(255,255,255,0.4)" strokeWidth="1" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 9, repeat: Infinity, ease: "linear", delay: 2 }} />
-      <motion.path d="M 350 -100 L 350 3000" stroke="rgba(255,255,255,0.5)" strokeWidth="2" strokeDasharray="15, 15" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 12, repeat: Infinity, ease: "linear", delay: 1 }} />
-      <motion.path d="M 850 -100 L 850 3000" stroke="rgba(255,255,255,0.3)" strokeWidth="1" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 15, repeat: Infinity, ease: "linear", delay: 3 }} />
+      <motion.path d="M -100 250 L 3000 250" stroke="color-mix(in srgb, var(--sc-ink) 70%, transparent)" strokeWidth="2" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 7, repeat: Infinity, ease: "linear" }} />
+      <motion.path d="M -100 600 L 3000 600" stroke="color-mix(in srgb, var(--sc-ink) 40%, transparent)" strokeWidth="1" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 9, repeat: Infinity, ease: "linear", delay: 2 }} />
+      <motion.path d="M 350 -100 L 350 3000" stroke="color-mix(in srgb, var(--sc-ink) 50%, transparent)" strokeWidth="2" strokeDasharray="15, 15" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 12, repeat: Infinity, ease: "linear", delay: 1 }} />
+      <motion.path d="M 850 -100 L 850 3000" stroke="color-mix(in srgb, var(--sc-ink) 30%, transparent)" strokeWidth="1" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 15, repeat: Infinity, ease: "linear", delay: 3 }} />
 
       {/* Perspective / Diagonal Lines */}
-      <motion.path d="M 0 1000 L 1500 -200" stroke="rgba(255,255,255,0.4)" strokeWidth="1" strokeDasharray="5, 5" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 8, repeat: Infinity, ease: "linear", delay: 1 }} />
-      
+      <motion.path d="M 0 1000 L 1500 -200" stroke="color-mix(in srgb, var(--sc-ink) 40%, transparent)" strokeWidth="1" strokeDasharray="5, 5" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 8, repeat: Infinity, ease: "linear", delay: 1 }} />
+
       {/* Architectural Radii / Swing Arcs */}
-      <motion.circle cx="450" cy="500" r="150" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5" strokeDasharray="5, 10" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 0.5 }} />
-      
+      <motion.circle cx="450" cy="500" r="150" stroke="color-mix(in srgb, var(--sc-ink) 60%, transparent)" strokeWidth="1.5" strokeDasharray="5, 10" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 0.5 }} />
+
       {/* Floorplan Structural Walls & Boxes */}
-      <motion.rect x="450" y="350" width="500" height="300" stroke="rgba(255,255,255,0.8)" strokeWidth="2" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }} />
-      <motion.rect x="400" y="300" width="200" height="400" stroke="rgba(255,255,255,0.5)" strokeWidth="1" strokeDasharray="10, 10" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1.5 }} />
+      <motion.rect x="450" y="350" width="500" height="300" stroke="color-mix(in srgb, var(--sc-ink) 80%, transparent)" strokeWidth="2" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }} />
+      <motion.rect x="400" y="300" width="200" height="400" stroke="color-mix(in srgb, var(--sc-ink) 50%, transparent)" strokeWidth="1" strokeDasharray="10, 10" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1.5 }} />
     </svg>
   </div>
 );
@@ -123,14 +123,14 @@ const RegionalReach = ({ content }: { content?: AboutPageContent | null }) => {
       className="mobilePad"
       style={{
         padding: "100px 0",
-        background: "#050505",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
+        background: "var(--sc-bg)",
+        borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 6%, transparent)",
         position: "relative",
         overflow: "hidden",
         zIndex: 10,
       }}
     >
-      <BlueprintBackground />
+
 
       <div
         className="containerWide mobileStack"
@@ -149,17 +149,7 @@ const RegionalReach = ({ content }: { content?: AboutPageContent | null }) => {
           viewport={{ once: true, margin: "-100px" }}
           transition={transition}
         >
-          <div
-            style={{
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              fontSize: 12,
-              opacity: 0.6,
-              fontWeight: 800,
-            }}
-          >
-            Regional Reach
-          </div>
+
 
           <h2
             style={{
@@ -181,7 +171,7 @@ const RegionalReach = ({ content }: { content?: AboutPageContent | null }) => {
               maxWidth: 560,
               fontSize: 18,
               lineHeight: 1.85,
-              color: "rgba(255,255,255,0.64)",
+              color: "color-mix(in srgb, var(--sc-ink) 64%, transparent)",
             }}
           >
             {content?.regionalText || "IMVO operates from Rwanda while supporting design, consultancy, site coordination, and development-oriented work across East, Central, and Southern African corridors."}
@@ -202,13 +192,13 @@ const RegionalReach = ({ content }: { content?: AboutPageContent | null }) => {
                 style={{
                   padding: "10px 14px",
                   borderRadius: 999,
-                  border: "1px solid rgba(255,255,255,0.12)",
-                  background: "rgba(255,255,255,0.035)",
+                  border: "1px solid color-mix(in srgb, var(--sc-ink) 12%, transparent)",
+                  background: "color-mix(in srgb, var(--sc-ink) 3.5%, transparent)",
                   fontSize: 12,
                   fontWeight: 800,
                   letterSpacing: "0.08em",
                   textTransform: "uppercase",
-                  color: "rgba(255,255,255,0.68)",
+                  color: "color-mix(in srgb, var(--sc-ink) 68%, transparent)",
                 }}
               >
                 {country.name}
@@ -226,8 +216,8 @@ const RegionalReach = ({ content }: { content?: AboutPageContent | null }) => {
             position: "relative",
             width: "100%",
             aspectRatio: "3/2",
-            border: "1px solid rgba(255,255,255,0.14)",
-            background: "#050505",
+            border: "1px solid color-mix(in srgb, var(--sc-ink) 14%, transparent)",
+            background: "var(--sc-bg)",
             overflow: "hidden",
           }}
         >
@@ -249,7 +239,7 @@ const RegionalReach = ({ content }: { content?: AboutPageContent | null }) => {
               position: "absolute",
               inset: 0,
               background:
-                "radial-gradient(circle at 58% 34%, transparent 0%, rgba(5,5,5,0.04) 32%, rgba(5,5,5,0.22) 100%)",
+                "radial-gradient(circle at 58% 34%, transparent 0%, color-mix(in srgb, var(--sc-bg) 4%, transparent) 32%, color-mix(in srgb, var(--sc-bg) 22%, transparent) 100%)",
               pointerEvents: "none",
             }}
           />
@@ -271,7 +261,7 @@ const RegionalReach = ({ content }: { content?: AboutPageContent | null }) => {
                 key={country.name}
                 d={curvedPath(country, index % 2 === 0 ? 11 : -8)}
                 fill="none"
-                stroke="rgba(255,255,255,0.28)"
+                stroke="color-mix(in srgb, var(--sc-ink) 28%, transparent)"
                 strokeWidth="0.11"
                 strokeDasharray="1.2 1.7"
                 initial={{ pathLength: 0, opacity: 0 }}
@@ -288,7 +278,7 @@ const RegionalReach = ({ content }: { content?: AboutPageContent | null }) => {
                   key={country.name}
                   d={curvedPath(country, index % 2 === 0 ? 5 : -5)}
                   fill="none"
-                  stroke="rgba(255,255,255,0.72)"
+                  stroke="color-mix(in srgb, var(--sc-ink) 72%, transparent)"
                   strokeWidth="0.16"
                   strokeDasharray="1.1 1.2"
                   initial={{ pathLength: 0, opacity: 0 }}
@@ -318,14 +308,14 @@ const RegionalReach = ({ content }: { content?: AboutPageContent | null }) => {
                     width: country.name === "Rwanda" ? 12 : isPrimary ? 8 : 5,
                     height: country.name === "Rwanda" ? 12 : isPrimary ? 8 : 5,
                     borderRadius: "50%",
-                    background: "white",
+                    background: "var(--sc-ink)",
                     opacity: country.name === "Rwanda" ? 1 : isPrimary ? 0.9 : 0.55,
                     boxShadow:
                       country.name === "Rwanda"
-                        ? "0 0 30px rgba(255,255,255,0.95)"
+                        ? "0 0 30px color-mix(in srgb, var(--sc-ink) 95%, transparent)"
                         : isPrimary
-                          ? "0 0 16px rgba(255,255,255,0.62)"
-                          : "0 0 10px rgba(255,255,255,0.35)",
+                          ? "0 0 16px color-mix(in srgb, var(--sc-ink) 62%, transparent)"
+                          : "0 0 10px color-mix(in srgb, var(--sc-ink) 35%, transparent)",
                   }}
                 />
               </div>
@@ -340,14 +330,14 @@ const RegionalReach = ({ content }: { content?: AboutPageContent | null }) => {
               zIndex: 5,
               padding: "10px 14px",
               borderRadius: 999,
-              background: "rgba(0,0,0,0.62)",
-              border: "1px solid rgba(255,255,255,0.18)",
+              background: "color-mix(in srgb, var(--sc-bg) 62%, transparent)",
+              border: "1px solid color-mix(in srgb, var(--sc-ink) 18%, transparent)",
               backdropFilter: "blur(10px)",
               fontSize: 11,
               fontWeight: 900,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.84)",
+              color: "color-mix(in srgb, var(--sc-ink) 84%, transparent)",
             }}
           >
             Kigali Base · Regional Horizon
@@ -421,15 +411,13 @@ export default function AboutPageClient({ content }: { content?: AboutPageConten
     : coordinationDefaults;
 
   return (
-    <div style={{ background: "#050505", color: "white", minHeight: "100vh", overflow: "hidden", position: "relative" }}>
-      
+    <div style={{ background: "var(--sc-bg)", color: "var(--sc-ink)", minHeight: "100vh", overflow: "hidden", position: "relative" }}>
+
       {/* 1. HERO TYPOGRAPHY */}
       <section style={{ paddingTop: "25vh", paddingBottom: "10vh", position: "relative", zIndex: 10 }}>
-        <BlueprintBackground />
+
         <div className="containerWide" style={{ position: "relative", zIndex: 10 }}>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ ...transition, delay: 0.1 }} style={{ textTransform: "uppercase", letterSpacing: "0.1em", fontSize: 12, opacity: 0.6 }}>
-            {content?.heroKicker || "Studio IMVO"}
-          </motion.div>
+
           <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ ...transition, delay: 0.2 }} style={{ margin: "24px 0 0", fontSize: "clamp(46px, 6vw, 110px)", lineHeight: 0.9, letterSpacing: "-0.04em", fontWeight: 900, maxWidth: 1200 }}>
             <span style={{ whiteSpace: "pre-line" }}>
               {content?.heroHeading || "Built on clarity,\ncontext, and execution."}
@@ -441,7 +429,7 @@ export default function AboutPageClient({ content }: { content?: AboutPageConten
       {/* 2. HERO IMAGE REVEAL */}
       <section style={{ paddingBottom: "96px", position: "relative", zIndex: 10 }}>
         <div className="containerWide">
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ ...transition, delay: 0.4 }} style={{ position: "relative", width: "100%", aspectRatio: "21/9", background: "#111", overflow: "hidden" }}>
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ ...transition, delay: 0.4 }} style={{ position: "relative", width: "100%", aspectRatio: "21/9", background: "var(--sc-bg)", overflow: "hidden" }}>
             <Image src={content?.heroImage?.url || "/about-hero.png"} alt={content?.heroImage?.alt || "IMVO Studio Philosophy"} fill sizes="100vw" style={{ objectFit: "cover", filter: "brightness(0.8)" }} />
           </motion.div>
         </div>
@@ -449,22 +437,22 @@ export default function AboutPageClient({ content }: { content?: AboutPageConten
 
       {/* 3. MANIFESTO / ORIGIN STORY WITH ANIMATED BLUEPRINT */}
       <section className="mobilePad" style={{ position: "relative", padding: "72px 0 108px 0" }}>
-        <BlueprintBackground />
+
         <div className="containerWide mobileStack" style={{ position: "relative", zIndex: 10, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", gap: "80px", alignItems: "start" }}>
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-100px" }} transition={transition}>
             <h2 style={{ fontSize: 24, fontWeight: 800, margin: 0, letterSpacing: "-0.02em" }}>
               {(content?.genesisHeading || "The Genesis of IMVO.\nIntellectu · Mens.\nVisio · Origo.").split("\n").map((line, index, lines) => (
-                <span key={`${line}-${index}`} style={index === lines.length - 1 ? { color: "white", opacity: 0.5 } : undefined}>
+                <span key={`${line}-${index}`} style={index === lines.length - 1 ? { color: "var(--sc-ink)", opacity: 0.5 } : undefined}>
                   {line}{index < lines.length - 1 && <br />}
                 </span>
               ))}
             </h2>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ ...transition, delay: 0.2 }}>
-            <p style={{ fontSize: "clamp(20px, 3vw, 32px)", lineHeight: 1.4, margin: 0, fontWeight: 500, color: "rgba(255,255,255,0.9)" }}>
+            <p style={{ fontSize: "clamp(20px, 3vw, 32px)", lineHeight: 1.4, margin: 0, fontWeight: 500, color: "color-mix(in srgb, var(--sc-ink) 90%, transparent)" }}>
               {content?.genesisLead || "The studio was not founded simply to draw. IMVO emerged from a rigorous technical need to merge deep contextual study (Intellectu) with execution-aware planning. We approach the built environment as an integrated system of proportion, function, material logic, and regulatory discipline."}
             </p>
-            <p style={{ fontSize: 18, lineHeight: 1.8, color: "rgba(255,255,255,0.6)", marginTop: 40, maxWidth: 700 }}>
+            <p style={{ fontSize: 18, lineHeight: 1.8, color: "color-mix(in srgb, var(--sc-ink) 60%, transparent)", marginTop: 40, maxWidth: 700 }}>
               {content?.genesisText || "Before form comes context. Our foundation is built on analyzing the regional landscape, the history of the site, and the operational ambition of the client. Through advanced BIM modeling and photorealistic visualization, we translate this raw data into technical documentation that guarantees sustainability, function, and long-term architectural value."}
             </p>
           </motion.div>
@@ -473,19 +461,19 @@ export default function AboutPageClient({ content }: { content?: AboutPageConten
 {/* REGIONAL REACH */}
 <RegionalReach content={content} />
       {/* 4. STUDIO CULTURE & TEAM PHOTO */}
-      <section className="mobilePad" style={{ padding: "96px 0", background: "#0a0a0a", position: "relative", zIndex: 10 }}>
+      <section className="mobilePad" style={{ padding: "96px 0", background: "var(--sc-bg)", position: "relative", zIndex: 10 }}>
         <div className="containerWide">
           <div className="mobileStack" style={{ display: "flex", flexWrap: "wrap", gap: "60px", alignItems: "center" }}>
             <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-100px" }} transition={transition} style={{ flex: "1 1 350px", maxWidth: "500px" }}>
-              <div style={{ textTransform: "uppercase", letterSpacing: "0.1em", fontSize: 12, opacity: 0.6 }}>Studio Culture</div>
+
               <h2 style={{ marginTop: 20, fontSize: "clamp(32px, 4vw, 48px)", lineHeight: 1.1, letterSpacing: "-0.04em", fontWeight: 900 }}>
                 {content?.cultureHeading || "A collaborative space built for technical excellence."}
               </h2>
-              <p style={{ marginTop: 30, fontSize: 16, lineHeight: 1.8, color: "rgba(255,255,255,0.6)" }}>
+              <p style={{ marginTop: 30, fontSize: 16, lineHeight: 1.8, color: "color-mix(in srgb, var(--sc-ink) 60%, transparent)" }}>
                 {content?.cultureText || "Our studio operates as a highly integrated unit. We believe that the strongest built environments emerge when design, technical coordination, and project management happen concurrently rather than sequentially. Our team is dedicated to constant learning, using advanced analysis and modeling tools to bring visionary concepts into reality."}
               </p>
             </motion.div>
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, margin: "-100px" }} transition={{ ...transition, delay: 0.2 }} style={{ flex: "2 1 600px", position: "relative", width: "100%", aspectRatio: "16/10", background: "#111", overflow: "hidden" }}>
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, margin: "-100px" }} transition={{ ...transition, delay: 0.2 }} style={{ flex: "2 1 600px", position: "relative", width: "100%", aspectRatio: "16/10", background: "var(--sc-bg)", overflow: "hidden" }}>
               <Image src={content?.cultureImage?.url || "/team.png"} alt={content?.cultureImage?.alt || "IMVO Office Team Photo"} fill sizes="(max-width: 900px) 100vw, 70vw" style={{ objectFit: "cover", filter: "grayscale(100%)" }} />
             </motion.div>
           </div>
@@ -493,30 +481,30 @@ export default function AboutPageClient({ content }: { content?: AboutPageConten
       </section>
 
       {/* 5. PILLAR 01: BUILT ENVIRONMENT DESIGN */}
-      <section className="mobilePad" style={{ padding: "112px 0", borderTop: "1px solid rgba(255,255,255,0.05)", position: "relative", zIndex: 10 }}>
+      <section className="mobilePad" style={{ padding: "112px 0", borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 5%, transparent)", position: "relative", zIndex: 10 }}>
         <div className="containerWide">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={transition}>
-            <div style={{ textTransform: "uppercase", letterSpacing: "0.1em", fontSize: 12, opacity: 0.6, color: "white", fontWeight: 800 }}>Pillar 01</div>
+
             <h2 style={{ marginTop: 20, fontSize: "clamp(36px, 5vw, 64px)", lineHeight: 1.05, letterSpacing: "-0.04em", fontWeight: 900 }}>
               {content?.frameworkHeading || "Built Environment Design."}<br/>
-              <span style={{ color: "rgba(255,255,255,0.4)", fontSize: "clamp(24px, 3vw, 42px)" }}>{content?.frameworkSubheading || "The IMVO Framework from Stage 0 to Handover."}</span>
+              <span style={{ color: "color-mix(in srgb, var(--sc-ink) 40%, transparent)", fontSize: "clamp(24px, 3vw, 42px)" }}>{content?.frameworkSubheading || "The IMVO Framework from Stage 0 to Handover."}</span>
             </h2>
           </motion.div>
 
           <div style={{ marginTop: 100, position: "relative" }}>
-            <div style={{ position: "absolute", top: "120px", left: 0, right: 0, height: "1px", background: "linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.1) 100%)", zIndex: 0 }} />
+            <div style={{ position: "absolute", top: "120px", left: 0, right: 0, height: "1px", background: "linear-gradient(90deg, color-mix(in srgb, var(--sc-ink) 10%, transparent) 0%, color-mix(in srgb, var(--sc-ink) 60%, transparent) 50%, color-mix(in srgb, var(--sc-ink) 10%, transparent) 100%)", zIndex: 0 }} />
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 20, position: "relative", zIndex: 1 }}>
               {activeStages.map((phase, i) => (
                 <motion.div key={phase.step} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ ...transition, delay: i * 0.1 }} style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: 13, textTransform: "uppercase", letterSpacing: "0.1em", color: "rgba(255,255,255,0.5)", marginBottom: 30 }}>{phase.name}</div>
+                  <div style={{ fontSize: 13, textTransform: "uppercase", letterSpacing: "0.1em", color: "color-mix(in srgb, var(--sc-ink) 50%, transparent)", marginBottom: 30 }}>{phase.name}</div>
                   <div style={{ width: "100%", height: "80px", display: "flex", justifyContent: "center", alignItems: "center", marginBottom: 30 }}>
                     <svg width="60" height="70" viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg">
-                      <path d={phase.icon} fill="none" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d={phase.icon} fill="none" stroke="color-mix(in srgb, var(--sc-ink) 80%, transparent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
-                  <div style={{ width: 8, height: 8, background: "white", borderRadius: "50%", margin: "0 auto 30px auto", boxShadow: "0 0 10px rgba(255,255,255,0.8)" }} />
+                  <div style={{ width: 8, height: 8, background: "var(--sc-ink)", borderRadius: "50%", margin: "0 auto 30px auto", boxShadow: "0 0 10px color-mix(in srgb, var(--sc-ink) 80%, transparent)" }} />
                   <div style={{ fontSize: 18, fontWeight: 800, margin: "0 0 10px 0" }}>Stage {phase.step}</div>
-                  <p style={{ fontSize: 13, lineHeight: 1.6, color: "rgba(255,255,255,0.4)", margin: "0 auto", maxWidth: 160 }}>{phase.desc}</p>
+                  <p style={{ fontSize: 13, lineHeight: 1.6, color: "color-mix(in srgb, var(--sc-ink) 40%, transparent)", margin: "0 auto", maxWidth: 160 }}>{phase.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -525,24 +513,24 @@ export default function AboutPageClient({ content }: { content?: AboutPageConten
       </section>
 
       {/* 6. TIMELINE & HISTORY */}
-      <section className="mobilePad" style={{ position: "relative", padding: "96px 0", background: "#0a0a0a", borderTop: "1px solid rgba(255,255,255,0.05)", overflow: "hidden" }}>
-        <BlueprintBackground />
+      <section className="mobilePad" style={{ position: "relative", padding: "96px 0", background: "var(--sc-bg)", borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 5%, transparent)", overflow: "hidden" }}>
+
         <div className="containerWide mobileStack" style={{ position: "relative", zIndex: 10, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", gap: 80 }}>
           <div>
             <div style={{ position: "sticky", top: "140px" }}>
-              <div style={{ textTransform: "uppercase", letterSpacing: "0.1em", fontSize: 12, opacity: 0.6 }}>Trajectory</div>
+
               <h2 style={{ marginTop: 20, fontSize: "clamp(36px, 5vw, 64px)", lineHeight: 1.05, letterSpacing: "-0.04em", fontWeight: 900 }}>{content?.historyHeading || "Firm History."}</h2>
             </div>
           </div>
-          <div style={{ borderLeft: "1px solid rgba(255,255,255,0.3)", paddingLeft: 40, display: "flex", flexDirection: "column", gap: 80 }}>
+          <div style={{ borderLeft: "1px solid color-mix(in srgb, var(--sc-ink) 30%, transparent)", paddingLeft: 40, display: "flex", flexDirection: "column", gap: 80 }}>
             {activeTimeline.map((event, index) => (
-              <motion.div key={event.year} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ ...transition, delay: index * 0.1 }} style={{ position: "relative", background: "rgba(0,0,0,0.6)", padding: "30px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.05)", backdropFilter: "blur(10px)" }}>
-                <div style={{ position: "absolute", left: -76, top: 36, width: 11, height: 11, borderRadius: "50%", background: "white", boxShadow: "0 0 15px rgba(255,255,255,0.8)" }} />
+              <motion.div key={event.year} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ ...transition, delay: index * 0.1 }} style={{ position: "relative", background: "color-mix(in srgb, var(--sc-bg) 60%, transparent)", padding: "30px", borderRadius: "8px", border: "1px solid color-mix(in srgb, var(--sc-ink) 5%, transparent)", backdropFilter: "blur(10px)" }}>
+                <div style={{ position: "absolute", left: -76, top: 36, width: 11, height: 11, borderRadius: "50%", background: "var(--sc-ink)", boxShadow: "0 0 15px color-mix(in srgb, var(--sc-ink) 80%, transparent)" }} />
                 <div style={{ display: "flex", flexWrap: "wrap", alignItems: "baseline", gap: 20 }}>
                   <h3 style={{ fontSize: 32, fontWeight: 900, margin: 0 }}>{event.year}</h3>
-                  <span style={{ fontSize: 18, fontWeight: 700, color: "rgba(255,255,255,0.9)" }}>{event.title}</span>
+                  <span style={{ fontSize: 18, fontWeight: 700, color: "color-mix(in srgb, var(--sc-ink) 90%, transparent)" }}>{event.title}</span>
                 </div>
-                <p style={{ marginTop: 16, fontSize: 16, lineHeight: 1.7, color: "rgba(255,255,255,0.7)", maxWidth: 600 }}>{event.description}</p>
+                <p style={{ marginTop: 16, fontSize: 16, lineHeight: 1.7, color: "color-mix(in srgb, var(--sc-ink) 70%, transparent)", maxWidth: 600 }}>{event.description}</p>
               </motion.div>
             ))}
           </div>
@@ -550,20 +538,20 @@ export default function AboutPageClient({ content }: { content?: AboutPageConten
       </section>
 
       {/* 7. PILLAR 02: CONSULTANCY & STRATEGY */}
-      <section className="mobilePad" style={{ padding: "104px 0", background: "#050505", borderTop: "1px solid rgba(255,255,255,0.05)", position: "relative", zIndex: 10 }}>
+      <section className="mobilePad" style={{ padding: "104px 0", background: "var(--sc-bg)", borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 5%, transparent)", position: "relative", zIndex: 10 }}>
         <div className="containerWide">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={transition}>
-            <div style={{ textTransform: "uppercase", letterSpacing: "0.1em", fontSize: 12, opacity: 0.6, color: "white", fontWeight: 800 }}>Pillar 02</div>
+
             <h2 style={{ marginTop: 20, fontSize: "clamp(36px, 5vw, 64px)", lineHeight: 1.05, letterSpacing: "-0.04em", fontWeight: 900, whiteSpace: "pre-line" }}>{content?.consultancyHeading || "Consultancy &\nStrategic Guidance."}</h2>
           </motion.div>
           <div style={{ marginTop: 80, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "40px" }}>
             {activeConsultancy.map((service, index) => (
-              <motion.div key={index} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ ...transition, delay: index * 0.15 }} style={{ borderTop: "1px solid rgba(255,255,255,0.2)", paddingTop: 30 }}>
+              <motion.div key={index} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ ...transition, delay: index * 0.15 }} style={{ borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 20%, transparent)", paddingTop: 30 }}>
                 <div style={{ height: "60px", marginBottom: 30 }}>
-                  <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d={service.icon} fill="none" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                  <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d={service.icon} fill="none" stroke="color-mix(in srgb, var(--sc-ink) 80%, transparent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </div>
                 <h3 style={{ fontSize: 20, fontWeight: 900, margin: "0 0 10px 0" }}>{service.name}</h3>
-                <p style={{ fontSize: 16, lineHeight: 1.8, color: "rgba(255,255,255,0.6)", margin: 0 }}>{service.desc}</p>
+                <p style={{ fontSize: 16, lineHeight: 1.8, color: "color-mix(in srgb, var(--sc-ink) 60%, transparent)", margin: 0 }}>{service.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -571,20 +559,20 @@ export default function AboutPageClient({ content }: { content?: AboutPageConten
       </section>
 
       {/* 8. PILLAR 03: SITE COORDINATION & DELIVERY */}
-      <section className="mobilePad" style={{ padding: "104px 0", background: "#050505", borderTop: "1px solid rgba(255,255,255,0.1)", position: "relative", zIndex: 10 }}>
+      <section className="mobilePad" style={{ padding: "104px 0", background: "var(--sc-bg)", borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 10%, transparent)", position: "relative", zIndex: 10 }}>
         <div className="containerWide">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={transition}>
-            <div style={{ textTransform: "uppercase", letterSpacing: "0.1em", fontSize: 12, opacity: 0.6, color: "white", fontWeight: 800 }}>Pillar 03</div>
+
             <h2 style={{ marginTop: 20, fontSize: "clamp(36px, 5vw, 64px)", lineHeight: 1.05, letterSpacing: "-0.04em", fontWeight: 900, whiteSpace: "pre-line" }}>{content?.coordinationHeading || "Site Coordination &\nDesign Delivery."}</h2>
           </motion.div>
           <div style={{ marginTop: 80, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "40px" }}>
             {activeCoordination.map((service, index) => (
-              <motion.div key={index} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ ...transition, delay: index * 0.15 }} style={{ borderTop: "1px solid rgba(255,255,255,0.2)", paddingTop: 30 }}>
+              <motion.div key={index} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ ...transition, delay: index * 0.15 }} style={{ borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 20%, transparent)", paddingTop: 30 }}>
                 <div style={{ height: "60px", marginBottom: 30 }}>
-                  <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d={service.icon} fill="none" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                  <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d={service.icon} fill="none" stroke="color-mix(in srgb, var(--sc-ink) 80%, transparent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </div>
                 <h3 style={{ fontSize: 20, fontWeight: 900, margin: "0 0 10px 0" }}>{service.name}</h3>
-                <p style={{ fontSize: 16, lineHeight: 1.8, color: "rgba(255,255,255,0.6)", margin: 0 }}>{service.desc}</p>
+                <p style={{ fontSize: 16, lineHeight: 1.8, color: "color-mix(in srgb, var(--sc-ink) 60%, transparent)", margin: 0 }}>{service.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -592,22 +580,22 @@ export default function AboutPageClient({ content }: { content?: AboutPageConten
       </section>
 
       {/* 9. SINGLE LINE LEADERSHIP DIRECTORY */}
-      <section className="mobilePad" style={{ padding: "96px 0", borderTop: "1px solid rgba(255,255,255,0.05)", background: "#0a0a0a", position: "relative", zIndex: 10 }}>
+      <section className="mobilePad" style={{ padding: "96px 0", borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 5%, transparent)", background: "var(--sc-bg)", position: "relative", zIndex: 10 }}>
         <div className="containerWide">
           <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={transition} style={{ textAlign: "center", marginBottom: 80 }}>
-            <div style={{ textTransform: "uppercase", letterSpacing: "0.1em", fontSize: 12, opacity: 0.6 }}>The Studio</div>
+
             <h2 style={{ marginTop: 20, fontSize: "clamp(36px, 5vw, 64px)", lineHeight: 1.05, letterSpacing: "-0.04em", fontWeight: 900, whiteSpace: "pre-line" }}>{content?.teamHeading || "The design and strategy team\nbehind the work."}</h2>
           </motion.div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "40px" }}>
             {activeTeamMembers.map((member, index) => (
               <motion.div key={member.name} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ ...transition, delay: index * 0.1 }}>
-                <div style={{ position: "relative", width: "100%", aspectRatio: "3/4", background: "#111", overflow: "hidden" }}>
+                <div style={{ position: "relative", width: "100%", aspectRatio: "3/4", background: "var(--sc-bg)", overflow: "hidden" }}>
                   <Image src={member.image} alt={member.name} fill sizes="(max-width: 768px) 100vw, 25vw" style={{ objectFit: "cover", filter: "grayscale(100%) contrast(1.1)", transition: "transform 0.6s ease" }} onMouseEnter={(e) => { e.currentTarget.style.filter = "grayscale(0%) contrast(1)"; e.currentTarget.style.transform = "scale(1.03)"; }} onMouseLeave={(e) => { e.currentTarget.style.filter = "grayscale(100%) contrast(1.1)"; e.currentTarget.style.transform = "scale(1)"; }} />
                 </div>
                 <div style={{ marginTop: 24 }}>
                   <h3 style={{ fontSize: 18, fontWeight: 800, margin: 0, letterSpacing: "-0.01em" }}>{member.name}</h3>
-                  <div style={{ fontSize: 12, textTransform: "uppercase", letterSpacing: "0.1em", color: "white", margin: "8px 0 16px 0", fontWeight: 700 }}>{member.role}</div>
-                  <p style={{ fontSize: 14, lineHeight: 1.6, color: "rgba(255,255,255,0.6)", margin: 0 }}>{member.description}</p>
+                  <div style={{ fontSize: 12, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--sc-ink)", margin: "8px 0 16px 0", fontWeight: 700 }}>{member.role}</div>
+                  <p style={{ fontSize: 14, lineHeight: 1.6, color: "color-mix(in srgb, var(--sc-ink) 60%, transparent)", margin: 0 }}>{member.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -616,15 +604,15 @@ export default function AboutPageClient({ content }: { content?: AboutPageConten
       </section>
 
       {/* 10. TESTIMONIALS SECTION */}
-      <section className="mobilePad" style={{ padding: "96px 0", background: "#050505", position: "relative", zIndex: 10 }}>
+      <section className="mobilePad" style={{ padding: "96px 0", background: "var(--sc-bg)", position: "relative", zIndex: 10 }}>
         <div className="containerWide">
           <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={transition} style={{ textAlign: "center", marginBottom: 60 }}>
-            <div style={{ textTransform: "uppercase", letterSpacing: "0.1em", fontSize: 12, opacity: 0.6 }}>Client Perspectives</div>
+
             <h2 style={{ marginTop: 16, fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 900, letterSpacing: "-0.02em" }}>{content?.reviewsHeading || "Trusted by visionaries."}</h2>
           </motion.div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "30px" }}>
             {activeTestimonials.map((testimonial, index) => (
-              <motion.div key={index} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ ...transition, delay: (index % 3) * 0.15 }} style={{ background: "#111", padding: "40px", border: "1px solid rgba(255,255,255,0.05)", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <motion.div key={index} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ ...transition, delay: (index % 3) * 0.15 }} style={{ background: "var(--sc-bg)", padding: "40px", border: "1px solid color-mix(in srgb, var(--sc-ink) 5%, transparent)", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                 <div>
                   <div style={{ display: "flex", gap: 4, marginBottom: 20 }}>
                      {[...Array(5)].map((_, i) => (
@@ -633,11 +621,11 @@ export default function AboutPageClient({ content }: { content?: AboutPageConten
                         </svg>
                      ))}
                   </div>
-                  <p style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(255,255,255,0.8)", margin: "0 0 30px 0" }}>“{testimonial.text}”</p>
+                  <p style={{ fontSize: 15, lineHeight: 1.8, color: "color-mix(in srgb, var(--sc-ink) 80%, transparent)", margin: "0 0 30px 0" }}>“{testimonial.text}”</p>
                 </div>
                 <div>
                   <div style={{ fontSize: 14, fontWeight: 800 }}>{testimonial.author}</div>
-                  <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", marginTop: 4 }}>{testimonial.date}</div>
+                  <div style={{ fontSize: 12, color: "color-mix(in srgb, var(--sc-ink) 40%, transparent)", marginTop: 4 }}>{testimonial.date}</div>
                 </div>
               </motion.div>
             ))}
@@ -646,17 +634,17 @@ export default function AboutPageClient({ content }: { content?: AboutPageConten
       </section>
 
       {/* 11. PREMIUM FINAL CTA (With Studio Deck Link) */}
-      <section className="mobilePad" style={{ padding: "112px 0", textAlign: "center", borderTop: "1px solid rgba(255,255,255,0.05)", background: "#050505", position: "relative", overflow: "hidden" }}>
-        <BlueprintBackground />
-        <div style={{ position: "absolute", top: "-50%", left: "50%", transform: "translateX(-50%)", width: "800px", height: "800px", background: "radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)", pointerEvents: "none", zIndex: 1 }} />
+      <section className="mobilePad" style={{ padding: "112px 0", textAlign: "center", borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 5%, transparent)", background: "var(--sc-bg)", position: "relative", overflow: "hidden" }}>
+
+        <div style={{ position: "absolute", top: "-50%", left: "50%", transform: "translateX(-50%)", width: "800px", height: "800px", background: "radial-gradient(circle, color-mix(in srgb, var(--sc-ink) 4%, transparent) 0%, transparent 70%)", pointerEvents: "none", zIndex: 1 }} />
         <div className="containerWide" style={{ position: "relative", zIndex: 10 }}>
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={transition}>
             <h2 style={{ fontSize: "clamp(40px, 5vw, 64px)", fontWeight: 900, letterSpacing: "-0.04em", margin: 0, whiteSpace: "pre-line" }}>{content?.ctaHeading || "Ready to shape\nthe future together?"}</h2>
-            <p style={{ fontSize: "18px", color: "rgba(255,255,255,0.5)", maxWidth: "500px", margin: "24px auto" }}>{content?.ctaText || "Initiate the IMVO design process. Let’s discuss how we can bring technical discipline and spatial clarity to your next vision."}</p>
+            <p style={{ fontSize: "18px", color: "color-mix(in srgb, var(--sc-ink) 50%, transparent)", maxWidth: "500px", margin: "24px auto" }}>{content?.ctaText || "Initiate the IMVO design process. Let’s discuss how we can bring technical discipline and spatial clarity to your next vision."}</p>
             <div style={{ marginTop: 60, display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-              <Link href="/contact#quote" style={{ background: "white", color: "black", padding: "20px 48px", borderRadius: 99, fontWeight: 800, fontSize: 16, textDecoration: "none", display: "inline-block", transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}>{content?.ctaPrimaryLabel || "START A CONVERSATION ↗"}</Link>
-              <Link href="/projects" style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.2)", color: "white", padding: "20px 48px", borderRadius: 99, fontWeight: 800, fontSize: 16, textDecoration: "none", display: "inline-block", transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}>{content?.ctaProjectsLabel || "EXPLORE PROJECTS ↗"}</Link>
-              <a href="/imvo-selected-works-2026.pdf" download="IMVO-Selected-Works-2026.pdf" style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.2)", color: "white", padding: "20px 48px", borderRadius: 99, fontWeight: 800, fontSize: 16, textDecoration: "none", display: "inline-block", transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}>{content?.deckLabel || "DOWNLOAD STUDIO DECK ↓"}</a>
+              <Link href="/contact#quote" style={{ background: "var(--sc-ink)", color: "var(--sc-bg)", padding: "20px 48px", borderRadius: 99, fontWeight: 800, fontSize: 16, textDecoration: "none", display: "inline-block", transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}>{content?.ctaPrimaryLabel || "START A CONVERSATION ↗"}</Link>
+              <Link href="/projects" style={{ background: "transparent", border: "1px solid color-mix(in srgb, var(--sc-ink) 20%, transparent)", color: "var(--sc-ink)", padding: "20px 48px", borderRadius: 99, fontWeight: 800, fontSize: 16, textDecoration: "none", display: "inline-block", transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}>{content?.ctaProjectsLabel || "EXPLORE PROJECTS ↗"}</Link>
+              <a href="/imvo-selected-works-2026.pdf" download="IMVO-Selected-Works-2026.pdf" style={{ background: "transparent", border: "1px solid color-mix(in srgb, var(--sc-ink) 20%, transparent)", color: "var(--sc-ink)", padding: "20px 48px", borderRadius: 99, fontWeight: 800, fontSize: 16, textDecoration: "none", display: "inline-block", transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}>{content?.deckLabel || "DOWNLOAD STUDIO DECK ↓"}</a>
             </div>
           </motion.div>
         </div>

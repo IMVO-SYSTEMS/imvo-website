@@ -14,7 +14,7 @@ export function useScrollScene<T extends HTMLElement>(ref: RefObject<T|null>, ca
       frame=0;
       if(!nearby)return;
       const rect=element.getBoundingClientRect();
-      const progress=motion.matches ? 1 : Math.max(0,Math.min(1,-rect.top/Math.max(1,rect.height-innerHeight)));
+      const progress=motion.matches ? 1 : Math.max(0,Math.min(1,rect.height<=innerHeight ? (innerHeight-rect.top)/(innerHeight+rect.height) : -rect.top/Math.max(1,rect.height-innerHeight)));
       paint.current(progress,motion.matches,innerWidth<=760);
     };
     const schedule=()=>{if(!frame)frame=requestAnimationFrame(update);};

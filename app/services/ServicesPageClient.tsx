@@ -12,13 +12,13 @@ const BlueprintBackground = () => (
   <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, opacity: 0.42 }}>
     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style={{ position: "absolute", top: 0, left: 0 }}>
       <pattern id="services-grid" width="100" height="100" patternUnits="userSpaceOnUse">
-        <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.045)" strokeWidth="1" />
+        <path d="M 100 0 L 0 0 0 100" fill="none" stroke="color-mix(in srgb, var(--sc-ink) 4.5%, transparent)" strokeWidth="1" />
       </pattern>
       <rect width="100%" height="100%" fill="url(#services-grid)" />
-      <motion.path d="M -100 260 L 3000 260" stroke="rgba(255,255,255,0.28)" strokeWidth="1.4" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 9, repeat: Infinity, ease: "linear" }} />
-      <motion.path d="M 420 -100 L 420 3000" stroke="rgba(255,255,255,0.22)" strokeWidth="1.4" strokeDasharray="15, 15" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 13, repeat: Infinity, ease: "linear", delay: 1 }} />
-      <motion.circle cx="520" cy="460" r="150" stroke="rgba(255,255,255,0.28)" strokeWidth="1.3" strokeDasharray="5, 10" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 0.5 }} />
-      <motion.rect x="520" y="330" width="460" height="280" stroke="rgba(255,255,255,0.32)" strokeWidth="1.5" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }} />
+      <motion.path d="M -100 260 L 3000 260" stroke="color-mix(in srgb, var(--sc-ink) 28%, transparent)" strokeWidth="1.4" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 9, repeat: Infinity, ease: "linear" }} />
+      <motion.path d="M 420 -100 L 420 3000" stroke="color-mix(in srgb, var(--sc-ink) 22%, transparent)" strokeWidth="1.4" strokeDasharray="15, 15" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 13, repeat: Infinity, ease: "linear", delay: 1 }} />
+      <motion.circle cx="520" cy="460" r="150" stroke="color-mix(in srgb, var(--sc-ink) 28%, transparent)" strokeWidth="1.3" strokeDasharray="5, 10" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 0.5 }} />
+      <motion.rect x="520" y="330" width="460" height="280" stroke="color-mix(in srgb, var(--sc-ink) 32%, transparent)" strokeWidth="1.5" fill="transparent" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }} />
     </svg>
   </div>
 );
@@ -43,9 +43,9 @@ const OrbitBackground = () => {
       <svg width="100%" height="100%" preserveAspectRatio="none" style={{ position: "absolute", top: 0, left: 0 }}>
         {orbits.map((orbit, i) => (
           <React.Fragment key={i}>
-            <path d={orbit.d} fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1.5" />
+            <path d={orbit.d} fill="none" stroke="color-mix(in srgb, var(--sc-ink) 3%, transparent)" strokeWidth="1.5" />
             <motion.path
-              d={orbit.d} fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2"
+              d={orbit.d} fill="none" stroke="color-mix(in srgb, var(--sc-ink) 40%, transparent)" strokeWidth="2"
               initial={{ pathLength: orbit.length, pathOffset: 0, opacity: 0 }}
               animate={{ pathOffset: [0, 1], opacity: [0, 1, 1, 0] }}
               transition={{ duration: orbit.duration, repeat: Infinity, ease: "linear", delay: orbit.delay, times: [0, 0.1, 0.9, 1] }}
@@ -149,12 +149,12 @@ const AnimatedBrick = ({ brick, index }: { brick: string, index: number }) => {
       initial={{ opacity: 0, scale: 0.85, y: 15 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ delay: index * 0.035, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.12)", borderColor: "rgba(255,255,255,0.5)", zIndex: 20 }}
+      whileHover={{ scale: 1.05, backgroundColor: "color-mix(in srgb, var(--sc-ink) 12%, transparent)", borderColor: "color-mix(in srgb, var(--sc-ink) 50%, transparent)", zIndex: 20 }}
       style={{
         padding: "14px 22px",
-        border: isCheckered ? "1px solid rgba(255,255,255,0.15)" : "1px solid transparent",
-        background: isCheckered ? "rgba(5,5,5,0.6)" : "rgba(255,255,255,0.06)",
-        backdropFilter: "blur(8px)", color: "rgba(255,255,255,0.8)", borderRadius: "4px", fontSize: "14px", fontWeight: 800, cursor: "default", position: "relative", zIndex: 10, whiteSpace: "nowrap",
+        border: isCheckered ? "1px solid color-mix(in srgb, var(--sc-ink) 15%, transparent)" : "1px solid transparent",
+        background: isCheckered ? "color-mix(in srgb, var(--sc-bg) 60%, transparent)" : "color-mix(in srgb, var(--sc-ink) 6%, transparent)",
+        backdropFilter: "blur(8px)", color: "color-mix(in srgb, var(--sc-ink) 80%, transparent)", borderRadius: "4px", fontSize: "14px", fontWeight: 800, cursor: "default", position: "relative", zIndex: 10, whiteSpace: "nowrap",
       }}
     >
       {brick}
@@ -170,8 +170,8 @@ const StrategicPartners = () => {
       className="mobilePad"
       style={{
         padding: "110px 0 0",
-        background: "#050505",
-        borderTop: "1px solid rgba(255,255,255,0.05)",
+        background: "var(--sc-bg)",
+        borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 5%, transparent)",
         overflow: "hidden",
       }}
     >
@@ -200,15 +200,13 @@ const StrategicPartners = () => {
           transition={transition}
           style={{ maxWidth: 760 }}
         >
-          <div style={{ textTransform: "uppercase", letterSpacing: "0.1em", fontSize: 12, opacity: 0.6, fontWeight: 800 }}>
-            Strategic Partners
-          </div>
+
 
           <h2 style={{ margin: "18px 0 0", fontSize: "clamp(34px, 4vw, 56px)", lineHeight: 1.05, letterSpacing: "-0.04em", fontWeight: 900 }}>
             A trusted network supporting responsible project delivery.
           </h2>
 
-          <p style={{ marginTop: 22, maxWidth: 680, fontSize: 17, lineHeight: 1.8, color: "rgba(255,255,255,0.62)" }}>
+          <p style={{ marginTop: 22, maxWidth: 680, fontSize: 17, lineHeight: 1.8, color: "color-mix(in srgb, var(--sc-ink) 62%, transparent)" }}>
             IMVO works with selected collaborators, technical specialists, suppliers, and industry partners who help strengthen project execution from planning through delivery.
           </p>
         </motion.div>
@@ -219,8 +217,8 @@ const StrategicPartners = () => {
         style={{
           marginTop: 70,
           overflow: "hidden",
-          borderTop: "1px solid rgba(255,255,255,0.06)",
-          borderBottom: "1px solid rgba(255,255,255,0.06)",
+          borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 6%, transparent)",
+          borderBottom: "1px solid color-mix(in srgb, var(--sc-ink) 6%, transparent)",
         }}
       >
         <div
@@ -242,7 +240,7 @@ const StrategicPartners = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                borderRight: "1px solid rgba(255,255,255,0.06)",
+                borderRight: "1px solid color-mix(in srgb, var(--sc-ink) 6%, transparent)",
                 opacity: 0.5,
                 transition: "opacity 0.3s ease, transform 0.3s ease",
               }}
@@ -331,7 +329,7 @@ export default function ServicesPageClient({ content }: { content?: ServicesPage
 
   const currentPillar = activePillars[activePillar] || activePillars[0];
   const total = currentPillar.bricks.length;
-  const sideCount = Math.floor(total * 0.4); 
+  const sideCount = Math.floor(total * 0.4);
   const centerTotal = total - (sideCount * 2);
   const topCount = Math.ceil(centerTotal / 2);
 
@@ -341,12 +339,10 @@ export default function ServicesPageClient({ content }: { content?: ServicesPage
   const bottomBricks = currentPillar.bricks.slice(sideCount * 2 + topCount);
 
   return (
-    <div style={{ background: "#050505", color: "white", minHeight: "100vh", overflow: "hidden" }}>
-            <section className="mobileStack" style={{ minHeight: "calc(100vh - 88px)", display: "grid", gridTemplateColumns: "0.92fr 1.08fr", background: "#050505", color: "white", overflow: "hidden" }}>
+    <div style={{ background: "var(--sc-bg)", color: "var(--sc-ink)", minHeight: "100vh", overflow: "hidden" }}>
+            <section className="mobileStack" style={{ minHeight: "calc(100vh - 88px)", display: "grid", gridTemplateColumns: "0.92fr 1.08fr", background: "var(--sc-bg)", color: "var(--sc-ink)", overflow: "hidden" }}>
         <div style={{ padding: "90px max(32px, calc((100vw - 1440px) / 2 + 32px)) 70px", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ ...transition, delay: 0.1 }} style={{ textTransform: "uppercase", letterSpacing: "0.1em", fontSize: 12, opacity: 0.65, fontWeight: 800 }}>
-            {content?.heroKicker || "IMVO Services"}
-          </motion.div>
+
 
           <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ ...transition, delay: 0.2 }} style={{ margin: "24px 0 0", fontSize: "clamp(54px,7vw,118px)", lineHeight: 0.88, letterSpacing: "-0.08em", fontWeight: 900 }}>
             <span style={{ whiteSpace: "pre-line" }}>
@@ -354,16 +350,16 @@ export default function ServicesPageClient({ content }: { content?: ServicesPage
             </span>
           </motion.h1>
 
-          <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ ...transition, delay: 0.35 }} style={{ marginTop: 30, maxWidth: 720, fontSize: 19, lineHeight: 1.8, color: "rgba(255,255,255,0.72)" }}>
+          <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ ...transition, delay: 0.35 }} style={{ marginTop: 30, maxWidth: 720, fontSize: 19, lineHeight: 1.8, color: "color-mix(in srgb, var(--sc-ink) 72%, transparent)" }}>
             {content?.heroIntro || "IMVO guides purposeful development through built-environment design, strategic consultancy, and disciplined site coordination — connecting vision, planning, technical clarity, and execution."}
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ ...transition, delay: 0.45 }} style={{ marginTop: 38, display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <Link href="/contact#quote" style={{ background: "white", color: "black", padding: "16px 30px", borderRadius: 99, fontWeight: 800, textDecoration: "none", transition: "transform 0.2s ease" }} onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"} onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}>
+            <Link href="/contact#quote" style={{ background: "var(--sc-ink)", color: "var(--sc-bg)", padding: "16px 30px", borderRadius: 99, fontWeight: 800, textDecoration: "none", transition: "transform 0.2s ease" }} onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"} onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}>
               {content?.quoteButtonLabel || "REQUEST A QUOTE ↗"}
             </Link>
 
-            <Link href="/projects" style={{ color: "white", padding: "16px 30px", borderRadius: 99, fontWeight: 800, textDecoration: "none", border: "1px solid rgba(255,255,255,0.2)", transition: "background 0.2s ease" }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.1)"} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}>
+            <Link href="/projects" style={{ color: "var(--sc-ink)", padding: "16px 30px", borderRadius: 99, fontWeight: 800, textDecoration: "none", border: "1px solid color-mix(in srgb, var(--sc-ink) 20%, transparent)", transition: "background 0.2s ease" }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "color-mix(in srgb, var(--sc-ink) 10%, transparent)"} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}>
               {content?.projectsButtonLabel || "VIEW PROJECTS"}
             </Link>
           </motion.div>
@@ -388,12 +384,10 @@ export default function ServicesPageClient({ content }: { content?: ServicesPage
         </motion.div>
       </section>
 
-      <section className="mobilePad" style={{ padding: "112px 0", borderTop: "1px solid rgba(255,255,255,0.05)", textAlign: "center" }}>
+      <section className="mobilePad" style={{ padding: "112px 0", borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 5%, transparent)", textAlign: "center" }}>
         <div className="containerWide" style={{ display: "flex", justifyContent: "center" }}>
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={transition} style={{ maxWidth: 1000, display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <div style={{ textTransform: "uppercase", letterSpacing: "0.1em", fontSize: 12, opacity: 0.6, fontWeight: 800 }}>
-              {content?.positioningKicker || "Purposeful Development"}
-            </div>
+
 
             <h2 style={{ marginTop: 18, fontSize: "clamp(38px, 5vw, 72px)", lineHeight: 1.02, letterSpacing: "-0.05em", fontWeight: 900 }}>
               {content?.positioningHeading || "Architecture should do more than occupy land."}
@@ -401,7 +395,7 @@ export default function ServicesPageClient({ content }: { content?: ServicesPage
 
             <div style={{ display: "flex", flexDirection: "column", gap: 24, marginTop: 32, alignItems: "center" }}>
               {positioningParagraphs.map((paragraph, index) => (
-                <p key={index} style={{ margin: "0 auto", maxWidth: 820, fontSize: 19, lineHeight: 1.8, color: index === 0 ? "rgba(255,255,255,0.8)" : "rgba(255,255,255,0.65)" }}>
+                <p key={index} style={{ margin: "0 auto", maxWidth: 820, fontSize: 19, lineHeight: 1.8, color: index === 0 ? "color-mix(in srgb, var(--sc-ink) 80%, transparent)" : "color-mix(in srgb, var(--sc-ink) 65%, transparent)" }}>
                   {paragraph}
                 </p>
               ))}
@@ -410,7 +404,7 @@ export default function ServicesPageClient({ content }: { content?: ServicesPage
         </div>
       </section>
 
-      <section className="mobilePad" style={{ padding: "104px 0", background: "#0a0a0a", borderTop: "1px solid rgba(255,255,255,0.05)", position: "relative", overflow: "hidden", minHeight: "760px", display: "flex", alignItems: "center" }}>
+      <section className="mobilePad" style={{ padding: "104px 0", background: "var(--sc-bg)", borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 5%, transparent)", position: "relative", overflow: "hidden", minHeight: "760px", display: "flex", alignItems: "center" }}>
         <OrbitBackground />
 
         <div className="containerWide" style={{ position: "relative", zIndex: 10, maxWidth: "1500px" }}>
@@ -425,26 +419,26 @@ export default function ServicesPageClient({ content }: { content?: ServicesPage
                   {topBricks.map((brick, i) => <AnimatedBrick brick={brick} index={leftBricks.length + i} key={brick} />)}
                 </div>
 
-                <motion.div initial={{ scale: 0.95, opacity: 0, y: 15 }} animate={{ scale: 1, opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.15 }} style={{ width: "100%", padding: "60px 40px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "radial-gradient(circle at center, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 60%, transparent 100%)", backdropFilter: "blur(12px)", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.05)", zIndex: 20 }}>
-                  <div style={{ textTransform: "uppercase", letterSpacing: "0.2em", fontSize: 13, color: "rgba(255,255,255,0.4)", fontWeight: 900, marginBottom: 24 }}>
+                <motion.div initial={{ scale: 0.95, opacity: 0, y: 15 }} animate={{ scale: 1, opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.15 }} style={{ width: "100%", padding: "60px 40px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "radial-gradient(circle at center, color-mix(in srgb, var(--sc-bg) 90%, transparent) 0%, color-mix(in srgb, var(--sc-bg) 60%, transparent) 60%, transparent 100%)", backdropFilter: "blur(12px)", borderRadius: "16px", border: "1px solid color-mix(in srgb, var(--sc-ink) 5%, transparent)", zIndex: 20 }}>
+                  <div style={{ textTransform: "uppercase", letterSpacing: "0.2em", fontSize: 13, color: "color-mix(in srgb, var(--sc-ink) 40%, transparent)", fontWeight: 900, marginBottom: 24 }}>
                     Core Pillar 0{activePillar + 1}
                   </div>
 
                   <svg width="60" height="60" viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg" style={{ marginBottom: 24 }}>
-                    <path d={currentPillar.icon} fill="none" stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d={currentPillar.icon} fill="none" stroke="color-mix(in srgb, var(--sc-ink) 90%, transparent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
 
                   <h2 style={{ margin: 0, fontSize: "clamp(38px, 4vw, 56px)", lineHeight: 1, letterSpacing: "-0.05em", fontWeight: 900 }}>
                     {currentPillar.title}
                   </h2>
 
-                  <p style={{ marginTop: 24, fontSize: 18, lineHeight: 1.6, color: "rgba(255,255,255,0.7)", maxWidth: "90%" }}>
+                  <p style={{ marginTop: 24, fontSize: 18, lineHeight: 1.6, color: "color-mix(in srgb, var(--sc-ink) 70%, transparent)", maxWidth: "90%" }}>
                     {currentPillar.description}
                   </p>
 
                   <div style={{ marginTop: 40, display: "flex", gap: 12 }}>
                     {activePillars.map((pillar, i) => (
-                      <button key={pillar.title} onClick={() => setActivePillar(i)} style={{ width: i === activePillar ? 40 : 12, height: 12, borderRadius: 99, border: "none", cursor: "pointer", background: i === activePillar ? "white" : "rgba(255,255,255,0.2)", transition: "all 0.4s ease" }} aria-label={`Show ${pillar.title}`} />
+                      <button key={pillar.title} onClick={() => setActivePillar(i)} style={{ width: i === activePillar ? 40 : 12, height: 12, borderRadius: 99, border: "none", cursor: "pointer", background: i === activePillar ? "var(--sc-ink)" : "color-mix(in srgb, var(--sc-ink) 20%, transparent)", transition: "all 0.4s ease" }} aria-label={`Show ${pillar.title}`} />
                     ))}
                   </div>
                 </motion.div>
@@ -462,7 +456,7 @@ export default function ServicesPageClient({ content }: { content?: ServicesPage
         </div>
       </section>
 
-      <section className="mobileStack" style={{ display: "grid", gridTemplateColumns: "1.35fr 0.9fr", minHeight: 680, background: "#111" }}>
+      <section className="mobileStack" style={{ display: "grid", gridTemplateColumns: "1.35fr 0.9fr", minHeight: 680, background: "var(--sc-bg)" }}>
         <motion.div
   className="serviceMediaTall"
   initial={{ opacity: 0, scale: 0.96 }}
@@ -473,7 +467,7 @@ export default function ServicesPageClient({ content }: { content?: ServicesPage
     position: "relative",
     overflow: "hidden",
     minHeight: 680,
-    background: "#111",
+    background: "var(--sc-bg)",
   }}
 >
           <Image src={content?.coordinationImage?.url || "/service-site-1.png"} alt={content?.coordinationImage?.alt || "IMVO on-site coordination"} fill style={hoverImageStyle} onMouseEnter={(e) => { e.currentTarget.style.filter = "grayscale(0%) contrast(1)"; e.currentTarget.style.transform = "scale(1.03)"; }} onMouseLeave={(e) => { e.currentTarget.style.filter = "grayscale(100%) contrast(1.05)"; e.currentTarget.style.transform = "scale(1)"; }} />
@@ -481,57 +475,51 @@ export default function ServicesPageClient({ content }: { content?: ServicesPage
 
         <div style={{ padding: "70px 44px", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-80px" }} transition={transition}>
-            <div style={{ textTransform: "uppercase", letterSpacing: "0.1em", fontSize: 12, opacity: 0.6, fontWeight: 800 }}>
-              On Site
-            </div>
+
 
             <h2 style={{ margin: "18px 0 0", fontSize: "clamp(34px, 4vw, 64px)", lineHeight: 0.98, letterSpacing: "-0.06em", fontWeight: 900 }}>
               {content?.coordinationHeading || "Design intent is protected through disciplined execution."}
             </h2>
 
-            <p style={{ marginTop: 24, color: "rgba(255,255,255,0.68)", lineHeight: 1.8, fontSize: 17 }}>
+            <p style={{ marginTop: 24, color: "color-mix(in srgb, var(--sc-ink) 68%, transparent)", lineHeight: 1.8, fontSize: 17 }}>
               {content?.coordinationText || "Site observation, coordination, and quality awareness help ensure that what is designed can be built with clarity and responsibility."}
             </p>
           </motion.div>
         </div>
       </section>
 
-      <section className="mobilePad" style={{ position: "relative", minHeight: 720, display: "flex", alignItems: "flex-end", background: "#050505", overflow: "hidden" }}>
+      <section className="mobilePad" style={{ position: "relative", minHeight: 720, display: "flex", alignItems: "flex-end", background: "var(--sc-bg)", overflow: "hidden" }}>
         <Image src={content?.strategyImage?.url || "/service-planning.png"} alt={content?.strategyImage?.alt || "Planning and design"} fill style={{ objectFit: "cover", filter: "grayscale(100%) brightness(0.65)", transition: "filter 0.8s ease, transform 0.8s ease" }} onMouseEnter={(e) => { e.currentTarget.style.filter = "grayscale(0%) brightness(0.8)"; e.currentTarget.style.transform = "scale(1.03)"; }} onMouseLeave={(e) => { e.currentTarget.style.filter = "grayscale(100%) brightness(0.65)"; e.currentTarget.style.transform = "scale(1)"; }} />
 
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0.2), transparent)" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, color-mix(in srgb, var(--sc-bg) 72%, transparent), color-mix(in srgb, var(--sc-bg) 20%, transparent), transparent)" }} />
 
         <div className="containerWide" style={{ position: "relative", zIndex: 2, paddingBottom: 76 }}>
           <motion.div initial={{ opacity: 0, y: 35 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={transition} style={{ maxWidth: 820 }}>
-            <div style={{ textTransform: "uppercase", letterSpacing: "0.1em", fontSize: 12, opacity: 0.7, fontWeight: 800 }}>
-              Planning & Development
-            </div>
+
 
             <h2 style={{ margin: "18px 0 0", fontSize: "clamp(42px,5vw,86px)", lineHeight: 0.95, letterSpacing: "-0.07em", fontWeight: 900 }}>
               {content?.strategyHeading || "Before a project is built, its direction must be understood."}
             </h2>
 
-            <p style={{ marginTop: 24, maxWidth: 720, color: "rgba(255,255,255,0.76)", fontSize: 19, lineHeight: 1.8 }}>
+            <p style={{ marginTop: 24, maxWidth: 720, color: "color-mix(in srgb, var(--sc-ink) 76%, transparent)", fontSize: 19, lineHeight: 1.8 }}>
               {content?.strategyText || "IMVO supports early-stage planning, development thinking, site interpretation, acquisition guidance, and strategic design direction before costly decisions are made."}
             </p>
           </motion.div>
         </div>
       </section>
 
-      <section className="mobilePad" style={{ padding: "96px 0", background: "#050505", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+      <section className="mobilePad" style={{ padding: "96px 0", background: "var(--sc-bg)", borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 5%, transparent)" }}>
         <div className="containerWide">
           <div className="mobileStack" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))", gap: 80 }}>
             {activeStrategyCards.map((card, index) => (
             <motion.div key={card.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ ...transition, delay: index * 0.2 }}>
-              <div style={{ textTransform: "uppercase", letterSpacing: "0.1em", fontSize: 12, opacity: 0.6, fontWeight: 800 }}>
-                {card.kicker}
-              </div>
+
 
               <h3 style={{ margin: "16px 0", fontSize: "clamp(28px, 3vw, 42px)", lineHeight: 1.1, letterSpacing: "-0.04em", fontWeight: 900 }}>
                 {card.title}
               </h3>
 
-              <p style={{ fontSize: 17, lineHeight: 1.8, color: "rgba(255,255,255,0.65)", margin: 0 }}>
+              <p style={{ fontSize: 17, lineHeight: 1.8, color: "color-mix(in srgb, var(--sc-ink) 65%, transparent)", margin: 0 }}>
                 {card.text}
               </p>
             </motion.div>
@@ -540,8 +528,8 @@ export default function ServicesPageClient({ content }: { content?: ServicesPage
         </div>
       </section>
 
-      <section className="mobilePad" style={{ position: "relative", padding: "108px 0", background: "#0a0a0a", overflow: "hidden", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <BlueprintBackground />
+      <section className="mobilePad" style={{ position: "relative", padding: "108px 0", background: "var(--sc-bg)", overflow: "hidden", borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 5%, transparent)" }}>
+
 
         <div className="containerWide" style={{ position: "relative", zIndex: 10 }}>
           <div className="mobileStack" style={{ display: "grid", gridTemplateColumns: "1.05fr 0.95fr", gap: 60, alignItems: "center" }}>
@@ -556,7 +544,7 @@ export default function ServicesPageClient({ content }: { content?: ServicesPage
     width: "100%",
     minHeight: 660,
     overflow: "hidden",
-    background: "#111",
+    background: "var(--sc-bg)",
   }}
 >
   <Image
@@ -581,9 +569,7 @@ export default function ServicesPageClient({ content }: { content?: ServicesPage
 </motion.div>
 
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-80px" }} transition={transition}>
-              <div style={{ textTransform: "uppercase", letterSpacing: "0.1em", fontSize: 12, opacity: 0.6, fontWeight: 800 }}>
-                How We Work
-              </div>
+
 
               <h2 style={{ margin: "18px 0 0", fontSize: "clamp(34px, 4vw, 56px)", lineHeight: 1.05, letterSpacing: "-0.04em", fontWeight: 900 }}>
                 {content?.processHeading || "A structured process for clear decisions and responsible delivery."}
@@ -591,11 +577,11 @@ export default function ServicesPageClient({ content }: { content?: ServicesPage
 
               <div style={{ marginTop: 42 }}>
                 {activeProcessSteps.map(([number, title, text]) => (
-                  <div key={title} style={{ display: "grid", gridTemplateColumns: "54px 1fr", gap: 18, padding: "24px 0", borderTop: "1px solid rgba(255,255,255,0.16)" }}>
-                    <div style={{ color: "rgba(255,255,255,0.42)", fontWeight: 900 }}>{number}</div>
+                  <div key={title} style={{ display: "grid", gridTemplateColumns: "54px 1fr", gap: 18, padding: "24px 0", borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 16%, transparent)" }}>
+                    <div style={{ color: "color-mix(in srgb, var(--sc-ink) 42%, transparent)", fontWeight: 900 }}>{number}</div>
                     <div>
                       <div style={{ fontSize: 28, fontWeight: 900, letterSpacing: "-0.04em" }}>{title}</div>
-                      <p style={{ marginTop: 8, fontSize: 16, lineHeight: 1.75, color: "rgba(255,255,255,0.62)" }}>{text}</p>
+                      <p style={{ marginTop: 8, fontSize: 16, lineHeight: 1.75, color: "color-mix(in srgb, var(--sc-ink) 62%, transparent)" }}>{text}</p>
                     </div>
                   </div>
                 ))}
@@ -607,10 +593,10 @@ export default function ServicesPageClient({ content }: { content?: ServicesPage
 
       <StrategicPartners />
 
-      <section className="mobilePad" style={{ padding: "112px 0", textAlign: "center", borderTop: "1px solid rgba(255,255,255,0.05)", background: "#050505", position: "relative", overflow: "hidden" }}>
-        <BlueprintBackground />
+      <section className="mobilePad" style={{ padding: "112px 0", textAlign: "center", borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 5%, transparent)", background: "var(--sc-bg)", position: "relative", overflow: "hidden" }}>
 
-        <div style={{ position: "absolute", top: "-50%", left: "50%", transform: "translateX(-50%)", width: "800px", height: "800px", background: "radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)", pointerEvents: "none", zIndex: 1 }} />
+
+        <div style={{ position: "absolute", top: "-50%", left: "50%", transform: "translateX(-50%)", width: "800px", height: "800px", background: "radial-gradient(circle, color-mix(in srgb, var(--sc-ink) 4%, transparent) 0%, transparent 70%)", pointerEvents: "none", zIndex: 1 }} />
 
         <div className="containerWide" style={{ position: "relative", zIndex: 10 }}>
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={transition}>
@@ -620,12 +606,12 @@ export default function ServicesPageClient({ content }: { content?: ServicesPage
               </span>
             </h2>
 
-            <p style={{ fontSize: "18px", color: "rgba(255,255,255,0.55)", maxWidth: "560px", margin: "24px auto" }}>
+            <p style={{ fontSize: "18px", color: "color-mix(in srgb, var(--sc-ink) 55%, transparent)", maxWidth: "560px", margin: "24px auto" }}>
               {content?.ctaText || "Whether you need design, consultancy, site coordination, development guidance, or acquisition support, IMVO helps structure decisions before they become costly."}
             </p>
 
             <div style={{ marginTop: 60, display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-              <Link href="/contact#quote" style={{ background: "white", color: "black", padding: "20px 48px", borderRadius: 99, fontWeight: 800, fontSize: 16, textDecoration: "none", display: "inline-block", transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }} onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"} onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}>
+              <Link href="/contact#quote" style={{ background: "var(--sc-ink)", color: "var(--sc-bg)", padding: "20px 48px", borderRadius: 99, fontWeight: 800, fontSize: 16, textDecoration: "none", display: "inline-block", transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }} onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"} onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}>
                 {content?.ctaButtonLabel || "REQUEST A QUOTE ↗"}
               </Link>
             </div>

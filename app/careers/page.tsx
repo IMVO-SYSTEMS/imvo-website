@@ -34,25 +34,23 @@ export default async function CareersPage() {
   const careers = await getCareers();
 
   return (
-    <main style={{ background: "#f4f4f1", color: "#111", minHeight: "100vh" }}>
+    <div style={{ background: "#f4f4f1", color: "var(--sc-bg)", minHeight: "100vh" }}>
       <section
         style={{
           minHeight: "52vh",
           display: "grid",
           alignContent: "end",
           padding: "clamp(120px, 16vw, 220px) clamp(22px, 5vw, 78px) clamp(54px, 8vw, 110px)",
-          background: "#080808",
-          color: "#fff",
+          background: "var(--sc-bg)",
+          color: "var(--sc-ink)",
         }}
       >
         <div style={{ maxWidth: 1120 }}>
-          <p style={{ margin: 0, fontSize: 11, fontWeight: 800, letterSpacing: ".14em", opacity: 0.52, textTransform: "uppercase" }}>
-            IMVO Group · Careers
-          </p>
+
           <h1 style={{ margin: "20px 0 0", maxWidth: 980, fontSize: "clamp(58px, 9vw, 142px)", lineHeight: 0.86, letterSpacing: "-.07em" }}>
             Build thoughtful work with us.
           </h1>
-          <p style={{ margin: "34px 0 0", maxWidth: 700, color: "rgba(255,255,255,.6)", fontSize: "clamp(16px, 1.8vw, 21px)", lineHeight: 1.55 }}>
+          <p style={{ margin: "34px 0 0", maxWidth: 700, color: "color-mix(in srgb, var(--sc-ink) 60%, transparent)", fontSize: "clamp(16px, 1.8vw, 21px)", lineHeight: 1.55 }}>
             Current roles, internships, graduate opportunities and selected collaboration openings are published here when available.
           </p>
         </div>
@@ -60,9 +58,9 @@ export default async function CareersPage() {
 
       <section style={{ padding: "clamp(54px, 8vw, 110px) clamp(22px, 5vw, 78px) clamp(90px, 11vw, 150px)" }}>
         <div style={{ maxWidth: 1320, margin: "0 auto" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", gap: 24, alignItems: "end", paddingBottom: 24, borderBottom: "1px solid rgba(0,0,0,.16)" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 24, alignItems: "end", paddingBottom: 24, borderBottom: "1px solid color-mix(in srgb, var(--sc-bg) 16%, transparent)" }}>
             <div>
-              <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: ".12em", textTransform: "uppercase", opacity: 0.5 }}>Open opportunities</span>
+
               <h2 style={{ margin: "10px 0 0", fontSize: "clamp(32px, 4.5vw, 68px)", letterSpacing: "-.055em", lineHeight: 0.95 }}>
                 {careers.length ? `${careers.length} current ${careers.length === 1 ? "opening" : "openings"}` : "No current openings"}
               </h2>
@@ -84,7 +82,7 @@ export default async function CareersPage() {
                       gridTemplateColumns: "minmax(0, .3fr) minmax(0, 1fr)",
                       gap: "clamp(26px, 5vw, 80px)",
                       padding: "clamp(34px, 5vw, 70px) 0",
-                      borderBottom: "1px solid rgba(0,0,0,.14)",
+                      borderBottom: "1px solid color-mix(in srgb, var(--sc-bg) 14%, transparent)",
                     }}
                   >
                     <div>
@@ -128,8 +126,8 @@ export default async function CareersPage() {
                           display: "inline-flex",
                           marginTop: 34,
                           padding: "14px 18px",
-                          border: "1px solid #111",
-                          color: "#111",
+                          border: "1px solid var(--sc-bg)",
+                          color: "var(--sc-bg)",
                           textDecoration: "none",
                           fontSize: 11,
                           fontWeight: 800,
@@ -156,6 +154,6 @@ export default async function CareersPage() {
           )}
         </div>
       </section>
-    </main>
+    </div>
   );
 }

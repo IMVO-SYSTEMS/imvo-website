@@ -198,8 +198,8 @@ const ArchitecturalModel = () => {
       >
         <defs>
           <radialGradient id="modelGlow" cx="55%" cy="45%" r="55%">
-            <stop offset="0%" stopColor="rgba(255,255,255,0.16)" />
-            <stop offset="65%" stopColor="rgba(255,255,255,0.04)" />
+            <stop offset="0%" stopColor="color-mix(in srgb, var(--sc-ink) 16%, transparent)" />
+            <stop offset="65%" stopColor="color-mix(in srgb, var(--sc-ink) 4%, transparent)" />
             <stop offset="100%" stopColor="transparent" />
           </radialGradient>
         </defs>
@@ -213,24 +213,24 @@ const ArchitecturalModel = () => {
           <path
             d="M120 575 C220 500 340 520 430 585 C520 640 610 575 700 540"
             fill="none"
-            stroke="rgba(255,255,255,0.22)"
+            stroke="color-mix(in srgb, var(--sc-ink) 22%, transparent)"
             strokeWidth="1"
             strokeDasharray="6 8"
           />
           <path
             d="M190 550 C285 485 390 485 535 550"
             fill="none"
-            stroke="rgba(255,255,255,0.16)"
+            stroke="color-mix(in srgb, var(--sc-ink) 16%, transparent)"
             strokeWidth="1"
             strokeDasharray="5 9"
           />
-          <circle cx="120" cy="575" r="4" fill="white" />
-          <circle cx="430" cy="585" r="4" fill="white" />
-          <circle cx="700" cy="540" r="4" fill="white" />
+          <circle cx="120" cy="575" r="4" fill="var(--sc-ink)" />
+          <circle cx="430" cy="585" r="4" fill="var(--sc-ink)" />
+          <circle cx="700" cy="540" r="4" fill="var(--sc-ink)" />
           <text
             x="100"
             y="602"
-            fill="rgba(255,255,255,0.6)"
+            fill="color-mix(in srgb, var(--sc-ink) 60%, transparent)"
             fontSize="10"
             fontWeight="900"
             letterSpacing="2"
@@ -240,7 +240,7 @@ const ArchitecturalModel = () => {
           <text
             x="405"
             y="612"
-            fill="rgba(255,255,255,0.45)"
+            fill="color-mix(in srgb, var(--sc-ink) 45%, transparent)"
             fontSize="10"
             fontWeight="900"
             letterSpacing="2"
@@ -250,7 +250,7 @@ const ArchitecturalModel = () => {
           <text
             x="667"
             y="568"
-            fill="rgba(255,255,255,0.45)"
+            fill="color-mix(in srgb, var(--sc-ink) 45%, transparent)"
             fontSize="10"
             fontWeight="900"
             letterSpacing="2"
@@ -266,37 +266,37 @@ const ArchitecturalModel = () => {
           <path
             d="M165 410 L305 350 L505 380 L610 460 L435 535 L205 495 Z"
             fill="none"
-            stroke="rgba(255,255,255,0.5)"
+            stroke="color-mix(in srgb, var(--sc-ink) 50%, transparent)"
             strokeWidth="1.2"
           />
           <path
             d="M205 495 C300 435 390 430 610 460"
             fill="none"
-            stroke="rgba(255,255,255,0.22)"
+            stroke="color-mix(in srgb, var(--sc-ink) 22%, transparent)"
             strokeWidth="1"
           />
           <path
             d="M305 350 L435 535"
             fill="none"
-            stroke="rgba(255,255,255,0.18)"
+            stroke="color-mix(in srgb, var(--sc-ink) 18%, transparent)"
             strokeWidth="1"
           />
           <path
             d="M505 380 L355 515"
             fill="none"
-            stroke="rgba(255,255,255,0.18)"
+            stroke="color-mix(in srgb, var(--sc-ink) 18%, transparent)"
             strokeWidth="1"
           />
           <path
             d="M145 460 C240 410 350 405 580 438"
             fill="none"
-            stroke="rgba(255,255,255,0.13)"
+            stroke="color-mix(in srgb, var(--sc-ink) 13%, transparent)"
             strokeWidth="1"
           />
           <path
             d="M170 530 C270 485 400 490 560 520"
             fill="none"
-            stroke="rgba(255,255,255,0.13)"
+            stroke="color-mix(in srgb, var(--sc-ink) 13%, transparent)"
             strokeWidth="1"
           />
 
@@ -308,7 +308,7 @@ const ArchitecturalModel = () => {
               width="46"
               height="24"
               fill="none"
-              stroke="rgba(255,255,255,0.16)"
+              stroke="color-mix(in srgb, var(--sc-ink) 16%, transparent)"
               strokeWidth="1"
             />
           ))}
@@ -322,7 +322,7 @@ const ArchitecturalModel = () => {
             rx={275 - i * 42}
             ry={96 - i * 14}
             fill="none"
-            stroke="rgba(255,255,255,0.28)"
+            stroke="color-mix(in srgb, var(--sc-ink) 28%, transparent)"
             strokeWidth="1"
             strokeDasharray={`${120 - i * 18} ${85 + i * 18}`}
             animate={{ strokeDashoffset: [0, -260] }}
@@ -345,25 +345,25 @@ const ArchitecturalModel = () => {
           <path
             d="M245 305 L305 260 L365 305 L365 365 L245 365 Z"
             fill="none"
-            stroke="rgba(255,255,255,0.72)"
+            stroke="color-mix(in srgb, var(--sc-ink) 72%, transparent)"
             strokeWidth="1.3"
           />
           <path
             d="M272 365 L272 330 L305 330 L305 365"
             fill="none"
-            stroke="rgba(255,255,255,0.38)"
+            stroke="color-mix(in srgb, var(--sc-ink) 38%, transparent)"
             strokeWidth="1"
           />
           <path
             d="M245 305 L365 305"
             fill="none"
-            stroke="rgba(255,255,255,0.2)"
+            stroke="color-mix(in srgb, var(--sc-ink) 20%, transparent)"
             strokeWidth="1"
           />
           <text
             x="278"
             y="398"
-            fill="rgba(255,255,255,0.55)"
+            fill="color-mix(in srgb, var(--sc-ink) 55%, transparent)"
             fontSize="10"
             fontWeight="900"
             letterSpacing="3"
@@ -379,19 +379,19 @@ const ArchitecturalModel = () => {
           <path
             d="M385 225 L495 248 L495 385 L385 360 Z"
             fill="none"
-            stroke="rgba(255,255,255,0.62)"
+            stroke="color-mix(in srgb, var(--sc-ink) 62%, transparent)"
             strokeWidth="1.3"
           />
           <path
             d="M385 225 L430 190 L540 215 L495 248"
             fill="none"
-            stroke="rgba(255,255,255,0.42)"
+            stroke="color-mix(in srgb, var(--sc-ink) 42%, transparent)"
             strokeWidth="1"
           />
           <path
             d="M495 248 L540 215 L540 350 L495 385"
             fill="none"
-            stroke="rgba(255,255,255,0.3)"
+            stroke="color-mix(in srgb, var(--sc-ink) 30%, transparent)"
             strokeWidth="1"
           />
 
@@ -399,7 +399,7 @@ const ArchitecturalModel = () => {
             <path
               key={y}
               d={`M405 ${y} L472 ${y + 14}`}
-              stroke="rgba(255,255,255,0.22)"
+              stroke="color-mix(in srgb, var(--sc-ink) 22%, transparent)"
               strokeWidth="1"
             />
           ))}
@@ -408,7 +408,7 @@ const ArchitecturalModel = () => {
             <path
               key={x}
               d={`M${x} 236 L${x} 362`}
-              stroke="rgba(255,255,255,0.13)"
+              stroke="color-mix(in srgb, var(--sc-ink) 13%, transparent)"
               strokeWidth="1"
             />
           ))}
@@ -416,7 +416,7 @@ const ArchitecturalModel = () => {
           <text
             x="414"
             y="415"
-            fill="rgba(255,255,255,0.55)"
+            fill="color-mix(in srgb, var(--sc-ink) 55%, transparent)"
             fontSize="10"
             fontWeight="900"
             letterSpacing="3"
@@ -432,19 +432,19 @@ const ArchitecturalModel = () => {
           <path
             d="M560 170 L640 202 L640 382 L560 350 Z"
             fill="none"
-            stroke="rgba(255,255,255,0.62)"
+            stroke="color-mix(in srgb, var(--sc-ink) 62%, transparent)"
             strokeWidth="1.2"
           />
           <path
             d="M560 170 L598 145 L678 178 L640 202"
             fill="none"
-            stroke="rgba(255,255,255,0.38)"
+            stroke="color-mix(in srgb, var(--sc-ink) 38%, transparent)"
             strokeWidth="1"
           />
           <path
             d="M640 202 L678 178 L678 358 L640 382"
             fill="none"
-            stroke="rgba(255,255,255,0.28)"
+            stroke="color-mix(in srgb, var(--sc-ink) 28%, transparent)"
             strokeWidth="1"
           />
 
@@ -452,7 +452,7 @@ const ArchitecturalModel = () => {
             <path
               key={i}
               d={`M578 ${202 + i * 20} L625 ${220 + i * 20}`}
-              stroke="rgba(255,255,255,0.2)"
+              stroke="color-mix(in srgb, var(--sc-ink) 20%, transparent)"
               strokeWidth="1"
             />
           ))}
@@ -461,7 +461,7 @@ const ArchitecturalModel = () => {
             <path
               key={i}
               d={`M${575 + i * 12} 185 L${575 + i * 12} 355`}
-              stroke="rgba(255,255,255,0.12)"
+              stroke="color-mix(in srgb, var(--sc-ink) 12%, transparent)"
               strokeWidth="1"
             />
           ))}
@@ -469,7 +469,7 @@ const ArchitecturalModel = () => {
           <text
             x="552"
             y="412"
-            fill="rgba(255,255,255,0.55)"
+            fill="color-mix(in srgb, var(--sc-ink) 55%, transparent)"
             fontSize="10"
             fontWeight="900"
             letterSpacing="3"
@@ -485,7 +485,7 @@ const ArchitecturalModel = () => {
             y1={110 + i * 15}
             x2={x}
             y2={500}
-            stroke="rgba(255,255,255,0.2)"
+            stroke="color-mix(in srgb, var(--sc-ink) 20%, transparent)"
             strokeWidth="1"
             strokeDasharray="4 8"
             animate={{ opacity: [0.2, 0.55, 0.2] }}
@@ -510,7 +510,7 @@ const ArchitecturalModel = () => {
               cx={x}
               cy={y}
               r={size}
-              fill="white"
+              fill="var(--sc-ink)"
               animate={{
                 opacity: [0.18, 0.9, 0.25],
                 scale: [1, 1.35, 1],
@@ -524,7 +524,7 @@ const ArchitecturalModel = () => {
               style={{
                 filter:
                   size > 2.5
-                    ? "drop-shadow(0 0 8px rgba(255,255,255,0.65))"
+                    ? "drop-shadow(0 0 8px color-mix(in srgb, var(--sc-ink) 65%, transparent))"
                     : "none",
               }}
             />
@@ -541,11 +541,11 @@ const ArchitecturalModel = () => {
               ease: "easeInOut",
             }}
           >
-            <circle cx={label.x - 16} cy={label.y - 4} r="3" fill="white" />
+            <circle cx={label.x - 16} cy={label.y - 4} r="3" fill="var(--sc-ink)" />
             <text
               x={label.x}
               y={label.y}
-              fill="rgba(255,255,255,0.55)"
+              fill="color-mix(in srgb, var(--sc-ink) 55%, transparent)"
               fontSize="11"
               fontWeight="900"
               letterSpacing="3"
@@ -555,7 +555,7 @@ const ArchitecturalModel = () => {
             <text
               x={label.x}
               y={label.y + 17}
-              fill="rgba(255,255,255,0.34)"
+              fill="color-mix(in srgb, var(--sc-ink) 34%, transparent)"
               fontSize="8"
               fontWeight="800"
               letterSpacing="1.5"
@@ -578,6 +578,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
         .filter((item): item is { label: string; value: string; href: string } => Boolean(item.label && item.value && item.href))
     : contactDetails;
   const [mounted, setMounted] = useState(false);
+  const [drawingReference,setDrawingReference]=useState("");
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -612,6 +613,8 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
 
   useEffect(() => {
     setMounted(true);
+    const project=new URLSearchParams(window.location.search).get("project");
+    if(project)setDrawingReference(project.slice(0,160));
   }, []);
 
   useEffect(() => {
@@ -673,7 +676,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
   const villagesByCell = rwandaLocationData?.villagesByCell || {};
 
   if (!mounted) {
-    return <div style={{ background: "#050505", minHeight: "100vh" }} />;
+    return <div style={{ background: "var(--sc-bg)", minHeight: "100vh" }} />;
   }
 
   const toggleService = (service: string) => {
@@ -942,9 +945,9 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
     width: "100%",
     height: 64,
     border: "none",
-    borderBottom: "1px solid rgba(255,255,255,0.2)",
+    borderBottom: "1px solid color-mix(in srgb, var(--sc-ink) 20%, transparent)",
     background: "transparent",
-    color: "white",
+    color: "var(--sc-ink)",
     padding: "0 10px",
     outline: "none",
     fontSize: 16,
@@ -958,8 +961,8 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
   };
 
   const optionStyle: React.CSSProperties = {
-    background: "#050505",
-    color: "white",
+    background: "var(--sc-bg)",
+    color: "var(--sc-ink)",
   };
 
   const fieldStyle = (
@@ -969,15 +972,15 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
     ...base,
     borderBottom: formErrors[name]
       ? "1px solid #ff7777"
-      : "1px solid rgba(255,255,255,0.2)",
+      : "1px solid color-mix(in srgb, var(--sc-ink) 20%, transparent)",
     boxShadow: formErrors[name] ? "0 1px 0 rgba(255,119,119,0.2)" : "none",
   });
 
   return (
     <div
       style={{
-        background: "#050505",
-        color: "white",
+        background: "var(--sc-bg)",
+        color: "var(--sc-ink)",
         overflow: "hidden",
         minHeight: "100vh",
       }}
@@ -1001,20 +1004,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
             zIndex: 10,
           }}
         >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ ...transition, delay: 0.1 }}
-            style={{
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              fontSize: 12,
-              opacity: 0.6,
-              fontWeight: 800,
-            }}
-          >
-            {content?.heroKicker || "Contact"}
-          </motion.div>
+
 
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
@@ -1042,7 +1032,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
               maxWidth: 520,
               fontSize: 18,
               lineHeight: 1.6,
-              color: "rgba(255,255,255,0.6)",
+              color: "color-mix(in srgb, var(--sc-ink) 60%, transparent)",
             }}
           >
             {content?.heroIntro || "Tell us about your project, site, ambition, timeline, and current stage. We will help define whether you need design, consultancy, site coordination, planning support, or development guidance."}
@@ -1085,7 +1075,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
             style={{
               position: "absolute",
               inset: 0,
-              background: "linear-gradient(to top, #050505, transparent 40%)",
+              background: "linear-gradient(to top, var(--sc-bg), transparent 40%)",
               pointerEvents: "none",
             }}
           />
@@ -1099,8 +1089,8 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
         style={{
           scrollMarginTop: 120,
           padding: "104px 0",
-          background: "#0a0a0a",
-          borderTop: "1px solid rgba(255,255,255,0.05)",
+          background: "var(--sc-bg)",
+          borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 5%, transparent)",
         }}
       >
         <div
@@ -1119,17 +1109,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
               viewport={{ once: true, margin: "-100px" }}
               transition={transition}
             >
-              <div
-                style={{
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  fontSize: 12,
-                  opacity: 0.6,
-                  fontWeight: 800,
-                }}
-              >
-                Studio Access
-              </div>
+
 
               <h2
                 style={{
@@ -1149,7 +1129,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
             <div
               style={{
                 marginTop: 60,
-                borderTop: "1px solid rgba(255,255,255,0.1)",
+                borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 10%, transparent)",
               }}
             >
               {activeContactDetails.map((item, index) => (
@@ -1171,7 +1151,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                     gridTemplateColumns: "120px 1fr auto",
                     gap: 24,
                     padding: "36px 0",
-                    borderBottom: "1px solid rgba(255,255,255,0.1)",
+                    borderBottom: "1px solid color-mix(in srgb, var(--sc-ink) 10%, transparent)",
                     alignItems: "center",
                     color: "inherit",
                     textDecoration: "none",
@@ -1183,7 +1163,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                       fontSize: 12,
                       letterSpacing: "0.14em",
                       textTransform: "uppercase",
-                      color: "rgba(255,255,255,0.4)",
+                      color: "color-mix(in srgb, var(--sc-ink) 40%, transparent)",
                       fontWeight: 900,
                     }}
                   >
@@ -1220,17 +1200,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
             viewport={{ once: true }}
             transition={transition}
           >
-            <div
-              style={{
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                fontSize: 12,
-                opacity: 0.6,
-                fontWeight: 800,
-              }}
-            >
-              {content?.formKicker || "Project Brief"}
-            </div>
+
 
             <h2
               style={{
@@ -1245,7 +1215,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
             </h2>
 
             {content?.formIntro && (
-              <p style={{ marginTop: 18, color: "rgba(255,255,255,0.62)", lineHeight: 1.7, maxWidth: 620 }}>
+              <p style={{ marginTop: 18, color: "color-mix(in srgb, var(--sc-ink) 62%, transparent)", lineHeight: 1.7, maxWidth: 620 }}>
                 {content.formIntro}
               </p>
             )}
@@ -1306,7 +1276,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                             {submissionError}{" "}
                             <a
                               href="https://wa.me/250787349257"
-                              style={{ color: "white", fontWeight: 800 }}
+                              style={{ color: "var(--sc-ink)", fontWeight: 800 }}
                             >
                               Contact IMVO on WhatsApp ↗
                             </a>
@@ -1332,7 +1302,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                           fontSize: 13,
                           textTransform: "uppercase",
                           letterSpacing: "0.1em",
-                          color: "rgba(255,255,255,0.5)",
+                          color: "color-mix(in srgb, var(--sc-ink) 50%, transparent)",
                           fontWeight: 800,
                           marginBottom: 16,
                         }}
@@ -1360,11 +1330,11 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                                 borderRadius: 99,
                                 border: isSelected
                                   ? "1px solid white"
-                                  : "1px solid rgba(255,255,255,0.15)",
-                                background: isSelected ? "white" : "transparent",
+                                  : "1px solid color-mix(in srgb, var(--sc-ink) 15%, transparent)",
+                                background: isSelected ? "var(--sc-ink)" : "transparent",
                                 color: isSelected
-                                  ? "black"
-                                  : "rgba(255,255,255,0.7)",
+                                  ? "var(--sc-bg)"
+                                  : "color-mix(in srgb, var(--sc-ink) 70%, transparent)",
                                 fontSize: 13,
                                 fontWeight: 800,
                                 cursor: "pointer",
@@ -1387,7 +1357,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                         fontWeight: 900,
                         letterSpacing: "0.12em",
                         textTransform: "uppercase",
-                        color: "rgba(255,255,255,0.46)",
+                        color: "color-mix(in srgb, var(--sc-ink) 46%, transparent)",
                       }}
                     >
                       Your Details
@@ -1559,7 +1529,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                           fontWeight: 900,
                           letterSpacing: "0.12em",
                           textTransform: "uppercase",
-                          color: "rgba(255,255,255,0.46)",
+                          color: "color-mix(in srgb, var(--sc-ink) 46%, transparent)",
                         }}
                       >
                         Project Location
@@ -1835,7 +1805,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                           fontWeight: 900,
                           letterSpacing: "0.12em",
                           textTransform: "uppercase",
-                          color: "rgba(255,255,255,0.46)",
+                          color: "color-mix(in srgb, var(--sc-ink) 46%, transparent)",
                         }}
                       >
                         Planning Information
@@ -1890,13 +1860,14 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                           fontWeight: 900,
                           letterSpacing: "0.12em",
                           textTransform: "uppercase",
-                          color: "rgba(255,255,255,0.46)",
+                          color: "color-mix(in srgb, var(--sc-ink) 46%, transparent)",
                         }}
                       >
                         Project Brief
                       </div>
                       <textarea
                         name="message"
+                        defaultValue={drawingReference?`I would like to discuss the published drawing for ${drawingReference}.\n\nMy project brief: `:undefined}
                         placeholder="Tell us about the site context, goals, and current phase... *"
                         rows={5}
                         minLength={30}
@@ -1905,9 +1876,9 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                         style={fieldStyle("message", {
                           width: "100%",
                           border: "none",
-                          borderBottom: "1px solid rgba(255,255,255,0.2)",
+                          borderBottom: "1px solid color-mix(in srgb, var(--sc-ink) 20%, transparent)",
                           background: "transparent",
-                          color: "white",
+                          color: "var(--sc-ink)",
                           padding: "20px 10px",
                           outline: "none",
                           resize: "vertical",
@@ -1932,7 +1903,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                           gap: 12,
                           color: formErrors.consent
                             ? "#ffd1d1"
-                            : "rgba(255,255,255,0.62)",
+                            : "color-mix(in srgb, var(--sc-ink) 62%, transparent)",
                           fontSize: 13,
                           lineHeight: 1.6,
                           cursor: "pointer",
@@ -1943,14 +1914,14 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                           type="checkbox"
                           value="yes"
                           aria-invalid={Boolean(formErrors.consent)}
-                          style={{ marginTop: 4, accentColor: "white" }}
+                          style={{ marginTop: 4, accentColor: "var(--sc-ink)" }}
                         />
                         <span>
                           I agree that IMVO Group may use these details to respond to
                           my project inquiry.{" "}
                           <a
                             href="/privacy"
-                            style={{ color: "white", fontWeight: 800 }}
+                            style={{ color: "var(--sc-ink)", fontWeight: 800 }}
                           >
                             View Privacy Policy
                           </a>
@@ -1966,9 +1937,9 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                       style={{
                         marginTop: 40,
                         background: isSubmitting
-                          ? "rgba(255,255,255,0.2)"
-                          : "white",
-                        color: isSubmitting ? "white" : "black",
+                          ? "color-mix(in srgb, var(--sc-ink) 20%, transparent)"
+                          : "var(--sc-ink)",
+                        color: isSubmitting ? "var(--sc-ink)" : "var(--sc-bg)",
                         padding: "20px 48px",
                         borderRadius: 99,
                         fontWeight: 800,
@@ -2006,12 +1977,12 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                         width: 64,
                         height: 64,
                         borderRadius: "50%",
-                        background: "white",
+                        background: "var(--sc-ink)",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
                         marginBottom: 32,
-                        boxShadow: "0 0 40px rgba(255,255,255,0.16)",
+                        boxShadow: "0 0 40px color-mix(in srgb, var(--sc-ink) 16%, transparent)",
                       }}
                     >
                       <svg
@@ -2019,7 +1990,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                         height="26"
                         viewBox="0 0 24 24"
                         fill="none"
-                        stroke="black"
+                        stroke="var(--sc-bg)"
                         strokeWidth="3"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -2028,18 +1999,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                       </svg>
                     </div>
 
-                    <div
-                      style={{
-                        textTransform: "uppercase",
-                        letterSpacing: "0.12em",
-                        fontSize: 12,
-                        color: "rgba(255,255,255,0.45)",
-                        fontWeight: 900,
-                        marginBottom: 14,
-                      }}
-                    >
-                      {content?.successKicker || "Inquiry Submitted"}
-                    </div>
+
 
                     <h3
                       style={{
@@ -2058,7 +2018,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                         marginTop: 22,
                         fontSize: 18,
                         lineHeight: 1.8,
-                        color: "rgba(255,255,255,0.68)",
+                        color: "color-mix(in srgb, var(--sc-ink) 68%, transparent)",
                         maxWidth: 560,
                       }}
                     >
@@ -2072,12 +2032,12 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                         gap: 10,
                         padding: "10px 16px",
                         borderRadius: 999,
-                        border: "1px solid rgba(255,255,255,0.12)",
-                        background: "rgba(255,255,255,0.03)",
+                        border: "1px solid color-mix(in srgb, var(--sc-ink) 12%, transparent)",
+                        background: "color-mix(in srgb, var(--sc-ink) 3%, transparent)",
                         fontSize: 13,
                         fontWeight: 700,
                         letterSpacing: "0.04em",
-                        color: "rgba(255,255,255,0.75)",
+                        color: "color-mix(in srgb, var(--sc-ink) 75%, transparent)",
                       }}
                     >
                       ⏱ {content?.responseTimeText || "We typically respond within one business day"}
@@ -2087,7 +2047,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                         marginTop: 16,
                         fontSize: 15,
                         lineHeight: 1.7,
-                        color: "rgba(255,255,255,0.45)",
+                        color: "color-mix(in srgb, var(--sc-ink) 45%, transparent)",
                         maxWidth: 560,
                       }}
                     >
@@ -2095,10 +2055,10 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                       <a
                         href="mailto:info@imvogroup.com"
                         style={{
-                          color: "white",
+                          color: "var(--sc-ink)",
                           textDecoration: "none",
                           borderBottom:
-                            "1px solid rgba(255,255,255,0.4)",
+                            "1px solid color-mix(in srgb, var(--sc-ink) 40%, transparent)",
                         }}
                       >
                         info@imvogroup.com
@@ -2120,8 +2080,8 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                           setSelectedServices([]);
                         }}
                         style={{
-                          background: "white",
-                          color: "black",
+                          background: "var(--sc-ink)",
+                          color: "var(--sc-bg)",
                           padding: "16px 34px",
                           borderRadius: 99,
                           fontWeight: 900,
@@ -2144,27 +2104,27 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
                         href="mailto:info@imvogroup.com?subject=Project Inquiry - IMVO"
                         style={{
                           background: "transparent",
-                          color: "white",
+                          color: "var(--sc-ink)",
                           padding: "16px 34px",
                           borderRadius: 99,
                           fontWeight: 900,
                           fontSize: 14,
-                          border: "1px solid rgba(255,255,255,0.22)",
+                          border: "1px solid color-mix(in srgb, var(--sc-ink) 22%, transparent)",
                           textDecoration: "none",
                           display: "inline-block",
                           transition: "all 0.3s ease",
                         }}
                         onMouseEnter={(event) => {
                           event.currentTarget.style.backgroundColor =
-                            "rgba(255,255,255,0.1)";
+                            "color-mix(in srgb, var(--sc-ink) 10%, transparent)";
                           event.currentTarget.style.borderColor =
-                            "rgba(255,255,255,0.42)";
+                            "color-mix(in srgb, var(--sc-ink) 42%, transparent)";
                         }}
                         onMouseLeave={(event) => {
                           event.currentTarget.style.backgroundColor =
                             "transparent";
                           event.currentTarget.style.borderColor =
-                            "rgba(255,255,255,0.22)";
+                            "color-mix(in srgb, var(--sc-ink) 22%, transparent)";
                         }}
                       >
                         EMAIL THE STUDIO ↗
@@ -2182,8 +2142,8 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
       <section
         className="mobilePad"
         style={{
-          background: "#050505",
-          color: "white",
+          background: "var(--sc-bg)",
+          color: "var(--sc-ink)",
           paddingTop: 88,
           position: "relative",
           overflow: "hidden",
@@ -2203,17 +2163,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
             viewport={{ once: true }}
             transition={transition}
           >
-            <div
-              style={{
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                fontSize: 12,
-                opacity: 0.6,
-                fontWeight: 800,
-              }}
-            >
-              {content?.locationKicker || "Location"}
-            </div>
+
 
             <h2
               style={{
@@ -2233,7 +2183,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
               style={{
                 marginTop: 40,
                 maxWidth: 470,
-                color: "rgba(255,255,255,0.72)",
+                color: "color-mix(in srgb, var(--sc-ink) 72%, transparent)",
                 lineHeight: 1.9,
                 fontSize: 17,
               }}
@@ -2263,7 +2213,7 @@ export default function ContactPageClient({ content }: { content?: ContactPageCo
             position: "relative",
             width: "100%",
             height: "65vh",
-            background: "#111",
+            background: "var(--sc-bg)",
           }}
         >
           <iframe

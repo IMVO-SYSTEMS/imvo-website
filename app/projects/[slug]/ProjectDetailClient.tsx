@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import ProjectPlanViewer from "../../studio-canvas/ProjectPlanViewer";
 import { useRouter } from "next/navigation";
 import {
   AnimatePresence,
@@ -48,8 +49,8 @@ export default function ProjectDetailClient({
           minHeight: "60vh",
           display: "flex",
           alignItems: "center",
-          background: "#050505",
-          color: "white",
+          background: "var(--sc-bg)",
+          color: "var(--sc-ink)",
         }}
       >
         <div className="containerWide">
@@ -90,7 +91,7 @@ export default function ProjectDetailClient({
   );
 
   return (
-    <div ref={container} style={{ background: "#050505", color: "white" }}>
+    <div ref={container} style={{ background: "var(--sc-bg)", color: "var(--sc-ink)" }}>
       <style>
         {`
           .project-gallery-grid {
@@ -103,7 +104,7 @@ export default function ProjectDetailClient({
             position: relative;
             border: none;
             padding: 0;
-            background: #111;
+            background: var(--sc-bg);
             color: white;
             overflow: hidden;
             cursor: pointer;
@@ -189,11 +190,11 @@ export default function ProjectDetailClient({
           }
 
           .timeline-scroll::-webkit-scrollbar-track {
-            background: rgba(255,255,255,0.05);
+            background: color-mix(in srgb, var(--sc-ink) 5%, transparent);
           }
 
           .timeline-scroll::-webkit-scrollbar-thumb {
-            background: rgba(255,255,255,0.28);
+            background: color-mix(in srgb, var(--sc-ink) 28%, transparent);
             border-radius: 999px;
           }
 
@@ -249,7 +250,7 @@ export default function ProjectDetailClient({
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(to top, rgba(5,5,5,0.94), rgba(5,5,5,0.35), transparent)",
+              "linear-gradient(to top, color-mix(in srgb, var(--sc-bg) 94%, transparent), color-mix(in srgb, var(--sc-bg) 35%, transparent), transparent)",
             pointerEvents: "none",
           }}
         />
@@ -263,19 +264,7 @@ export default function ProjectDetailClient({
             width: "100%",
           }}
         >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ ...transition, delay: 0.1 }}
-            style={{
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              fontSize: 12,
-              opacity: 0.6,
-            }}
-          >
-            {project.category}
-          </motion.div>
+
 
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
@@ -299,7 +288,7 @@ export default function ProjectDetailClient({
             style={{
               marginTop: 24,
               fontSize: 18,
-              color: "rgba(255,255,255,0.68)",
+              color: "color-mix(in srgb, var(--sc-ink) 68%, transparent)",
             }}
           >
             {project.location} · {project.year}
@@ -317,8 +306,8 @@ export default function ProjectDetailClient({
                 gap: 10,
                 padding: "10px 16px",
                 borderRadius: 99,
-                border: "1px solid rgba(255,255,255,0.18)",
-                background: "rgba(0,0,0,0.35)",
+                border: "1px solid color-mix(in srgb, var(--sc-ink) 18%, transparent)",
+                background: "color-mix(in srgb, var(--sc-bg) 35%, transparent)",
                 backdropFilter: "blur(10px)",
                 fontSize: 12,
                 textTransform: "uppercase",
@@ -331,7 +320,7 @@ export default function ProjectDetailClient({
                   width: 7,
                   height: 7,
                   borderRadius: "50%",
-                  background: "white",
+                  background: "var(--sc-ink)",
                   display: "inline-block",
                 }}
               />
@@ -355,21 +344,12 @@ export default function ProjectDetailClient({
               gridTemplateColumns: "1fr 1.2fr",
               gap: 80,
               alignItems: "start",
-              borderTop: "1px solid rgba(255,255,255,0.1)",
+              borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 10%, transparent)",
               paddingTop: 40,
             }}
           >
             <div>
-              <div
-                style={{
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  fontSize: 12,
-                  opacity: 0.6,
-                }}
-              >
-                Project Summary
-              </div>
+
 
               <h2
                 style={{
@@ -388,7 +368,7 @@ export default function ProjectDetailClient({
                   gridTemplateColumns: "1fr 1fr",
                   gap: 20,
                   marginTop: 40,
-                  borderTop: "1px solid rgba(255,255,255,0.1)",
+                  borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 10%, transparent)",
                   paddingTop: 30,
                 }}
               >
@@ -441,7 +421,7 @@ export default function ProjectDetailClient({
                 style={{
                   fontSize: 20,
                   lineHeight: 1.8,
-                  color: "rgba(255,255,255,0.8)",
+                  color: "color-mix(in srgb, var(--sc-ink) 80%, transparent)",
                   margin: 0,
                 }}
               >
@@ -465,7 +445,7 @@ export default function ProjectDetailClient({
               viewport={{ once: true }}
               transition={transition}
               style={{
-                borderTop: "1px solid rgba(255,255,255,0.1)",
+                borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 10%, transparent)",
                 paddingTop: 40,
               }}
             >
@@ -495,7 +475,7 @@ export default function ProjectDetailClient({
                     style={{
                       margin: "12px 0 0",
                       maxWidth: 520,
-                      color: "rgba(255,255,255,0.48)",
+                      color: "color-mix(in srgb, var(--sc-ink) 48%, transparent)",
                       fontSize: 14,
                       lineHeight: 1.7,
                     }}
@@ -510,7 +490,7 @@ export default function ProjectDetailClient({
                     fontSize: 11,
                     letterSpacing: "0.12em",
                     textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.42)",
+                    color: "color-mix(in srgb, var(--sc-ink) 42%, transparent)",
                     fontWeight: 900,
                   }}
                 >
@@ -528,85 +508,7 @@ export default function ProjectDetailClient({
                   gap: 24,
                 }}
               >
-                {floorPlans.map((plan, index) => (
-                  <div
-                    key={plan}
-                    className="imvo-protected-plan"
-                    onContextMenu={(event) => event.preventDefault()}
-                    style={{
-                      position: "relative",
-                      width: "100%",
-                      aspectRatio: "16/10",
-                      background:
-                        "radial-gradient(circle at center, rgba(255,255,255,0.045), #090909 68%)",
-                      overflow: "hidden",
-                      border: "1px solid rgba(255,255,255,0.08)",
-                      userSelect: "none",
-                    }}
-                  >
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: 18,
-                        left: 18,
-                        zIndex: 4,
-                        padding: "8px 12px",
-                        borderRadius: 99,
-                        background: "rgba(0,0,0,0.55)",
-                        border: "1px solid rgba(255,255,255,0.12)",
-                        backdropFilter: "blur(10px)",
-                        fontSize: 11,
-                        fontWeight: 900,
-                        letterSpacing: "0.12em",
-                        textTransform: "uppercase",
-                        color: "rgba(255,255,255,0.72)",
-                      }}
-                    >
-                      {floorPlans.length === 1
-                        ? "Floor Plan"
-                        : index === 0
-                          ? "Ground Floor"
-                          : index === 1
-                            ? "Upper Floor"
-                            : `Plan ${index + 1}`}
-                    </div>
-
-                    <div className="imvo-plan-status-label">NOT FOR CONSTRUCTION</div>
-
-                    <div
-                      style={{
-                        position: "absolute",
-                        inset: 34,
-                        pointerEvents: "none",
-                      }}
-                    >
-                      <Image
-                        src={plan}
-                        alt={`${project.title} floor plan ${index + 1}`}
-                        fill
-                        draggable={false}
-                        sizes="100vw"
-                        style={{
-                          objectFit: "contain",
-                          pointerEvents: "none",
-                        }}
-                      />
-                    </div>
-
-                    <div
-                      aria-hidden
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        zIndex: 8,
-                        pointerEvents: "auto",
-                        background:
-                          "linear-gradient(135deg, rgba(255,255,255,0.015), transparent 45%, rgba(255,255,255,0.02))",
-                      }}
-                      onContextMenu={(event) => event.preventDefault()}
-                    />
-                  </div>
-                ))}
+                {floorPlans.map((plan,index)=><ProjectPlanViewer key={plan} src={plan} title={project.title} label={floorPlans.length===1?'Floor plan':index===0?'Ground floor':index===1?'Upper floor':`Plan ${index+1}`}/>)}
               </div>
             </motion.div>
           </div>
@@ -623,7 +525,7 @@ export default function ProjectDetailClient({
               viewport={{ once: true }}
               transition={transition}
               style={{
-                borderTop: "1px solid rgba(255,255,255,0.1)",
+                borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 10%, transparent)",
                 paddingTop: 40,
               }}
             >
@@ -654,7 +556,7 @@ export default function ProjectDetailClient({
                     left: 0,
                     right: 0,
                     height: 1,
-                    background: "rgba(255,255,255,0.14)",
+                    background: "color-mix(in srgb, var(--sc-ink) 14%, transparent)",
                     minWidth: project.timeline.length * 230,
                   }}
                 />
@@ -676,9 +578,9 @@ export default function ProjectDetailClient({
                           width: 14,
                           height: 14,
                           borderRadius: "50%",
-                          background: "#050505",
+                          background: "var(--sc-bg)",
                           border: "2px solid white",
-                          boxShadow: "0 0 18px rgba(255,255,255,0.22)",
+                          boxShadow: "0 0 18px color-mix(in srgb, var(--sc-ink) 22%, transparent)",
                           marginBottom: 28,
                         }}
                       />
@@ -687,7 +589,7 @@ export default function ProjectDetailClient({
                         style={{
                           fontSize: 14,
                           fontWeight: 900,
-                          color: "rgba(255,255,255,0.48)",
+                          color: "color-mix(in srgb, var(--sc-ink) 48%, transparent)",
                           marginBottom: 10,
                         }}
                       >
@@ -723,7 +625,7 @@ export default function ProjectDetailClient({
             viewport={{ once: true }}
             transition={transition}
             style={{
-              borderTop: "1px solid rgba(255,255,255,0.1)",
+              borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 10%, transparent)",
               paddingTop: 40,
             }}
           >
@@ -743,7 +645,7 @@ export default function ProjectDetailClient({
               style={{
                 position: "relative",
                 height: 500,
-                background: "#111",
+                background: "var(--sc-bg)",
                 overflow: "hidden",
                 filter: "grayscale(100%) contrast(1.2)",
               }}
@@ -765,7 +667,7 @@ export default function ProjectDetailClient({
                     alignItems: "center",
                     justifyContent: "center",
                     height: "100%",
-                    color: "rgba(255,255,255,0.3)",
+                    color: "color-mix(in srgb, var(--sc-ink) 30%, transparent)",
                   }}
                 >
                   Location data not available
@@ -781,7 +683,7 @@ export default function ProjectDetailClient({
         <div className="containerWide">
           <div
             style={{
-              borderTop: "1px solid rgba(255,255,255,0.1)",
+              borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 10%, transparent)",
               paddingTop: 40,
             }}
           >
@@ -810,7 +712,7 @@ export default function ProjectDetailClient({
                   href={`/projects/${related.slug}`}
                   className="imvo-public-watermark related-card"
                   style={{
-                    color: "white",
+                    color: "var(--sc-ink)",
                     textDecoration: "none",
                     display: "block",
                   }}
@@ -819,7 +721,7 @@ export default function ProjectDetailClient({
                     style={{
                       position: "relative",
                       aspectRatio: "4/3",
-                      background: "#111",
+                      background: "var(--sc-bg)",
                       overflow: "hidden",
                     }}
                   >
@@ -834,16 +736,7 @@ export default function ProjectDetailClient({
                   </div>
 
                   <div style={{ marginTop: 18 }}>
-                    <div
-                      style={{
-                        fontSize: 12,
-                        textTransform: "uppercase",
-                        letterSpacing: "0.1em",
-                        color: "rgba(255,255,255,0.45)",
-                      }}
-                    >
-                      {related.category}
-                    </div>
+
 
                     <h3
                       className="related-title"
@@ -870,11 +763,11 @@ export default function ProjectDetailClient({
         className="mobilePad"
         style={{
           padding: "96px 0",
-          borderTop: "1px solid rgba(255,255,255,0.08)",
+          borderTop: "1px solid color-mix(in srgb, var(--sc-ink) 8%, transparent)",
           textAlign: "center",
           position: "relative",
           overflow: "hidden",
-          background: "#050505",
+          background: "var(--sc-bg)",
         }}
       >
         <CTALines />
@@ -901,7 +794,7 @@ export default function ProjectDetailClient({
               maxWidth: 560,
               fontSize: 18,
               lineHeight: 1.8,
-              color: "rgba(255,255,255,0.62)",
+              color: "color-mix(in srgb, var(--sc-ink) 62%, transparent)",
             }}
           >
             Start a conversation with IMVO about design, consultancy,
@@ -913,8 +806,8 @@ export default function ProjectDetailClient({
             style={{
               display: "inline-block",
               marginTop: 42,
-              background: "white",
-              color: "black",
+              background: "var(--sc-ink)",
+              color: "var(--sc-bg)",
               padding: "18px 38px",
               borderRadius: 99,
               fontWeight: 900,
@@ -952,9 +845,9 @@ function BackButton() {
         height: 44,
         padding: "0 18px",
         borderRadius: 99,
-        border: "1px solid rgba(255,255,255,0.18)",
-        background: "rgba(5,5,5,0.35)",
-        color: "white",
+        border: "1px solid color-mix(in srgb, var(--sc-ink) 18%, transparent)",
+        background: "color-mix(in srgb, var(--sc-bg) 35%, transparent)",
+        color: "var(--sc-ink)",
         backdropFilter: "blur(14px)",
         cursor: "pointer",
         fontSize: 13,
@@ -963,12 +856,12 @@ function BackButton() {
         transition: "background 0.25s ease, border-color 0.25s ease",
       }}
       onMouseEnter={(event) => {
-        event.currentTarget.style.background = "rgba(255,255,255,0.12)";
-        event.currentTarget.style.borderColor = "rgba(255,255,255,0.36)";
+        event.currentTarget.style.background = "color-mix(in srgb, var(--sc-ink) 12%, transparent)";
+        event.currentTarget.style.borderColor = "color-mix(in srgb, var(--sc-ink) 36%, transparent)";
       }}
       onMouseLeave={(event) => {
-        event.currentTarget.style.background = "rgba(5,5,5,0.35)";
-        event.currentTarget.style.borderColor = "rgba(255,255,255,0.18)";
+        event.currentTarget.style.background = "color-mix(in srgb, var(--sc-bg) 35%, transparent)";
+        event.currentTarget.style.borderColor = "color-mix(in srgb, var(--sc-ink) 18%, transparent)";
       }}
     >
       ← Back
@@ -1056,7 +949,7 @@ function ProjectGallery({
                     position: "absolute",
                     inset: 0,
                     background:
-                      "linear-gradient(to top, rgba(0,0,0,0.28), transparent 55%)",
+                      "linear-gradient(to top, color-mix(in srgb, var(--sc-bg) 28%, transparent), transparent 55%)",
                     pointerEvents: "none",
                   }}
                 />
@@ -1080,7 +973,7 @@ function ProjectGallery({
               position: "fixed",
               inset: 0,
               zIndex: 999999,
-              background: "rgba(5,5,5,0.94)",
+              background: "color-mix(in srgb, var(--sc-bg) 94%, transparent)",
               backdropFilter: "blur(14px)",
               display: "flex",
               alignItems: "center",
@@ -1101,9 +994,9 @@ function ProjectGallery({
                 width: 46,
                 height: 46,
                 borderRadius: "50%",
-                border: "1px solid rgba(255,255,255,0.2)",
-                background: "rgba(255,255,255,0.08)",
-                color: "white",
+                border: "1px solid color-mix(in srgb, var(--sc-ink) 20%, transparent)",
+                background: "color-mix(in srgb, var(--sc-ink) 8%, transparent)",
+                color: "var(--sc-ink)",
                 fontSize: 22,
                 cursor: "pointer",
               }}
@@ -1131,9 +1024,9 @@ function ProjectGallery({
                     width: 48,
                     height: 48,
                     borderRadius: "50%",
-                    border: "1px solid rgba(255,255,255,0.2)",
-                    background: "rgba(255,255,255,0.08)",
-                    color: "white",
+                    border: "1px solid color-mix(in srgb, var(--sc-ink) 20%, transparent)",
+                    background: "color-mix(in srgb, var(--sc-ink) 8%, transparent)",
+                    color: "var(--sc-ink)",
                     cursor: "pointer",
                     fontSize: 22,
                   }}
@@ -1157,9 +1050,9 @@ function ProjectGallery({
                     width: 48,
                     height: 48,
                     borderRadius: "50%",
-                    border: "1px solid rgba(255,255,255,0.2)",
-                    background: "rgba(255,255,255,0.08)",
-                    color: "white",
+                    border: "1px solid color-mix(in srgb, var(--sc-ink) 20%, transparent)",
+                    background: "color-mix(in srgb, var(--sc-ink) 8%, transparent)",
+                    color: "var(--sc-ink)",
                     cursor: "pointer",
                     fontSize: 22,
                   }}
@@ -1191,7 +1084,7 @@ function ProjectGallery({
                   alignItems: "center",
                   justifyContent: "space-between",
                   gap: 16,
-                  color: "white",
+                  color: "var(--sc-ink)",
                   fontSize: 13,
                   fontWeight: 900,
                   letterSpacing: "0.08em",
@@ -1199,7 +1092,7 @@ function ProjectGallery({
                 }}
               >
                 <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{title}</span>
-                <span style={{ color: "rgba(255,255,255,0.62)", whiteSpace: "nowrap" }}>
+                <span style={{ color: "color-mix(in srgb, var(--sc-ink) 62%, transparent)", whiteSpace: "nowrap" }}>
                   {String((activeIndex ?? 0) + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
                 </span>
               </div>
@@ -1210,7 +1103,7 @@ function ProjectGallery({
                   position: "relative",
                   minHeight: 0,
                   height: "min(720px, 68vh)",
-                  background: "#111",
+                  background: "var(--sc-bg)",
                   overflow: "hidden",
                 }}
               >
@@ -1225,9 +1118,9 @@ function ProjectGallery({
 
               <div
                 style={{
-                  border: "1px solid rgba(255,255,255,0.12)",
-                  background: "rgba(0,0,0,0.42)",
-                  color: "rgba(255,255,255,0.72)",
+                  border: "1px solid color-mix(in srgb, var(--sc-ink) 12%, transparent)",
+                  background: "color-mix(in srgb, var(--sc-bg) 42%, transparent)",
+                  color: "color-mix(in srgb, var(--sc-ink) 72%, transparent)",
                   padding: "12px 14px",
                   fontSize: 12,
                   lineHeight: 1.55,
@@ -1266,12 +1159,12 @@ function Spec({
           width: 34,
           height: 34,
           borderRadius: "50%",
-          border: "1px solid rgba(255,255,255,0.14)",
+          border: "1px solid color-mix(in srgb, var(--sc-ink) 14%, transparent)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "rgba(255,255,255,0.78)",
-          background: "rgba(255,255,255,0.035)",
+          color: "color-mix(in srgb, var(--sc-ink) 78%, transparent)",
+          background: "color-mix(in srgb, var(--sc-ink) 3.5%, transparent)",
         }}
       >
         <SpecIcon type={icon} />
@@ -1401,7 +1294,7 @@ function CTALines() {
           <path
             d="M90 0 L0 0 0 90"
             fill="none"
-            stroke="rgba(255,255,255,0.05)"
+            stroke="color-mix(in srgb, var(--sc-ink) 5%, transparent)"
             strokeWidth="1"
           />
         </pattern>
@@ -1418,7 +1311,7 @@ function CTALines() {
             key={path}
             d={path}
             fill="none"
-            stroke="rgba(255,255,255,0.65)"
+            stroke="color-mix(in srgb, var(--sc-ink) 65%, transparent)"
             strokeWidth={index === 0 ? 1.6 : 1.1}
             strokeLinecap="round"
             strokeDasharray="120 900"
@@ -1450,7 +1343,7 @@ function CTALines() {
             cx={cx}
             cy={cy}
             r="3"
-            fill="white"
+            fill="var(--sc-ink)"
             animate={{
               opacity: [0.25, 1, 0.25],
               scale: [1, 1.35, 1],
