@@ -24,7 +24,7 @@ const countries:CountryInfo[]=[...regionalCountries,...africaCountryOutlines
  capital:c.name,pin:[c.lon,c.lat] as [number,number],zoom:1.7}))];
 const index=new Map(countries.map(c=>[c.name,c]));
 const outlines=africaCountryOutlines;
-const countryBounds=new Map(outlines.map(outline=>{
+const countryBounds:Map<string,{cx:number;cy:number;width:number;height:number}>=new Map(outlines.map(outline=>{
  const pairs=Array.from(outline.path.matchAll(/(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/g),m=>[Number(m[1]),Number(m[2])]);
  const xs=pairs.map(p=>p[0]),ys=pairs.map(p=>p[1]);
  const minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys);
