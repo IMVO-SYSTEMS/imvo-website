@@ -1,3 +1,4 @@
+import { archivedAboutTestimonials } from "./about/archivedTestimonials";
 import StudioCanvas from "./studio-canvas/StudioCanvas";
 import { getHomePageContent, getAboutPageContent } from "@/sanity/lib/siteContent";
 import { getAllProjects, getFeaturedProjects } from "@/sanity/lib/projects";
@@ -29,5 +30,6 @@ export default async function HomePage() {
     : (aboutContent?.testimonials||[]).filter(r=>r.active!==false&&r.text?.trim()&&r.author?.trim()).map(r=>({
         quote:r.text!,author:r.author!,role:r.role,company:r.company,source:r.source
       }));
-  return <StudioCanvas content={resolvedContent} projects={allProjects} featuredProjects={featuredProjects} controls={controls} reviews={reviews} />;
+  const resolvedReviews = reviews.length ? reviews : archivedAboutTestimonials.map(r=>({quote:r.text,author:r.author,source:r.date==="Client Review"?"Archived About page":r.date}));
+  return <StudioCanvas content={resolvedContent} projects={allProjects} featuredProjects={featuredProjects} controls={controls} reviews={resolvedReviews} />;
 }
