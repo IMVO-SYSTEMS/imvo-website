@@ -37,7 +37,8 @@ const cities:City[]=[
  ["MAR","Rabat",-6.836,34.021,1],["DZA","Algiers",3.058,36.753,1],["TUN","Tunis",10.181,36.807,1],
  ["NGA","Abuja",7.398,9.076,1],["NGA","Lagos",3.379,6.524,0],["GHA","Accra",-.188,5.603,1],
  ["SEN","Dakar",-17.467,14.717,1],["CMR","Yaoundé",11.502,3.848,1],["MDG","Antananarivo",47.507,-18.879,1],
- ["CAF","Bangui",18.562,4.394,1],["COG","Brazzaville",15.283,-4.263,1],["ERI","Asmara",38.931,15.322,1]
+ ["CAF","Bangui",18.562,4.394,1],["COG","Brazzaville",15.283,-4.263,1],["ERI","Asmara",38.931,15.322,1],
+ ["CPV","Praia",-23.512,14.921,1],["STP","São Tomé",6.727,.336,1],["COM","Moroni",43.255,-11.704,1],["MUS","Port Louis",57.499,-20.161,1],["SYC","Victoria",55.45,-4.62,1]
 ].map(([iso,name,lon,lat,capital])=>({iso:String(iso),name:String(name),lon:Number(lon),lat:Number(lat),capital:!!capital}));
 const index=new Map(countries.map(c=>[c.name,c]));
 const outlines=africaCountryOutlines;
@@ -88,7 +89,7 @@ export default function RegionAtlas({country,onCountryChange}:{country:string;on
      {outlines.map(outline=>{
       const c=countries.find(x=>x.iso===outline.iso);
       const selectable=!!c;
-      return <path key={outline.iso} d={outline.path} className={selectable?styles.atlasSelectable:styles.atlasBorder} data-active={c?.name===country?"true":undefined} onClick={c?()=>focusCountry(c.name):undefined} role={selectable?"button":undefined} tabIndex={selectable?0:undefined} aria-label={c?`Zoom to ${c.name}`:undefined} onKeyDown={c?e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();focusCountry(c.name);}}:undefined}/>;
+      return <path key={outline.iso} d={outline.path} className={selectable?styles.atlasSelectable:styles.atlasBorder} data-active={c?.name===country?"true":undefined} data-regional-focus={c&&regionalCountries.some(x=>x.iso===c.iso)?"true":undefined} onClick={c?()=>focusCountry(c.name):undefined} role={selectable?"button":undefined} tabIndex={selectable?0:undefined} aria-label={c?`Zoom to ${c.name}`:undefined} onKeyDown={c?e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();focusCountry(c.name);}}:undefined}/>;
      })}
      <g className={styles.atlasKigali} transform={`translate(${kigali.x},${kigali.y})`}>
        <circle r="16"/><circle r="5"/><path d="M-24 0H24 M0 -24V24"/><text x="22" y="-11">KIGALI / IMVO BASE</text>
