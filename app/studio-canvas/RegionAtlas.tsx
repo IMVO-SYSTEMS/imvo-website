@@ -37,21 +37,39 @@ function countryFit(iso:string){
 }
 function point(lon:number,lat:number){return {x:20+(lon+18)/72*920,y:20+(38-lat)/74*710};}
 const kigali=point(30.0619,-1.9441);
+const REGIONAL_CAMERA={center:"__REGION__",zoom:2.45};
 
 export const regionCountryNames=regionalCountries.map(c=>c.name);
 export default function RegionAtlas({country,onCountryChange}:{country:string;onCountryChange:(name:string)=>void}){
  const selected=index.get(country)||countries[0];
- const [camera,setCamera]=useState(()=>({center:country,zoom:countryFit(selected.iso)}));
+ const [camera,setCamera]=useState(()=>REGIONAL_CAMERA);
  const [selectedCity,setSelectedCity]=useState<string|null>(null);
  const [showCities,setShowCities]=useState(true);
  const cityList=atlasCityPairs[selected.iso]||[];
  const activeCity=cityList.find(c=>c.name===selectedCity)||cityList.find(c=>c.primary)||cityList[0];
- const focusCountry=(name:string)=>{setSelectedCity(null);onCountryChange(name);};
- const focusCity=(name:string)=>{setSelectedCity(name);setCamera({center:country,zoom:Math.min(23,countryFit(selected.iso)*1.45)});};
- const homeReset=()=>{setSelectedCity(null);setCamera({center:"Rwanda",zoom:countryFit("RWA")});onCountryChange("Rwanda");};
- const africaOverview=()=>{setSelectedCity(null);setCamera({center:"__AFRICA__",zoom:.72});};
- const zoomBy=(value:number)=>setCamera(c=>({...c,zoom:Math.max(.65,Math.min(24,Math.round((c.zoom+value)*100)/100))}));
+ const idleTimer=useRef<ReturnType<typeof setTimeout>|null>(null);
  const previous=useRef(country);
+ const returnToRegion=()=>{
+  previous.current="Rwanda";
+  setSelectedCity(null);
+  onCountryChange("Rwanda");
+  setCamera(REGIONAL_CAMERA);
+ };
+ const armReturn=()=>{
+  if(idleTimer.current)clearTimeout(idleTimer.current);
+  idleTimer.current=setTimeout(returnToRegion,8000);
+ };
+ useEffect(()=>()=>{if(idleTimer.current)clearTimeout(idleTimer.current);},[]);
+ const focusCountry=(name:string)=>{
+  setSelectedCity(null);
+  if(name===country)setCamera({center:name,zoom:countryFit(index.get(name)?.iso||"RWA")});
+  onCountryChange(name);
+  armReturn();
+ };
+ const focusCity=(name:string)=>{setSelectedCity(name);setCamera({center:country,zoom:Math.min(23,countryFit(selected.iso)*1.45)});armReturn();};
+ const homeReset=()=>{setSelectedCity(null);previous.current="Rwanda";onCountryChange("Rwanda");setCamera({center:"Rwanda",zoom:countryFit("RWA")});armReturn();};
+ const africaOverview=()=>{setSelectedCity(null);setCamera({center:"__AFRICA__",zoom:.72});armReturn();};
+ const zoomBy=(value:number)=>{setCamera(c=>({...c,zoom:Math.max(.65,Math.min(24,Math.round((c.zoom+value)*100)/100))}));armReturn();};
  useEffect(()=>{
   if(previous.current===country)return;
   previous.current=country;
@@ -65,7 +83,7 @@ export default function RegionAtlas({country,onCountryChange}:{country:string;on
  const focused=index.get(camera.center)||countries[0];
  const cityTarget=selectedCity&&activeCity?activeCity:null;
  const countryBox=countryBounds.get(focused.iso);
- const c=camera.center==="__AFRICA__"?point(17,0):cityTarget?point(cityTarget.lon,cityTarget.lat):countryBox?{x:countryBox.cx,y:countryBox.cy}:point(...focused.center);
+ const c=camera.center==="__AFRICA__"?point(17,0):camera.center==="__REGION__"?point(29,-3.8):cityTarget?point(cityTarget.lon,cityTarget.lat):countryBox?{x:countryBox.cx,y:countryBox.cy}:point(...focused.center);
  const scale=camera.zoom;
  const transform=`translate(${+(480-c.x*scale).toFixed(2)}px, ${+(365-c.y*scale).toFixed(2)}px) scale(${scale})`;
  const home=country==="Rwanda";
@@ -98,7 +116,7 @@ export default function RegionAtlas({country,onCountryChange}:{country:string;on
         <text textAnchor="middle">{outline.name.toUpperCase()}</text>
        </g>;
       })}
-      <g className={styles.atlasKigali} transform={`translate(${kigali.x},${kigali.y})`}>
+      <g className={styles.atlasKigali} transform={`translate(${kigali.x},${kigali.y}) scale(${1/Math.max(1,camera.zoom)})`}>
        <circle r="16"/><circle r="5"/><path d="M-24 0H24 M0 -24V24"/><text x="22" y="-11">KIGALI / IMVO BASE</text>
      </g>
      {!home&&<g className={styles.atlasSelectedPin} transform={`translate(${point(...selected.pin).x},${point(...selected.pin).y})`}>

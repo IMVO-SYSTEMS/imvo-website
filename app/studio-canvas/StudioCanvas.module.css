@@ -556,3 +556,28 @@
  .planSideDetail p,.planSideDetail>a{display:block;padding:10px;font-size:12px}
  .connectedDesign{display:none}
 }
+
+/* Studio choreography: centered drawing on entry; moves to left as the principles appear. */
+@media(min-width:761px) and (prefers-reduced-motion:no-preference){
+ .planViewport .planDrawing{transform:translateX(calc(36% + var(--plan-travel))) scale(var(--plan-scale));transform-origin:center center}
+}
+@media(prefers-reduced-motion:reduce) and (min-width:761px){
+ .planViewport .planDrawing{transform:none}
+ .planViewport .connectedDesign{opacity:1;transform:none}
+}
+/* Two offset, opposing horizontal editorial/testimonial rails. */
+.studioMarqueeRows{display:grid;gap:14px;overflow:hidden;margin-top:36px}
+.studioMarqueeTrack{display:flex;width:max-content;gap:14px;animation:studioMarqueeLeft 44s linear infinite;will-change:transform}
+.studioMarqueeTrack[data-direction="right"]{animation-name:studioMarqueeRight;animation-duration:52s}
+.studioMarqueeRows:hover .studioMarqueeTrack,.studioMarqueeRows:focus-within .studioMarqueeTrack{animation-play-state:paused}
+.studioMarqueeCard{flex:0 0 clamp(245px,25vw,415px);width:clamp(245px,25vw,415px);min-height:185px;border:1px solid #3b3b3b;background:#111;padding:clamp(18px,2vw,28px);display:flex;flex-direction:column;justify-content:space-between;gap:20px}
+.studioMarqueeCard>span{font:10px/1.4 var(--sc-mono);color:#b4b4b4}
+.studioMarqueeCard blockquote{font:500 clamp(15px,1.3vw,21px)/1.35 var(--sc-font);color:#fff;margin:0}
+.studioMarqueeCard strong{font:11px/1.4 var(--sc-mono);color:#eee}
+.studioMarqueeCard p{font:13px/1.4 var(--sc-font);color:#d5d5d5}
+@keyframes studioMarqueeLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes studioMarqueeRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@media(prefers-reduced-motion:reduce){
+ .studioMarqueeTrack,.studioMarqueeTrack[data-direction="right"]{animation:none;width:auto;max-width:100%;flex-wrap:wrap}
+ .studioMarqueeCard{flex:1 1 240px}
+}
