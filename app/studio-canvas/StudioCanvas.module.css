@@ -473,3 +473,13 @@
  .explorerViewport .drawingInteraction .detailNote{width:min(220px,80%);max-height:93%;overflow:auto}
  .drawingInteraction .detailNote p{font-size:11px;line-height:1.35}
 }
+
+
+/* Principle details stay within the architecture study, never expand the page. */
+.connectedDesign{position:relative}
+.principleFloat{position:absolute;z-index:35;left:var(--sc-s3);right:var(--sc-s3);top:14%;max-height:65%;overflow:auto;background:var(--sc-bg);color:var(--sc-ink);border:1px solid var(--sc-ink);box-shadow:4px 4px 0 color-mix(in srgb,var(--sc-ink) 16%,transparent)}
+.principleFloat>div{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 15px;background:var(--sc-ink);color:var(--sc-bg)}
+.principleFloat strong{font:600 var(--sc-label)/1.2 var(--sc-font)}
+.principleFloat button{border:0;width:35px;height:35px;display:grid;place-items:center;font-size:23px}
+.principleFloat p{font:var(--sc-label)/1.5 var(--sc-font);padding:15px}
+@media(max-width:760px){.principleFloat{top:6%;max-height:82%}}
