@@ -50,7 +50,7 @@ const outlines=africaCountryOutlines;
 function point(lon:number,lat:number){return {x:20+(lon+18)/72*920,y:20+(38-lat)/74*710};}
 const kigali=point(30.0619,-1.9441);
 /** Geometrically fit each selected country into the same boxed map viewport. */
-const countryBounds=new Map(africaCountryOutlines.map(c=>{
+const countryBounds=new Map<string,{x:number;y:number;zoom:number}>(africaCountryOutlines.map(c=>{
  const points=[...c.path.matchAll(/(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/g)].map(m=>({x:Number(m[1]),y:Number(m[2])}));
  if(!points.length){const p=point(c.lon,c.lat);return [c.iso,{x:p.x,y:p.y,zoom:9}] as const;}
  const xs=points.map(p=>p.x),ys=points.map(p=>p.y);
