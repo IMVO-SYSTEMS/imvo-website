@@ -42,7 +42,7 @@ function Team({content}:{content?:HomePageContent|null}){
   : teamMembers;
  return <section id="studio-team" className={styles.team} tabIndex={-1} data-studio-section="team" aria-labelledby="team-heading">
   <Heading label={content?.teamKicker||"Team"} title={content?.teamHeading||"A studio shaped by collaboration, technical focus, and shared responsibility."} id="team-heading"/>
-  <div className={styles.teamLandscape} data-reveal><StudioImage src={content?.teamImage?.url||"/team.png"} alt={content?.teamImage?.alt||"The IMVO team in the studio"} width="1440" height="780" loading="lazy"/><CornerMarks/></div>
+  <div className={styles.teamLandscape} data-reveal><StudioImage src={content?.useCmsTeamImage&&content.teamImage?.url?content.teamImage.url:"/studio-team-illustrated.webp"} alt="Illustrated architectural pencil study of the IMVO team" width="1440" height="780" loading="lazy"/><CornerMarks/></div>
   <div className={styles.teamGrid}>{members.map((member,index)=><article key={member.name} className={styles.member} data-reveal>
     <StudioPortrait src={member.image} alt={member.name} index={index}/>
     <div className={styles.memberDetails}><h3><button className={styles.memberToggle} type="button" aria-expanded={open===index} aria-controls={`team-bio-${index}`} onClick={()=>setOpen(open===index?null:index)}><span>{member.name}</span>{open===index?<Minus size={15}/>:<Plus size={15}/>}</button></h3><p>{member.role}</p></div>
