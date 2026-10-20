@@ -317,3 +317,11 @@
  .planDetailDock:not(:empty){padding:var(--sc-s2)}
 }
 @media(prefers-reduced-motion:reduce){.atlasGeography{transition:none}.atlasSelectable{transition:none}}
+
+/* Compact image explorers had an older, more-specific bottom offset.
+   The information panel now stays entirely below the image viewport. */
+.explorer[data-compact="true"] .drawingDock .detailNote,
+.explorer[data-compact=true] .drawingDock .detailNote{
+ position:relative;left:auto;right:auto;top:auto;bottom:auto;
+ width:100%;max-width:none;transform:none;margin:0;
+}
