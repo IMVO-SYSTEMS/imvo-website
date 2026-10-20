@@ -47,5 +47,13 @@ for (const name of ["team1", "team2", "team3", "team4"]) {
     .webp({ quality: 81, effort: 4 })
     .toFile(output);
   const optimized = await stat(output);
-  console.log(`IMVO pencil portrait ${name}: ${original.size} -> ${optimized.size} bytes`);
+  // Retain the same face and pose in both modes. In dark mode, use a
+  // true white-pencil contour on black, not CSS inversion of a full photo.
+  const darkOutput = path.join(sketchDir, `${name}-dark.webp`);
+  await sharp(output).grayscale().linear(1.5, -100)
+    .threshold(170).negate()
+    .webp({ quality: 80, effort: 4 })
+    .toFile(darkOutput);
+  const darkSize = await stat(darkOutput);
+  console.log(`IMVO pencil portrait ${name}: ${original.size} -> ${optimized.size} light, ${darkSize.size} dark bytes`);
 }
