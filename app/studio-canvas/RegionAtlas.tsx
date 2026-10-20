@@ -106,6 +106,10 @@ export default function RegionAtlas({country,onCountryChange}:{country:string;on
       const selectable=!!c;
       return <path key={outline.iso} d={outline.path} className={selectable?styles.atlasSelectable:styles.atlasBorder} data-active={c?.name===country?"true":undefined} data-regional-focus={c&&regionalCountries.some(x=>x.iso===c.iso)?"true":undefined} onClick={c?()=>focusCountry(c.name):undefined} role={selectable?"button":undefined} tabIndex={selectable?0:undefined} aria-label={c?`Zoom to ${c.name}`:undefined} onKeyDown={c?e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();focusCountry(c.name);}}:undefined}/>;
      })}
+     {outlines.map(outline=>{const p=point(outline.lon,outline.lat),inv=1/Math.max(1,camera.zoom);return <g key={"label-"+outline.iso}
+       className={styles.atlasCountryLabel} data-active={outline.iso===selected.iso?"true":undefined}
+       transform={"translate("+p.x+","+p.y+") scale("+inv+")"} aria-hidden="true">
+       <text textAnchor="middle">{outline.name.toUpperCase()}</text></g>})}
      <g className={styles.atlasKigali} transform={`translate(${kigali.x},${kigali.y})`}>
        <circle r="16"/><circle r="5"/><path d="M-24 0H24 M0 -24V24"/><text x="22" y="-11">KIGALI / IMVO BASE</text>
      </g>
