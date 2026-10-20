@@ -106,6 +106,7 @@ export const projectType = defineType({
           type: "image",
           options: { hotspot: true },
           fields: [
+            defineField({ name: "caption", title: "Image caption", type: "string", validation: (rule) => rule.max(200) }),
             defineField({
               name: "alt",
               title: "Alternative text",
@@ -131,6 +132,16 @@ export const projectType = defineType({
       ],
       options: { layout: "grid" },
       validation: (rule) => rule.max(12),
+    }),
+    defineField({
+      name: "clientName", title: "Client name (internal / optional)",
+      description: "Only include names cleared for public use in published descriptions.",
+      type: "string", group: "details", validation: (rule) => rule.max(140),
+    }),
+    defineField({
+      name: "designNotes", title: "Technical notes and design intent",
+      type: "text", rows: 5, group: "details",
+      description: "Useful non-confidential context for the project editor.",
     }),
     defineField({
       name: "status",
@@ -207,6 +218,20 @@ export const projectType = defineType({
         }),
       ],
       validation: (rule) => rule.max(20),
+    }),
+    defineField({
+      name: "websiteVisible", title: "Visible on public website",
+      description: "Switch off to temporarily unpublish this project's web listing without deleting the CMS entry. Saving as a draft also keeps it unpublished.",
+      type: "boolean", initialValue: true, group: "publishing",
+    }),
+    defineField({
+      name: "seoTitle", title: "SEO title (optional)", type: "string", group: "publishing",
+      description: "Search title override; recommended maximum 65 characters.",
+      validation: (rule) => rule.max(70),
+    }),
+    defineField({
+      name: "seoDescription", title: "SEO description (optional)", type: "text", rows: 3, group: "publishing",
+      validation: (rule) => rule.max(170),
     }),
     defineField({
       name: "featured",
