@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import AboutPageClient from "./AboutPageClient";
 import AboutTestimonialsController from "./AboutTestimonialsController";
+import { archivedAboutTestimonials } from "./archivedTestimonials";
 import { getAboutPageContent } from "@/sanity/lib/siteContent";
 import { getSeoEntry, getTeamMembers } from "@/sanity/lib/cmsBackend";
 import { mergeCmsMetadata } from "@/app/lib/cmsMetadata";
@@ -64,7 +65,7 @@ export default async function AboutPage() {
   // hides the entire Client Perspectives section.
   const renderedTestimonials = testimonials.length
     ? testimonials
-    : [{ text: "", author: "", date: "" }];
+    : archivedAboutTestimonials;
 
   const resolvedContent: AboutPageContent = {
     ...(content || {}),
@@ -75,7 +76,7 @@ export default async function AboutPage() {
   return (
     <>
       <AboutPageClient content={resolvedContent} />
-      <AboutTestimonialsController hasTestimonials={testimonials.length > 0} />
+      <AboutTestimonialsController hasTestimonials={renderedTestimonials.length > 0} />
     </>
   );
 }
