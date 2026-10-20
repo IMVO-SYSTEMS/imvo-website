@@ -11,6 +11,15 @@ export type StudioReview={
 export default function StudioTestimonials({reviews}:{reviews:StudioReview[]}){
  const [index,setIndex]=useState(0),[paused,setPaused]=useState(false),[hovered,setHovered]=useState(false);
  const count=reviews.length,active=reviews[Math.min(index,count-1)];
+ const editorial=[
+  {title:"DESIGN",description:"Thoughtful architecture, from the first line to the spaces people inhabit."},
+  {title:"STRATEGY",description:"Feasibility, purpose and direction aligned before construction begins."},
+  {title:"COORDINATION",description:"Architectural and technical decisions developed together."},
+  {title:"EXECUTION",description:"Design intent supported through documentation and site delivery."}
+ ];
+ const railItems=count>0
+  ?Array.from({length:Math.max(4,count)},(_,i)=>({key:"review-"+i,title:reviews[i%count].author,description:reviews[i%count].quote,review:true}))
+  :editorial.map((item,i)=>({key:"editorial-"+i,...item,review:false}));
  useEffect(()=>{
   if(count<2||paused||hovered||typeof window==="undefined")return;
   if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
@@ -46,5 +55,14 @@ export default function StudioTestimonials({reviews}:{reviews:StudioReview[]}){
    <div><span className={styles.eyebrow}>CLIENT FEEDBACK / EDITORIAL APPROVAL</span><h3>Every project starts with trust.</h3><p>Client testimonials will appear here once an approved review has been published. Discover our work and the people behind it in the meantime.</p></div>
    <Link href="/projects">EXPLORE OUR WORK <ArrowUpRight size={18}/></Link>
   </div>}
+  <div className={styles.studioMarqueeRows} aria-label={count?"Published client feedback":"IMVO Studio principles while client feedback awaits approval"}>
+   {["left","right"].map(direction=><div key={direction} className={styles.studioMarqueeTrack} data-direction={direction}>
+    {[...railItems,...railItems].map((item,i)=><article key={direction+"-"+item.key+"-"+i} className={styles.studioMarqueeCard} aria-hidden={i>=railItems.length}>
+      <span>{item.review?"CLIENT PERSPECTIVE / APPROVED":"IMVO STUDIO / OUR APPROACH"}</span>
+      {item.review?<blockquote>“{item.description}”</blockquote>:<p>{item.description}</p>}
+      <strong>{item.title}</strong>
+    </article>)}
+   </div>)}
+  </div>
  </section>;
 }
