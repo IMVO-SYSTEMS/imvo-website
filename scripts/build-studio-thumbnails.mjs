@@ -49,3 +49,20 @@ for (const name of ["team1", "team2", "team3", "team4"]) {
   const optimized = await stat(output);
   console.log(`IMVO pencil portrait ${name}: ${original.size} -> ${optimized.size} bytes`);
 }
+
+// Approved IMVO portrait pairs take precedence. If an approved source has not
+// yet been checked into public/studio-portraits, supply a working local fallback
+// instead of a broken URL. Never overwrite the hand-drawn approved variants.
+const portraitDir = path.join(sourceDir, "studio-portraits");
+await mkdir(portraitDir, { recursive: true });
+for (const name of ["team1", "team2", "team3", "team4"]) {
+  const sketch = path.join(sketchDir, `${name}.webp`);
+  for (const mode of ["light", "dark"]) {
+    const target = path.join(portraitDir, `${name}-${mode}.webp`);
+    if (await stat(target).catch(() => null)) continue;
+    const transform = sharp(sketch).resize({ width: 760, withoutEnlargement: true });
+    if (mode === "dark") transform.negate();
+    await transform.webp({ quality: 81, effort: 4 }).toFile(target);
+    console.log(`IMVO ${name} ${mode}: generated fallback (replace with approved artwork)`);
+  }
+}
