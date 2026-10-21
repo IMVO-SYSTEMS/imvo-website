@@ -233,11 +233,10 @@ export async function getAllProjects(): Promise<Project[]> {
     "ev-hub-kigali",
     "domus-aurea-residence",
   ]);
-  // Never display historical illustrative projects when Sanity cannot be
-  // reached: their placeholder covers and summaries are not the real work.
-  // The two explicitly uploaded image galleries are verified local fallbacks.
+  // Preserve the established catalogue if CMS is temporarily unreachable.
+  // CMS records still replace matching local slugs when available.
   const source = [
-    ...localProjects.filter((project) => galleryFallbackSlugs.has(project.slug)),
+    ...localProjects,
     ...sanityProjects,
   ];
 
