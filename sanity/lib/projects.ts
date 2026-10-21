@@ -233,12 +233,13 @@ export async function getAllProjects(): Promise<Project[]> {
     "ev-hub-kigali",
     "domus-aurea-residence",
   ]);
-  const source = sanityProjects.length
-    ? [
-        ...localProjects.filter((project) => galleryFallbackSlugs.has(project.slug)),
-        ...sanityProjects,
-      ]
-    : localProjects;
+  // Never display historical illustrative projects when Sanity cannot be
+  // reached: their placeholder covers and summaries are not the real work.
+  // The two explicitly uploaded image galleries are verified local fallbacks.
+  const source = [
+    ...localProjects.filter((project) => galleryFallbackSlugs.has(project.slug)),
+    ...sanityProjects,
+  ];
 
   // CMS wins for the same slug. Prevent repeated titles when an old local
   // record uses a different slug to describe the very same project.
