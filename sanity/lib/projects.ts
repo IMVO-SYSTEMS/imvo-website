@@ -174,7 +174,7 @@ function toProject(record: SanityProjectRecord): Project | null {
   return {
     id: record.id,
     slug: record.slug,
-    title: localProjectTitleOverrides[record.slug] || record.title,
+    title: record.title,
     category: record.category as ProjectCategory,
     location: record.location,
     year: record.year,
@@ -224,15 +224,39 @@ export async function getAllProjects(): Promise<Project[]> {
     order: project.order ?? index + 1,
   }));
   const sanityProjects = await getSanityProjects();
-  const merged = new Map<string, Project>(
-    localProjects.map((project) => [project.slug, project]),
-  );
 
-  for (const project of sanityProjects) {
-    merged.set(project.slug, project);
+  // The published CMS is the catalogue's source of truth. The large legacy
+  // local catalogue contains illustrative stand-ins, including mismatched
+  // descriptions and repeated images. Keep only the two commissioned
+  // image galleries as local fallbacks if not yet published in Sanity.
+  const galleryFallbackSlugs = new Set([
+    "ev-hub-kigali",
+    "domus-aurea-residence",
+  ]);
+  const source = sanityProjects.length
+    ? [
+        ...localProjects.filter((project) => galleryFallbackSlugs.has(project.slug)),
+        ...sanityProjects,
+      ]
+    : localProjects;
+
+  // CMS wins for the same slug. Prevent repeated titles when an old local
+  // record uses a different slug to describe the very same project.
+  const bySlug = new Map<string, Project>();
+  for (const project of source) {
+    const uniqueImages = Array.from(new Set([project.cover, ...project.images]));
+    bySlug.set(project.slug, {
+      ...project,
+      images: uniqueImages,
+    });
   }
-
-  return Array.from(merged.values()).sort((left, right) => {
+  const seenTitles = new Set<string>();
+  return Array.from(bySlug.values()).reverse().filter((project) => {
+    const key = project.title.trim().toLocaleLowerCase().replace(/\\s+/g, " ");
+    if (seenTitles.has(key)) return false;
+    seenTitles.add(key);
+    return true;
+  }).reverse().sort((left, right) => {
     if (left.orderRank && right.orderRank) {
       const rankDifference = left.orderRank.localeCompare(right.orderRank);
       if (rankDifference !== 0) return rankDifference;
@@ -241,9 +265,7 @@ export async function getAllProjects(): Promise<Project[]> {
     } else if (right.orderRank) {
       return 1;
     }
-
     const orderDifference = (left.order ?? 100) - (right.order ?? 100);
-
     if (orderDifference !== 0) return orderDifference;
     return right.year.localeCompare(left.year);
   });
