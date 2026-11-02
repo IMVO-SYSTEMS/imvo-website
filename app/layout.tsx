@@ -35,9 +35,6 @@ const defaultMetadata: Metadata = {
     "feasibility studies Rwanda",
     "East Africa built environment",
   ],
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     type: "website",
     locale: "en_RW",
