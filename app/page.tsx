@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { archivedAboutTestimonials } from "./about/archivedTestimonials";
 import StudioCanvas from "./studio-canvas/StudioCanvas";
 import { getHomePageContent, getAboutPageContent } from "@/sanity/lib/siteContent";
@@ -5,6 +6,8 @@ import { getAllProjects, getFeaturedProjects } from "@/sanity/lib/projects";
 import { getHomePageControls, getTeamMembers, getTestimonials } from "@/sanity/lib/cmsBackend";
 import type { HomePageContent } from "@/sanity/types/siteContent";
 import type { StudioReview } from "./studio-canvas/StudioTestimonials";
+
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 export const revalidate = 300;
 
