@@ -18,14 +18,14 @@ const fallbackMetadata: Metadata = {
     title: "Built-Environment Services | IMVO Group",
     description:
       "Design, consultancy, feasibility, and site coordination for residential, commercial, institutional, and development projects.",
-    images: [{ url: "/services-hero.png", alt: "IMVO Group built-environment services" }],
+    images: [{ url: "/services-hero.webp", alt: "IMVO Group built-environment services" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Built-Environment Services | IMVO Group",
     description:
       "Design, consultancy, feasibility, and site coordination for projects across Rwanda and East Africa.",
-    images: ["/services-hero.png"],
+    images: ["/services-hero.webp"],
   },
 };
 

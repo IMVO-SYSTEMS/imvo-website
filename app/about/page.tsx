@@ -20,14 +20,14 @@ const fallbackMetadata: Metadata = {
     title: "About IMVO Group",
     description:
       "A Kigali-based built-environment studio combining design, development consultancy, and site coordination.",
-    images: [{ url: "/about-hero.png", alt: "IMVO Group" }],
+    images: [{ url: "/about-hero.webp", alt: "IMVO Group" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "About IMVO Group",
     description:
       "A Kigali-based built-environment studio combining design, development consultancy, and site coordination.",
-    images: ["/about-hero.png"],
+    images: ["/about-hero.webp"],
   },
 };
 

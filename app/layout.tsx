@@ -48,7 +48,7 @@ const defaultMetadata: Metadata = {
       "Design, strategy, and execution for enduring environments across Rwanda and East Africa.",
     images: [
       {
-        url: "/about-hero.png",
+        url: "/about-hero.webp",
         alt: "IMVO Group built-environment design and development consultancy",
       },
     ],
@@ -58,7 +58,7 @@ const defaultMetadata: Metadata = {
     title: "IMVO Group | Built Environment Design & Development",
     description:
       "Design, strategy, and execution for enduring environments across Rwanda and East Africa.",
-    images: ["/about-hero.png"],
+    images: ["/about-hero.webp"],
   },
   robots: {
     index: true,
@@ -88,7 +88,7 @@ export async function generateMetadata(): Promise<Metadata> {
   ]);
   const title = routeSeo?.title || settings?.seoTitle || "IMVO Group | Built Environment Design & Development";
   const description = routeSeo?.description || settings?.seoDescription || defaultMetadata.description;
-  const shareImage = routeSeo?.shareImage?.url || settings?.shareImage?.url || "/about-hero.png";
+  const shareImage = routeSeo?.shareImage?.url || settings?.shareImage?.url || "/about-hero.webp";
   const shareImageAlt = routeSeo?.shareImage?.alt || settings?.shareImage?.alt || "IMVO Group";
   const globalNoIndex = growth?.siteIndexingEnabled === false;
   const googleVerification = normalizeGoogleVerification(growth?.googleSiteVerification);
@@ -137,7 +137,7 @@ const structuredData = (settings: Awaited<ReturnType<typeof getSiteSettings>>) =
       name: settings?.companyName || "IMVO Group",
       url: `${siteUrl}/`,
       logo: `${siteUrl}/imvo-black.png`,
-      image: `${siteUrl}/about-hero.png`,
+      image: `${siteUrl}/about-hero.webp`,
       description:
         settings?.tagline || "A built-environment design and development consultancy based in Kigali, Rwanda.",
       areaServed: [
